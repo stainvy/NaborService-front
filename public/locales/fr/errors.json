@@ -1,0 +1,8 @@
+{
+  "generic": "Une erreur est survenue. Réessayez plus tard.",
+  "network": "Impossible de joindre le serveur.",
+  "unauthorized": "Session expirée, veuillez vous reconnecter.",
+  "forbidden": "Vous n'avez pas les droits nécessaires.",
+  "not_found": "Ressource introuvable.",
+  "validation": "Veuillez vérifier les champs du formulaire."
+}

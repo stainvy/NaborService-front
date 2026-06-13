@@ -1,0 +1,23 @@
+{
+  "app": {
+    "name": "Nabor Services",
+    "tagline": "La plateforme collaborative de votre quartier"
+  },
+  "actions": {
+    "publish": "Publier",
+    "pay": "Payer",
+    "sign": "Signer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "logout": "Se déconnecter"
+  },
+  "language": {
+    "label": "Langue",
+    "fr": "Français",
+    "en": "Anglais"
+  },
+  "nav": {
+    "home": "Accueil",
+    "admin": "Administration"
+  }
+}

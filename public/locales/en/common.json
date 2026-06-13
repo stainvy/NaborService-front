@@ -1,0 +1,23 @@
+{
+  "app": {
+    "name": "Nabor Services",
+    "tagline": "Your neighbourhood's collaborative platform"
+  },
+  "actions": {
+    "publish": "Publish",
+    "pay": "Pay",
+    "sign": "Sign",
+    "cancel": "Cancel",
+    "save": "Save",
+    "logout": "Log out"
+  },
+  "language": {
+    "label": "Language",
+    "fr": "French",
+    "en": "English"
+  },
+  "nav": {
+    "home": "Home",
+    "admin": "Administration"
+  }
+}
