@@ -8,7 +8,6 @@ import {
 } from '@/lib/tokenStore';
 import { connectSocket, disconnectSocket, reconnectSocket, getSocket } from '@/lib/socket';
 import type { User } from '@/types/user';
-import type { LoginPayload, VerifyTotpPayload } from '@/types/auth';
 import { AuthContext, type AuthContextValue, type AuthStatus } from '@/hooks/auth-context';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -42,6 +41,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
+  const refreshUser = useCallback(async (): Promise<User> => {
+    const me = await authService.getMe();
+    setUser(me);
+    setStatus('authenticated');
+    return me;
+  }, []);
+
+  const setSession = useCallback(
+    async (accessToken: string): Promise<User> => {
+      setAccessToken(accessToken);
+      return refreshUser();
+    },
+    [refreshUser],
+  );
+
   // Refresh silencieux au démarrage (une seule fois, même en StrictMode).
   useEffect(() => {
     if (initialized.current) return;
@@ -50,26 +64,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     (async () => {
       try {
         const { access_token } = await authService.refresh();
-        setAccessToken(access_token);
-        const me = await authService.getMe();
-        setUser(me);
-        setStatus('authenticated');
+        await setSession(access_token);
       } catch {
         purge();
       }
     })();
-  }, [purge]);
-
-  const beginLogin = useCallback((payload: LoginPayload) => authService.login(payload), []);
-
-  const completeTotp = useCallback(async (payload: VerifyTotpPayload): Promise<User> => {
-    const { access_token, user: userFromVerify } = await authService.verifyTotp(payload);
-    setAccessToken(access_token);
-    const me = userFromVerify ?? (await authService.getMe());
-    setUser(me);
-    setStatus('authenticated');
-    return me;
-  }, []);
+  }, [purge, setSession]);
 
   const logout = useCallback(async () => {
     try {
@@ -86,11 +86,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       status,
       isAuthenticated: status === 'authenticated',
       isLoading: status === 'loading',
-      beginLogin,
-      completeTotp,
+      setSession,
+      refreshUser,
       logout,
     }),
-    [user, status, beginLogin, completeTotp, logout],
+    [user, status, setSession, refreshUser, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

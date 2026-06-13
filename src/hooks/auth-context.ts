@@ -1,7 +1,6 @@
 import { createContext } from 'react';
 import type { User } from '@/types/user';
 import type { Role } from '@/types/roles';
-import type { LoginChallenge, LoginPayload, VerifyTotpPayload } from '@/types/auth';
 
 export type AuthStatus = 'loading' | 'authenticated' | 'unauthenticated';
 
@@ -11,11 +10,11 @@ export interface AuthContextValue {
   status: AuthStatus;
   isAuthenticated: boolean;
   isLoading: boolean;
-  /** Étape 1 : email + mot de passe → déclenche le challenge TOTP. */
-  beginLogin: (payload: LoginPayload) => Promise<LoginChallenge>;
-  /** Étape 2 : code TOTP → pose l'access token en mémoire et charge l'utilisateur. */
-  completeTotp: (payload: VerifyTotpPayload) => Promise<User>;
-  /** Révoque la session et purge l'état local. */
+  // Établit la session à partir d'un access_token (renvoyé par totp/verify
+  // ou totp/confirm-setup) : pose le token en mémoire et charge /users/me.
+  setSession: (accessToken: string) => Promise<User>;
+  // Recharge l'utilisateur courant (après une mutation de profil par ex.).
+  refreshUser: () => Promise<User>;
   logout: () => Promise<void>;
 }
 

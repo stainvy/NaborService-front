@@ -1,11 +1,19 @@
 import type { Role } from './roles';
 
+// Objet renvoyé par GET /v1/users/me (camelCase, conforme au back réel).
 export interface User {
-  id: string; // UUID v7
+  id: string;
   email: string;
-  first_name?: string;
-  last_name?: string;
+  firstName: string;
+  lastName: string;
   role: Role;
+  visibility?: string;
+  bio?: string | null;
   locale?: string;
-  avatar_media_id?: string;
+  messagePolicy?: string;
+  neighbourhoodId?: string | null;
+  profilePictureMongoId?: string | null;
+  bannerMongoId?: string | null;
+  createdAt: string;
+  updatedAt: string;
 }

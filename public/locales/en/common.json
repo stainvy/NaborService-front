@@ -18,6 +18,7 @@
   },
   "nav": {
     "home": "Home",
-    "admin": "Administration"
+    "admin": "Administration",
+    "sessions": "Sessions"
   }
 }

@@ -35,6 +35,11 @@ i18n
     interpolation: {
       escapeValue: false, // React échappe déjà
     },
+    react: {
+      // Pas de Suspense : les composants rendent tout de suite (les clés
+      // s'affichent le temps que les fichiers de traduction se chargent).
+      useSuspense: false,
+    },
   });
 
 export default i18n;

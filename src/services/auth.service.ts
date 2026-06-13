@@ -2,45 +2,67 @@ import { api } from '@/lib/api';
 import type { User } from '@/types/user';
 import type {
   AccessTokenResponse,
-  ConfirmTotpSetupPayload,
+  AuthSession,
+  ForgotPasswordPayload,
   LoginChallenge,
   LoginPayload,
+  MessageResponse,
   RegisterPayload,
-  VerifyTotpPayload,
+  ResetPasswordPayload,
+  TotpPayload,
 } from '@/types/auth';
 
+// Service Auth — un endpoint par fonction. Seul endroit qui connaît les URLs.
+// Flux : login ne renvoie PAS de token, il renvoie un challenge ; c'est
+// totp/verify (ou totp/confirm-setup) qui renvoie l'access_token.
 export const authService = {
-  register(payload: RegisterPayload): Promise<void> {
-    return api.post('/auth/register', payload).then(() => undefined);
+  register(payload: RegisterPayload): Promise<MessageResponse> {
+    return api.post<MessageResponse>('/auth/register', payload).then((r) => r.data);
   },
 
-  /** Vérifie email + mot de passe et déclenche le challenge TOTP. */
   login(payload: LoginPayload): Promise<LoginChallenge> {
     return api.post<LoginChallenge>('/auth/login', payload).then((r) => r.data);
   },
 
-  /** Renvoie l'access token (et pose le cookie refresh). */
-  verifyTotp(payload: VerifyTotpPayload): Promise<AccessTokenResponse> {
+  // Cas totp_required : l'utilisateur a déjà configuré le TOTP.
+  verifyTotp(payload: TotpPayload): Promise<AccessTokenResponse> {
     return api.post<AccessTokenResponse>('/auth/totp/verify', payload).then((r) => r.data);
   },
 
-  /** Première activation du TOTP. */
-  confirmTotpSetup(payload: ConfirmTotpSetupPayload): Promise<void> {
-    return api.post('/auth/totp/confirm-setup', payload).then(() => undefined);
+  // Cas totp_setup_required : première activation du TOTP.
+  confirmTotpSetup(payload: TotpPayload): Promise<AccessTokenResponse> {
+    return api.post<AccessTokenResponse>('/auth/totp/confirm-setup', payload).then((r) => r.data);
   },
 
-  /** Rotation : nouveau access token à partir du cookie refresh. */
   refresh(): Promise<AccessTokenResponse> {
     return api.post<AccessTokenResponse>('/auth/refresh', null).then((r) => r.data);
   },
 
-  /** Révoque la session courante. */
-  logout(): Promise<void> {
-    return api.post('/auth/logout').then(() => undefined);
+  logout(): Promise<MessageResponse> {
+    return api.post<MessageResponse>('/auth/logout').then((r) => r.data);
   },
 
-  /** Utilisateur courant (rôle inclus). */
+  logoutAll(): Promise<MessageResponse> {
+    return api.post<MessageResponse>('/auth/logout/all').then((r) => r.data);
+  },
+
   getMe(): Promise<User> {
     return api.get<User>('/users/me').then((r) => r.data);
+  },
+
+  getSessions(): Promise<AuthSession[]> {
+    return api.get<AuthSession[]>('/auth/sessions').then((r) => r.data);
+  },
+
+  revokeSession(id: string): Promise<MessageResponse> {
+    return api.delete<MessageResponse>(`/auth/sessions/${id}`).then((r) => r.data);
+  },
+
+  forgotPassword(payload: ForgotPasswordPayload): Promise<MessageResponse> {
+    return api.post<MessageResponse>('/auth/forgot-password', payload).then((r) => r.data);
+  },
+
+  resetPassword(payload: ResetPasswordPayload): Promise<MessageResponse> {
+    return api.post<MessageResponse>('/auth/reset-password', payload).then((r) => r.data);
   },
 };
