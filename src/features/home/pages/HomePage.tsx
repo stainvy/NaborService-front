@@ -16,8 +16,14 @@ export function HomePage() {
         <h1 className="text-xl font-bold text-navy">{t('app.name')}</h1>
         <div className="flex items-center gap-4">
           <LanguageSwitcher />
-          <Link to="/sessions" className="text-sm font-medium text-navy underline">
-            {t('nav.sessions')}
+          <Link to="/profile" className="text-sm font-medium text-navy underline">
+            {t('nav.profile')}
+          </Link>
+          <Link to="/discover" className="text-sm font-medium text-navy underline">
+            {t('nav.discover')}
+          </Link>
+          <Link to="/search" className="text-sm font-medium text-navy underline">
+            {t('nav.search')}
           </Link>
           {hasMinRole(role, 'moderator') && (
             <Link to="/admin" className="text-sm font-medium text-navy underline">

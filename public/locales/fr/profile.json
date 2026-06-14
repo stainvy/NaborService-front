@@ -1,0 +1,122 @@
+{
+  "profile": {
+    "title": "Mon profil",
+    "edit": "Modifier le profil",
+    "first_name": "Prénom",
+    "last_name": "Nom",
+    "bio": "Bio",
+    "no_bio": "Aucune bio renseignée.",
+    "visibility": "Visibilité",
+    "message_policy": "Réception de messages",
+    "visibility_public": "Public",
+    "visibility_friends": "Amis",
+    "visibility_private": "Privé",
+    "message_open": "Ouvert à tous",
+    "message_filtered": "Filtré",
+    "message_closed": "Fermé",
+    "avatar": "Photo de profil",
+    "banner": "Bannière",
+    "upload": "Téléverser",
+    "remove": "Supprimer",
+    "save": "Enregistrer",
+    "saved": "Profil mis à jour.",
+    "error": "Échec de l'enregistrement.",
+    "file_too_large": "Fichier trop volumineux (max {{max}}).",
+    "links": {
+      "security": "Sécurité",
+      "notifications": "Notifications",
+      "privacy": "Confidentialité",
+      "sessions": "Sessions"
+    },
+    "tabs": {
+      "followers": "Abonnés",
+      "following": "Abonnements",
+      "friends": "Amis"
+    },
+    "empty_list": "Personne pour l'instant."
+  },
+  "security": {
+    "title": "Sécurité",
+    "change_password": "Changer le mot de passe",
+    "current_password": "Mot de passe actuel",
+    "new_password": "Nouveau mot de passe",
+    "password_submit": "Mettre à jour le mot de passe",
+    "password_changed": "Mot de passe mis à jour.",
+    "change_email": "Changer l'adresse e-mail",
+    "new_email": "Nouvelle adresse e-mail",
+    "email_submit": "Mettre à jour l'e-mail",
+    "email_changed": "Adresse e-mail mise à jour.",
+    "totp_title": "Confirmez avec votre code",
+    "sessions_link": "Gérer mes sessions actives",
+    "error": "Échec de l'opération."
+  },
+  "notif": {
+    "title": "Préférences de notifications",
+    "saved": "Préférences enregistrées.",
+    "notifNewFollower": "Nouvel abonné",
+    "notifNewListing": "Nouvelle annonce",
+    "notifNewEvent": "Nouvel événement",
+    "notifNewPoll": "Nouveau sondage",
+    "notifWaitlist": "Liste d'attente",
+    "notifMessage": "Nouveau message"
+  },
+  "privacy": {
+    "title": "Confidentialité & RGPD",
+    "export": {
+      "title": "Exporter mes données",
+      "json": "Exporter en JSON",
+      "csv": "Exporter en CSV",
+      "hint": "Téléchargez une copie de vos données personnelles."
+    },
+    "rectify": {
+      "title": "Rectifier mes données",
+      "submit": "Rectifier",
+      "done": "Données rectifiées."
+    },
+    "opt_out": {
+      "title": "Opposition au traitement",
+      "hint": "Désactivez certains traitements de vos données.",
+      "discovery": "Découverte de profils",
+      "notifications": "Notifications",
+      "neo4j_tracking": "Suivi des relations"
+    },
+    "restrict": {
+      "title": "Limitation du traitement",
+      "hint": "Demandez la limitation temporaire du traitement de vos données.",
+      "enable": "Demander la limitation",
+      "disable": "Lever la limitation",
+      "done": "Demande prise en compte."
+    },
+    "delete": {
+      "title": "Supprimer mon compte",
+      "warning": "Cette action désactive définitivement votre compte.",
+      "button": "Supprimer mon compte",
+      "totp_title": "Confirmez la suppression"
+    }
+  },
+  "social": {
+    "follow": "Suivre",
+    "unfollow": "Ne plus suivre",
+    "block": "Bloquer",
+    "unblock": "Débloquer",
+    "report": "Signaler",
+    "report_title": "Signaler cet utilisateur",
+    "report_reason": "Motif du signalement",
+    "report_submit": "Envoyer le signalement",
+    "reported": "Signalement envoyé.",
+    "restricted": "Ce profil est restreint.",
+    "member_since": "Membre depuis {{date}}",
+    "discover": {
+      "title": "Découvrir des voisins",
+      "like": "J'aime",
+      "dislike": "Passer",
+      "empty": "Plus de profils à découvrir pour le moment."
+    },
+    "search": {
+      "title": "Rechercher",
+      "placeholder": "Nom d'un voisin…",
+      "empty": "Aucun résultat.",
+      "unavailable": "La recherche est momentanément indisponible."
+    }
+  }
+}

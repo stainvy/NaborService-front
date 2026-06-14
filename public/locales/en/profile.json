@@ -1,0 +1,122 @@
+{
+  "profile": {
+    "title": "My profile",
+    "edit": "Edit profile",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "bio": "Bio",
+    "no_bio": "No bio yet.",
+    "visibility": "Visibility",
+    "message_policy": "Message reception",
+    "visibility_public": "Public",
+    "visibility_friends": "Friends",
+    "visibility_private": "Private",
+    "message_open": "Open to all",
+    "message_filtered": "Filtered",
+    "message_closed": "Closed",
+    "avatar": "Profile picture",
+    "banner": "Banner",
+    "upload": "Upload",
+    "remove": "Remove",
+    "save": "Save",
+    "saved": "Profile updated.",
+    "error": "Could not save.",
+    "file_too_large": "File too large (max {{max}}).",
+    "links": {
+      "security": "Security",
+      "notifications": "Notifications",
+      "privacy": "Privacy",
+      "sessions": "Sessions"
+    },
+    "tabs": {
+      "followers": "Followers",
+      "following": "Following",
+      "friends": "Friends"
+    },
+    "empty_list": "Nobody yet."
+  },
+  "security": {
+    "title": "Security",
+    "change_password": "Change password",
+    "current_password": "Current password",
+    "new_password": "New password",
+    "password_submit": "Update password",
+    "password_changed": "Password updated.",
+    "change_email": "Change email address",
+    "new_email": "New email address",
+    "email_submit": "Update email",
+    "email_changed": "Email address updated.",
+    "totp_title": "Confirm with your code",
+    "sessions_link": "Manage my active sessions",
+    "error": "Operation failed."
+  },
+  "notif": {
+    "title": "Notification preferences",
+    "saved": "Preferences saved.",
+    "notifNewFollower": "New follower",
+    "notifNewListing": "New listing",
+    "notifNewEvent": "New event",
+    "notifNewPoll": "New poll",
+    "notifWaitlist": "Waitlist",
+    "notifMessage": "New message"
+  },
+  "privacy": {
+    "title": "Privacy & GDPR",
+    "export": {
+      "title": "Export my data",
+      "json": "Export as JSON",
+      "csv": "Export as CSV",
+      "hint": "Download a copy of your personal data."
+    },
+    "rectify": {
+      "title": "Rectify my data",
+      "submit": "Rectify",
+      "done": "Data rectified."
+    },
+    "opt_out": {
+      "title": "Object to processing",
+      "hint": "Disable some processing of your data.",
+      "discovery": "Profile discovery",
+      "notifications": "Notifications",
+      "neo4j_tracking": "Relationship tracking"
+    },
+    "restrict": {
+      "title": "Restrict processing",
+      "hint": "Request a temporary restriction of your data processing.",
+      "enable": "Request restriction",
+      "disable": "Lift restriction",
+      "done": "Request taken into account."
+    },
+    "delete": {
+      "title": "Delete my account",
+      "warning": "This permanently deactivates your account.",
+      "button": "Delete my account",
+      "totp_title": "Confirm deletion"
+    }
+  },
+  "social": {
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "block": "Block",
+    "unblock": "Unblock",
+    "report": "Report",
+    "report_title": "Report this user",
+    "report_reason": "Reason for the report",
+    "report_submit": "Send report",
+    "reported": "Report sent.",
+    "restricted": "This profile is restricted.",
+    "member_since": "Member since {{date}}",
+    "discover": {
+      "title": "Discover neighbours",
+      "like": "Like",
+      "dislike": "Skip",
+      "empty": "No more profiles to discover for now."
+    },
+    "search": {
+      "title": "Search",
+      "placeholder": "A neighbour's name…",
+      "empty": "No results.",
+      "unavailable": "Search is temporarily unavailable."
+    }
+  }
+}

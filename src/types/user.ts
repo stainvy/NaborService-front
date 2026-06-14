@@ -15,5 +15,5 @@ export interface User {
   profilePictureMongoId?: string | null;
   bannerMongoId?: string | null;
   createdAt: string;
-  updatedAt: string;
+  updatedAt: string | null; // le back renvoie null tant que jamais modifié
 }

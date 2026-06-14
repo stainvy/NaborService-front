@@ -19,6 +19,9 @@
   "nav": {
     "home": "Home",
     "admin": "Administration",
-    "sessions": "Sessions"
+    "sessions": "Sessions",
+    "profile": "Profile",
+    "discover": "Discover",
+    "search": "Search"
   }
 }
