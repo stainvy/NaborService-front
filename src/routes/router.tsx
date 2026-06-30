@@ -17,6 +17,7 @@ import { PrivacyPage } from '@/features/profile/pages/PrivacyPage';
 import { PublicProfilePage } from '@/features/social/pages/PublicProfilePage';
 import { DiscoverPage } from '@/features/social/pages/DiscoverPage';
 import { SearchPage } from '@/features/social/pages/SearchPage';
+import { SsoValidatePage } from '@/features/sso/pages/SsoValidatePage';
 
 export const router = createBrowserRouter([
   // Routes publiques
@@ -39,6 +40,7 @@ export const router = createBrowserRouter([
       { path: '/discover', element: <DiscoverPage /> },
       { path: '/search', element: <SearchPage /> },
       { path: '/users/:id', element: <PublicProfilePage /> },
+      { path: '/auth/sso/qr/validate', element: <SsoValidatePage /> },
     ],
   },
 
