@@ -1,0 +1,14 @@
+{
+  "back_home": "Retour à l'accueil",
+  "payment": {
+    "success": "Paiement réussi !",
+    "cancel": "Paiement annulé.",
+    "pay_button": "Payer maintenant",
+    "loading": "Génération du lien sécurisé..."
+  },
+  "errors": {
+    "not_found": "Annonce introuvable.",
+    "load_failed": "Impossible de charger l'annonce.",
+    "checkout_failed": "Impossible de démarrer le paiement. Réessayez plus tard."
+  }
+}

@@ -6,6 +6,7 @@ import { LoginPage } from '@/features/auth/pages/LoginPage';
 import { RegisterPage } from '@/features/auth/pages/RegisterPage';
 import { HomePage } from '@/features/home/pages/HomePage';
 import { AdminDashboardPage } from '@/features/admin/pages/AdminDashboardPage';
+import { ListingPage } from '@/features/listings/pages/ListingPage';
 
 export const router = createBrowserRouter([
   { path: '/login', element: <LoginPage /> },
@@ -13,7 +14,10 @@ export const router = createBrowserRouter([
 
   {
     element: <ProtectedRoute />,
-    children: [{ path: '/', element: <HomePage /> }],
+    children: [
+      { path: '/', element: <HomePage /> },
+      { path: '/listings/:listingId', element: <ListingPage /> },
+    ],
   },
 
   {

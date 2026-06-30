@@ -1,0 +1,14 @@
+{
+  "back_home": "Back to home",
+  "payment": {
+    "success": "Payment successful!",
+    "cancel": "Payment cancelled.",
+    "pay_button": "Pay now",
+    "loading": "Generating secure link..."
+  },
+  "errors": {
+    "not_found": "Listing not found.",
+    "load_failed": "Unable to load this listing.",
+    "checkout_failed": "Unable to start the payment. Please try again later."
+  }
+}
