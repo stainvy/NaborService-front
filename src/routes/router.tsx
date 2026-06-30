@@ -18,6 +18,7 @@ import { PublicProfilePage } from '@/features/social/pages/PublicProfilePage';
 import { DiscoverPage } from '@/features/social/pages/DiscoverPage';
 import { SearchPage } from '@/features/social/pages/SearchPage';
 import { SsoValidatePage } from '@/features/sso/pages/SsoValidatePage';
+import { ListingPage } from '@/features/listings/pages/ListingPage';
 
 export const router = createBrowserRouter([
   // Routes publiques
@@ -30,6 +31,8 @@ export const router = createBrowserRouter([
   {
     element: <ProtectedRoute />,
     children: [
+      { path: '/', element: <HomePage /> },
+      { path: '/listings/:listingId', element: <ListingPage /> },
       { path: '/', element: <HomePage /> },
       { path: '/profile', element: <ProfilePage /> },
       { path: '/profile/edit', element: <ProfileEditPage /> },
