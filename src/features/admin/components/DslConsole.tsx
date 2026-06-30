@@ -4,8 +4,6 @@ import { dslService, type DslQueryResult } from '@/services/dsl.service';
 import { Button } from '@/components/Button';
 import { COLLECTIONS, type LifecycleFilter } from '../schemas/fieldRegistry';
 
-const ALLOWED_IDS = new Set(COLLECTIONS.map((c) => c.id));
-
 function defaultQuery(collectionId: string): string {
   return `GET ${collectionId}
 LIMIT 10`;
