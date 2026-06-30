@@ -11,6 +11,7 @@ import { TotpSetupStep } from '../components/TotpSetupStep';
 import { useLogin } from '../hooks/useLogin';
 import { loginSchema, type LoginForm } from '../schemas';
 import type { LoginChallenge } from '@/types/auth';
+import { SsoQrLogin } from '../components/SsoQrLogin';
 
 export function LoginPage() {
   const { t } = useTranslation('auth');
@@ -92,6 +93,16 @@ export function LoginPage() {
           </Link>
         </div>
       </form>
+
+      <div className="mt-4 flex items-center gap-3">
+        <div className="h-px flex-1 bg-gray/20" />
+        <span className="text-xs text-gray uppercase">{t('sso.login_via_qr')}</span>
+        <div className="h-px flex-1 bg-gray/20" />
+      </div>
+
+      <div className="mt-4">
+        <SsoQrLogin />
+      </div>
     </AuthCard>
   );
 }
