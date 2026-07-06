@@ -28,6 +28,8 @@ export interface CollectionDef {
   pgRefField: string; // champ qui référence PostgreSQL (ex. pg_message_id)
   fields: FieldDef[];
   lifecycleFilters: LifecycleFilter[];
+  prebuiltQuery?: string; // requête DSL par défaut pour le Data Browser
+  adminEndpoint?: string; // endpoint REST admin associé (ex. /admin/messages/{id})
 }
 
 /** Filtre lifecycle prêt à l'emploi. */
@@ -65,6 +67,8 @@ export const COLLECTIONS: CollectionDef[] = [
       { label: 'Supprimés', field: 'deleted_at', operator: 'IS NOT NULL' as const },
       { label: 'Édités', field: 'edited_at', operator: 'IS NOT NULL' as const },
     ],
+    prebuiltQuery: 'GET messages\nWHERE deleted_at IS NULL\nLIMIT 20',
+    adminEndpoint: '/admin/messages/{id}',
   },
   {
     id: 'event_documents',
@@ -88,6 +92,7 @@ export const COLLECTIONS: CollectionDef[] = [
       { label: 'Anonymisés', field: 'anonymised_at', operator: 'IS NOT NULL' as const },
       { label: 'Modifiés récemment', field: 'updated_at', operator: 'IS NOT NULL' as const },
     ],
+    prebuiltQuery: 'GET event_documents\nLIMIT 20',
   },
   {
     id: 'listing_documents',
@@ -108,6 +113,7 @@ export const COLLECTIONS: CollectionDef[] = [
       { label: 'Anonymisés', field: 'anonymised_at', operator: 'IS NOT NULL' as const },
       { label: 'Avec tags', field: 'tags', operator: 'IS NOT NULL' as const },
     ],
+    prebuiltQuery: 'GET listing_documents\nLIMIT 20',
   },
   {
     id: 'user_media',
@@ -129,6 +135,7 @@ export const COLLECTIONS: CollectionDef[] = [
       { label: 'Bannières', field: 'type', operator: '=' as any, value: 'banner' },
       { label: 'Jamais remplacés', field: 'replaced_at', operator: 'IS NULL' as const },
     ],
+    prebuiltQuery: 'GET user_media\nLIMIT 20',
   },
   {
     id: 'contracts',
@@ -161,6 +168,7 @@ export const COLLECTIONS: CollectionDef[] = [
       { label: 'Contrats', field: 'type', operator: '=' as any, value: 'contract' },
       { label: 'Reçus', field: 'type', operator: '=' as any, value: 'receipt' },
     ],
+    prebuiltQuery: 'GET contracts\nWHERE signed_at IS NOT NULL\nLIMIT 20',
   },
   {
     id: 'event_tickets',
@@ -182,6 +190,7 @@ export const COLLECTIONS: CollectionDef[] = [
       { label: 'Non scannés', field: 'scanned_at', operator: 'IS NULL' as const },
       { label: 'Scannés', field: 'scanned_at', operator: 'IS NOT NULL' as const },
     ],
+    prebuiltQuery: 'GET event_tickets\nLIMIT 20',
   },
   {
     id: 'incident_documents',
@@ -201,6 +210,7 @@ export const COLLECTIONS: CollectionDef[] = [
       { label: 'Synchronisés', field: 'synced_at', operator: 'IS NOT NULL' as const },
       { label: 'Non synchronisés', field: 'synced_at', operator: 'IS NULL' as const },
     ],
+    prebuiltQuery: 'GET incident_documents\nLIMIT 20',
   },
 ];
 

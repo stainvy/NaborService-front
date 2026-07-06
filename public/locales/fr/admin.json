@@ -5,6 +5,9 @@
     "tab_explorer": "Explorer",
     "tab_console": "Console",
     "tab_audit": "Historique",
+    "tab_browser": "Explorateur MongoDB",
+    "tab_api": "API Explorer",
+    "tab_geo": "Geo",
     "tab_messages": "Messages",
     "explorer_title": "Explorateur de schémas",
     "explorer_subtitle": "Parcourez les collections MongoDB et leurs champs queryables.",
@@ -35,6 +38,10 @@
     "documents": "Documents",
     "generated_filter": "Filtre MongoDB généré",
     "raw_response": "Réponse brute JSON",
+    "endpoint_hint": "Ce endpoint retourne seulement le filtre MongoDB généré — il n'exécute pas la requête sur les documents.",
+    "no_documents_explain": "Le endpoint /dsl/query traduit votre requête DSL en filtre MongoDB mais ne retourne pas les documents. Utilisez l'onglet Explorateur MongoDB pour parcourir les données.",
+    "copy_filter": "Copier le filtre",
+    "filter_copied": "Filtre copié dans le presse-papier.",
     "unknown_error": "Erreur inconnue.",
     "audit_title": "Historique des requêtes",
     "audit_subtitle": "Consultation des requêtes DSL exécutées (admin uniquement).",
@@ -60,5 +67,20 @@
     "msg_no_content": "Contenu vide ou chiffré.",
     "msg_attachments": "Pièces jointes",
     "msg_reactions": "Réactions"
+  },
+  "browser": {
+    "title": "Explorateur de données MongoDB",
+    "subtitle": "Parcourez les collections MongoDB avec des requêtes DSL pré-construites.",
+    "run_query": "Exécuter",
+    "running": "Exécution…",
+    "results": "Résultats",
+    "no_results": "Aucun document trouvé pour cette requête.",
+    "data_unavailable": "Données non disponibles",
+    "data_unavailable_hint": "Le endpoint DSL retourne le filtre MongoDB mais pas les documents eux-mêmes. Utilisez les endpoints REST dédiés pour voir les données réelles.",
+    "generated_filter": "Filtre MongoDB généré"
+  },
+  "geo": {
+    "title": "Géo & Quartiers",
+    "subtitle": "Autocomplétion BAN, exploration des quartiers, et CRUD admin (Neo4j)."
   }
 }

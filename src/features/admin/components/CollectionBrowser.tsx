@@ -3,14 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { dslService, type DslQueryResult } from '@/services/dsl.service';
 import { Button } from '@/components/Button';
 import { COLLECTIONS, type LifecycleFilter } from '../schemas/fieldRegistry';
-import { redactDocument, MiniBlock } from '../utils/redact';
+import { DataTable, type DataTableColumn } from './DataTable';
+import { MiniBlock } from '../utils/redact';
 
 function defaultQuery(collectionId: string): string {
-  return `GET ${collectionId}
-LIMIT 10`;
+  const col = COLLECTIONS.find((c) => c.id === collectionId);
+  return col?.prebuiltQuery ?? `GET ${collectionId}\nLIMIT 20`;
 }
 
-export function DslConsole() {
+export function CollectionBrowser() {
   const { t } = useTranslation('admin');
   const [collection, setCollection] = useState(COLLECTIONS[0]);
   const [query, setQuery] = useState(() => defaultQuery(collection.id));
@@ -28,7 +29,6 @@ export function DslConsole() {
 
   function applyFilter(f: LifecycleFilter) {
     const val = f.value ? ` ${f.operator} "${f.value}"` : '';
-    // Insère une clause WHERE ou l'ajoute après une clause existante
     if (query.includes('WHERE')) {
       setQuery(query.replace(/WHERE (.+)/, `WHERE $1 AND ${f.field} ${f.operator}${val}`));
     } else if (query.includes('LIMIT')) {
@@ -55,11 +55,14 @@ export function DslConsole() {
     }
   }
 
+  // Build columns from result documents
+  const columns: DataTableColumn[] = buildColumns(result);
+
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-lg font-bold text-navy">{t('dsl.title')}</h2>
-        <p className="mt-1 text-sm text-gray">{t('dsl.subtitle')}</p>
+        <h2 className="text-lg font-bold text-navy">{t('browser.title')}</h2>
+        <p className="mt-1 text-sm text-gray">{t('browser.subtitle')}</p>
       </div>
 
       {/* Sélecteur de collection */}
@@ -106,12 +109,12 @@ export function DslConsole() {
           rows={5}
           spellCheck={false}
           className="rounded-md border border-gray/30 bg-gray-50 px-4 py-3 font-mono text-sm leading-relaxed text-navy outline-none focus:border-orange focus:ring-1 focus:ring-orange"
-          placeholder="GET contracts&#10;WHERE signed_at IS NOT NULL&#10;LIMIT 20"
+          placeholder="GET contracts\nWHERE signed_at IS NOT NULL\nLIMIT 20"
         />
         <div className="flex items-center justify-between">
           <p className="text-xs text-gray">{t('dsl.editor_hint')}</p>
           <Button onClick={handleExecute} disabled={loading || !query.trim()}>
-            {loading ? t('dsl.executing') : t('dsl.execute')}
+            {loading ? t('browser.running') : t('browser.run_query')}
           </Button>
         </div>
       </div>
@@ -131,7 +134,7 @@ export function DslConsole() {
           <div className="rounded-lg border border-gray/200 bg-white">
             <div className="flex items-center justify-between border-b border-gray/100 px-5 py-3">
               <div className="flex items-center gap-3">
-                <h3 className="font-bold text-navy">{t('dsl.results_title')}</h3>
+                <h3 className="font-bold text-navy">{t('browser.results')}</h3>
                 <code className="rounded bg-gray-100 px-2 py-0.5 font-mono text-xs text-gray">
                   {result.collection}
                 </code>
@@ -141,41 +144,21 @@ export function DslConsole() {
               </div>
             </div>
 
-            {result.results.length > 0 ? (
-              <div className="max-h-[32rem] overflow-auto">
-                <table className="w-full text-left text-xs">
-                  <tbody>
-                    {result.results.map((doc, i) => (
-                      <tr
-                        key={i}
-                        className={`border-b border-gray/50 hover:bg-gray-50/50 ${
-                          i % 2 === 0 ? 'bg-white' : 'bg-gray-50/30'
-                        }`}
-                      >
-                        <td className="w-10 select-none px-4 py-2.5 text-center text-gray">
-                          {i + 1}
-                        </td>
-                        <td className="px-4 py-2.5 font-mono leading-relaxed text-navy">
-                          <pre className="max-h-20 overflow-auto whitespace-pre-wrap">
-                            {JSON.stringify(redactDocument(doc), null, 2)}
-                          </pre>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <div className="px-5 py-8 text-center text-sm text-gray">
-                {t('dsl.no_results')}
-              </div>
-            )}
+            <div className="p-4">
+              <DataTable
+                columns={columns}
+                data={result.results}
+                pageSize={20}
+                loading={false}
+                emptyMessage={t('browser.no_results')}
+              />
+            </div>
           </div>
 
           {/* ── Section Filtre généré ── */}
           <details className="rounded-lg border border-gray/200 bg-white">
             <summary className="flex cursor-pointer items-center justify-between px-5 py-3 text-sm font-medium text-navy">
-              <span>{t('dsl.generated_filter')}</span>
+              <span>{t('browser.generated_filter')}</span>
               <button
                 type="button"
                 onClick={(e) => {
@@ -200,4 +183,15 @@ export function DslConsole() {
       )}
     </div>
   );
+}
+
+/** Infer table columns from the first document's keys. */
+function buildColumns(result: DslQueryResult | null): DataTableColumn[] {
+  if (!result?.results?.length) return [];
+  const first = result.results[0];
+  return Object.keys(first).map((key) => ({
+    key,
+    label: key,
+    sortable: true,
+  }));
 }

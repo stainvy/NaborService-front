@@ -4,14 +4,18 @@ import { useTranslation } from 'react-i18next';
 import { DslExplorer } from '../components/DslExplorer';
 import { DslConsole } from '../components/DslConsole';
 import { DslAudit } from '../components/DslAudit';
+import { ApiExplorer } from '../components/ApiExplorer';
+import { GeoNeighbourhoodPanel } from '../components/GeoNeighbourhoodPanel';
 import { MessageLookup } from '../components/MessageLookup';
 
-type AdminTab = 'explorer' | 'console' | 'audit' | 'messages';
+type AdminTab = 'explorer' | 'console' | 'audit' | 'api' | 'geo' | 'messages';
 
 const TABS: { key: AdminTab; labelKey: string }[] = [
   { key: 'explorer', labelKey: 'dsl.tab_explorer' },
   { key: 'console', labelKey: 'dsl.tab_console' },
   { key: 'audit', labelKey: 'dsl.tab_audit' },
+  { key: 'api', labelKey: 'dsl.tab_api' },
+  { key: 'geo', labelKey: 'dsl.tab_geo' },
   { key: 'messages', labelKey: 'dsl.tab_messages' },
 ];
 
@@ -32,7 +36,7 @@ export function AdminDashboardPage() {
       </header>
 
       {/* Onglets */}
-      <nav className="flex gap-0 border-b border-gray/20 px-6">
+      <nav className="flex gap-0 overflow-x-auto border-b border-gray/20 px-6">
         {TABS.map(({ key, labelKey }) => (
           <button
             key={key}
@@ -54,6 +58,8 @@ export function AdminDashboardPage() {
         {tab === 'explorer' && <DslExplorer />}
         {tab === 'console' && <DslConsole />}
         {tab === 'audit' && <DslAudit />}
+        {tab === 'api' && <ApiExplorer />}
+        {tab === 'geo' && <GeoNeighbourhoodPanel />}
         {tab === 'messages' && <MessageLookup />}
       </main>
     </div>

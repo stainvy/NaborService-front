@@ -14,14 +14,35 @@ export interface AdminMessage {
   reactions?: { pg_user_id: string; emoji: string }[];
 }
 
+export interface AdminGroup {
+  id: string;
+  name: string;
+  type: string;
+  createdBy: string;
+  createdAt: string;
+  memberCount: number;
+}
+
 export const adminService = {
+  /** Liste tous les groupes (admin). */
+  listGroups(): Promise<AdminGroup[]> {
+    return api.get<AdminGroup[]>('/admin/chat/groups').then((r) => r.data);
+  },
+
+  /** Historique des messages d'un groupe (admin, contourne l'appartenance). */
+  getGroupMessages(groupId: string, limit?: number): Promise<unknown[]> {
+    return api
+      .get(`/admin/chat/groups/${groupId}/messages`, { params: { limit } })
+      .then((r) => r.data);
+  },
+
   /** Lit un message déchiffré (contourne l'appartenance au groupe). */
   getMessage(messageId: string): Promise<AdminMessage> {
-    return api.get<AdminMessage>(`/admin/messages/${messageId}`).then((r) => r.data);
+    return api.get<AdminMessage>(`/admin/chat/messages/${messageId}`).then((r) => r.data);
   },
 
   /** Supprime un message (soft delete). */
   deleteMessage(messageId: string): Promise<void> {
-    return api.delete(`/admin/messages/${messageId}`).then(() => undefined);
+    return api.delete(`/admin/chat/messages/${messageId}`).then(() => undefined);
   },
 };

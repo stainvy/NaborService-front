@@ -13,8 +13,8 @@ export interface DslQueryResult {
   order: Record<string, unknown> | null;
   limit: number;
   projection: Record<string, unknown>;
-  documents?: Record<string, unknown>[];
-  total?: number;
+  results: Record<string, unknown>[];
+  resultCount: number;
 }
 
 /** Format réel de l'API dsl/audit (NestJS → Python FastAPI). */
