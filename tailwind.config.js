@@ -10,6 +10,19 @@ export default {
         success: '#3DBD77', // confirmations, statuts validés
         error: '#E8534A', // erreurs, modération
         gray: '#8C8C8C', // textes secondaires, placeholders
+        // Palette back-office admin — délibérément distincte du reste du site
+        admin: {
+          sidebar: '#0F172A',
+          sidebarHover: '#1E293B',
+          bg: '#F8FAFC',
+          surface: '#FFFFFF',
+          border: '#E2E8F0',
+          text: '#1E293B',
+          textInverse: '#E2E8F0',
+          muted: '#64748B',
+          accent: '#6366F1',
+          accentHover: '#4F46E5',
+        },
       },
     },
   },

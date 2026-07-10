@@ -1,29 +1,27 @@
 import { api } from '@/lib/api';
+import type {
+  AdminMessage,
+  AdminGroup,
+  AdminUser,
+  AdminUsersQuery,
+  AdminUsersListResponse,
+  AdminConfig,
+  RgpdRequest,
+  RgpdRequestStatusResponse,
+  StatsOverview,
+  StatsListings,
+  StatsEvents,
+  StatsPayments,
+  StatsUsers,
+  StatsIncidents,
+} from '@/types/admin';
+import type { Role } from '@/types/roles';
 
-export interface AdminMessage {
-  id: string;
-  pg_message_id: string;
-  pg_group_id: string;
-  pg_sender_id: string;
-  type: 'text' | 'image' | 'file' | 'voice';
-  content?: string; // déchiffré par le serveur avec la clé admin
-  sent_at: string;
-  edited_at?: string;
-  deleted_at?: string;
-  attachments?: { filename: string; mimetype: string; size_bytes: number }[];
-  reactions?: { pg_user_id: string; emoji: string }[];
-}
-
-export interface AdminGroup {
-  id: string;
-  name: string;
-  type: string;
-  createdBy: string;
-  createdAt: string;
-  memberCount: number;
-}
+export type { AdminMessage, AdminGroup };
 
 export const adminService = {
+  // --- Chat (modération messages) ---
+
   /** Liste tous les groupes (admin). */
   listGroups(): Promise<AdminGroup[]> {
     return api.get<AdminGroup[]>('/admin/chat/groups').then((r) => r.data);
@@ -44,5 +42,87 @@ export const adminService = {
   /** Supprime un message (soft delete). */
   deleteMessage(messageId: string): Promise<void> {
     return api.delete(`/admin/chat/messages/${messageId}`).then(() => undefined);
+  },
+
+  // --- Users ---
+  // GET /admin/users -> AdminUsersListDto { users, total } (confirmé /api-json).
+
+  listUsers(params?: AdminUsersQuery): Promise<AdminUsersListResponse> {
+    return api.get<AdminUsersListResponse>('/admin/users', { params }).then((r) => r.data);
+  },
+
+  getUser(id: string): Promise<AdminUser> {
+    return api.get<AdminUser>(`/admin/users/${id}`).then((r) => r.data);
+  },
+
+  deleteUser(id: string): Promise<void> {
+    return api.delete(`/admin/users/${id}`).then(() => undefined);
+  },
+
+  updateUserRole(id: string, role: Role): Promise<AdminUser> {
+    return api.patch<AdminUser>(`/admin/users/${id}/role`, { role }).then((r) => r.data);
+  },
+
+  suspendUser(id: string): Promise<AdminUser> {
+    return api.post<AdminUser>(`/admin/users/${id}/suspend`).then((r) => r.data);
+  },
+
+  restoreUser(id: string): Promise<AdminUser> {
+    return api.post<AdminUser>(`/admin/users/${id}/restore`).then((r) => r.data);
+  },
+
+  resetUserTotp(id: string): Promise<void> {
+    return api.delete(`/admin/users/${id}/totp`).then(() => undefined);
+  },
+
+  // --- Config ---
+
+  getConfig(): Promise<AdminConfig> {
+    return api.get<AdminConfig>('/admin/config').then((r) => r.data);
+  },
+
+  updateConfig(payload: Partial<AdminConfig>): Promise<AdminConfig> {
+    return api.patch<AdminConfig>('/admin/config', payload).then((r) => r.data);
+  },
+
+  // --- Stats ---
+
+  getStatsOverview(): Promise<StatsOverview> {
+    return api.get<StatsOverview>('/admin/stats/overview').then((r) => r.data);
+  },
+
+  getStatsListings(): Promise<StatsListings> {
+    return api.get<StatsListings>('/admin/stats/listings').then((r) => r.data);
+  },
+
+  getStatsEvents(): Promise<StatsEvents> {
+    return api.get<StatsEvents>('/admin/stats/events').then((r) => r.data);
+  },
+
+  getStatsPayments(): Promise<StatsPayments> {
+    return api.get<StatsPayments>('/admin/stats/payments').then((r) => r.data);
+  },
+
+  getStatsUsers(): Promise<StatsUsers> {
+    return api.get<StatsUsers>('/admin/stats/users').then((r) => r.data);
+  },
+
+  getStatsIncidents(): Promise<StatsIncidents> {
+    return api.get<StatsIncidents>('/admin/stats/incidents').then((r) => r.data);
+  },
+
+  // --- RGPD ---
+  // GET /admin/rgpd/requests -> RgpdRequestDto[] brut, sans pagination (confirmé /api-json).
+
+  listRgpdRequests(): Promise<RgpdRequest[]> {
+    return api.get<RgpdRequest[]>('/admin/rgpd/requests').then((r) => r.data);
+  },
+
+  anonymizeRgpdRequest(userId: string): Promise<void> {
+    return api.post(`/admin/rgpd/requests/${userId}/anonymize`).then(() => undefined);
+  },
+
+  getRgpdRequestStatus(userId: string): Promise<RgpdRequestStatusResponse> {
+    return api.get<RgpdRequestStatusResponse>(`/admin/rgpd/requests/${userId}/status`).then((r) => r.data);
   },
 };

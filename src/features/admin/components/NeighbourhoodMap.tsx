@@ -203,7 +203,7 @@ export function NeighbourhoodMap({
 
   return (
     <div className="flex flex-col gap-2">
-      <div style={{ height }} className="overflow-hidden rounded-lg border border-gray/20">
+      <div style={{ height }} className="overflow-hidden rounded-lg border border-admin-border">
         <MapContainer center={center} zoom={13} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -223,7 +223,7 @@ export function NeighbourhoodMap({
 
           {/* Preview polygon (when editing / pasted GeoJSON) */}
           {displayPositions.length > 0 && !drawing && (
-            <Polygon positions={displayPositions} pathOptions={{ color: '#f97316', fillColor: '#f97316', fillOpacity: 0.15, weight: 2 }}>
+            <Polygon positions={displayPositions} pathOptions={{ color: '#6366f1', fillColor: '#6366f1', fillOpacity: 0.15, weight: 2 }}>
               <Popup>Polygone du quartier</Popup>
             </Polygon>
           )}
@@ -265,14 +265,14 @@ export function NeighbourhoodMap({
             </button>
           ) : (
             <>
-              <span className="text-xs text-gray">
+              <span className="text-xs text-admin-muted">
                 {drawPoints.length} point{drawPoints.length > 1 ? 's' : ''} — cliquez sur la carte
                 {snapHint && <span className="ml-1 font-medium text-green-600">(accroché !)</span>}
               </span>
               <button type="button" onClick={finishDrawing} disabled={drawPoints.length < 3} className="rounded bg-green-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-green-700 disabled:opacity-40">
                 Terminer
               </button>
-              <button type="button" onClick={clearDrawing} className="rounded border border-gray/30 px-3 py-1.5 text-xs text-gray hover:bg-gray-50">
+              <button type="button" onClick={clearDrawing} className="rounded border border-admin-border px-3 py-1.5 text-xs text-admin-muted hover:bg-admin-bg">
                 Annuler
               </button>
             </>

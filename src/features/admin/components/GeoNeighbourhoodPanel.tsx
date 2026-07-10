@@ -1,18 +1,32 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/Button';
-import { geoService, type GeoSuggestion } from '@/services/geo.service';
-import { neighbourhoodsService } from '@/services/neighbourhoods.service';
+import { ConfirmDialog } from '@/components/ConfirmDialog';
+import type { GeoSuggestion } from '@/services/geo.service';
 import type { Neighbourhood, CreateNeighbourhoodPayload } from '@/types/geo';
 import { NeighbourhoodMap } from './NeighbourhoodMap';
+import {
+  useBanAutocomplete,
+  useResolveNeighbourhood,
+  useNearbyNeighbourhoods,
+} from '../hooks/useGeoTools';
+import {
+  useNeighbourhoods,
+  useAdminNeighbourhoods,
+  useNeighbourhoodMembers,
+  useAdjacentNeighbourhoods,
+  useCreateNeighbourhood,
+  useUpdateNeighbourhood,
+  useDeleteNeighbourhood,
+  useOverlapCheck,
+  useReconcileNeighbourhoods,
+} from '../hooks/useNeighbourhoodAdmin';
 
 type GeoTab = 'ban' | 'browse' | 'admin';
 
-// ─── JSON block helper ───
-
 function JsonBlock({ data }: { data: unknown }) {
   return (
-    <pre className="max-h-52 overflow-auto rounded bg-gray-50 p-3 font-mono text-xs leading-relaxed text-navy">
+    <pre className="max-h-52 overflow-auto rounded bg-admin-bg p-3 font-mono text-xs leading-relaxed text-admin-text">
       {JSON.stringify(data, null, 2)}
     </pre>
   );
@@ -23,62 +37,49 @@ function JsonBlock({ data }: { data: unknown }) {
 function BANTab() {
   const { t } = useTranslation('admin');
   const [q, setQ] = useState('');
-  const [suggestions, setSuggestions] = useState<GeoSuggestion[]>([]);
+  const [debouncedQ, setDebouncedQ] = useState('');
   const [selected, setSelected] = useState<GeoSuggestion | null>(null);
-  const [resolvedNb, setResolvedNb] = useState<Neighbourhood | null>(null);
-  const [nearby, setNearby] = useState<Neighbourhood[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const timer = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedQ(q), 300);
+    return () => clearTimeout(timer);
+  }, [q]);
+
+  const { data: suggestions = [], isFetching: loadingSuggestions } = useBanAutocomplete(debouncedQ);
+  const { data: resolvedNb, isLoading: resolvingNb } = useResolveNeighbourhood(selected?.label);
+  const { data: nearby = [] } = useNearbyNeighbourhoods(
+    selected ? { latitude: selected.latitude, longitude: selected.longitude } : undefined,
+  );
 
   function handleChange(val: string) {
     setQ(val);
     setSelected(null);
-    setResolvedNb(null);
-    setNearby([]);
-    if (timer.current) clearTimeout(timer.current);
-    if (val.length < 3) { setSuggestions([]); return; }
-    timer.current = setTimeout(async () => {
-      setLoading(true);
-      try { const r = await geoService.autocomplete(val, 5); setSuggestions(r); } catch { /* ignore */ } finally { setLoading(false); }
-    }, 300);
   }
 
-  async function select(s: GeoSuggestion) {
+  function select(s: GeoSuggestion) {
     setSelected(s);
     setQ(s.label);
-    setSuggestions([]);
-    setError(null);
-    setLoading(true);
-    try {
-      const nb = await geoService.resolveNeighbourhood(s.label);
-      setResolvedNb(nb);
-    } catch { setResolvedNb(null); }
-    try {
-      const n = await neighbourhoodsService.nearby(s.latitude, s.longitude, 5000);
-      setNearby(n ?? []);
-    } catch { setNearby([]); }
-    setLoading(false);
+    setDebouncedQ('');
   }
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <div className="flex flex-col gap-4">
-        <div className="rounded-lg border border-gray/200 p-4">
-          <h3 className="mb-3 font-semibold text-navy">Autocomplétion BAN</h3>
+        <div className="rounded-lg border border-admin-border p-4">
+          <h3 className="mb-3 font-semibold text-admin-text">{t('geo.ban_title')}</h3>
           <input
             value={q}
             onChange={(e) => handleChange(e.target.value)}
-            placeholder="Tapez une adresse (min. 3 caractères)…"
-            className="w-full rounded border border-gray/30 px-3 py-2 text-sm outline-none focus:border-orange"
+            placeholder={t('geo.ban_placeholder')}
+            className="w-full rounded border border-admin-border px-3 py-2 text-sm outline-none focus:border-admin-accent"
           />
-          {loading && <p className="mt-2 text-xs text-gray">Recherche…</p>}
+          {loadingSuggestions && <p className="mt-2 text-xs text-admin-muted">{t('geo.searching')}</p>}
           {suggestions.length > 0 && (
-            <ul className="mt-2 max-h-48 overflow-auto rounded border border-gray/200">
+            <ul className="mt-2 max-h-48 overflow-auto rounded border border-admin-border">
               {suggestions.map((s, i) => (
                 <li key={i}>
-                  <button onClick={() => select(s)} className="w-full px-3 py-2 text-left text-sm text-navy hover:bg-orange/10">
-                    {s.label} {s.postcode && <span className="text-xs text-gray">({s.postcode} {s.city})</span>}
+                  <button onClick={() => select(s)} className="w-full px-3 py-2 text-left text-sm text-admin-text hover:bg-admin-accent/10">
+                    {s.label} {s.postcode && <span className="text-xs text-admin-muted">({s.postcode} {s.city})</span>}
                   </button>
                 </li>
               ))}
@@ -87,37 +88,35 @@ function BANTab() {
         </div>
 
         {selected && (
-          <div className="rounded-lg border border-gray/200 p-4">
-            <h3 className="mb-2 font-semibold text-navy">Adresse sélectionnée</h3>
-            <p className="text-sm text-navy">{selected.label}</p>
-            <p className="text-xs text-gray">
+          <div className="rounded-lg border border-admin-border p-4">
+            <h3 className="mb-2 font-semibold text-admin-text">{t('geo.selected_address')}</h3>
+            <p className="text-sm text-admin-text">{selected.label}</p>
+            <p className="text-xs text-admin-muted">
               GPS: {selected.latitude}, {selected.longitude}
               {selected.city && ` — ${selected.postcode} ${selected.city}`}
             </p>
             {resolvedNb && (
               <div className="mt-2 rounded bg-green-50 p-2 text-xs text-green-700">
-                Quartier résolu: <strong>{resolvedNb.name}</strong> ({resolvedNb.city})
+                {t('geo.resolved_neighbourhood')}: <strong>{resolvedNb.name}</strong> ({resolvedNb.city})
               </div>
             )}
-            {resolvedNb === null && selected && !loading && (
-              <p className="mt-2 text-xs text-amber-600">Aucun quartier trouvé pour cette adresse.</p>
+            {!resolvingNb && resolvedNb === undefined && (
+              <p className="mt-2 text-xs text-amber-600">{t('geo.no_neighbourhood_found')}</p>
             )}
-            {selected && (
-              <NeighbourhoodMap centroid={{ latitude: selected.latitude, longitude: selected.longitude }} height="200px" />
-            )}
+            <NeighbourhoodMap centroid={{ latitude: selected.latitude, longitude: selected.longitude }} height="200px" />
           </div>
         )}
       </div>
 
       <div className="flex flex-col gap-4">
         {nearby.length > 0 && (
-          <div className="rounded-lg border border-gray/200 p-4">
-            <h3 className="mb-3 font-semibold text-navy">Quartiers proches ({nearby.length})</h3>
+          <div className="rounded-lg border border-admin-border p-4">
+            <h3 className="mb-3 font-semibold text-admin-text">{t('geo.nearby_neighbourhoods')} ({nearby.length})</h3>
             <div className="max-h-64 overflow-auto">
               {nearby.map((nb) => (
-                <div key={nb.pgId} className="border-b border-gray/100 py-2 text-sm text-navy">
+                <div key={nb.pgId} className="border-b border-admin-border/60 py-2 text-sm text-admin-text">
                   <span className="font-medium">{nb.name}</span>{' '}
-                  <span className="text-xs text-gray">{nb.city} {nb.zipCode}</span>
+                  <span className="text-xs text-admin-muted">{nb.city} {nb.zipCode}</span>
                 </div>
               ))}
             </div>
@@ -131,91 +130,70 @@ function BANTab() {
 // ─── Neighbourhood Browser ───
 
 function BrowseTab() {
-  const [neighbourhoods, setNeighbourhoods] = useState<Neighbourhood[]>([]);
+  const { t } = useTranslation('admin');
   const [selected, setSelected] = useState<Neighbourhood | null>(null);
-  const [members, setMembers] = useState<unknown[]>([]);
-  const [adjacent, setAdjacent] = useState<Neighbourhood[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  async function load() {
-    setLoading(true);
-    try { const r = await neighbourhoodsService.listAll(); setNeighbourhoods(r ?? []); } catch { /* */ } finally { setLoading(false); }
-  }
-
-  async function selectOne(nb: Neighbourhood) {
-    setSelected(nb);
-    setMembers([]);
-    setAdjacent([]);
-    setLoading(true);
-    try {
-      const [m, a] = await Promise.all([
-        neighbourhoodsService.getMembers(nb.pgId).catch(() => []),
-        neighbourhoodsService.getAdjacent(nb.pgId).catch(() => []),
-      ]);
-      setMembers((m as any[]) ?? []);
-      setAdjacent((a as any[]) ?? []);
-    } catch { /* */ }
-    setLoading(false);
-  }
+  const { data: neighbourhoods = [], isFetching, refetch } = useNeighbourhoods();
+  const { data: members = [] } = useNeighbourhoodMembers(selected?.pgId);
+  const { data: adjacent = [] } = useAdjacentNeighbourhoods(selected?.pgId);
 
   return (
     <div className="grid gap-6 lg:grid-cols-3">
-      <div className="rounded-lg border border-gray/200 p-4">
+      <div className="rounded-lg border border-admin-border p-4">
         <div className="mb-3 flex items-center justify-between">
-          <h3 className="font-semibold text-navy">Quartiers</h3>
-          <Button onClick={load} disabled={loading}>↻</Button>
+          <h3 className="font-semibold text-admin-text">{t('geo.browse_neighbourhoods')}</h3>
+          <Button tone="admin" onClick={() => refetch()} disabled={isFetching}>↻</Button>
         </div>
         <div className="max-h-96 overflow-auto">
           {neighbourhoods.map((nb) => (
-            <button key={nb.pgId} onClick={() => selectOne(nb)} className={`block w-full px-3 py-2 text-left text-sm ${selected?.pgId === nb.pgId ? 'bg-orange/10 text-orange font-medium' : 'text-navy hover:bg-gray-50'}`}>
+            <button key={nb.pgId} onClick={() => setSelected(nb)} className={`block w-full px-3 py-2 text-left text-sm ${selected?.pgId === nb.pgId ? 'bg-admin-accent/10 text-admin-accent font-medium' : 'text-admin-text hover:bg-admin-bg'}`}>
               {nb.name}
-              <span className="ml-1 text-xs text-gray">{nb.city}</span>
-              {nb.memberCount != null && <span className="ml-1 text-[10px] text-gray">({nb.memberCount})</span>}
+              <span className="ml-1 text-xs text-admin-muted">{nb.city}</span>
+              {nb.memberCount != null && <span className="ml-1 text-[10px] text-admin-muted">({nb.memberCount})</span>}
             </button>
           ))}
-          {!neighbourhoods.length && <p className="py-4 text-center text-xs text-gray">Cliquez ↻ pour charger.</p>}
+          {!neighbourhoods.length && <p className="py-4 text-center text-xs text-admin-muted">{t('geo.click_refresh')}</p>}
         </div>
       </div>
 
       <div className="lg:col-span-2 flex flex-col gap-4">
         {selected && (
           <>
-            <div className="rounded-lg border border-gray/200 p-4">
-              <h3 className="mb-3 font-semibold text-navy">{selected.name}</h3>
-              <div className="grid grid-cols-2 gap-2 text-xs text-navy">
-                <span className="text-gray">Ville:</span><span>{selected.city}</span>
-                <span className="text-gray">Code postal:</span><span>{selected.zipCode}</span>
-                <span className="text-gray">Pays:</span><span>{selected.country}</span>
-                <span className="text-gray">ID:</span><span className="font-mono">{selected.pgId}</span>
-                {selected.areaM2 != null && (<><span className="text-gray">Surface:</span><span>{selected.areaM2.toLocaleString()} m²</span></>)}
-                {selected.memberCount != null && (<><span className="text-gray">Habitants:</span><span>{selected.memberCount}</span></>)}
+            <div className="rounded-lg border border-admin-border p-4">
+              <h3 className="mb-3 font-semibold text-admin-text">{selected.name}</h3>
+              <div className="grid grid-cols-2 gap-2 text-xs text-admin-text">
+                <span className="text-admin-muted">{t('geo.city')}:</span><span>{selected.city}</span>
+                <span className="text-admin-muted">{t('geo.zip')}:</span><span>{selected.zipCode}</span>
+                <span className="text-admin-muted">{t('geo.country')}:</span><span>{selected.country}</span>
+                <span className="text-admin-muted">{t('geo.id')}:</span><span className="font-mono">{selected.pgId}</span>
+                {selected.areaM2 != null && (<><span className="text-admin-muted">{t('geo.area')}:</span><span>{selected.areaM2.toLocaleString()} m²</span></>)}
+                {selected.memberCount != null && (<><span className="text-admin-muted">{t('geo.residents')}:</span><span>{selected.memberCount}</span></>)}
               </div>
             </div>
 
             {selected.geometry && <NeighbourhoodMap geojson={selected.geometry} centroid={selected.centroid} height="250px" />}
 
             {adjacent.length > 0 && (
-              <div className="rounded-lg border border-gray/200 p-4">
-                <h3 className="mb-2 font-semibold text-navy">Adjacents ({adjacent.length})</h3>
+              <div className="rounded-lg border border-admin-border p-4">
+                <h3 className="mb-2 font-semibold text-admin-text">{t('geo.adjacent')} ({adjacent.length})</h3>
                 <div className="flex flex-wrap gap-1">
                   {adjacent.map((a) => (
-                    <span key={a.id} className="rounded bg-gray-100 px-2 py-1 text-xs text-navy">{a.name}</span>
+                    <span key={a.pgId} className="rounded bg-admin-bg px-2 py-1 text-xs text-admin-text">{a.name}</span>
                   ))}
                 </div>
               </div>
             )}
 
             {members.length > 0 && (
-              <details className="rounded-lg border border-gray/200 bg-white">
-                <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-navy">Habitants ({members.length})</summary>
-                <div className="border-t border-gray/100 px-4 py-3">
+              <details className="rounded-lg border border-admin-border bg-admin-surface">
+                <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-admin-text">{t('geo.residents_list')} ({members.length})</summary>
+                <div className="border-t border-admin-border px-4 py-3">
                   <JsonBlock data={members.slice(0, 10)} />
                 </div>
               </details>
             )}
           </>
         )}
-        {!selected && <p className="py-8 text-center text-sm text-gray">Sélectionnez un quartier.</p>}
+        {!selected && <p className="py-8 text-center text-sm text-admin-muted">{t('geo.select_neighbourhood')}</p>}
       </div>
     </div>
   );
@@ -238,19 +216,24 @@ const EMPTY_FORM: CreateNeighbourhoodPayload = {
 };
 
 function AdminTab() {
-  const [neighbourhoods, setNeighbourhoods] = useState<Neighbourhood[]>([]);
+  const { t } = useTranslation('admin');
+  const { data: neighbourhoods = [], isFetching, refetch } = useAdminNeighbourhoods();
   const [selected, setSelected] = useState<Neighbourhood | null>(null);
   const [form, setForm] = useState<CreateNeighbourhoodPayload>(EMPTY_FORM);
   const [geoText, setGeoText] = useState('');
   const [response, setResponse] = useState<unknown>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [pendingDelete, setPendingDelete] = useState<string | null>(null);
 
-  async function load() {
-    setLoading(true); setError(null);
-    try { const r = await neighbourhoodsService.adminList(); setNeighbourhoods(r ?? []); } catch (e: any) { setError(e?.message); } finally { setLoading(false); }
-  }
+  const createMutation = useCreateNeighbourhood();
+  const updateMutation = useUpdateNeighbourhood();
+  const deleteMutation = useDeleteNeighbourhood();
+  const overlapMutation = useOverlapCheck();
+  const reconcileMutation = useReconcileNeighbourhoods();
+
+  const loading =
+    createMutation.isPending || updateMutation.isPending || deleteMutation.isPending || overlapMutation.isPending || reconcileMutation.isPending;
 
   function selectOne(nb: Neighbourhood) {
     setSelected(nb);
@@ -268,42 +251,47 @@ function AdminTab() {
     setResponse(null);
   }
 
-  /** Called by NeighbourhoodMap when the user finishes drawing a polygon. */
   function handlePolygonDrawn(geojson: GeoJSON.Polygon) {
     setGeoText(JSON.stringify(geojson, null, 2));
   }
 
-  async function save() {
+  function save() {
     let geom: GeoJSON.Polygon;
-    try { geom = JSON.parse(geoText); } catch { setError('GeoJSON invalide'); return; }
-    setLoading(true); setError(null);
-    try {
-      const payload = { ...form, geometry: geom };
-      const r = editing
-        ? await neighbourhoodsService.update(selected!.pgId, payload)
-        : await neighbourhoodsService.create(payload);
-      setResponse(r);
-      resetForm();
-      await load();
-    } catch (e: any) { setError(e?.response?.data?.message ?? e?.message); } finally { setLoading(false); }
+    try { geom = JSON.parse(geoText); } catch { setError(t('geo.invalid_geojson')); return; }
+    setError(null);
+    const payload = { ...form, geometry: geom };
+    const mutation = editing
+      ? updateMutation.mutateAsync({ id: selected!.pgId, payload })
+      : createMutation.mutateAsync(payload);
+    mutation
+      .then((r) => { setResponse(r); resetForm(); })
+      .catch((e: any) => setError(e?.response?.data?.message ?? e?.message));
   }
 
-  async function del(pgId: string) {
-    if (!confirm('Supprimer ce quartier ?')) return;
-    setLoading(true); setError(null);
-    try { await neighbourhoodsService.delete(pgId); setResponse({ deleted: pgId }); await load(); } catch (e: any) { setError(e?.response?.data?.message ?? e?.message); } finally { setLoading(false); }
+  function confirmDelete() {
+    if (!pendingDelete) return;
+    deleteMutation.mutate(pendingDelete, {
+      onSuccess: () => { setResponse({ deleted: pendingDelete }); setPendingDelete(null); },
+      onError: (e: any) => { setError(e?.response?.data?.message ?? e?.message); setPendingDelete(null); },
+    });
   }
 
-  async function checkOverlap() {
+  function checkOverlap() {
     let geom: GeoJSON.Polygon;
-    try { geom = JSON.parse(geoText); } catch { setError('GeoJSON invalide'); return; }
-    setLoading(true); setError(null);
-    try { const r = await neighbourhoodsService.overlapCheck(geom); setResponse(r); } catch (e: any) { setError(e?.message); } finally { setLoading(false); }
+    try { geom = JSON.parse(geoText); } catch { setError(t('geo.invalid_geojson')); return; }
+    setError(null);
+    overlapMutation.mutate(geom, {
+      onSuccess: (r) => setResponse(r),
+      onError: (e: any) => setError(e?.message),
+    });
   }
 
-  async function reconcile() {
-    setLoading(true); setError(null);
-    try { const r = await neighbourhoodsService.reconcile(); setResponse(r); } catch (e: any) { setError(e?.message); } finally { setLoading(false); }
+  function reconcile() {
+    setError(null);
+    reconcileMutation.mutate(undefined, {
+      onSuccess: (r) => setResponse(r),
+      onError: (e: any) => setError(e?.message),
+    });
   }
 
   // GeoJSON preview from textarea
@@ -322,52 +310,52 @@ function AdminTab() {
   return (
     <div className="grid gap-6 lg:grid-cols-3">
       {/* Liste */}
-      <div className="rounded-lg border border-gray/200 p-4">
+      <div className="rounded-lg border border-admin-border p-4">
         <div className="mb-3 flex items-center justify-between">
-          <h3 className="font-semibold text-navy">Admin CRUD</h3>
+          <h3 className="font-semibold text-admin-text">{t('geo.admin_crud')}</h3>
           <div className="flex gap-1">
-            <Button onClick={load} disabled={loading}>↻</Button>
-            <Button onClick={reconcile} disabled={loading}>↺</Button>
+            <Button tone="admin" onClick={() => refetch()} disabled={isFetching}>↻</Button>
+            <Button tone="admin" onClick={reconcile} disabled={loading}>↺</Button>
           </div>
         </div>
         <div className="max-h-96 overflow-auto">
           {neighbourhoods.map((nb) => (
-            <div key={nb.pgId} className="flex items-center justify-between border-b border-gray/100 py-2">
-              <button onClick={() => selectOne(nb)} className={`text-left text-sm ${selected?.pgId === nb.pgId ? 'text-orange font-medium' : 'text-navy hover:text-orange'}`}>
-                {nb.name} <span className="text-xs text-gray">{nb.city}</span>
+            <div key={nb.pgId} className="flex items-center justify-between border-b border-admin-border/60 py-2">
+              <button onClick={() => selectOne(nb)} className={`text-left text-sm ${selected?.pgId === nb.pgId ? 'text-admin-accent font-medium' : 'text-admin-text hover:text-admin-accent'}`}>
+                {nb.name} <span className="text-xs text-admin-muted">{nb.city}</span>
               </button>
-              <button onClick={() => del(nb.pgId)} className="text-xs text-red-500 hover:underline">del</button>
+              <button onClick={() => setPendingDelete(nb.pgId)} className="text-xs text-red-500 hover:underline">{t('geo.delete')}</button>
             </div>
           ))}
-          {!neighbourhoods.length && <p className="py-4 text-center text-xs text-gray">Cliquez ↻</p>}
+          {!neighbourhoods.length && <p className="py-4 text-center text-xs text-admin-muted">{t('geo.click_refresh')}</p>}
         </div>
-        <button onClick={resetForm} className="mt-3 text-xs text-orange underline">+ Nouveau</button>
+        <button onClick={resetForm} className="mt-3 text-xs text-admin-accent underline">+ {t('geo.new_neighbourhood')}</button>
       </div>
 
       {/* Formulaire + carte */}
       <div className="lg:col-span-2 flex flex-col gap-4">
-        <div className="rounded-lg border border-gray/200 p-4">
-          <h3 className="mb-3 font-semibold text-navy">{editing ? 'Modifier' : 'Créer'} un quartier</h3>
+        <div className="rounded-lg border border-admin-border p-4">
+          <h3 className="mb-3 font-semibold text-admin-text">{editing ? t('geo.edit_neighbourhood') : t('geo.create_neighbourhood')}</h3>
           <div className="grid grid-cols-3 gap-2">
-            <input value={form.pg_id} onChange={(e) => setForm({ ...form, pg_id: e.target.value })} placeholder="ex: nb-belleville" className="rounded border border-gray/30 px-3 py-1.5 text-sm outline-none focus:border-orange" />
-            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="ex: Belleville" className="rounded border border-gray/30 px-3 py-1.5 text-sm outline-none focus:border-orange" />
-            <input value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} placeholder="ex: Paris" className="rounded border border-gray/30 px-3 py-1.5 text-sm outline-none focus:border-orange" />
-            <input value={form.zip_code} onChange={(e) => setForm({ ...form, zip_code: e.target.value })} placeholder="ex: 75020" className="rounded border border-gray/30 px-3 py-1.5 text-sm outline-none focus:border-orange" />
-            <input value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} placeholder="ex: FR" className="rounded border border-gray/30 px-3 py-1.5 text-sm outline-none focus:border-orange" />
+            <input value={form.pg_id} onChange={(e) => setForm({ ...form, pg_id: e.target.value })} placeholder="ex: nb-belleville" className="rounded border border-admin-border px-3 py-1.5 text-sm outline-none focus:border-admin-accent" />
+            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="ex: Belleville" className="rounded border border-admin-border px-3 py-1.5 text-sm outline-none focus:border-admin-accent" />
+            <input value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} placeholder="ex: Paris" className="rounded border border-admin-border px-3 py-1.5 text-sm outline-none focus:border-admin-accent" />
+            <input value={form.zip_code} onChange={(e) => setForm({ ...form, zip_code: e.target.value })} placeholder="ex: 75020" className="rounded border border-admin-border px-3 py-1.5 text-sm outline-none focus:border-admin-accent" />
+            <input value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} placeholder="ex: FR" className="rounded border border-admin-border px-3 py-1.5 text-sm outline-none focus:border-admin-accent" />
           </div>
-          <label className="mt-3 block text-xs font-medium text-gray">GeoJSON Polygon</label>
+          <label className="mt-3 block text-xs font-medium text-admin-muted">{t('geo.geojson_polygon')}</label>
           <textarea
             value={geoText}
             onChange={(e) => setGeoText(e.target.value)}
             rows={4}
             spellCheck={false}
-            className="mt-1 w-full rounded border border-gray/30 bg-gray-50 px-3 py-2 font-mono text-xs leading-relaxed text-navy outline-none focus:border-orange"
-            placeholder='Dessinez sur la carte ci-dessous ou collez un GeoJSON…'
+            className="mt-1 w-full rounded border border-admin-border bg-admin-bg px-3 py-2 font-mono text-xs leading-relaxed text-admin-text outline-none focus:border-admin-accent"
+            placeholder={t('geo.geojson_placeholder')}
           />
           <div className="mt-3 flex gap-2">
-            <Button onClick={save} disabled={loading || !form.pg_id || !form.name || !geoText}>{editing ? 'Update' : 'Create'}</Button>
-            <Button onClick={checkOverlap} disabled={loading || !geoText}>Check Overlap</Button>
-            {editing && <Button onClick={resetForm}>Cancel</Button>}
+            <Button tone="admin" onClick={save} disabled={loading || !form.pg_id || !form.name || !geoText}>{editing ? t('geo.update') : t('geo.create')}</Button>
+            <Button tone="admin" variant="secondary" onClick={checkOverlap} disabled={loading || !geoText}>{t('geo.check_overlap')}</Button>
+            {editing && <Button tone="admin" variant="secondary" onClick={resetForm}>{t('geo.cancel')}</Button>}
           </div>
         </div>
 
@@ -384,23 +372,34 @@ function AdminTab() {
         />
 
         {error && <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{error}</div>}
-        {response && (
-          <details className="rounded-lg border border-gray/200 bg-white">
-            <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-navy">Réponse</summary>
-            <div className="border-t border-gray/100 px-4 py-3"><JsonBlock data={response} /></div>
+        {response != null && (
+          <details className="rounded-lg border border-admin-border bg-admin-surface">
+            <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-admin-text">{t('geo.response')}</summary>
+            <div className="border-t border-admin-border px-4 py-3"><JsonBlock data={response} /></div>
           </details>
         )}
       </div>
+
+      <ConfirmDialog
+        open={Boolean(pendingDelete)}
+        tone="admin"
+        destructive
+        title={t('geo.delete')}
+        message={t('geo.confirm_delete_neighbourhood')}
+        loading={deleteMutation.isPending}
+        onConfirm={confirmDelete}
+        onCancel={() => setPendingDelete(null)}
+      />
     </div>
   );
 }
 
 // ─── Main ───
 
-const SUB_TABS: { key: GeoTab; label: string }[] = [
-  { key: 'ban', label: 'BAN' },
-  { key: 'browse', label: 'Quartiers' },
-  { key: 'admin', label: 'Admin CRUD' },
+const SUB_TABS: { key: GeoTab; labelKey: string }[] = [
+  { key: 'ban', labelKey: 'geo.tab_ban' },
+  { key: 'browse', labelKey: 'geo.tab_browse' },
+  { key: 'admin', labelKey: 'geo.tab_admin' },
 ];
 
 export function GeoNeighbourhoodPanel() {
@@ -410,15 +409,15 @@ export function GeoNeighbourhoodPanel() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-lg font-bold text-navy">{t('geo.title', 'Geo & Neighbourhoods')}</h2>
-        <p className="mt-1 text-sm text-gray">{t('geo.subtitle', 'BAN autocomplete, neighbourhood browser, and admin CRUD.')}</p>
+        <h2 className="text-lg font-bold text-admin-text">{t('geo.title')}</h2>
+        <p className="mt-1 text-sm text-admin-muted">{t('geo.subtitle')}</p>
       </div>
 
-      <nav className="flex gap-0 border-b border-gray/20">
-        {SUB_TABS.map(({ key, label }) => (
+      <nav className="flex gap-0 border-b border-admin-border">
+        {SUB_TABS.map(({ key, labelKey }) => (
           <button key={key} type="button" onClick={() => setTab(key)}
-            className={`px-4 py-2 text-sm font-medium transition-colors ${tab === key ? 'border-b-2 border-orange text-orange' : 'text-gray hover:text-navy'}`}>
-            {label}
+            className={`px-4 py-2 text-sm font-medium transition-colors ${tab === key ? 'border-b-2 border-admin-accent text-admin-accent' : 'text-admin-muted hover:text-admin-text'}`}>
+            {t(labelKey)}
           </button>
         ))}
       </nav>

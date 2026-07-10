@@ -29,9 +29,9 @@ export function MiniBlock({
 }) {
   const display = json !== undefined ? JSON.stringify(json, null, 2) : String(value ?? '—');
   return (
-    <div className="rounded border border-gray/20 bg-white p-3">
-      <p className="mb-1 text-xs font-medium text-gray">{label}</p>
-      <pre className="max-h-40 overflow-auto font-mono text-xs text-navy">{display}</pre>
+    <div className="rounded border border-admin-border bg-admin-surface p-3">
+      <p className="mb-1 text-xs font-medium text-admin-muted">{label}</p>
+      <pre className="max-h-40 overflow-auto font-mono text-xs text-admin-text">{display}</pre>
     </div>
   );
 }
