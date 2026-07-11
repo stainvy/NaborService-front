@@ -4,7 +4,6 @@ import type {
   AdminGroup,
   AdminUser,
   AdminUsersQuery,
-  AdminUsersListResponse,
   AdminConfig,
   RgpdRequest,
   RgpdRequestStatusResponse,
@@ -15,6 +14,7 @@ import type {
   StatsUsers,
   StatsIncidents,
 } from '@/types/admin';
+import type { Paginated } from '@/types/pagination';
 import type { Role } from '@/types/roles';
 
 export type { AdminMessage, AdminGroup };
@@ -45,10 +45,11 @@ export const adminService = {
   },
 
   // --- Users ---
-  // GET /admin/users -> AdminUsersListDto { users, total } (confirmé /api-json).
+  // GET /admin/users -> Paginated<AdminUser> { data, meta: { total, offset, limit } }
+  // (confirmé /api-json).
 
-  listUsers(params?: AdminUsersQuery): Promise<AdminUsersListResponse> {
-    return api.get<AdminUsersListResponse>('/admin/users', { params }).then((r) => r.data);
+  listUsers(params?: AdminUsersQuery): Promise<Paginated<AdminUser>> {
+    return api.get<Paginated<AdminUser>>('/admin/users', { params }).then((r) => r.data);
   },
 
   getUser(id: string): Promise<AdminUser> {

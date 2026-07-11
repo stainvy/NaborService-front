@@ -37,7 +37,7 @@ export function ModerationListingsPage() {
             },
           ]}
           data={items}
-          total={data?.total ?? 0}
+          total={data?.meta.total ?? 0}
           offset={offset}
           limit={LIMIT}
           onPageChange={setOffset}

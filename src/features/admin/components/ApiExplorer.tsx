@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import DOMPurify from 'dompurify';
+import { RefreshCw, Plus, Unlock, FileText, Paperclip, X } from 'lucide-react';
 import { Button } from '@/components/Button';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { Modal } from '@/components/Modal';
@@ -115,8 +116,8 @@ function MessagesPanel() {
           <h3 className="mb-3 font-semibold text-admin-text">{t('api.all_groups')}</h3>
           <div className="mb-3 flex gap-2">
             <input value={groupName} onChange={(e) => setGroupName(e.target.value)} placeholder={t('api.group_name_placeholder')} className="flex-1 rounded border border-admin-border px-3 py-1.5 text-sm outline-none focus:border-admin-accent" />
-            <Button tone="admin" onClick={handleCreateGroup} disabled={loading || !groupName.trim()}>+</Button>
-            <Button tone="admin" onClick={() => refetchGroups()} disabled={loading}>↻</Button>
+            <Button tone="admin" onClick={handleCreateGroup} disabled={loading || !groupName.trim()}><Plus className="h-3.5 w-3.5" /></Button>
+            <Button tone="admin" onClick={() => refetchGroups()} disabled={loading}><RefreshCw className="h-3.5 w-3.5" /></Button>
           </div>
           <div className="max-h-96 overflow-auto">
             {groups.map((g) => (
@@ -157,9 +158,9 @@ function MessagesPanel() {
                         <button
                           onClick={() => lookup.mutate(m.id, { onSuccess: (r) => setDecrypted((prev) => ({ ...prev, [m.id]: r.content ?? '[vide]' })) })}
                           disabled={lookup.isPending}
-                          className="mt-1 text-xs text-admin-accent hover:underline"
+                          className="mt-1 flex items-center gap-1 text-xs text-admin-accent hover:underline"
                         >
-                          🔓 {t('api.decrypt_message')}
+                          <Unlock className="h-3 w-3" /> {t('api.decrypt_message')}
                         </button>
                       )}
                       <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-[10px] text-admin-muted">
@@ -283,7 +284,7 @@ function EventsPanel() {
         <div className="rounded-lg border border-admin-border p-4">
           <div className="mb-3 flex items-center justify-between">
             <h3 className="font-semibold text-admin-text">{t('api.events')}</h3>
-            <Button tone="admin" onClick={() => refetch()} disabled={loadingList}>↻</Button>
+            <Button tone="admin" onClick={() => refetch()} disabled={loadingList}><RefreshCw className="h-3.5 w-3.5" /></Button>
           </div>
           <div className="max-h-80 overflow-auto">
             {events.map((ev) => (
@@ -337,8 +338,8 @@ function EventsPanel() {
               ))}
             </div>
 
-            <button onClick={() => { setShowContent(true); loadContent(); }} disabled={loading} className="text-xs text-admin-accent underline">
-              📄 {t('api.view_rich_content')}
+            <button onClick={() => { setShowContent(true); loadContent(); }} disabled={loading} className="flex items-center gap-1 text-xs text-admin-accent underline">
+              <FileText className="h-3 w-3" /> {t('api.view_rich_content')}
             </button>
 
             {showContent && content != null && (
@@ -356,15 +357,15 @@ function EventsPanel() {
             <div className="border-t border-admin-border/60 pt-3">
               <p className="mb-1 text-xs font-medium text-admin-muted">{t('api.media')}</p>
               <input ref={fileRef} type="file" accept="image/*" onChange={() => handleMediaUpload(selected.id)} className="hidden" />
-              <button onClick={() => fileRef.current?.click()} disabled={loading} className="text-xs text-admin-accent underline">
-                📎 {t('api.upload_image')}
+              <button onClick={() => fileRef.current?.click()} disabled={loading} className="flex items-center gap-1 text-xs text-admin-accent underline">
+                <Paperclip className="h-3 w-3" /> {t('api.upload_image')}
               </button>
               {mediaList.length > 0 && (
                 <div className="mt-2 flex flex-wrap gap-2">
                   {mediaList.map((m) => (
                     <div key={m.id} className="relative">
                       <img src={m.url} alt="" className="h-16 w-16 rounded border border-admin-border object-cover" />
-                      <button onClick={() => deleteMedia.mutate({ eventId: selected.id, filename: m.id }, { onSuccess: () => setMediaList((prev) => prev.filter((x) => x.id !== m.id)) })} className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] text-white hover:bg-red-600">×</button>
+                      <button onClick={() => deleteMedia.mutate({ eventId: selected.id, filename: m.id }, { onSuccess: () => setMediaList((prev) => prev.filter((x) => x.id !== m.id)) })} className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600"><X className="h-2.5 w-2.5" /></button>
                     </div>
                   ))}
                 </div>
@@ -461,7 +462,7 @@ function ListingsPanel() {
         <div className="rounded-lg border border-admin-border p-4">
           <div className="mb-3 flex items-center justify-between">
             <h3 className="font-semibold text-admin-text">{t('api.listings')}</h3>
-            <Button tone="admin" onClick={() => refetch()} disabled={loadingList}>↻</Button>
+            <Button tone="admin" onClick={() => refetch()} disabled={loadingList}><RefreshCw className="h-3.5 w-3.5" /></Button>
           </div>
           <div className="max-h-80 overflow-auto">
             {listings.map((l: any) => (
@@ -507,8 +508,8 @@ function ListingsPanel() {
             <FieldRow label="Créé le" value={selected.createdAt ? new Date(selected.createdAt as string).toLocaleString() : null} />
             <FieldRow label="Description" value={(selected.description as string)?.slice(0, 200)} />
 
-            <button onClick={() => { setShowContent(true); loadContent(); }} disabled={loading} className="text-xs text-admin-accent underline">
-              📄 {t('api.view_rich_content')}
+            <button onClick={() => { setShowContent(true); loadContent(); }} disabled={loading} className="flex items-center gap-1 text-xs text-admin-accent underline">
+              <FileText className="h-3 w-3" /> {t('api.view_rich_content')}
             </button>
 
             {showContent && content != null && (
@@ -526,15 +527,15 @@ function ListingsPanel() {
             <div className="border-t border-admin-border/60 pt-3">
               <p className="mb-1 text-xs font-medium text-admin-muted">{t('api.photos')}</p>
               <input ref={fileRef} type="file" accept="image/*" onChange={() => handleMediaUpload(selected.id as string)} className="hidden" />
-              <button onClick={() => fileRef.current?.click()} disabled={loading} className="text-xs text-admin-accent underline">
-                📎 {t('api.upload_photo')}
+              <button onClick={() => fileRef.current?.click()} disabled={loading} className="flex items-center gap-1 text-xs text-admin-accent underline">
+                <Paperclip className="h-3 w-3" /> {t('api.upload_photo')}
               </button>
               {mediaList.length > 0 && (
                 <div className="mt-2 flex flex-wrap gap-2">
                   {mediaList.map((m) => (
                     <div key={m.id} className="relative">
                       <img src={m.url} alt="" className="h-16 w-16 rounded border border-admin-border object-cover" />
-                      <button onClick={() => deleteMedia.mutate({ listingId: selected.id as string, mediaId: m.id }, { onSuccess: () => setMediaList((prev) => prev.filter((x) => x.id !== m.id)) })} className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] text-white hover:bg-red-600">×</button>
+                      <button onClick={() => deleteMedia.mutate({ listingId: selected.id as string, mediaId: m.id }, { onSuccess: () => setMediaList((prev) => prev.filter((x) => x.id !== m.id)) })} className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600"><X className="h-2.5 w-2.5" /></button>
                     </div>
                   ))}
                 </div>

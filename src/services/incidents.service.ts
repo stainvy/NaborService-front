@@ -8,6 +8,7 @@ import type {
 import type { Paginated } from '@/types/pagination';
 
 export const incidentsService = {
+  // GET /incidents -> Paginated<Incident> { data, meta: { total, offset, limit } }
   list(params?: IncidentsQuery): Promise<Paginated<Incident>> {
     return api.get<Paginated<Incident>>('/incidents', { params }).then((r) => r.data);
   },

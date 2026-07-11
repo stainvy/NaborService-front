@@ -2,21 +2,21 @@ import { api } from '@/lib/api';
 import type {
   ModerationAction,
   ModerationActionType,
-  ReportedListingsResponse,
-  ReportedEventsResponse,
+  ReportedListingItem,
+  ReportedEventItem,
 } from '@/types/admin';
-import type { PageParams } from '@/types/pagination';
+import type { Paginated, PageParams } from '@/types/pagination';
 
 export const moderationService = {
   // --- Listings ---
-  // GET /listings/reported -> ReportedListingsResponseDto { data, total } (confirmé /api-json).
+  // GET /listings/reported -> Paginated<ReportedListingItem> { data, meta } (confirmé /api-json).
 
-  getReportedListings(params?: PageParams): Promise<ReportedListingsResponse> {
-    return api.get<ReportedListingsResponse>('/listings/reported', { params }).then((r) => r.data);
+  getReportedListings(params?: PageParams): Promise<Paginated<ReportedListingItem>> {
+    return api.get<Paginated<ReportedListingItem>>('/listings/reported', { params }).then((r) => r.data);
   },
 
-  getListingModeratedActions(params?: PageParams): Promise<ModerationAction[]> {
-    return api.get<ModerationAction[]>('/listings/moderated_actions', { params }).then((r) => r.data);
+  getListingModeratedActions(params?: PageParams): Promise<Paginated<ModerationAction>> {
+    return api.get<Paginated<ModerationAction>>('/listings/moderated_actions', { params }).then((r) => r.data);
   },
 
   moderateListing(id: string, action: ModerationActionType, reason: string): Promise<void> {
@@ -28,15 +28,15 @@ export const moderationService = {
   },
 
   // --- Events ---
-  // GET /events/reported -> ReportedEventsResponseDto { items, total } (confirmé /api-json,
-  // clé "items" et pas "data" — asymétrique avec les listings).
+  // GET /events/reported -> Paginated<ReportedEventItem> { data, meta } (confirmé /api-json —
+  // la clé est désormais "data" pour les deux endpoints, plus d'asymétrie avec listings).
 
-  getReportedEvents(params?: PageParams): Promise<ReportedEventsResponse> {
-    return api.get<ReportedEventsResponse>('/events/reported', { params }).then((r) => r.data);
+  getReportedEvents(params?: PageParams): Promise<Paginated<ReportedEventItem>> {
+    return api.get<Paginated<ReportedEventItem>>('/events/reported', { params }).then((r) => r.data);
   },
 
-  getEventModeratedActions(params?: PageParams): Promise<ModerationAction[]> {
-    return api.get<ModerationAction[]>('/events/moderated_actions', { params }).then((r) => r.data);
+  getEventModeratedActions(params?: PageParams): Promise<Paginated<ModerationAction>> {
+    return api.get<Paginated<ModerationAction>>('/events/moderated_actions', { params }).then((r) => r.data);
   },
 
   moderateEvent(id: string, action: ModerationActionType, reason: string): Promise<void> {

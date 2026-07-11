@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { ArrowUp, ArrowDown, ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { redactDocument } from '../utils/redact';
 
 export interface DataTableColumn {
@@ -60,9 +61,12 @@ export function DataTable({
     setPage(0);
   }
 
-  function sortIcon(key: string): string {
-    if (sortKey !== key) return '↕';
-    return sortDir === 'asc' ? '↑' : sortDir === 'desc' ? '↓' : '↕';
+  function sortIcon(key: string) {
+    const cls = 'inline h-3 w-3';
+    if (sortKey !== key) return <ArrowUpDown className={cls} />;
+    if (sortDir === 'asc') return <ArrowUp className={cls} />;
+    if (sortDir === 'desc') return <ArrowDown className={cls} />;
+    return <ArrowUpDown className={cls} />;
   }
 
   // Loading skeleton
@@ -165,7 +169,7 @@ export function DataTable({
               onClick={() => setPage((p) => p - 1)}
               className="rounded border border-gray/20 px-2 py-1 disabled:opacity-30"
             >
-              ←
+              <ChevronLeft className="h-3.5 w-3.5" />
             </button>
             <button
               type="button"
@@ -173,7 +177,7 @@ export function DataTable({
               onClick={() => setPage((p) => p + 1)}
               className="rounded border border-gray/20 px-2 py-1 disabled:opacity-30"
             >
-              →
+              <ChevronRight className="h-3.5 w-3.5" />
             </button>
           </div>
         </div>

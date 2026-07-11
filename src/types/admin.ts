@@ -68,15 +68,10 @@ export interface AdminUsersQuery extends PageParams {
   q?: string;
 }
 
-// GET /admin/users -> { users, total } (pas l'enveloppe Paginated<T> générique)
-export interface AdminUsersListResponse {
-  users: AdminUser[];
-  total: number;
-}
-
 // --- Moderation ---
-// Shapes confirmées via /api-json (ReportedListingsResponseDto/ReportedListingItemDto,
-// ReportedEventsResponseDto/ReportedEventItemDto) — asymétriques entre listings et events.
+// Item shapes confirmées via /api-json (ReportedListingItemDto/ReportedEventItemDto) —
+// asymétriques entre listings et events. Les deux endpoints renvoient désormais
+// l'enveloppe Paginated<T> générique (voir src/types/pagination.ts).
 
 export type ModerationTargetType = 'listing' | 'event';
 // Valeurs confirmées via /api-json (ModerateDto / ModerateListingDto) — passé, pas infinitif.
@@ -108,21 +103,11 @@ export interface ReportedListingItem {
   last_report_at: string | null;
 }
 
-export interface ReportedListingsResponse {
-  data: ReportedListingItem[];
-  total: number;
-}
-
 // GET /events/reported item — enveloppe l'entité événement complète (non typée côté API).
 export interface ReportedEventItem {
   event: NaborEvent;
   reportCount: number;
   lastReportedAt: string;
-}
-
-export interface ReportedEventsResponse {
-  items: ReportedEventItem[];
-  total: number;
 }
 
 // --- Config ---

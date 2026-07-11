@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export interface ServerDataTableColumn<T> {
   key: string;
@@ -116,7 +117,7 @@ export function ServerDataTable<T>({
               onClick={() => onPageChange(Math.max(0, offset - limit))}
               className="rounded border border-admin-border px-2 py-1 disabled:opacity-30"
             >
-              ←
+              <ChevronLeft className="h-3.5 w-3.5" />
             </button>
             <span className="flex items-center px-2">
               {page + 1} / {totalPages}
@@ -127,7 +128,7 @@ export function ServerDataTable<T>({
               onClick={() => onPageChange(offset + limit)}
               className="rounded border border-admin-border px-2 py-1 disabled:opacity-30"
             >
-              →
+              <ChevronRight className="h-3.5 w-3.5" />
             </button>
           </div>
         </div>

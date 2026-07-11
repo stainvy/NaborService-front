@@ -15,7 +15,7 @@ export function ModerationEventsPage() {
   const { data, isLoading } = useReportedEvents({ offset, limit: LIMIT });
   const moderate = useModerateEvent();
 
-  const items = data?.items ?? [];
+  const items = data?.data ?? [];
   const selected = items.find((r) => r.event.id === selectedId) ?? null;
 
   return (
@@ -37,7 +37,7 @@ export function ModerationEventsPage() {
             },
           ]}
           data={items}
-          total={data?.total ?? 0}
+          total={data?.meta.total ?? 0}
           offset={offset}
           limit={LIMIT}
           onPageChange={setOffset}

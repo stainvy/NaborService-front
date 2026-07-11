@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Zap, Lock } from 'lucide-react';
 import {
   COLLECTIONS,
   FIELD_TYPE_COLORS,
@@ -114,14 +115,18 @@ function FieldRow({ field }: { field: FieldDef }) {
       </td>
       <td className="px-5 py-2">
         {field.indexed ? (
-          <span className="text-xs font-medium text-green-600">⚡ {field.name.split('.').pop()}</span>
+          <span className="flex items-center gap-1 text-xs font-medium text-green-600">
+            <Zap className="h-3 w-3" /> {field.name.split('.').pop()}
+          </span>
         ) : (
           <span className="text-xs text-admin-muted">—</span>
         )}
       </td>
       <td className="px-5 py-2">
         {field.sensitive ? (
-          <span className="rounded-full bg-red-100 px-2 py-0.5 text-[10px] font-medium text-red-600">🔒</span>
+          <span className="inline-flex items-center rounded-full bg-red-100 px-2 py-0.5 text-red-600">
+            <Lock className="h-3 w-3" />
+          </span>
         ) : (
           <span className="text-xs text-admin-muted">—</span>
         )}

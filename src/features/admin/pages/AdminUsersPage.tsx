@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Check, Minus } from 'lucide-react';
 import { ROLES, type Role } from '@/types/roles';
 import { ServerDataTable } from '../components/ServerDataTable';
 import { UserDetailModal } from '../components/UserDetailModal';
@@ -49,11 +50,20 @@ export function AdminUsersPage() {
           { key: 'name', label: t('users.col_name'), render: (u) => `${u.firstName} ${u.lastName}` },
           { key: 'role', label: t('users.col_role') },
           { key: 'status', label: t('users.col_status'), render: (u) => t(`users.status_${adminUserStatus(u)}`) },
-          { key: 'totp', label: t('users.col_totp'), render: (u) => (u.mfaEnabled ? '✓' : '—') },
+          {
+            key: 'totp',
+            label: t('users.col_totp'),
+            render: (u) =>
+              u.mfaEnabled ? (
+                <Check className="h-4 w-4 text-green-600" />
+              ) : (
+                <Minus className="h-4 w-4 text-admin-muted" />
+              ),
+          },
           { key: 'createdAt', label: t('users.col_created'), render: (u) => new Date(u.createdAt).toLocaleDateString() },
         ]}
-        data={data?.users ?? []}
-        total={data?.total ?? 0}
+        data={data?.data ?? []}
+        total={data?.meta.total ?? 0}
         offset={offset}
         limit={LIMIT}
         onPageChange={setOffset}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { RefreshCw, RotateCcw, Plus } from 'lucide-react';
 import { Button } from '@/components/Button';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import type { GeoSuggestion } from '@/services/geo.service';
@@ -141,7 +142,7 @@ function BrowseTab() {
       <div className="rounded-lg border border-admin-border p-4">
         <div className="mb-3 flex items-center justify-between">
           <h3 className="font-semibold text-admin-text">{t('geo.browse_neighbourhoods')}</h3>
-          <Button tone="admin" onClick={() => refetch()} disabled={isFetching}>↻</Button>
+          <Button tone="admin" onClick={() => refetch()} disabled={isFetching}><RefreshCw className="h-3.5 w-3.5" /></Button>
         </div>
         <div className="max-h-96 overflow-auto">
           {neighbourhoods.map((nb) => (
@@ -314,8 +315,8 @@ function AdminTab() {
         <div className="mb-3 flex items-center justify-between">
           <h3 className="font-semibold text-admin-text">{t('geo.admin_crud')}</h3>
           <div className="flex gap-1">
-            <Button tone="admin" onClick={() => refetch()} disabled={isFetching}>↻</Button>
-            <Button tone="admin" onClick={reconcile} disabled={loading}>↺</Button>
+            <Button tone="admin" onClick={() => refetch()} disabled={isFetching}><RefreshCw className="h-3.5 w-3.5" /></Button>
+            <Button tone="admin" onClick={reconcile} disabled={loading}><RotateCcw className="h-3.5 w-3.5" /></Button>
           </div>
         </div>
         <div className="max-h-96 overflow-auto">
@@ -329,7 +330,9 @@ function AdminTab() {
           ))}
           {!neighbourhoods.length && <p className="py-4 text-center text-xs text-admin-muted">{t('geo.click_refresh')}</p>}
         </div>
-        <button onClick={resetForm} className="mt-3 text-xs text-admin-accent underline">+ {t('geo.new_neighbourhood')}</button>
+        <button onClick={resetForm} className="mt-3 flex items-center gap-1 text-xs text-admin-accent underline">
+          <Plus className="h-3 w-3" /> {t('geo.new_neighbourhood')}
+        </button>
       </div>
 
       {/* Formulaire + carte */}

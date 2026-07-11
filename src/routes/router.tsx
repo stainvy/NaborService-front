@@ -15,7 +15,6 @@ import { ModerationListingsPage } from '@/features/admin/pages/ModerationListing
 import { ModerationEventsPage } from '@/features/admin/pages/ModerationEventsPage';
 import { AdminIncidentsPage } from '@/features/admin/pages/AdminIncidentsPage';
 import { GeoPage } from '@/features/admin/pages/GeoPage';
-import { MessagesPage } from '@/features/admin/pages/MessagesPage';
 import { AdminConfigPage } from '@/features/admin/pages/AdminConfigPage';
 import { AdminRgpdPage } from '@/features/admin/pages/AdminRgpdPage';
 import { DslConsolePage } from '@/features/admin/pages/DslConsolePage';
@@ -78,7 +77,6 @@ export const router = createBrowserRouter([
           { path: 'moderation/events', element: <ModerationEventsPage /> },
           { path: 'incidents', element: <AdminIncidentsPage /> },
           { path: 'geo', element: <GeoPage /> },
-          { path: 'messages', element: <MessagesPage /> },
           {
             path: 'config',
             element: <RoleRoute minRole="admin" />,

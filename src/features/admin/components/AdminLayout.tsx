@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { hasMinRole } from '@/types/roles';
 
@@ -41,8 +42,8 @@ export function AdminLayout() {
   return (
     <div className="flex min-h-screen bg-admin-bg">
       <aside className="flex w-56 shrink-0 flex-col gap-1 bg-admin-sidebar px-3 py-4">
-        <Link to="/" className="mb-1 px-3 text-xs text-admin-muted underline hover:text-admin-textInverse">
-          ← {t('nav_home')}
+        <Link to="/" className="mb-1 flex items-center gap-1 px-3 text-xs text-admin-muted underline hover:text-admin-textInverse">
+          <ArrowLeft className="h-3.5 w-3.5" /> {t('nav_home')}
         </Link>
         <h1 className="mb-2 px-3 text-lg font-bold text-white">{t('title')}</h1>
 
@@ -67,7 +68,6 @@ export function AdminLayout() {
 
           <NavSection label={t('nav.community')}>
             <AdminNavLink to="/admin/geo">{t('nav.geo')}</AdminNavLink>
-            <AdminNavLink to="/admin/messages">{t('nav.messages')}</AdminNavLink>
           </NavSection>
 
           {isAdmin && (

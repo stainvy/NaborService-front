@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { MapContainer, TileLayer, Polygon, Marker, Popup, useMap, useMapEvents, Circle } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { PenLine } from 'lucide-react';
 
 // Fix default marker icon (vite bundling)
 import iconUrl from 'leaflet/dist/images/marker-icon.png';
@@ -260,8 +261,8 @@ export function NeighbourhoodMap({
       {drawMode && (
         <div className="flex items-center gap-2">
           {!drawing ? (
-            <button type="button" onClick={startDrawing} className="rounded border border-green-400 bg-green-50 px-3 py-1.5 text-xs font-medium text-green-700 hover:bg-green-100">
-              🖉 Dessiner un polygone
+            <button type="button" onClick={startDrawing} className="flex items-center gap-1.5 rounded border border-green-400 bg-green-50 px-3 py-1.5 text-xs font-medium text-green-700 hover:bg-green-100">
+              <PenLine className="h-3.5 w-3.5" /> Dessiner un polygone
             </button>
           ) : (
             <>

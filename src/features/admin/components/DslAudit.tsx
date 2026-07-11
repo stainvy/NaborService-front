@@ -1,5 +1,6 @@
 import { useState, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/Button';
 import { useDslAudit } from '../hooks/useDslTools';
 
@@ -144,7 +145,7 @@ export function DslAudit() {
                 onClick={() => setPage((p) => p - 1)}
                 className="text-xs"
               >
-                ← {t('dsl.previous')}
+                <ArrowLeft className="mr-1 inline h-3.5 w-3.5" />{t('dsl.previous')}
               </Button>
               <span className="flex items-center px-2 text-xs">
                 {page + 1} / {totalPages}
@@ -156,7 +157,7 @@ export function DslAudit() {
                 onClick={() => setPage((p) => p + 1)}
                 className="text-xs"
               >
-                {t('dsl.next')} →
+                {t('dsl.next')}<ArrowRight className="ml-1 inline h-3.5 w-3.5" />
               </Button>
             </div>
           </div>

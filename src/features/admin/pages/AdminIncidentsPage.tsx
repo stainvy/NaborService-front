@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Plus } from 'lucide-react';
 import { Button } from '@/components/Button';
 import { ServerDataTable } from '../components/ServerDataTable';
 import { IncidentDetailModal } from '../components/IncidentDetailModal';
@@ -53,8 +54,8 @@ export function AdminIncidentsPage() {
           <h2 className="text-lg font-bold text-admin-text">{t('incidents.title')}</h2>
           <p className="mt-1 text-sm text-admin-muted">{t('incidents.subtitle')}</p>
         </div>
-        <Button tone="admin" onClick={() => setCreateOpen(true)}>
-          + {t('incidents.create')}
+        <Button tone="admin" onClick={() => setCreateOpen(true)} className="flex items-center gap-1.5">
+          <Plus className="h-4 w-4" /> {t('incidents.create')}
         </Button>
       </div>
 

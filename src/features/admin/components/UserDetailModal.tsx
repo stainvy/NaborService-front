@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Check, Minus } from 'lucide-react';
 import { Modal } from '@/components/Modal';
 import { Button } from '@/components/Button';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
@@ -70,7 +71,7 @@ export function UserDetailModal({ user, onClose }: UserDetailModalProps) {
             <span className="text-admin-muted">{t('users.col_status')}:</span>
             <span>{t(`users.status_${status}`)}</span>
             <span className="text-admin-muted">{t('users.col_totp')}:</span>
-            <span>{user.mfaEnabled ? '✓' : '—'}</span>
+            <span>{user.mfaEnabled ? <Check className="h-4 w-4 text-green-600" /> : <Minus className="h-4 w-4 text-admin-muted" />}</span>
             <span className="text-admin-muted">{t('users.col_created')}:</span>
             <span>{new Date(user.createdAt).toLocaleDateString()}</span>
           </div>

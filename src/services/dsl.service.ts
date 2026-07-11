@@ -1,4 +1,5 @@
 import { api } from '@/lib/api';
+import type { Paginated } from '@/types/pagination';
 
 // --- Types ---
 
@@ -84,13 +85,10 @@ export const dslService = {
 
   /** Historique paginé des requêtes DSL exécutées (admin only). */
   async getAudit(offset = 0, limit = 50): Promise<DslAuditResponse> {
-    const res = await api.get<{ entries: DslAuditEntryRaw[]; total: number }>(
-      '/dsl/audit',
-      { params: { offset, limit } },
-    );
+    const res = await api.get<Paginated<DslAuditEntryRaw>>('/dsl/audit', { params: { offset, limit } });
     return {
-      entries: (res.data.entries ?? []).map(normalizeEntry),
-      total: res.data.total ?? 0,
+      entries: (res.data.data ?? []).map(normalizeEntry),
+      total: res.data.meta?.total ?? 0,
     };
   },
 };
