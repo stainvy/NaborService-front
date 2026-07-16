@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -40,6 +40,14 @@ export function ProfileEditPage() {
   const avatarInput = useRef<HTMLInputElement>(null);
   const bannerInput = useRef<HTMLInputElement>(null);
   const [fileError, setFileError] = useState<string | null>(null);
+
+  // Sans ça, le message d'erreur reste affiché indéfiniment tant que
+  // l'utilisateur ne retente pas une sélection de fichier.
+  useEffect(() => {
+    if (!fileError) return;
+    const timer = setTimeout(() => setFileError(null), 5000);
+    return () => clearTimeout(timer);
+  }, [fileError]);
 
   // `values` (et non `defaultValues`) : le formulaire se (re)remplit dès que le
   // profil est chargé, même s'il était null au premier rendu.
