@@ -42,6 +42,7 @@ const defaultMgr = createSocketManager('');
 const chatMgr = createSocketManager('/chat');
 const pollsMgr = createSocketManager('/polls');
 const callsMgr = createSocketManager('/calls');
+const notificationsMgr = createSocketManager('/notifications');
 
 /** Retourne le socket courant (null tant que non connecté). */
 export const getSocket = defaultMgr.get;
@@ -67,6 +68,11 @@ export const connectCallsSocket = callsMgr.connect;
 export const reconnectCallsSocket = callsMgr.reconnect;
 export const disconnectCallsSocket = callsMgr.disconnect;
 
+export const getNotificationsSocket = notificationsMgr.get;
+export const connectNotificationsSocket = notificationsMgr.connect;
+export const reconnectNotificationsSocket = notificationsMgr.reconnect;
+export const disconnectNotificationsSocket = notificationsMgr.disconnect;
+
 // Les sockets par namespace partagent le cycle de vie du socket par défaut
 // (voir AuthProvider) — ces agrégats évitent de dupliquer cette logique à
 // chaque nouveau namespace (ex. `calls` à venir).
@@ -75,6 +81,7 @@ export function connectAllSockets(token: string): void {
   connectChatSocket(token);
   connectPollsSocket(token);
   connectCallsSocket(token);
+  connectNotificationsSocket(token);
 }
 
 export function reconnectAllSockets(token: string): void {
@@ -82,6 +89,7 @@ export function reconnectAllSockets(token: string): void {
   reconnectChatSocket(token);
   reconnectPollsSocket(token);
   reconnectCallsSocket(token);
+  reconnectNotificationsSocket(token);
 }
 
 export function disconnectAllSockets(): void {
@@ -89,4 +97,5 @@ export function disconnectAllSockets(): void {
   disconnectChatSocket();
   disconnectPollsSocket();
   disconnectCallsSocket();
+  disconnectNotificationsSocket();
 }
