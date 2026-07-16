@@ -30,6 +30,8 @@
     "typing_other": "Several people are typing…",
     "member_count": "{{count}} member",
     "member_count_other": "{{count}} members",
+    "online": "Online",
+    "offline": "Offline",
     "message_deleted": "This message was deleted.",
     "message_edited": "(edited)",
     "send_failed": "Message failed to send.",

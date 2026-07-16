@@ -30,6 +30,8 @@
     "typing_other": "Plusieurs personnes écrivent…",
     "member_count": "{{count}} membre",
     "member_count_other": "{{count}} membres",
+    "online": "En ligne",
+    "offline": "Hors ligne",
     "message_deleted": "Ce message a été supprimé.",
     "message_edited": "(modifié)",
     "send_failed": "Échec de l'envoi.",
