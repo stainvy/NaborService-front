@@ -16,6 +16,7 @@
     "@hookform/resolvers": "^3.9.1",
     "@tanstack/react-query": "^5.62.7",
     "@types/leaflet": "^1.9.21",
+    "@types/simple-peer": "^9.11.9",
     "axios": "^1.7.9",
     "dompurify": "^3.2.3",
     "i18next": "^24.2.0",
@@ -31,6 +32,7 @@
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.28.1",
     "recharts": "^3.9.2",
+    "simple-peer": "^9.11.1",
     "socket.io-client": "^4.8.1",
     "zod": "^3.24.1"
   },
@@ -56,6 +58,7 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.18.1",
     "vite": "^6.0.5",
+    "vite-plugin-node-polyfills": "^0.28.0",
     "vitest": "^3.0.5"
   }
 }
