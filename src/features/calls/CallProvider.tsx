@@ -16,6 +16,30 @@ interface ActiveCallRef {
   initiator: boolean;
 }
 
+/**
+ * Porte l'appareil précis (micro ou caméra) dont l'accès a été refusé — le
+ * `name`/`message` restent ceux d'une DOMException NotAllowedError classique
+ * pour que le code existant qui teste `.name === 'NotAllowedError'` continue
+ * de fonctionner sans changement.
+ */
+class MediaPermissionError extends Error {
+  readonly name = 'NotAllowedError';
+  readonly deviceKind: 'microphone' | 'camera';
+  constructor(deviceKind: 'microphone' | 'camera') {
+    super(`${deviceKind} permission denied`);
+    this.deviceKind = deviceKind;
+  }
+}
+
+/** Traduit une erreur de capture média en code d'erreur affichable (mic/caméra/générique). */
+function mediaErrorCode(e: unknown): 'mic_denied' | 'camera_denied' | 'call_failed' {
+  if (e instanceof MediaPermissionError) {
+    return e.deviceKind === 'microphone' ? 'mic_denied' : 'camera_denied';
+  }
+  if ((e as Error)?.name === 'NotAllowedError') return 'mic_denied';
+  return 'call_failed';
+}
+
 // Fournisseur global d'appels audio/vidéo 1:1. Signalisation via le namespace
 // socket `/calls` (offer/answer/ICE relayés par le back), négociation WebRTC
 // déléguée à simple-peer. Monté haut dans l'arbre pour capter un appel entrant
@@ -142,23 +166,41 @@ export function CallProvider({ children }: { children: React.ReactNode }) {
     [cleanup],
   );
 
+  // Micro et caméra sont demandés séparément (plutôt qu'un seul getUserMedia
+  // combiné) afin de savoir précisément lequel des deux a été refusé, pour
+  // afficher le bon message ("autorisez votre micro" vs "votre caméra").
   const getLocalMedia = useCallback(async (type: CallType): Promise<MediaStream> => {
-    let stream: MediaStream;
+    let audioStream: MediaStream;
     try {
-      stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: type === 'video' });
+      audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (e) {
+      if ((e as Error)?.name === 'NotAllowedError') throw new MediaPermissionError('microphone');
+      throw e;
+    }
+
+    if (type !== 'video') {
+      localStreamRef.current = audioStream;
+      setLocalStream(audioStream);
+      return audioStream;
+    }
+
+    try {
+      const videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const combined = new MediaStream([...audioStream.getTracks(), ...videoStream.getTracks()]);
+      localStreamRef.current = combined;
+      setLocalStream(combined);
+      return combined;
     } catch (e) {
       // Caméra indisponible (déjà captée par un autre onglet en test local, ou
       // absente) mais micro OK : on retombe sur l'audio seul plutôt que d'échouer
       // tout l'appel. Un refus explicite de permission (NotAllowedError) reste bloquant.
-      if (type === 'video' && (e as Error)?.name !== 'NotAllowedError') {
-        stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
-      } else {
-        throw e;
+      if ((e as Error)?.name !== 'NotAllowedError') {
+        localStreamRef.current = audioStream;
+        setLocalStream(audioStream);
+        return audioStream;
       }
+      throw new MediaPermissionError('camera');
     }
-    localStreamRef.current = stream;
-    setLocalStream(stream);
-    return stream;
   }, []);
 
   // ── Public actions ───────────────────────────────────────
@@ -184,7 +226,7 @@ export function CallProvider({ children }: { children: React.ReactNode }) {
         // rejoint (`call:participant_joined`), pas avant.
         getCallsSocket()?.emit('join_call', { call_id: res.id });
       } catch (e) {
-        setError((e as Error)?.name === 'NotAllowedError' ? 'media_denied' : 'call_failed');
+        setError(mediaErrorCode(e));
         endCallInternal(true);
       }
     },
@@ -216,7 +258,7 @@ export function CallProvider({ children }: { children: React.ReactNode }) {
       createPeerConnection(false);
       getCallsSocket()?.emit('join_call', { call_id: inc.callId });
     } catch (e) {
-      setError((e as Error)?.name === 'NotAllowedError' ? 'media_denied' : 'call_failed');
+      setError(mediaErrorCode(e));
       endCallInternal(true);
     }
   }, [incoming, getLocalMedia, createPeerConnection, endCallInternal, resolvePeer]);
@@ -229,6 +271,11 @@ export function CallProvider({ children }: { children: React.ReactNode }) {
   }, [incoming]);
 
   const endCall = useCallback(() => endCallInternal(true), [endCallInternal]);
+
+  // Contrairement à `cleanup()` (raccrochage), l'erreur n'est PAS effacée
+  // automatiquement — sinon un refus de permission disparaîtrait avant que
+  // l'utilisateur ait pu le voir. Elle ne l'est qu'explicitement ici.
+  const clearError = useCallback(() => setError(null), []);
 
   const toggleMute = useCallback(() => {
     const track = localStreamRef.current?.getAudioTracks()[0];
@@ -283,7 +330,7 @@ export function CallProvider({ children }: { children: React.ReactNode }) {
         video_enabled: true,
       });
     } catch (e) {
-      setError((e as Error)?.name === 'NotAllowedError' ? 'media_denied' : 'call_failed');
+      setError((e as Error)?.name === 'NotAllowedError' ? 'camera_denied' : 'call_failed');
     }
   }, [muted]);
 
@@ -418,6 +465,7 @@ export function CallProvider({ children }: { children: React.ReactNode }) {
         acceptCall,
         declineCall,
         endCall,
+        clearError,
         toggleMute,
         toggleCamera,
         switchToVideo,

@@ -14,8 +14,11 @@
     "camera_off": "Turn camera off",
     "switch_to_video": "Switch to video",
     "unknown": "Unknown",
-    "error_media_denied": "Microphone/camera access denied.",
-    "error_call_failed": "Call failed."
+    "error_mic_denied": "Please authorize microphone access to make calls.",
+    "error_camera_denied": "Please authorize camera access to use video.",
+    "error_call_failed": "Call failed.",
+    "permission_dialog_title": "Permission required",
+    "permission_dialog_ok": "Got it"
   },
   "chat": {
     "title": "Messages",
