@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { MessageSquare } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
-import { AppHeader } from '@/components/AppHeader';
 import { useChatGroup, useGroupMembers } from '../hooks/useChatGroups';
 import { ConversationsSidebar } from '../components/ConversationsSidebar';
 import { ConversationThread } from '../components/ConversationThread';
@@ -35,9 +34,7 @@ export function MessagingPage() {
   const hasActiveThread = Boolean(groupId && group);
 
   return (
-    <div className="flex h-screen flex-col">
-      <AppHeader />
-
+    <div className="flex h-full flex-col">
       <div className="flex min-h-0 flex-1 overflow-hidden">
         {/* Liste des conversations : pleine largeur sur mobile tant qu'aucune
             conversation n'est ouverte ; colonne fixe (masquée si on lit un fil

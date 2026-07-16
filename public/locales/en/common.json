@@ -30,5 +30,24 @@
     "chat": "Messages",
     "polls": "Polls",
     "listings": "Listings"
+  },
+  "home": {
+    "greeting": "Hello {{name}} 👋",
+    "subtitle": "Find the services and activity in your neighbourhood.",
+    "publish_cta": "Post a listing",
+    "quick_access": "Quick access",
+    "soon": "Soon",
+    "cards": {
+      "listings": "Browse offers and requests in your neighbourhood.",
+      "my_listings_title": "My listings",
+      "my_listings": "Manage the listings you've posted.",
+      "chat": "Chat with your neighbours by messaging.",
+      "discover": "Discover new neighbours around you.",
+      "search": "Find a neighbour or a service.",
+      "profile": "Manage your profile and preferences.",
+      "events_title": "Events",
+      "events": "Take part in neighbourhood events.",
+      "polls": "Share your opinion in polls."
+    }
   }
 }

@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { ProtectedRoute } from './ProtectedRoute';
 import { RoleRoute } from './RoleRoute';
 import { NotFoundPage } from './NotFoundPage';
+import { HabitantLayout } from '@/components/HabitantLayout';
 import { LoginPage } from '@/features/auth/pages/LoginPage';
 import { RegisterPage } from '@/features/auth/pages/RegisterPage';
 import { ForgotPasswordPage } from '@/features/auth/pages/ForgotPasswordPage';
@@ -48,33 +49,38 @@ export const router = createBrowserRouter([
   { path: '/forgot-password', element: <ForgotPasswordPage /> },
   { path: '/reset-password', element: <ResetPasswordPage /> },
 
-  // Zone habitant protégée (session requise)
+  // Zone habitant protégée (session requise), sous la coquille HabitantLayout
   {
     element: <ProtectedRoute />,
     children: [
-      { path: '/', element: <HomePage /> },
-      { path: '/profile', element: <ProfilePage /> },
-      { path: '/profile/edit', element: <ProfileEditPage /> },
-      { path: '/security', element: <SecurityPage /> },
-      { path: '/settings/notifications', element: <NotificationPreferencesPage /> },
-      { path: '/privacy', element: <PrivacyPage /> },
-      { path: '/sessions', element: <SessionsPage /> },
-      { path: '/discover', element: <DiscoverPage /> },
-      { path: '/search', element: <SearchPage /> },
-      { path: '/chat', element: <MessagingPage /> },
-      { path: '/chat/:groupId', element: <MessagingPage /> },
-      { path: '/chat/:groupId/settings', element: <GroupSettingsPage /> },
-      { path: '/chat/:groupId/members', element: <GroupMembersPage /> },
-      { path: '/users/:id', element: <PublicProfilePage /> },
-      { path: '/auth/sso/qr/validate', element: <SsoValidatePage /> },
+      {
+        element: <HabitantLayout />,
+        children: [
+          { path: '/', element: <HomePage /> },
+          { path: '/profile', element: <ProfilePage /> },
+          { path: '/profile/edit', element: <ProfileEditPage /> },
+          { path: '/security', element: <SecurityPage /> },
+          { path: '/settings/notifications', element: <NotificationPreferencesPage /> },
+          { path: '/privacy', element: <PrivacyPage /> },
+          { path: '/sessions', element: <SessionsPage /> },
+          { path: '/discover', element: <DiscoverPage /> },
+          { path: '/search', element: <SearchPage /> },
+          { path: '/chat', element: <MessagingPage /> },
+          { path: '/chat/:groupId', element: <MessagingPage /> },
+          { path: '/chat/:groupId/settings', element: <GroupSettingsPage /> },
+          { path: '/chat/:groupId/members', element: <GroupMembersPage /> },
+          { path: '/users/:id', element: <PublicProfilePage /> },
+          { path: '/auth/sso/qr/validate', element: <SsoValidatePage /> },
 
-      // Annonces & services (la page détail intègre le retour paiement Stripe)
-      { path: '/listings', element: <ListingsFeedPage /> },
-      { path: '/listings/new', element: <ListingCreatePage /> },
-      { path: '/listings/:listingId', element: <ListingDetailPage /> },
-      { path: '/listings/:listingId/edit', element: <ListingEditPage /> },
-      { path: '/listings/:listingId/sign', element: <SignDocumentPage /> },
-      { path: '/my-listings', element: <MyListingsPage /> },
+          // Annonces & services (la page détail intègre le retour paiement Stripe)
+          { path: '/listings', element: <ListingsFeedPage /> },
+          { path: '/listings/new', element: <ListingCreatePage /> },
+          { path: '/listings/:listingId', element: <ListingDetailPage /> },
+          { path: '/listings/:listingId/edit', element: <ListingEditPage /> },
+          { path: '/listings/:listingId/sign', element: <SignDocumentPage /> },
+          { path: '/my-listings', element: <MyListingsPage /> },
+        ],
+      },
     ],
   },
 

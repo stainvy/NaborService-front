@@ -30,5 +30,24 @@
     "chat": "Messagerie",
     "polls": "Sondages",
     "listings": "Annonces"
+  },
+  "home": {
+    "greeting": "Bonjour {{name}} 👋",
+    "subtitle": "Retrouvez les services et l'activité de votre quartier.",
+    "publish_cta": "Publier une annonce",
+    "quick_access": "Accès rapides",
+    "soon": "Bientôt",
+    "cards": {
+      "listings": "Parcourez les offres et demandes de votre quartier.",
+      "my_listings_title": "Mes annonces",
+      "my_listings": "Gérez les annonces que vous avez publiées.",
+      "chat": "Échangez avec vos voisins par messagerie.",
+      "discover": "Découvrez de nouveaux voisins autour de vous.",
+      "search": "Trouvez un voisin ou un service.",
+      "profile": "Gérez votre profil et vos préférences.",
+      "events_title": "Événements",
+      "events": "Participez aux événements du quartier.",
+      "polls": "Donnez votre avis dans les sondages."
+    }
   }
 }
