@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Check, Minus } from 'lucide-react';
+import { Check, MessageSquare, Minus } from 'lucide-react';
 import { Modal } from '@/components/Modal';
 import { Button } from '@/components/Button';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
@@ -80,6 +81,14 @@ export function UserDetailModal({ user, onClose }: UserDetailModalProps) {
             <span className="text-sm text-admin-muted">{t('users.change_role')}:</span>
             <RoleSelect value={user.role} onChange={handleRoleChange} disabled={loading} />
           </div>
+
+          <Link
+            to={`/admin/messages?userId=${user.id}`}
+            onClick={onClose}
+            className="flex items-center gap-1.5 text-sm font-medium text-admin-accent hover:underline"
+          >
+            <MessageSquare className="h-4 w-4" /> {t('users.view_conversations')}
+          </Link>
 
           <div className="flex flex-wrap gap-2 border-t border-admin-border pt-3">
             {status === 'suspended' ? (

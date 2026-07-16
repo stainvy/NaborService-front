@@ -4,27 +4,58 @@ import type { NaborEvent } from '@/services/events.service';
 
 // --- Chat (déplacé depuis admin.service.ts) ---
 
+export interface AdminMessageSender {
+  id: string;
+  first_name: string | null;
+  last_name: string | null;
+  profile_picture_mongo_id: string | null;
+}
+
+export interface AdminMessageAttachment {
+  media_id: string;
+  filename: string;
+  mimetype: string;
+  size_bytes: number;
+}
+
 export interface AdminMessage {
   id: string;
-  pg_message_id: string;
-  pg_group_id: string;
-  pg_sender_id: string;
-  type: 'text' | 'image' | 'file' | 'voice';
+  group_id: string;
+  sender_id: string;
+  sender?: AdminMessageSender | null;
+  type: 'text' | 'image' | 'file' | 'voice' | 'poll';
   content?: string; // déchiffré par le serveur avec la clé admin
   sent_at: string;
   edited_at?: string;
+  is_deleted?: boolean;
   deleted_at?: string;
-  attachments?: { filename: string; mimetype: string; size_bytes: number }[];
+  deleted_by_moderator_id?: string | null;
+  parent_message_id?: string | null;
+  attachments?: AdminMessageAttachment[];
   reactions?: { pg_user_id: string; emoji: string }[];
+  /** Renseigné quand type === 'poll' — sondage attaché au message. */
+  poll_id?: string | null;
+  pinned?: boolean;
+  pinned_at?: string | null;
+  pinned_by?: string | null;
+}
+
+/** Page renvoyée par GET /admin/chat/groups/:id/messages (pagination cursor-based). */
+export interface AdminMessagesPage {
+  messages: AdminMessage[];
+  has_more?: boolean;
+  cursor?: string;
 }
 
 export interface AdminGroup {
   id: string;
-  name: string;
+  name: string | null;
   type: string;
-  createdBy: string;
+  createdBy: string | null;
   createdAt: string;
   memberCount: number;
+  /** Membres actifs (utile pour identifier qui parle à qui dans un message privé, sans nom de groupe). */
+  participants: { id: string; first_name: string; last_name: string }[];
 }
 
 // --- Users ---

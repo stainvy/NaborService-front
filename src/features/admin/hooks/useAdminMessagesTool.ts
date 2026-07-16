@@ -18,7 +18,23 @@ export function useCreateAdminGroup() {
 export function useGroupMessages(groupId: string | undefined, limit = 50) {
   return useQuery({
     queryKey: adminKeys.groupMessages(groupId ?? ''),
-    queryFn: () => adminService.getGroupMessages(groupId!, limit),
+    queryFn: () => adminService.getGroupMessages(groupId!, { limit }).then((p) => p.messages),
+    enabled: Boolean(groupId),
+  });
+}
+
+export function useGroupPinned(groupId: string | undefined) {
+  return useQuery({
+    queryKey: adminKeys.groupPinned(groupId ?? ''),
+    queryFn: () => adminService.getGroupPinned(groupId!).then((r) => r.messages),
+    enabled: Boolean(groupId),
+  });
+}
+
+export function useGroupAttachments(groupId: string | undefined) {
+  return useQuery({
+    queryKey: adminKeys.groupAttachments(groupId ?? ''),
+    queryFn: () => adminService.getGroupAttachments(groupId!).then((r) => r.attachments),
     enabled: Boolean(groupId),
   });
 }
@@ -37,10 +53,35 @@ export function useLookupAdminMessage() {
   });
 }
 
-export function useDeleteAdminMessage() {
+// Après chaque opération de modération sur un message, on rafraîchit toute la
+// sous-arborescence 'admin/chat' (fil du groupe + épinglés + message unitaire) :
+// un pin/désépingle/suppression/édition change potentiellement plusieurs vues.
+function useInvalidateAdminChat() {
   const queryClient = useQueryClient();
+  return () => queryClient.invalidateQueries({ queryKey: ['admin', 'chat'] });
+}
+
+export function useDeleteAdminMessage() {
+  const invalidate = useInvalidateAdminChat();
   return useMutation({
     mutationFn: (id: string) => adminService.deleteMessage(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'chat'] }),
+    onSuccess: invalidate,
+  });
+}
+
+export function useEditAdminMessage() {
+  const invalidate = useInvalidateAdminChat();
+  return useMutation({
+    mutationFn: ({ id, content }: { id: string; content: string }) => adminService.editMessage(id, content),
+    onSuccess: invalidate,
+  });
+}
+
+export function usePinAdminMessage() {
+  const invalidate = useInvalidateAdminChat();
+  return useMutation({
+    mutationFn: ({ id, pinned }: { id: string; pinned: boolean }) =>
+      pinned ? adminService.unpinMessage(id) : adminService.pinMessage(id),
+    onSuccess: invalidate,
   });
 }

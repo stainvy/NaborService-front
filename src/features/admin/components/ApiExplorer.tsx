@@ -1,24 +1,17 @@
 import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import DOMPurify from 'dompurify';
-import { RefreshCw, Plus, Unlock, FileText, Paperclip, X } from 'lucide-react';
+import { RefreshCw, FileText, Paperclip, X } from 'lucide-react';
 import { Button } from '@/components/Button';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { Modal } from '@/components/Modal';
-import type { ChatGroup, ChatMessage } from '@/services/chat.service';
 import type { NaborEvent, CreateEventPayload } from '@/services/events.service';
 import type { CreateListingPayload } from '@/services/listings.service';
 import { useAuth } from '@/hooks/useAuth';
 import { env } from '@/lib/env';
 import { mediaUrl } from '@/lib/media';
 import { getAccessToken } from '@/lib/tokenStore';
-import {
-  useAdminGroups,
-  useCreateAdminGroup,
-  useGroupMessages,
-  useLookupAdminMessage,
-  useDeleteAdminMessage,
-} from '../hooks/useAdminMessagesTool';
+
 import {
   useExplorerEvents,
   useExplorerEventContent,
@@ -75,138 +68,6 @@ function FieldRow({ label, value }: { label: string; value: string | undefined |
     <div className="flex gap-2 text-xs">
       <span className="w-24 shrink-0 font-medium text-admin-muted">{label}</span>
       <span className="truncate text-admin-text">{value}</span>
-    </div>
-  );
-}
-
-// ─── Messages tab ───
-
-function MessagesPanel() {
-  const { t } = useTranslation('admin');
-  const [selectedGroup, setSelectedGroup] = useState<ChatGroup | null>(null);
-  const [groupName, setGroupName] = useState('');
-  const [messageId, setMessageId] = useState('');
-  const [pendingDelete, setPendingDelete] = useState<string | null>(null);
-  const [decrypted, setDecrypted] = useState<Record<string, string>>({});
-
-  const { data: groupsRaw, isFetching: loadingGroups, refetch: refetchGroups } = useAdminGroups();
-  const groups = ensureArray<ChatGroup>(groupsRaw);
-  const createGroup = useCreateAdminGroup();
-  const { data: messagesRaw, isFetching: loadingMessages } = useGroupMessages(selectedGroup?.id);
-  const messages = ensureArray<ChatMessage>(messagesRaw);
-  const lookup = useLookupAdminMessage();
-  const deleteMessage = useDeleteAdminMessage();
-
-  function handleCreateGroup() {
-    if (!groupName.trim()) return;
-    createGroup.mutate({ name: groupName.trim() }, { onSuccess: () => setGroupName('') });
-  }
-
-  function handleDelete() {
-    if (!pendingDelete) return;
-    deleteMessage.mutate(pendingDelete, { onSuccess: () => setPendingDelete(null) });
-  }
-
-  const loading = loadingGroups || loadingMessages || createGroup.isPending || lookup.isPending || deleteMessage.isPending;
-
-  return (
-    <div className="flex flex-col gap-6">
-      <div className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-lg border border-admin-border p-4">
-          <h3 className="mb-3 font-semibold text-admin-text">{t('api.all_groups')}</h3>
-          <div className="mb-3 flex gap-2">
-            <input value={groupName} onChange={(e) => setGroupName(e.target.value)} placeholder={t('api.group_name_placeholder')} className="flex-1 rounded border border-admin-border px-3 py-1.5 text-sm outline-none focus:border-admin-accent" />
-            <Button tone="admin" onClick={handleCreateGroup} disabled={loading || !groupName.trim()}><Plus className="h-3.5 w-3.5" /></Button>
-            <Button tone="admin" onClick={() => refetchGroups()} disabled={loading}><RefreshCw className="h-3.5 w-3.5" /></Button>
-          </div>
-          <div className="max-h-96 overflow-auto">
-            {groups.map((g) => (
-              <button key={g.id} onClick={() => setSelectedGroup(g)} className={`block w-full px-3 py-2 text-left text-sm ${selectedGroup?.id === g.id ? 'bg-admin-accent/10 text-admin-accent font-medium' : 'text-admin-text hover:bg-admin-bg'}`}>
-                <div className="flex items-center gap-1.5">
-                  <span className="font-medium">{g.name}</span>
-                  {(g as any).type && <span className="rounded bg-admin-bg px-1 text-[10px] text-admin-muted">{(g as any).type}</span>}
-                </div>
-                <div className="mt-0.5 text-xs text-admin-muted">
-                  ID: {g.id?.slice(0, 8)}…
-                  {(g as any).memberCount != null && <span> · {(g as any).memberCount} membres</span>}
-                  {(g as any).createdAt && <span> · {new Date((g as any).createdAt).toLocaleDateString()}</span>}
-                </div>
-              </button>
-            ))}
-            {!groups.length && <p className="py-4 text-center text-xs text-admin-muted">{t('api.no_groups')}</p>}
-          </div>
-        </div>
-
-        <div className="rounded-lg border border-admin-border p-4">
-          <h3 className="mb-3 font-semibold text-admin-text">{t('api.messages')} {selectedGroup ? `— ${selectedGroup.name}` : ''}</h3>
-          {selectedGroup ? (
-            <div className="max-h-96 overflow-auto">
-              {messages.map((m) => (
-                <div key={m.id} className="border-b border-admin-border/60 py-2.5">
-                  <div className="flex items-start justify-between">
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-1.5">
-                        <span className="text-xs font-medium text-admin-text">{(m as any).pg_sender_id?.slice(0, 8)}…</span>
-                        <span className="rounded bg-admin-bg px-1 text-[10px] text-admin-muted">{m.type}</span>
-                        {m.edited_at && <span className="rounded bg-amber-100 px-1 text-[10px] text-amber-700">{t('api.edited')}</span>}
-                        {m.deleted_at && <span className="rounded bg-red-100 px-1 text-[10px] text-red-700">{t('api.deleted')}</span>}
-                        <span className="text-[10px] text-admin-muted">{m.sent_at ? new Date(m.sent_at).toLocaleString() : ''}</span>
-                      </div>
-                      {m.content || decrypted[m.id] ? (
-                        <p className="mt-1 whitespace-pre-wrap text-xs text-admin-text">{m.content ?? decrypted[m.id]}</p>
-                      ) : (
-                        <button
-                          onClick={() => lookup.mutate(m.id, { onSuccess: (r) => setDecrypted((prev) => ({ ...prev, [m.id]: r.content ?? '[vide]' })) })}
-                          disabled={lookup.isPending}
-                          className="mt-1 flex items-center gap-1 text-xs text-admin-accent hover:underline"
-                        >
-                          <Unlock className="h-3 w-3" /> {t('api.decrypt_message')}
-                        </button>
-                      )}
-                      <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-[10px] text-admin-muted">
-                        <span>ID: {m.id?.slice(0, 8)}…</span>
-                        {m.pg_message_id && <span>PG: {m.pg_message_id.slice(0, 8)}…</span>}
-                        {(m as any).pg_group_id && <span>Groupe: {(m as any).pg_group_id.slice(0, 8)}…</span>}
-                        {m.attachments?.length ? <span>{m.attachments.length} PJ</span> : null}
-                        {m.reactions?.length ? <span>{m.reactions.length} réactions</span> : null}
-                      </div>
-                    </div>
-                    <button onClick={() => setPendingDelete(m.id)} className="ml-2 shrink-0 text-xs text-red-500 hover:underline">{t('api.delete')}</button>
-                  </div>
-                </div>
-              ))}
-              {!messages.length && <p className="py-4 text-center text-xs text-admin-muted">{t('api.no_messages')}</p>}
-            </div>
-          ) : (
-            <p className="text-xs text-admin-muted">{t('api.select_group')}</p>
-          )}
-        </div>
-      </div>
-
-      {/* Lookup manuel */}
-      <div className="rounded-lg border border-admin-border p-4">
-        <h3 className="mb-3 font-semibold text-admin-text">{t('api.manual_lookup')}</h3>
-        <div className="flex gap-2">
-          <input value={messageId} onChange={(e) => setMessageId(e.target.value)} placeholder="UUID du message…" className="flex-1 rounded border border-admin-border px-3 py-1.5 text-sm outline-none focus:border-admin-accent" />
-          <Button tone="admin" onClick={() => lookup.mutate(messageId.trim())} disabled={loading || !messageId.trim()}>{t('api.view')}</Button>
-        </div>
-        {lookup.data && (
-          <div className="mt-3">
-            <JsonBlock data={lookup.data} />
-          </div>
-        )}
-      </div>
-
-      <ConfirmDialog
-        open={Boolean(pendingDelete)}
-        tone="admin"
-        destructive
-        title={t('api.delete')}
-        message={t('api.confirm_delete_message')}
-        loading={deleteMessage.isPending}
-        onConfirm={handleDelete}
-        onCancel={() => setPendingDelete(null)}
-      />
     </div>
   );
 }
@@ -643,7 +504,6 @@ function MediaPanel() {
 // ─── Main ApiExplorer ───
 
 const ENTITIES: { key: EntityTab; labelKey: string }[] = [
-  { key: 'messages', labelKey: 'api.tab_messages' },
   { key: 'events', labelKey: 'api.tab_events' },
   { key: 'listings', labelKey: 'api.tab_listings' },
   { key: 'media', labelKey: 'api.tab_media' },
@@ -651,7 +511,7 @@ const ENTITIES: { key: EntityTab; labelKey: string }[] = [
 
 export function ApiExplorer() {
   const { t } = useTranslation('admin');
-  const [tab, setTab] = useState<EntityTab>('messages');
+  const [tab, setTab] = useState<EntityTab>('events');
 
   return (
     <div className="flex flex-col gap-6">
@@ -670,7 +530,6 @@ export function ApiExplorer() {
       </nav>
 
       <div>
-        {tab === 'messages' && <MessagesPanel />}
         {tab === 'events' && <EventsPanel />}
         {tab === 'listings' && <ListingsPanel />}
         {tab === 'media' && <MediaPanel />}

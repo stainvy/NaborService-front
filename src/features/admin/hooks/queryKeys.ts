@@ -3,6 +3,8 @@ export const adminKeys = {
   audit: (offset: number, limit: number) => ['admin', 'dsl', 'audit', offset, limit] as const,
   groups: ['admin', 'chat', 'groups'] as const,
   groupMessages: (groupId: string) => ['admin', 'chat', 'groups', groupId, 'messages'] as const,
+  groupPinned: (groupId: string) => ['admin', 'chat', 'groups', groupId, 'pinned'] as const,
+  groupAttachments: (groupId: string) => ['admin', 'chat', 'groups', groupId, 'attachments'] as const,
   message: (id: string) => ['admin', 'chat', 'messages', id] as const,
   users: (params?: unknown) => ['admin', 'users', params] as const,
   user: (id: string) => ['admin', 'users', id] as const,

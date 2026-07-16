@@ -1,6 +1,7 @@
 import { api } from '@/lib/api';
 import type {
   AdminMessage,
+  AdminMessagesPage,
   AdminGroup,
   AdminUser,
   AdminUsersQuery,
@@ -16,6 +17,7 @@ import type {
 } from '@/types/admin';
 import type { Paginated } from '@/types/pagination';
 import type { Role } from '@/types/roles';
+import type { GroupSharedFile } from '@/types/chat';
 
 export type { AdminMessage, AdminGroup };
 
@@ -27,16 +29,41 @@ export const adminService = {
     return api.get<AdminGroup[]>('/admin/chat/groups').then((r) => r.data);
   },
 
-  /** Historique des messages d'un groupe (admin, contourne l'appartenance). */
-  getGroupMessages(groupId: string, limit?: number): Promise<unknown[]> {
+  /** Historique paginé (cursor) des messages d'un groupe (admin, contourne l'appartenance). */
+  getGroupMessages(groupId: string, params?: { cursor?: string; limit?: number }): Promise<AdminMessagesPage> {
     return api
-      .get(`/admin/chat/groups/${groupId}/messages`, { params: { limit } })
+      .get<AdminMessagesPage>(`/admin/chat/groups/${groupId}/messages`, { params })
       .then((r) => r.data);
+  },
+
+  /** Messages épinglés d'un groupe (admin, contourne l'appartenance). */
+  getGroupPinned(groupId: string): Promise<{ messages: AdminMessage[] }> {
+    return api.get<{ messages: AdminMessage[] }>(`/admin/chat/groups/${groupId}/pinned`).then((r) => r.data);
+  },
+
+  /** Fichiers partagés d'un groupe (admin, contourne l'appartenance). */
+  getGroupAttachments(groupId: string): Promise<{ attachments: GroupSharedFile[] }> {
+    return api.get<{ attachments: GroupSharedFile[] }>(`/admin/chat/groups/${groupId}/attachments`).then((r) => r.data);
   },
 
   /** Lit un message déchiffré (contourne l'appartenance au groupe). */
   getMessage(messageId: string): Promise<AdminMessage> {
     return api.get<AdminMessage>(`/admin/chat/messages/${messageId}`).then((r) => r.data);
+  },
+
+  /** Réécrit le contenu d'un message (les deux côtés d'une conversation, tout message d'un groupe). */
+  editMessage(messageId: string, content: string): Promise<AdminMessage> {
+    return api.patch<AdminMessage>(`/admin/chat/messages/${messageId}`, { content }).then((r) => r.data);
+  },
+
+  /** Épingle un message (contourne le rôle de groupe). */
+  pinMessage(messageId: string): Promise<AdminMessage> {
+    return api.post<AdminMessage>(`/admin/chat/messages/${messageId}/pin`).then((r) => r.data);
+  },
+
+  /** Désépingle un message. */
+  unpinMessage(messageId: string): Promise<AdminMessage> {
+    return api.delete<AdminMessage>(`/admin/chat/messages/${messageId}/pin`).then((r) => r.data);
   },
 
   /** Supprime un message (soft delete). */

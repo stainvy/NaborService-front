@@ -57,6 +57,7 @@ export function AdminLayout() {
           <NavSection label={t('nav.moderation')}>
             <AdminNavLink to="/admin/moderation/listings">{t('nav.moderation_listings')}</AdminNavLink>
             <AdminNavLink to="/admin/moderation/events">{t('nav.moderation_events')}</AdminNavLink>
+            <AdminNavLink to="/admin/messages">{t('nav.messages')}</AdminNavLink>
             <AdminNavLink to="/admin/incidents">{t('nav.incidents')}</AdminNavLink>
           </NavSection>
 

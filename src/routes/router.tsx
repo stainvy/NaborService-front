@@ -14,6 +14,7 @@ import { AdminUsersPage } from '@/features/admin/pages/AdminUsersPage';
 import { ModerationListingsPage } from '@/features/admin/pages/ModerationListingsPage';
 import { ModerationEventsPage } from '@/features/admin/pages/ModerationEventsPage';
 import { AdminIncidentsPage } from '@/features/admin/pages/AdminIncidentsPage';
+import { AdminMessagesPage } from '@/features/admin/pages/AdminMessagesPage';
 import { GeoPage } from '@/features/admin/pages/GeoPage';
 import { AdminConfigPage } from '@/features/admin/pages/AdminConfigPage';
 import { AdminRgpdPage } from '@/features/admin/pages/AdminRgpdPage';
@@ -31,6 +32,9 @@ import { DiscoverPage } from '@/features/social/pages/DiscoverPage';
 import { SearchPage } from '@/features/social/pages/SearchPage';
 import { SsoValidatePage } from '@/features/sso/pages/SsoValidatePage';
 import { ListingPage } from '@/features/listings/pages/ListingPage';
+import { MessagingPage } from '@/features/chat/pages/MessagingPage';
+import { GroupSettingsPage } from '@/features/chat/pages/GroupSettingsPage';
+import { GroupMembersPage } from '@/features/chat/pages/GroupMembersPage';
 
 export const router = createBrowserRouter([
   // Routes publiques
@@ -54,6 +58,10 @@ export const router = createBrowserRouter([
       { path: '/sessions', element: <SessionsPage /> },
       { path: '/discover', element: <DiscoverPage /> },
       { path: '/search', element: <SearchPage /> },
+      { path: '/chat', element: <MessagingPage /> },
+      { path: '/chat/:groupId', element: <MessagingPage /> },
+      { path: '/chat/:groupId/settings', element: <GroupSettingsPage /> },
+      { path: '/chat/:groupId/members', element: <GroupMembersPage /> },
       { path: '/users/:id', element: <PublicProfilePage /> },
       { path: '/auth/sso/qr/validate', element: <SsoValidatePage /> },
     ],
@@ -75,6 +83,7 @@ export const router = createBrowserRouter([
           },
           { path: 'moderation/listings', element: <ModerationListingsPage /> },
           { path: 'moderation/events', element: <ModerationEventsPage /> },
+          { path: 'messages', element: <AdminMessagesPage /> },
           { path: 'incidents', element: <AdminIncidentsPage /> },
           { path: 'geo', element: <GeoPage /> },
           {
