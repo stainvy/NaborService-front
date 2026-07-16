@@ -31,10 +31,15 @@ import { PublicProfilePage } from '@/features/social/pages/PublicProfilePage';
 import { DiscoverPage } from '@/features/social/pages/DiscoverPage';
 import { SearchPage } from '@/features/social/pages/SearchPage';
 import { SsoValidatePage } from '@/features/sso/pages/SsoValidatePage';
-import { ListingPage } from '@/features/listings/pages/ListingPage';
 import { MessagingPage } from '@/features/chat/pages/MessagingPage';
 import { GroupSettingsPage } from '@/features/chat/pages/GroupSettingsPage';
 import { GroupMembersPage } from '@/features/chat/pages/GroupMembersPage';
+import { ListingsFeedPage } from '@/features/listings/pages/ListingsFeedPage';
+import { ListingDetailPage } from '@/features/listings/pages/ListingDetailPage';
+import { ListingCreatePage } from '@/features/listings/pages/ListingCreatePage';
+import { ListingEditPage } from '@/features/listings/pages/ListingEditPage';
+import { MyListingsPage } from '@/features/listings/pages/MyListingsPage';
+import { SignDocumentPage } from '@/features/listings/pages/SignDocumentPage';
 
 export const router = createBrowserRouter([
   // Routes publiques
@@ -47,8 +52,6 @@ export const router = createBrowserRouter([
   {
     element: <ProtectedRoute />,
     children: [
-      { path: '/', element: <HomePage /> },
-      { path: '/listings/:listingId', element: <ListingPage /> },
       { path: '/', element: <HomePage /> },
       { path: '/profile', element: <ProfilePage /> },
       { path: '/profile/edit', element: <ProfileEditPage /> },
@@ -64,6 +67,14 @@ export const router = createBrowserRouter([
       { path: '/chat/:groupId/members', element: <GroupMembersPage /> },
       { path: '/users/:id', element: <PublicProfilePage /> },
       { path: '/auth/sso/qr/validate', element: <SsoValidatePage /> },
+
+      // Annonces & services (la page détail intègre le retour paiement Stripe)
+      { path: '/listings', element: <ListingsFeedPage /> },
+      { path: '/listings/new', element: <ListingCreatePage /> },
+      { path: '/listings/:listingId', element: <ListingDetailPage /> },
+      { path: '/listings/:listingId/edit', element: <ListingEditPage /> },
+      { path: '/listings/:listingId/sign', element: <SignDocumentPage /> },
+      { path: '/my-listings', element: <MyListingsPage /> },
     ],
   },
 

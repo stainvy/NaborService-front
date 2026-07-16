@@ -28,3 +28,31 @@ export function mockAuthenticated(user: User = fakeUser) {
     http.get(`${env.apiUrl}/users/me`, () => HttpResponse.json(user)),
   );
 }
+
+// Catalogue vide (catégories + quartiers) — suffisant pour les selects en test.
+export function mockEmptyCatalog() {
+  server.use(
+    http.get(`${env.apiUrl}/categories/listings`, () => HttpResponse.json([])),
+    http.get(`${env.apiUrl}/neighbourhoods`, () => HttpResponse.json([])),
+  );
+}
+
+export function makeListing(overrides: Record<string, unknown> = {}) {
+  return {
+    id: 'listing-1',
+    creatorId: 'someone-else',
+    title: 'Tonte de pelouse',
+    description: 'Je tonds',
+    categoryId: null,
+    listingType: 'offer',
+    priceCents: 1500,
+    status: 'open',
+    neighbourhoodId: null,
+    mongoDocumentId: null,
+    createdAt: '2026-01-01T00:00:00.000Z',
+    updatedAt: null,
+    closedAt: null,
+    deletedAt: null,
+    ...overrides,
+  };
+}

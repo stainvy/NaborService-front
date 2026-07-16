@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/Button';
 import { TotpInput } from '@/components/TotpInput';
 import { useConfirmTotpSetup } from '../hooks/useConfirmTotpSetup';
+import { DevTotpHelper } from './DevTotpHelper';
 
 interface Props {
   challengeToken: string;
@@ -30,6 +31,7 @@ export function TotpSetupStep({ challengeToken, otpauthUrl, onAuthenticated }: P
         <QRCodeSVG value={otpauthUrl} size={176} aria-label={t('totp.qr_alt')} />
       </div>
       <p className="text-center text-sm text-gray">{t('totp.setup_then')}</p>
+      {import.meta.env.DEV && <DevTotpHelper otpauthUrl={otpauthUrl} onUseCode={setCode} />}
       <TotpInput
         value={code}
         onChange={setCode}

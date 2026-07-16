@@ -21,6 +21,9 @@ export function AppHeader() {
       </Link>
       <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium text-navy">
         <LanguageSwitcher />
+        <Link to="/listings" className="underline">
+          {t('nav.listings')}
+        </Link>
         <Link to="/discover" className="underline">
           {t('nav.discover')}
         </Link>

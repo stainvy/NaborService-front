@@ -1,5 +1,123 @@
 {
-  "back_home": "Back to home",
+  "listings": {
+    "free": "Free"
+  },
+  "type": {
+    "offer": "Offer",
+    "request": "Request"
+  },
+  "status": {
+    "open": "Open",
+    "pending": "Interest expressed",
+    "in_progress": "In progress",
+    "closed": "Closed",
+    "cancelled": "Cancelled"
+  },
+  "feed": {
+    "title": "Listings & services",
+    "mine": "My listings",
+    "create": "Post a listing",
+    "error": "Could not load listings.",
+    "empty": "No listing matches.",
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "filters": {
+    "all": "All",
+    "type": "Type",
+    "status": "Status",
+    "category": "Category",
+    "neighbourhood": "Neighbourhood"
+  },
+  "form": {
+    "required": "This field is required.",
+    "price_invalid": "Invalid price.",
+    "title": "Title",
+    "type": "Type",
+    "description": "Description",
+    "category": "Category",
+    "neighbourhood": "Neighbourhood",
+    "none": "None",
+    "price_euros": "Price (€)",
+    "price_hint": "€0 = free. The price is stored in cents."
+  },
+  "create": {
+    "title": "Post a listing",
+    "submit": "Publish",
+    "error": "Publishing failed."
+  },
+  "edit": {
+    "title": "Edit listing",
+    "submit": "Save",
+    "saved": "Listing updated.",
+    "content_title": "Rich content",
+    "body_html": "Content (HTML)",
+    "tags": "Tags",
+    "tags_hint": "comma-separated",
+    "save_content": "Save content",
+    "content_saved": "Content saved.",
+    "photos": "Photos"
+  },
+  "detail": {
+    "back": "Back to listing",
+    "back_home": "Back to home",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "mine": {
+    "title": "My listings",
+    "empty": "You haven't posted any listing yet."
+  },
+  "actions": {
+    "interest": "I'm interested",
+    "accept": "Accept interest",
+    "confirm": "Confirm completion",
+    "cancel": "Cancel",
+    "cancel_reason": "Cancellation reason",
+    "cancel_confirm": "Confirm cancellation"
+  },
+  "media": {
+    "add": "Add a photo",
+    "remove": "Remove",
+    "hint": "Up to 8 photos, 5 MB each.",
+    "too_large": "Photo too large (max 5 MB)."
+  },
+  "chat": {
+    "open": "Open discussion",
+    "coming_soon": "Messaging coming soon."
+  },
+  "documents": {
+    "contract": "Download contract",
+    "receipt": "Download receipt",
+    "sign": "Sign"
+  },
+  "sign": {
+    "title": "Sign the document",
+    "hint": "Draw your signature below, then confirm with your TOTP code. The document is immutable once signed.",
+    "clear": "Clear",
+    "submit": "Sign",
+    "totp_title": "Confirm the signature"
+  },
+  "report": {
+    "action": "Report listing",
+    "title": "Report listing",
+    "reason": "Reason for the report",
+    "submit": "Send report",
+    "done": "Report sent."
+  },
+  "moderation": {
+    "queue_title": "Reported listings",
+    "action": "Moderate",
+    "title": "Moderate listing",
+    "decision": "Decision",
+    "cancelled": "Cancel listing",
+    "warned": "Warn",
+    "restored": "Restore",
+    "reason": "Reason",
+    "submit": "Apply",
+    "error": "Could not load the queue.",
+    "empty": "No reported listings."
+  },
   "payment": {
     "success": "Payment successful!",
     "cancel": "Payment cancelled.",

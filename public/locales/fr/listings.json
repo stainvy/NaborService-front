@@ -1,5 +1,123 @@
 {
-  "back_home": "Retour à l'accueil",
+  "listings": {
+    "free": "Gratuit"
+  },
+  "type": {
+    "offer": "Offre",
+    "request": "Demande"
+  },
+  "status": {
+    "open": "Ouverte",
+    "pending": "Intérêt exprimé",
+    "in_progress": "En cours",
+    "closed": "Clôturée",
+    "cancelled": "Annulée"
+  },
+  "feed": {
+    "title": "Annonces & services",
+    "mine": "Mes annonces",
+    "create": "Publier une annonce",
+    "error": "Impossible de charger les annonces.",
+    "empty": "Aucune annonce ne correspond.",
+    "prev": "Précédent",
+    "next": "Suivant"
+  },
+  "filters": {
+    "all": "Toutes",
+    "type": "Type",
+    "status": "Statut",
+    "category": "Catégorie",
+    "neighbourhood": "Quartier"
+  },
+  "form": {
+    "required": "Ce champ est requis.",
+    "price_invalid": "Prix invalide.",
+    "title": "Titre",
+    "type": "Type",
+    "description": "Description",
+    "category": "Catégorie",
+    "neighbourhood": "Quartier",
+    "none": "Aucune",
+    "price_euros": "Prix (€)",
+    "price_hint": "0 € = gratuit. Le prix est enregistré en centimes."
+  },
+  "create": {
+    "title": "Publier une annonce",
+    "submit": "Publier",
+    "error": "La publication a échoué."
+  },
+  "edit": {
+    "title": "Modifier l'annonce",
+    "submit": "Enregistrer",
+    "saved": "Annonce mise à jour.",
+    "content_title": "Contenu enrichi",
+    "body_html": "Contenu (HTML)",
+    "tags": "Tags",
+    "tags_hint": "séparés par des virgules",
+    "save_content": "Enregistrer le contenu",
+    "content_saved": "Contenu enregistré.",
+    "photos": "Photos"
+  },
+  "detail": {
+    "back": "Retour à l'annonce",
+    "back_home": "Retour à l'accueil",
+    "edit": "Modifier",
+    "delete": "Supprimer"
+  },
+  "mine": {
+    "title": "Mes annonces",
+    "empty": "Vous n'avez pas encore publié d'annonce."
+  },
+  "actions": {
+    "interest": "Je suis intéressé",
+    "accept": "Accepter l'intérêt",
+    "confirm": "Confirmer la réalisation",
+    "cancel": "Annuler",
+    "cancel_reason": "Motif d'annulation",
+    "cancel_confirm": "Confirmer l'annulation"
+  },
+  "media": {
+    "add": "Ajouter une photo",
+    "remove": "Retirer",
+    "hint": "8 photos max, 5 Mo chacune.",
+    "too_large": "Photo trop volumineuse (max 5 Mo)."
+  },
+  "chat": {
+    "open": "Ouvrir la discussion",
+    "coming_soon": "Messagerie à venir."
+  },
+  "documents": {
+    "contract": "Télécharger le contrat",
+    "receipt": "Télécharger le reçu",
+    "sign": "Signer"
+  },
+  "sign": {
+    "title": "Signer le document",
+    "hint": "Dessinez votre signature ci-dessous, puis confirmez avec votre code TOTP. Le document est immuable après signature.",
+    "clear": "Effacer",
+    "submit": "Signer",
+    "totp_title": "Confirmez la signature"
+  },
+  "report": {
+    "action": "Signaler l'annonce",
+    "title": "Signaler l'annonce",
+    "reason": "Motif du signalement",
+    "submit": "Envoyer le signalement",
+    "done": "Signalement envoyé."
+  },
+  "moderation": {
+    "queue_title": "Annonces signalées",
+    "action": "Modérer",
+    "title": "Modérer l'annonce",
+    "decision": "Décision",
+    "cancelled": "Annuler l'annonce",
+    "warned": "Avertir",
+    "restored": "Rétablir",
+    "reason": "Motif",
+    "submit": "Appliquer",
+    "error": "Impossible de charger la file.",
+    "empty": "Aucune annonce signalée."
+  },
   "payment": {
     "success": "Paiement réussi !",
     "cancel": "Paiement annulé.",
