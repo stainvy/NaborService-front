@@ -35,11 +35,8 @@ export function MessageInput({ onSend, onTyping, onSendFile, replyTo, onCancelRe
 
   const { error: fileError, triggerPick, inputProps } = useFilePicker({
     accept: ACCEPTED_TYPES,
-    maxSizeBytes: MAX_OTHER_BYTES,
-    onPick: (file) => {
-      if (file.type.startsWith('image/') && file.size > MAX_IMAGE_BYTES) return;
-      onSendFile(file);
-    },
+    maxSizeBytes: (file) => (file.type.startsWith('image/') ? MAX_IMAGE_BYTES : MAX_OTHER_BYTES),
+    onPick: onSendFile,
   });
 
   // Message vocal : enregistré au micro puis envoyé comme pièce jointe audio
