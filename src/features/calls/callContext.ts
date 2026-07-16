@@ -16,6 +16,7 @@ export interface CallContextValue {
   acceptCall: () => Promise<void>;
   declineCall: () => void;
   endCall: () => void;
+  clearError: () => void;
   toggleMute: () => void;
   toggleCamera: () => void;
   switchToVideo: () => Promise<void>;

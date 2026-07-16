@@ -98,7 +98,11 @@ export function CallColumn() {
               ? t('call.ringing')
               : formatDuration(durationSec)}
         </p>
-        {error && <p className="mt-1 text-xs font-semibold text-error">{t(`call.error_${error}`, { defaultValue: t('call.error_call_failed') })}</p>}
+        {/* mic_denied/camera_denied ont leur propre popup persistante (MediaPermissionDialog),
+            rendue hors de ce composant — ici on ne garde que le message générique. */}
+        {error && error !== 'mic_denied' && error !== 'camera_denied' && (
+          <p className="mt-1 text-xs font-semibold text-error">{t('call.error_call_failed')}</p>
+        )}
       </div>
 
       {/* PiP caméra locale (appel vidéo actif). */}

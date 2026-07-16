@@ -14,8 +14,11 @@
     "camera_off": "Couper la caméra",
     "switch_to_video": "Passer en vidéo",
     "unknown": "Inconnu",
-    "error_media_denied": "Accès micro/caméra refusé.",
-    "error_call_failed": "Échec de l'appel."
+    "error_mic_denied": "Veuillez autoriser l'accès au microphone pour passer des appels.",
+    "error_camera_denied": "Veuillez autoriser l'accès à la caméra pour activer la vidéo.",
+    "error_call_failed": "Échec de l'appel.",
+    "permission_dialog_title": "Autorisation requise",
+    "permission_dialog_ok": "Compris"
   },
   "chat": {
     "title": "Messages",
