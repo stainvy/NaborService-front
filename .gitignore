@@ -22,9 +22,8 @@ coverage
 .env.*.local
 
 # Fichiers de doc/contexte à ne pas committer (demande explicite)
-README.md
 CLAUDE.md
-Prompt-claude.md
+cahier_des_charges_nabor.md
 
 # Editor directories and files
 .vscode/*

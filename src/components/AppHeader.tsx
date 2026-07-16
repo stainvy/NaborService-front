@@ -4,6 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { hasMinRole } from '@/types/roles';
 import { Button } from '@/components/Button';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { NotificationBell } from '@/features/notifications/components/NotificationBell';
 
 // En-tête de navigation commun à la zone habitant (accueil, messagerie…) :
 // nom de l'app + liens principaux + langue + déconnexion. Extrait de HomePage
@@ -20,6 +21,7 @@ export function AppHeader() {
         {t('app.name')}
       </Link>
       <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium text-navy">
+        <NotificationBell />
         <LanguageSwitcher />
         <Link to="/discover" className="underline">
           {t('nav.discover')}
