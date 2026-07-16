@@ -9,6 +9,7 @@ export const NAMESPACES = [
   'listings',
   'events',
   'messages',
+  'polls',
   'profile',
   'admin',
   'errors',
