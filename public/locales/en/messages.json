@@ -105,6 +105,11 @@
     "attachment_failed": "Attachment failed to upload.",
     "attachment_size": "({{size}} KB)",
 
+    "system_call_missed": "Missed call",
+    "system_call_declined": "Call declined",
+    "system_call_ended": "Call ended — {{duration}}",
+    "system_generic": "System event",
+
     "group_settings": "Group settings",
     "close": "Close",
     "back_to_conversations": "Back to conversations",

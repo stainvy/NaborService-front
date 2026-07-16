@@ -51,3 +51,26 @@ describe('MessageBubble — moderation menu', () => {
     expect(screen.getByRole('button', { name: 'chat.unpin' })).toBeInTheDocument();
   });
 });
+
+describe('MessageBubble — system messages', () => {
+  it('renders a call_missed system message with no sender/actions, not as a normal bubble', () => {
+    renderBubble({
+      message: { ...MESSAGE, type: 'system', system_event: 'call_missed', content: 'call_missed' },
+    });
+    expect(screen.getByText('chat.system_call_missed')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'chat.message_actions' })).not.toBeInTheDocument();
+  });
+
+  it('renders a call_ended system message with the duration from system_payload', () => {
+    renderBubble({
+      message: {
+        ...MESSAGE,
+        type: 'system',
+        system_event: 'call_ended',
+        system_payload: { durationSeconds: 125 },
+        content: 'call_ended',
+      },
+    });
+    expect(screen.getByText('chat.system_call_ended')).toBeInTheDocument();
+  });
+});
