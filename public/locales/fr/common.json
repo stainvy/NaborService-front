@@ -13,7 +13,8 @@
     "sign": "Signer",
     "cancel": "Annuler",
     "save": "Enregistrer",
-    "logout": "Se déconnecter"
+    "logout": "Se déconnecter",
+    "back": "Retour"
   },
   "language": {
     "label": "Langue",

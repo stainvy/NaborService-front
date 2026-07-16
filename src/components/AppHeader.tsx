@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { hasMinRole } from '@/types/roles';
 import { Button } from '@/components/Button';
@@ -29,12 +30,24 @@ function NavItem({ to, end, children }: { to: string; end?: boolean; children: R
 export function AppHeader() {
   const { t } = useTranslation('common');
   const { role, logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="flex flex-shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-gray/30 bg-white px-4 py-3">
-      <Link to="/" className="text-lg font-bold text-navy">
-        {t('app.name')}
-      </Link>
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          aria-label={t('actions.back')}
+          title={t('actions.back')}
+          className="flex h-8 w-8 items-center justify-center rounded-md text-navy transition-colors hover:bg-navy/10"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </button>
+        <Link to="/" className="text-lg font-bold text-navy">
+          {t('app.name')}
+        </Link>
+      </div>
       <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium">
         <LanguageSwitcher />
         <NavItem to="/" end>

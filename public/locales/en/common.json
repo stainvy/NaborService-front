@@ -13,7 +13,8 @@
     "sign": "Sign",
     "cancel": "Cancel",
     "save": "Save",
-    "logout": "Log out"
+    "logout": "Log out",
+    "back": "Back"
   },
   "language": {
     "label": "Language",
