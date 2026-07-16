@@ -3,6 +3,10 @@
     "name": "Nabor Services",
     "tagline": "La plateforme collaborative de votre quartier"
   },
+  "media": {
+    "download": "Télécharger",
+    "preview_unavailable": "Aucun aperçu disponible pour ce type de fichier — utilisez le téléchargement."
+  },
   "actions": {
     "publish": "Publier",
     "pay": "Payer",
@@ -22,6 +26,8 @@
     "sessions": "Sessions",
     "profile": "Profil",
     "discover": "Découvrir",
-    "search": "Rechercher"
+    "search": "Rechercher",
+    "chat": "Messagerie",
+    "polls": "Sondages"
   }
 }

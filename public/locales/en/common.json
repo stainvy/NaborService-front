@@ -3,6 +3,10 @@
     "name": "Nabor Services",
     "tagline": "Your neighbourhood's collaborative platform"
   },
+  "media": {
+    "download": "Download",
+    "preview_unavailable": "No inline preview available for this file type — use download."
+  },
   "actions": {
     "publish": "Publish",
     "pay": "Pay",
@@ -22,6 +26,8 @@
     "sessions": "Sessions",
     "profile": "Profile",
     "discover": "Discover",
-    "search": "Search"
+    "search": "Search",
+    "chat": "Messages",
+    "polls": "Polls"
   }
 }

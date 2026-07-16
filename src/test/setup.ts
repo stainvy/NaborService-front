@@ -11,6 +11,13 @@ vi.mock('@/lib/socket', () => ({
   connectSocket: () => null,
   reconnectSocket: () => undefined,
   disconnectSocket: () => undefined,
+  getChatSocket: () => null,
+  connectChatSocket: () => null,
+  reconnectChatSocket: () => undefined,
+  disconnectChatSocket: () => undefined,
+  connectAllSockets: () => undefined,
+  reconnectAllSockets: () => undefined,
+  disconnectAllSockets: () => undefined,
 }));
 
 // MSW : on intercepte les appels API. Les requêtes non gérées (ex. chargement

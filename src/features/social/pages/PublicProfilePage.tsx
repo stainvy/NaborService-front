@@ -11,10 +11,12 @@ import { usePublicProfile } from '../hooks/usePublicProfile';
 import { useFollow, useUnfollow } from '../hooks/useFollow';
 import { useBlock, useUnblock } from '../hooks/useBlock';
 import { useReportUser } from '../hooks/useReportUser';
+import { useStartDirectChat } from '@/features/chat/hooks/useStartDirectChat';
 import { isFullProfile } from '../types';
 
 export function PublicProfilePage() {
   const { t, i18n } = useTranslation('profile');
+  const { t: tMessages } = useTranslation('messages');
   const { id = '' } = useParams();
   const { user } = useAuth();
 
@@ -24,6 +26,7 @@ export function PublicProfilePage() {
   const block = useBlock();
   const unblock = useUnblock();
   const report = useReportUser(id);
+  const startDirectChat = useStartDirectChat();
 
   const [reportOpen, setReportOpen] = useState(false);
   const [reason, setReason] = useState('');
@@ -84,6 +87,13 @@ export function PublicProfilePage() {
 
         {/* Actions */}
         <div className="mt-6 flex flex-wrap gap-2">
+          <Button
+            variant="secondary"
+            onClick={() => startDirectChat.start(id, profile.firstName)}
+            disabled={startDirectChat.isPending}
+          >
+            {startDirectChat.isPending ? tMessages('chat.starting_conversation') : tMessages('chat.start_direct_message')}
+          </Button>
           <Button onClick={() => follow.mutate(id)} disabled={follow.isPending}>
             {t('social.follow')}
           </Button>
