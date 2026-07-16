@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
@@ -31,19 +31,23 @@ export function AppHeader() {
   const { t } = useTranslation('common');
   const { role, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const showBack = location.pathname !== '/';
 
   return (
     <header className="flex flex-shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-gray/30 bg-white px-4 py-3">
       <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={() => navigate(-1)}
-          aria-label={t('actions.back')}
-          title={t('actions.back')}
-          className="flex h-8 w-8 items-center justify-center rounded-md text-navy transition-colors hover:bg-navy/10"
-        >
-          <ArrowLeft className="h-5 w-5" />
-        </button>
+        {showBack && (
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            aria-label={t('actions.back')}
+            title={t('actions.back')}
+            className="flex h-8 w-8 items-center justify-center rounded-md text-navy transition-colors hover:bg-navy/10"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+        )}
         <Link to="/" className="text-lg font-bold text-navy">
           {t('app.name')}
         </Link>
