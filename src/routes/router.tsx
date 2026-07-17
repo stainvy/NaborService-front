@@ -41,6 +41,7 @@ import { ListingCreatePage } from '@/features/listings/pages/ListingCreatePage';
 import { ListingEditPage } from '@/features/listings/pages/ListingEditPage';
 import { MyListingsPage } from '@/features/listings/pages/MyListingsPage';
 import { SignDocumentPage } from '@/features/listings/pages/SignDocumentPage';
+import { PointsPage } from '@/features/points/pages/PointsPage';
 
 export const router = createBrowserRouter([
   // Routes publiques
@@ -63,6 +64,7 @@ export const router = createBrowserRouter([
           { path: '/settings/notifications', element: <NotificationPreferencesPage /> },
           { path: '/privacy', element: <PrivacyPage /> },
           { path: '/sessions', element: <SessionsPage /> },
+          { path: '/points', element: <PointsPage /> },
           { path: '/discover', element: <DiscoverPage /> },
           { path: '/search', element: <SearchPage /> },
           { path: '/chat', element: <MessagingPage /> },

@@ -1,18 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { listingsService } from '@/services/listings.service';
-import { pointsService } from '@/services/points.service';
 import { listingKeys } from './queryKeys';
+// Clé de requête et hook de solde canoniques (features/points) — réexportés
+// ici pour ne pas casser les imports existants depuis ce fichier.
+import { pointsKeys, usePointsBalance } from '@/features/points/hooks/usePoints';
 
-export const pointsKeys = { balance: ['points', 'balance'] as const };
-
-// Solde de points de l'utilisateur (pour savoir s'il peut payer l'annonce).
-export function usePointsBalance(enabled = true) {
-  return useQuery({
-    queryKey: pointsKeys.balance,
-    queryFn: () => pointsService.getBalance(),
-    enabled,
-  });
-}
+export { pointsKeys, usePointsBalance };
 
 // Paie l'annonce en points, puis resynchronise le détail + le solde.
 export function usePayListing(id: string) {

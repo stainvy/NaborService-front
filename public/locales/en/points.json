@@ -1,0 +1,31 @@
+{
+  "title": "My points",
+  "badge": "{{points}} pts",
+  "balance": "Current balance: {{points}} points",
+  "topup": {
+    "title": "Top up my balance",
+    "amount_label": "Amount to top up (€)",
+    "estimate": "≈ {{points}} points at the current rate",
+    "submit": "Top up via Stripe",
+    "loading": "Redirecting to Stripe...",
+    "error": "Unable to start the top-up. Please try again later.",
+    "success": "Top-up successful! Your balance has been updated.",
+    "cancel": "Top-up cancelled."
+  },
+  "history": {
+    "title": "Recent activity",
+    "empty": "No activity yet.",
+    "types": {
+      "topup": "Top-up",
+      "listing_hold": "Listing payment",
+      "listing_payout": "Listing sale",
+      "listing_refund": "Listing refund",
+      "listing_commission": "Platform commission",
+      "event_hold": "Event registration",
+      "event_payout": "Event earnings",
+      "event_refund": "Event refund",
+      "event_commission": "Platform commission",
+      "adjustment": "Adjustment"
+    }
+  }
+}

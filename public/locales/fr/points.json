@@ -1,0 +1,31 @@
+{
+  "title": "Mes points",
+  "badge": "{{points}} pts",
+  "balance": "Solde actuel : {{points}} points",
+  "topup": {
+    "title": "Recharger mon solde",
+    "amount_label": "Montant à recharger (€)",
+    "estimate": "≈ {{points}} points au taux actuel",
+    "submit": "Recharger via Stripe",
+    "loading": "Redirection vers Stripe...",
+    "error": "Impossible de démarrer la recharge. Réessayez plus tard.",
+    "success": "Recharge réussie ! Votre solde a été mis à jour.",
+    "cancel": "Recharge annulée."
+  },
+  "history": {
+    "title": "Historique récent",
+    "empty": "Aucune opération pour le moment.",
+    "types": {
+      "topup": "Recharge",
+      "listing_hold": "Paiement d'une annonce",
+      "listing_payout": "Vente d'une annonce",
+      "listing_refund": "Remboursement d'annonce",
+      "listing_commission": "Commission plateforme",
+      "event_hold": "Inscription à un événement",
+      "event_payout": "Revenus d'événement",
+      "event_refund": "Remboursement d'événement",
+      "event_commission": "Commission plateforme",
+      "adjustment": "Ajustement"
+    }
+  }
+}
