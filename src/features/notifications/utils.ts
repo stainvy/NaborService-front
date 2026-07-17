@@ -54,6 +54,7 @@ export function getNotificationMessage(notification: AppNotification, t: TFuncti
       });
     case 'call_summary':
       return t('types.call_summary', {
+        name: (p.otherName as string) || t('someone'),
         duration: formatDuration(typeof p.durationSeconds === 'number' ? p.durationSeconds : 0),
       });
     case 'new_follower':

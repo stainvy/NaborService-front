@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { CheckCheck } from 'lucide-react';
+import { CheckCheck, Trash2 } from 'lucide-react';
 import { Avatar } from '@/components/Avatar';
 import { useChatGroups } from '@/features/chat/hooks/useChatGroups';
 import { getGroupAvatarProps, getGroupDisplayName } from '@/features/chat/utils';
-import { useNotifications, useMarkAllNotificationsRead } from '../hooks/useNotifications';
+import {
+  useDeleteAllNotifications,
+  useMarkAllNotificationsRead,
+  useNotifications,
+} from '../hooks/useNotifications';
 import { NotificationItem } from './NotificationItem';
 
 interface NotificationPanelProps {
@@ -19,6 +23,7 @@ export function NotificationPanel({ onNavigate }: NotificationPanelProps) {
   const { data: groups, isLoading: groupsLoading } = useChatGroups();
   const { data: notificationsPage, isLoading: notificationsLoading } = useNotifications();
   const markAllRead = useMarkAllNotificationsRead();
+  const deleteAll = useDeleteAllNotifications();
 
   const unreadConversations = (groups ?? [])
     .filter((g) => !!g.unread_count)
@@ -36,16 +41,30 @@ export function NotificationPanel({ onNavigate }: NotificationPanelProps) {
     >
       <div className="flex items-center justify-between border-b border-gray/10 px-4 py-3">
         <h2 className="text-sm font-bold text-navy">{t('title')}</h2>
-        {hasUnread && (
-          <button
-            type="button"
-            onClick={() => markAllRead.mutate()}
-            className="flex items-center gap-1 text-xs font-medium text-orange hover:underline"
-          >
-            <CheckCheck className="h-3.5 w-3.5" />
-            {t('mark_all_read')}
-          </button>
-        )}
+        <div className="flex items-center gap-3">
+          {hasUnread && (
+            <button
+              type="button"
+              onClick={() => markAllRead.mutate()}
+              className="flex items-center gap-1 text-xs font-medium text-orange hover:underline"
+            >
+              <CheckCheck className="h-3.5 w-3.5" />
+              {t('mark_all_read')}
+            </button>
+          )}
+          {notifications.length > 0 && (
+            <button
+              type="button"
+              onClick={() => {
+                if (window.confirm(t('confirm_delete_all'))) deleteAll.mutate();
+              }}
+              className="flex items-center gap-1 text-xs font-medium text-gray hover:text-error hover:underline"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+              {t('delete_all')}
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="max-h-[70vh] overflow-y-auto p-2">

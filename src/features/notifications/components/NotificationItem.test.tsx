@@ -33,7 +33,7 @@ describe('NotificationItem', () => {
     expect(await screen.findByText('types.missed_call')).toBeInTheDocument();
 
     const user = userEvent.setup();
-    await user.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button', { name: /types\.missed_call/ }));
 
     await vi.waitFor(() => expect(markRead).toHaveBeenCalledOnce());
   });
@@ -42,7 +42,25 @@ describe('NotificationItem', () => {
     mockAuthenticated();
     renderWithProviders(<NotificationItem notification={{ ...MISSED_CALL, read: true }} />);
 
-    const button = await screen.findByRole('button');
+    const button = await screen.findByRole('button', { name: /types\.missed_call/ });
     expect(button.querySelector('.bg-orange.rounded-full')).not.toBeInTheDocument();
+  });
+
+  it('deletes the notification without navigating when the delete button is clicked', async () => {
+    mockAuthenticated();
+    const deleteCall = vi.fn();
+    server.use(
+      http.delete(`${env.apiUrl}/notifications/${MISSED_CALL.id}`, () => {
+        deleteCall();
+        return new HttpResponse(null, { status: 204 });
+      }),
+    );
+
+    renderWithProviders(<NotificationItem notification={MISSED_CALL} />);
+
+    const user = userEvent.setup();
+    await user.click(await screen.findByRole('button', { name: 'delete' }));
+
+    await vi.waitFor(() => expect(deleteCall).toHaveBeenCalledOnce());
   });
 });

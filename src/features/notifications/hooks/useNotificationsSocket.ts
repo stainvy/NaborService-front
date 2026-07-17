@@ -2,7 +2,11 @@ import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { getNotificationsSocket } from '@/lib/socket';
 import type { AppNotification, NotificationType } from '@/types/notification';
-import { markNotificationsReadInCache, prependNotification } from './notificationCache';
+import {
+  markNotificationsReadInCache,
+  prependNotification,
+  removeNotificationsFromCache,
+} from './notificationCache';
 
 // Charge utile socket brute — `created_at` en snake_case côté serveur
 // (NotificationsService.create), contrairement au REST qui renvoie `createdAt`.
@@ -15,6 +19,7 @@ interface NotificationNewPayload {
 }
 
 type NotificationReadAckPayload = { notification_id: string } | { all: true };
+type NotificationDeletedPayload = { notification_id: string } | { all: true };
 
 function normalize(payload: NotificationNewPayload): AppNotification {
   return {
@@ -52,12 +57,22 @@ export function useNotificationsSocket() {
       }
     }
 
+    function onDeleted(payload: NotificationDeletedPayload) {
+      if ('all' in payload) {
+        removeNotificationsFromCache(queryClient, { all: true });
+      } else {
+        removeNotificationsFromCache(queryClient, { notificationId: payload.notification_id });
+      }
+    }
+
     socket.on('notification:new', onNew);
     socket.on('notification:read_ack', onReadAck);
+    socket.on('notification:deleted', onDeleted);
 
     return () => {
       socket.off('notification:new', onNew);
       socket.off('notification:read_ack', onReadAck);
+      socket.off('notification:deleted', onDeleted);
     };
   }, [queryClient]);
 }
