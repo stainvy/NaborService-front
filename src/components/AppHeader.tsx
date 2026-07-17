@@ -7,6 +7,7 @@ import { hasMinRole } from '@/types/roles';
 import { Button } from '@/components/Button';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { NotificationBell } from '@/features/notifications/components/NotificationBell';
+import { PointsBadge } from '@/features/points/components/PointsBadge';
 
 // Lien de navigation avec état actif (route courante mise en avant).
 function NavItem({ to, end, children }: { to: string; end?: boolean; children: ReactNode }) {
@@ -55,6 +56,7 @@ export function AppHeader() {
       </div>
       <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium">
         <NotificationBell />
+        <PointsBadge />
         <LanguageSwitcher />
         <NavItem to="/" end>
           {t('nav.home')}

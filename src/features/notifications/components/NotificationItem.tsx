@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { X } from 'lucide-react';
 import type { AppNotification } from '@/types/notification';
-import { useMarkNotificationRead } from '../hooks/useNotifications';
+import { useDeleteNotification, useMarkNotificationRead } from '../hooks/useNotifications';
 import { getNotificationIcon, getNotificationLink, getNotificationMessage } from '../utils';
 
 interface NotificationItemProps {
@@ -24,6 +25,7 @@ export function NotificationItem({ notification, onNavigate }: NotificationItemP
   const { t } = useTranslation('notifications');
   const navigate = useNavigate();
   const markRead = useMarkNotificationRead();
+  const deleteNotification = useDeleteNotification();
   const Icon = getNotificationIcon(notification.type);
   const link = getNotificationLink(notification);
 
@@ -36,27 +38,42 @@ export function NotificationItem({ notification, onNavigate }: NotificationItemP
   }
 
   return (
-    <button
-      type="button"
-      onClick={handleClick}
-      className={`flex w-full items-start gap-3 rounded-lg p-2.5 text-left transition-colors hover:bg-gray/5 ${
+    <div
+      className={`group flex w-full items-start gap-1 rounded-lg p-2.5 transition-colors hover:bg-gray/5 ${
         notification.read ? '' : 'bg-orange/5'
       }`}
     >
-      <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-navy/10 text-navy">
-        <Icon className="h-4 w-4" />
-      </span>
-      <span className="min-w-0 flex-1">
-        <span className="block truncate text-sm text-navy">
-          {getNotificationMessage(notification, t)}
+      <button
+        type="button"
+        onClick={handleClick}
+        className="flex min-w-0 flex-1 items-start gap-3 text-left"
+      >
+        <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-navy/10 text-navy">
+          <Icon className="h-4 w-4" />
         </span>
-        <span className="block text-xs text-gray">
-          {formatRelativeTime(notification.createdAt, t)}
+        <span className="min-w-0 flex-1">
+          <span className="block truncate text-sm text-navy">
+            {getNotificationMessage(notification, t)}
+          </span>
+          <span className="block text-xs text-gray">
+            {formatRelativeTime(notification.createdAt, t)}
+          </span>
         </span>
-      </span>
-      {!notification.read && (
-        <span aria-hidden className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-orange" />
-      )}
-    </button>
+        {!notification.read && (
+          <span aria-hidden className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-orange" />
+        )}
+      </button>
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          deleteNotification.mutate(notification.id);
+        }}
+        aria-label={t('delete')}
+        className="flex-shrink-0 self-center rounded-full p-1.5 text-gray opacity-0 transition-opacity hover:bg-gray/10 hover:text-error focus-within:opacity-100 group-hover:opacity-100"
+      >
+        <X className="h-3.5 w-3.5" />
+      </button>
+    </div>
   );
 }

@@ -1,0 +1,53 @@
+{
+  "title": "My points",
+  "badge": "{{points}} pts",
+  "balance": "Current balance: {{points}} points",
+  "mode": {
+    "topup": "Top up",
+    "cashout": "Cash out"
+  },
+  "topup": {
+    "title": "Top up my balance",
+    "amount_label": "Amount to top up (€)",
+    "estimate": "≈ {{points}} points at the current rate",
+    "submit": "Top up via Stripe",
+    "loading": "Redirecting to Stripe...",
+    "error": "Unable to start the top-up. Please try again later.",
+    "success": "Top-up successful! Your balance has been updated.",
+    "cancel": "Top-up cancelled."
+  },
+  "cashout": {
+    "title": "Cash out my balance",
+    "loading_status": "Checking your eligibility...",
+    "setup_required": "You need to set up a payout account (Stripe Connect) before you can cash out your points.",
+    "setup_button": "Set up payouts",
+    "setup_error": "Unable to start the setup. Please try again later.",
+    "amount_label": "Points to cash out",
+    "estimate": "≈ €{{amount}} bank transfer",
+    "submit": "Cash out via Stripe",
+    "loading": "Redirecting to Stripe...",
+    "insufficient": "Insufficient balance for this amount.",
+    "error": "The transfer failed. Your points have been credited back.",
+    "success": "Cashout successful! The transfer is on its way.",
+    "connect_return": "Setup submitted to Stripe — verification can take a few moments.",
+    "connect_refresh": "The setup link expired, please try again."
+  },
+  "history": {
+    "title": "Recent activity",
+    "empty": "No activity yet.",
+    "types": {
+      "topup": "Top-up",
+      "listing_hold": "Listing payment",
+      "listing_payout": "Listing sale",
+      "listing_refund": "Listing refund",
+      "listing_commission": "Platform commission",
+      "event_hold": "Event registration",
+      "event_payout": "Event earnings",
+      "event_refund": "Event refund",
+      "event_commission": "Platform commission",
+      "adjustment": "Adjustment",
+      "cashout": "Cashout to bank transfer",
+      "cashout_reversed": "Cashout reversed (recredited)"
+    }
+  }
+}

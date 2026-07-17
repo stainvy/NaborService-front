@@ -60,6 +60,7 @@ export function AdminUsersPage() {
                 <Minus className="h-4 w-4 text-admin-muted" />
               ),
           },
+          { key: 'points', label: t('users.col_points'), render: (u) => u.pointsBalance },
           { key: 'createdAt', label: t('users.col_created'), render: (u) => new Date(u.createdAt).toLocaleDateString() },
         ]}
         data={data?.data ?? []}

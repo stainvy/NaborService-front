@@ -2,6 +2,9 @@
   "title": "Notifications",
   "empty": "No notifications yet.",
   "mark_all_read": "Mark all read",
+  "delete": "Delete notification",
+  "delete_all": "Delete all",
+  "confirm_delete_all": "Delete all notifications? This cannot be undone.",
   "messages_section": "Messages",
   "notifications_section": "Notifications",
   "someone": "Someone",
@@ -13,7 +16,7 @@
   "time_days_other": "{{count}} days ago",
   "types": {
     "missed_call": "Missed call from {{name}}",
-    "call_summary": "Call ended — {{duration}}",
+    "call_summary": "Call with {{name}} ended — {{duration}}",
     "new_follower": "{{name}} started following you",
     "new_listing_interest": "Someone is interested in your listing “{{title}}”",
     "listing_accepted": "Your request for “{{title}}” was accepted",

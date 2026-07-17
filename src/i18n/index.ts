@@ -14,6 +14,7 @@ export const NAMESPACES = [
   'profile',
   'admin',
   'errors',
+  'points',
 ] as const;
 
 export const SUPPORTED_LANGUAGES = ['fr', 'en'] as const;

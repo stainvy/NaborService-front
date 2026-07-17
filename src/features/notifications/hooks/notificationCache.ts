@@ -46,3 +46,35 @@ export function markNotificationsReadInCache(
     return { unreadCount: Math.max(0, old.unreadCount - 1) };
   });
 }
+
+/** Retire une notification (ou toutes) du cache — utilisé par l'optimistic update des
+ * mutations de suppression et par l'écho socket `notification:deleted`. */
+export function removeNotificationsFromCache(
+  queryClient: QueryClient,
+  target: { notificationId: string } | { all: true },
+): void {
+  const before = queryClient.getQueryData<NotificationsPage>(notificationKeys.list);
+  const removedUnreadCount =
+    'all' in target
+      ? (before?.unreadCount ?? 0)
+      : before?.notifications.find((n) => n.id === target.notificationId && !n.read)
+        ? 1
+        : 0;
+
+  queryClient.setQueryData<NotificationsPage>(notificationKeys.list, (old) => {
+    if (!old) return old;
+    if ('all' in target) return { notifications: [], unreadCount: 0 };
+    return {
+      notifications: old.notifications.filter((n) => n.id !== target.notificationId),
+      unreadCount: Math.max(0, old.unreadCount - removedUnreadCount),
+    };
+  });
+
+  if (removedUnreadCount > 0 || 'all' in target) {
+    queryClient.setQueryData<{ unreadCount: number }>(notificationKeys.unreadCount, (old) => {
+      if (!old) return old;
+      if ('all' in target) return { unreadCount: 0 };
+      return { unreadCount: Math.max(0, old.unreadCount - removedUnreadCount) };
+    });
+  }
+}

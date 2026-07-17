@@ -20,4 +20,12 @@ export const notificationsService = {
   markAllRead(): Promise<void> {
     return api.patch('/notifications/read-all').then(() => undefined);
   },
+
+  delete(notificationId: string): Promise<void> {
+    return api.delete(`/notifications/${notificationId}`).then(() => undefined);
+  },
+
+  deleteAll(): Promise<void> {
+    return api.delete('/notifications').then(() => undefined);
+  },
 };

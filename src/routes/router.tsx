@@ -12,6 +12,7 @@ import { HomePage } from '@/features/home/pages/HomePage';
 import { AdminLayout } from '@/features/admin/components/AdminLayout';
 import { AdminDashboardPage } from '@/features/admin/pages/AdminDashboardPage';
 import { AdminUsersPage } from '@/features/admin/pages/AdminUsersPage';
+import { AdminPointsPage } from '@/features/admin/pages/AdminPointsPage';
 import { ModerationListingsPage } from '@/features/admin/pages/ModerationListingsPage';
 import { ModerationEventsPage } from '@/features/admin/pages/ModerationEventsPage';
 import { AdminIncidentsPage } from '@/features/admin/pages/AdminIncidentsPage';
@@ -41,6 +42,7 @@ import { ListingCreatePage } from '@/features/listings/pages/ListingCreatePage';
 import { ListingEditPage } from '@/features/listings/pages/ListingEditPage';
 import { MyListingsPage } from '@/features/listings/pages/MyListingsPage';
 import { SignDocumentPage } from '@/features/listings/pages/SignDocumentPage';
+import { PointsPage } from '@/features/points/pages/PointsPage';
 
 export const router = createBrowserRouter([
   // Routes publiques
@@ -63,6 +65,7 @@ export const router = createBrowserRouter([
           { path: '/settings/notifications', element: <NotificationPreferencesPage /> },
           { path: '/privacy', element: <PrivacyPage /> },
           { path: '/sessions', element: <SessionsPage /> },
+          { path: '/points', element: <PointsPage /> },
           { path: '/discover', element: <DiscoverPage /> },
           { path: '/search', element: <SearchPage /> },
           { path: '/chat', element: <MessagingPage /> },
@@ -112,6 +115,11 @@ export const router = createBrowserRouter([
             path: 'rgpd',
             element: <RoleRoute minRole="admin" />,
             children: [{ index: true, element: <AdminRgpdPage /> }],
+          },
+          {
+            path: 'points',
+            element: <RoleRoute minRole="admin" />,
+            children: [{ index: true, element: <AdminPointsPage /> }],
           },
           { path: 'dsl/console', element: <DslConsolePage /> },
           { path: 'dsl/audit', element: <DslAuditPage /> },

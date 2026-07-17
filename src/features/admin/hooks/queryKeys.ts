@@ -8,6 +8,7 @@ export const adminKeys = {
   message: (id: string) => ['admin', 'chat', 'messages', id] as const,
   users: (params?: unknown) => ['admin', 'users', params] as const,
   user: (id: string) => ['admin', 'users', id] as const,
+  pointsLedger: (params?: unknown) => ['admin', 'points', 'ledger', params] as const,
   config: ['admin', 'config'] as const,
   rgpdRequests: (params?: unknown) => ['admin', 'rgpd', 'requests', params] as const,
   rgpdRequestStatus: (uid: string) => ['admin', 'rgpd', 'requests', uid, 'status'] as const,
