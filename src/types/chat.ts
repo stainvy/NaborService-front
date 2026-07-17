@@ -1,4 +1,4 @@
-export type MessageType = 'text' | 'image' | 'file' | 'voice' | 'poll';
+export type MessageType = 'text' | 'image' | 'file' | 'voice' | 'poll' | 'system';
 
 export interface ChatGroupParticipant {
   id: string;
@@ -43,6 +43,8 @@ export interface ChatMessageAttachment {
   filename: string;
   mimetype: string;
   size_bytes: number;
+  /** Renseigné pour les pièces jointes audio — probé côté back, ne dépend pas du navigateur. */
+  duration_seconds?: number | null;
 }
 
 /** Fichier partagé renvoyé par GET /chat/groups/:id/attachments — pièce jointe + message d'origine (pour le saut). */
@@ -91,6 +93,9 @@ export interface ChatMessage {
   reactions?: ChatMessageReaction[];
   /** Renseigné quand type === 'poll' — id du sondage affiché dans ce message. */
   poll_id?: string | null;
+  /** Renseignés quand type === 'system' — nom d'événement + charge utile libre (ex. appel manqué/terminé). */
+  system_event?: string | null;
+  system_payload?: Record<string, unknown> | null;
   pinned?: boolean;
   pinned_at?: string | null;
   pinned_by?: string | null;

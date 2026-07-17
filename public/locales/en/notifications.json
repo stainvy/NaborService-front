@@ -1,0 +1,31 @@
+{
+  "title": "Notifications",
+  "empty": "No notifications yet.",
+  "mark_all_read": "Mark all read",
+  "messages_section": "Messages",
+  "notifications_section": "Notifications",
+  "someone": "Someone",
+  "time_just_now": "Just now",
+  "time_minutes": "{{count}} min ago",
+  "time_hours_one": "{{count}} hour ago",
+  "time_hours_other": "{{count}} hours ago",
+  "time_days_one": "{{count}} day ago",
+  "time_days_other": "{{count}} days ago",
+  "types": {
+    "missed_call": "Missed call from {{name}}",
+    "call_summary": "Call ended — {{duration}}",
+    "new_follower": "{{name}} started following you",
+    "new_listing_interest": "Someone is interested in your listing “{{title}}”",
+    "listing_accepted": "Your request for “{{title}}” was accepted",
+    "contract_pending": "A contract is pending your signature for “{{title}}”",
+    "contract_signed": "Your contract was signed",
+    "payment_confirmed": "Your payment was confirmed",
+    "event_cancelled": "The event “{{title}}” was cancelled",
+    "waitlist_place": "A spot opened up for “{{title}}”",
+    "incident_resolved": "Your report “{{title}}” was resolved",
+    "new_event": "A new event was posted in your neighbourhood",
+    "new_poll": "A new poll was posted in your neighbourhood",
+    "new_message": "You have a new message",
+    "unknown": "New notification"
+  }
+}

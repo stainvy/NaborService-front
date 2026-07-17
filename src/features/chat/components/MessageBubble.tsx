@@ -93,6 +93,13 @@ export function MessageBubble({ message, isOwn, showSender, isGroupAdmin, canPin
   function handleCopy() {
     if (message.content) void navigator.clipboard.writeText(message.content);
   }
+
+  // Messages système (ex. appel manqué/terminé) : pas d'auteur, pas d'actions —
+  // rendu à part, centré, avant tout le reste de la bulle normale.
+  if (message.type === 'system') {
+    return <SystemMessage message={message} />;
+  }
+
   return (
     <div className={`group flex ${isOwn ? 'justify-end' : 'justify-start'}`}>
       <div className={`flex max-w-[75%] items-start gap-1 ${isOwn ? 'flex-row-reverse' : ''}`}>
@@ -334,6 +341,46 @@ export function MessageBubble({ message, isOwn, showSender, isGroupAdmin, canPin
   );
 }
 
+function formatDuration(totalSec: number): string {
+  const m = Math.floor(totalSec / 60);
+  const s = totalSec % 60;
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+/**
+ * Rendu centré (pas de bulle, pas d'auteur) pour les messages `type: 'system'`
+ * — aujourd'hui uniquement les événements d'appel, mais `system_event` est un
+ * nom d'événement générique : un futur événement système ajoute juste un cas
+ * ici, sans nouveau type de message.
+ */
+function SystemMessage({ message }: { message: ChatMessage }) {
+  const { t } = useTranslation('messages');
+  const payload = message.system_payload ?? {};
+
+  let text: string;
+  switch (message.system_event) {
+    case 'call_missed':
+      text = t('chat.system_call_missed');
+      break;
+    case 'call_declined':
+      text = t('chat.system_call_declined');
+      break;
+    case 'call_ended': {
+      const seconds = typeof payload.durationSeconds === 'number' ? payload.durationSeconds : 0;
+      text = t('chat.system_call_ended', { duration: formatDuration(seconds) });
+      break;
+    }
+    default:
+      text = t('chat.system_generic');
+  }
+
+  return (
+    <div className="flex justify-center py-1">
+      <span className="rounded-full bg-gray/10 px-3 py-1 text-center text-xs text-gray">{text}</span>
+    </div>
+  );
+}
+
 function AttachmentView({ attachment }: { attachment: NonNullable<ChatMessage['attachments']>[number] }) {
   const { t } = useTranslation('messages');
   const url = mediaUrl(attachment.media_id);
@@ -343,7 +390,21 @@ function AttachmentView({ attachment }: { attachment: NonNullable<ChatMessage['a
     return <img src={url} alt={attachment.filename} className="max-h-64 rounded-lg object-cover" />;
   }
   if (attachment.mimetype.startsWith('audio/')) {
-    return <audio controls src={url} className="max-w-full" />;
+    // La durée native du lecteur n'est pas fiable ici : le conteneur Ogg
+    // transcodé côté back n'a pas de durée en en-tête, donc le navigateur
+    // affiche souvent 0:00 tant qu'il n'a pas lu/cherché dans tout le flux.
+    // On affiche donc la durée probée côté serveur à côté, en complément.
+    const hasDuration = typeof attachment.duration_seconds === 'number';
+    return (
+      <div className="flex items-center gap-2">
+        <audio controls src={url} className="max-w-full" />
+        {hasDuration && (
+          <span className="text-xs tabular-nums opacity-70">
+            {formatDuration(attachment.duration_seconds!)}
+          </span>
+        )}
+      </div>
+    );
   }
   if (attachment.mimetype.startsWith('video/')) {
     return <video controls src={url} className="max-h-64 max-w-full rounded-lg" />;

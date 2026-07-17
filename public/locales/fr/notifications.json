@@ -1,0 +1,31 @@
+{
+  "title": "Notifications",
+  "empty": "Aucune notification pour le moment.",
+  "mark_all_read": "Tout marquer comme lu",
+  "messages_section": "Messages",
+  "notifications_section": "Notifications",
+  "someone": "Quelqu'un",
+  "time_just_now": "À l'instant",
+  "time_minutes": "il y a {{count}} min",
+  "time_hours_one": "il y a {{count}} heure",
+  "time_hours_other": "il y a {{count}} heures",
+  "time_days_one": "il y a {{count}} jour",
+  "time_days_other": "il y a {{count}} jours",
+  "types": {
+    "missed_call": "Appel manqué de {{name}}",
+    "call_summary": "Appel terminé — {{duration}}",
+    "new_follower": "{{name}} a commencé à vous suivre",
+    "new_listing_interest": "Quelqu'un est intéressé par votre annonce « {{title}} »",
+    "listing_accepted": "Votre demande pour « {{title}} » a été acceptée",
+    "contract_pending": "Un contrat est en attente de votre signature pour « {{title}} »",
+    "contract_signed": "Votre contrat a été signé",
+    "payment_confirmed": "Votre paiement a été confirmé",
+    "event_cancelled": "L'événement « {{title}} » a été annulé",
+    "waitlist_place": "Une place s'est libérée pour « {{title}} »",
+    "incident_resolved": "Votre signalement « {{title}} » a été résolu",
+    "new_event": "Un nouvel événement a été publié dans votre quartier",
+    "new_poll": "Un nouveau sondage a été publié dans votre quartier",
+    "new_message": "Vous avez un nouveau message",
+    "unknown": "Nouvelle notification"
+  }
+}

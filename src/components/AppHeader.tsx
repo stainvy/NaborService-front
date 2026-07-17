@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { hasMinRole } from '@/types/roles';
 import { Button } from '@/components/Button';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { NotificationBell } from '@/features/notifications/components/NotificationBell';
 
 // Lien de navigation avec état actif (route courante mise en avant).
 function NavItem({ to, end, children }: { to: string; end?: boolean; children: ReactNode }) {
@@ -25,8 +26,8 @@ function NavItem({ to, end, children }: { to: string; end?: boolean; children: R
 }
 
 // En-tête de navigation commun à la zone habitant, monté par HabitantLayout.
-// `flex-wrap` garde les liens accessibles sur petit écran plutôt que de les
-// faire déborder.
+// Bouton retour (sauf sur l'accueil), liens actifs, cloche de notifications,
+// langue et déconnexion. `flex-wrap` garde les liens accessibles sur petit écran.
 export function AppHeader() {
   const { t } = useTranslation('common');
   const { role, logout } = useAuth();
@@ -53,6 +54,7 @@ export function AppHeader() {
         </Link>
       </div>
       <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium">
+        <NotificationBell />
         <LanguageSwitcher />
         <NavItem to="/" end>
           {t('nav.home')}

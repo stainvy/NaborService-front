@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Plus, Search } from 'lucide-react';
 import { Avatar } from '@/components/Avatar';
 import { useChatGroups } from '../hooks/useChatGroups';
+import { usePresence } from '../hooks/usePresence';
 import { CreateGroupModal } from './CreateGroupModal';
 import { getGroupAvatarProps, getGroupDisplayName } from '../utils';
 
@@ -29,6 +30,9 @@ export function ConversationsSidebar({ activeGroupId }: ConversationsSidebarProp
     if (search.trim() && !getGroupDisplayName(g, t).toLowerCase().includes(search.trim().toLowerCase())) return false;
     return true;
   });
+
+  // Présence temps réel des interlocuteurs de MP (pastille sur l'avatar).
+  const online = usePresence((groups ?? []).map((g) => g.other_participant?.id));
 
   return (
     <aside className="flex h-full w-full flex-col border-r border-gray/20 bg-white">
@@ -87,7 +91,18 @@ export function ConversationsSidebar({ activeGroupId }: ConversationsSidebarProp
                 activeGroupId === group.id ? 'bg-orange/10' : 'hover:bg-gray/5'
               }`}
             >
-              <Avatar {...getGroupAvatarProps(group)} size={44} />
+              <span className="relative flex-shrink-0">
+                <Avatar {...getGroupAvatarProps(group)} size={44} />
+                {group.type === 'direct_message' && group.other_participant && (
+                  <span
+                    aria-label={online[group.other_participant.id] ? t('chat.online') : t('chat.offline')}
+                    title={online[group.other_participant.id] ? t('chat.online') : t('chat.offline')}
+                    className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white ${
+                      online[group.other_participant.id] ? 'bg-success' : 'bg-gray/60'
+                    }`}
+                  />
+                )}
+              </span>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between gap-2">
                   <p className="truncate text-sm font-semibold text-navy">{getGroupDisplayName(group, t)}</p>

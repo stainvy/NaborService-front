@@ -14,6 +14,7 @@ import { useSendMessage } from '../hooks/useSendMessage';
 import { useSendAttachment } from '../hooks/useSendAttachment';
 import { useTyping } from '../hooks/useTyping';
 import { useMarkGroupRead } from '../hooks/useMarkGroupRead';
+import { usePresence } from '../hooks/usePresence';
 import { MessageBubble } from './MessageBubble';
 import { MessageInput } from './MessageInput';
 import { TypingIndicator } from './TypingIndicator';
@@ -69,6 +70,8 @@ export function ConversationThread({
   const { notifyTyping } = useTyping(groupId);
   const markGroupRead = useMarkGroupRead();
   const { startCall, phase: callPhase } = useCall();
+  // Présence temps réel de l'interlocuteur (MP uniquement) pour l'en-tête.
+  const presence = usePresence(group?.type === 'direct_message' ? [group.other_participant?.id] : []);
   const jumpToMessage = useJumpToMessage(groupId);
   const returnToLiveMessages = useReturnToLiveMessages(groupId);
   const [replyTo, setReplyTo] = useState<ChatMessage | null>(null);
@@ -297,6 +300,11 @@ export function ConversationThread({
           <p className="truncate font-bold text-navy">{getGroupDisplayName(group, t)}</p>
           {isGroup && group.member_count != null && (
             <p className="text-xs text-gray">{t('chat.member_count', { count: group.member_count })}</p>
+          )}
+          {!isGroup && group.other_participant && (
+            <p className={`text-xs ${presence[group.other_participant.id] ? 'text-success' : 'text-gray'}`}>
+              {presence[group.other_participant.id] ? t('chat.online') : t('chat.offline')}
+            </p>
           )}
         </div>
 
