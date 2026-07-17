@@ -119,10 +119,12 @@
     "empty": "Aucune annonce signalée."
   },
   "payment": {
-    "success": "Paiement réussi !",
-    "cancel": "Paiement annulé.",
-    "pay_button": "Payer maintenant",
-    "loading": "Génération du lien sécurisé..."
+    "pay_button": "Payer (en points)",
+    "balance": "Votre solde : {{points}} points",
+    "price": "Prix : {{points}} points",
+    "insufficient": "Solde insuffisant — rechargez vos points.",
+    "paid": "Paiement effectué.",
+    "error": "Le paiement a échoué."
   },
   "errors": {
     "not_found": "Annonce introuvable.",

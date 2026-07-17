@@ -119,10 +119,12 @@
     "empty": "No reported listings."
   },
   "payment": {
-    "success": "Payment successful!",
-    "cancel": "Payment cancelled.",
-    "pay_button": "Pay now",
-    "loading": "Generating secure link..."
+    "pay_button": "Pay (with points)",
+    "balance": "Your balance: {{points}} points",
+    "price": "Price: {{points}} points",
+    "insufficient": "Insufficient balance — top up your points.",
+    "paid": "Payment completed.",
+    "error": "Payment failed."
   },
   "errors": {
     "not_found": "Listing not found.",

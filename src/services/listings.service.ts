@@ -88,6 +88,13 @@ export const listingsService = {
     return api.post<Listing>(`/listings/${id}/accept`).then((r) => r.data);
   },
 
+  // Paiement de l'annonce EN POINTS (débite le solde). Cycle de vie :
+  // interest → accept → pay → confirm. (L'ancien checkout Stripe par annonce a
+  // été supprimé côté back ; Stripe ne sert plus qu'à recharger les points.)
+  pay(id: string): Promise<Listing> {
+    return api.post<Listing>(`/listings/${id}/pay`).then((r) => r.data);
+  },
+
   confirm(id: string): Promise<Listing> {
     return api.post<Listing>(`/listings/${id}/confirm`).then((r) => r.data);
   },

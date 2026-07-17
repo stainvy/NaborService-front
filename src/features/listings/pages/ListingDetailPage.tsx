@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import DOMPurify from 'dompurify';
 import { useAuth } from '@/hooks/useAuth';
-import { stripeService } from '@/services/stripe.service';
 import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
 import { FullPageLoader } from '@/components/FullPageLoader';
@@ -17,6 +16,7 @@ import { useReportListing } from '../hooks/useReportListing';
 import { useDeleteListing } from '../hooks/useListingMutations';
 import { useDownloadContract, useDownloadReceipt } from '../hooks/useDocuments';
 import { useListingChat } from '../hooks/useListingChat';
+import { usePointsBalance, usePayListing } from '../hooks/usePayment';
 import { listingMediaIds } from '../types';
 
 export function ListingDetailPage() {
@@ -40,23 +40,14 @@ export function ListingDetailPage() {
   const [reportOpen, setReportOpen] = useState(false);
   const [reason, setReason] = useState('');
 
-  // Paiement Stripe (géré par l'équipe paiement) : bouton + retour ?payment=.
-  const [searchParams] = useSearchParams();
-  const paymentResult = searchParams.get('payment');
-  const [isPaying, setIsPaying] = useState(false);
-  const [payError, setPayError] = useState<string | null>(null);
-
-  const handlePay = async () => {
-    setIsPaying(true);
-    setPayError(null);
-    try {
-      const { url } = await stripeService.createCheckoutSession(id);
-      window.location.href = url;
-    } catch {
-      setPayError(t('errors.checkout_failed'));
-      setIsPaying(false);
-    }
-  };
+  // Paiement EN POINTS : l'acheteur (non-créateur) règle l'annonce en cours
+  // avec son solde de points. On ne charge le solde que si c'est pertinent.
+  const canPay =
+    listing?.status === 'in_progress' &&
+    (listing?.priceCents ?? 0) > 0 &&
+    listing?.creatorId !== user?.id;
+  const balance = usePointsBalance(Boolean(canPay));
+  const pay = usePayListing(id);
 
   if (isLoading || !listing) return <FullPageLoader />;
 
@@ -69,16 +60,6 @@ export function ListingDetailPage() {
       <Link to="/listings" className="text-sm text-orange underline">
         ← {t('feed.title')}
       </Link>
-
-      {/* Retour de paiement Stripe */}
-      {paymentResult === 'success' && (
-        <p className="mt-4 rounded-md bg-success/10 p-3 text-sm text-success">
-          {t('payment.success')}
-        </p>
-      )}
-      {paymentResult === 'cancel' && (
-        <p className="mt-4 rounded-md bg-gray/10 p-3 text-sm text-gray">{t('payment.cancel')}</p>
-      )}
 
       <header className="mt-4 flex items-start justify-between gap-4">
         <div>
@@ -136,15 +117,35 @@ export function ListingDetailPage() {
         </section>
       )}
 
-      {/* Paiement Stripe : dispo quand la transaction est en cours et payante */}
-      {listing.status === 'in_progress' && listing.priceCents > 0 && (
-        <section className="mt-6">
-          <Button onClick={handlePay} disabled={isPaying}>
-            {isPaying ? t('payment.loading') : t('payment.pay_button')}
-          </Button>
-          {payError && <p className="mt-1 text-sm text-error">{payError}</p>}
-        </section>
-      )}
+      {/* Paiement EN POINTS (transaction en cours, annonce payante, acheteur).
+          ⚠️ Hypothèse 1 point = 1 centime (à confirmer avec l'équipe paiement). */}
+      {canPay &&
+        (() => {
+          const bal = balance.data?.pointsBalance;
+          const insufficient = bal !== undefined && bal < listing.priceCents;
+          return (
+            <section className="mt-6 rounded-md border border-gray/30 p-4">
+              <p className="text-sm text-gray">
+                {t('payment.balance', { points: bal ?? 0 })}
+              </p>
+              <p className="mt-1 text-sm text-navy">
+                {t('payment.price', { points: listing.priceCents })}
+              </p>
+              <Button
+                className="mt-3"
+                onClick={() => pay.mutate()}
+                disabled={pay.isPending || insufficient}
+              >
+                {t('payment.pay_button')}
+              </Button>
+              {insufficient && (
+                <p className="mt-1 text-sm text-error">{t('payment.insufficient')}</p>
+              )}
+              {pay.isError && <p className="mt-1 text-sm text-error">{t('payment.error')}</p>}
+              {pay.isSuccess && <p className="mt-1 text-sm text-success">{t('payment.paid')}</p>}
+            </section>
+          );
+        })()}
 
       {/* Documents & signature */}
       <section className="mt-6 flex flex-wrap gap-2">
