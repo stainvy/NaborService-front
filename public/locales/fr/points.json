@@ -2,6 +2,10 @@
   "title": "Mes points",
   "badge": "{{points}} pts",
   "balance": "Solde actuel : {{points}} points",
+  "mode": {
+    "topup": "Recharger",
+    "cashout": "Retirer"
+  },
   "topup": {
     "title": "Recharger mon solde",
     "amount_label": "Montant à recharger (€)",
@@ -11,6 +15,22 @@
     "error": "Impossible de démarrer la recharge. Réessayez plus tard.",
     "success": "Recharge réussie ! Votre solde a été mis à jour.",
     "cancel": "Recharge annulée."
+  },
+  "cashout": {
+    "title": "Retirer mon solde",
+    "loading_status": "Vérification de votre éligibilité...",
+    "setup_required": "Vous devez d'abord configurer un compte de virement (Stripe Connect) avant de pouvoir retirer vos points.",
+    "setup_button": "Configurer les virements",
+    "setup_error": "Impossible de démarrer la configuration. Réessayez plus tard.",
+    "amount_label": "Points à retirer",
+    "estimate": "≈ {{amount}} € par virement bancaire",
+    "submit": "Retirer via Stripe",
+    "loading": "Redirection vers Stripe...",
+    "insufficient": "Solde insuffisant pour ce montant.",
+    "error": "Le virement a échoué. Vos points ont été recrédités.",
+    "success": "Retrait réussi ! Le virement est en cours.",
+    "connect_return": "Configuration transmise à Stripe — la vérification peut prendre quelques instants.",
+    "connect_refresh": "Le lien de configuration a expiré, réessayez."
   },
   "history": {
     "title": "Historique récent",

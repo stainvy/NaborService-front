@@ -34,3 +34,31 @@ export function useCreateTopup() {
     },
   });
 }
+
+// Éligibilité au retrait (onboarding Stripe Connect terminé ou non).
+export function useConnectStatus() {
+  return useQuery({
+    queryKey: pointsKeys.connectStatus,
+    queryFn: () => pointsService.getConnectStatus(),
+  });
+}
+
+// Démarre/poursuit l'onboarding Stripe Connect : le composant appelant
+// redirige vers `url` au succès.
+export function useCreateOnboardingLink() {
+  return useMutation({
+    mutationFn: () => pointsService.createOnboardingLink(),
+  });
+}
+
+// Retire des points en virement bancaire réel.
+export function useCreateCashout() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (amountPoints: number) => pointsService.createCashout(amountPoints),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: pointsKeys.balance });
+      queryClient.invalidateQueries({ queryKey: ['points', 'ledger'] });
+    },
+  });
+}
