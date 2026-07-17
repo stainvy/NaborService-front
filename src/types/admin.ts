@@ -1,6 +1,7 @@
 import type { Role } from './roles';
 import type { PageParams } from './pagination';
 import type { NaborEvent } from '@/services/events.service';
+import type { PointsLedgerEntryType } from '@/services/points.service';
 
 // --- Chat (déplacé depuis admin.service.ts) ---
 
@@ -74,6 +75,8 @@ export interface AdminUser {
   locale: string;
   neighbourhoodId: string | null;
   stripeAccountId: string | null;
+  pointsBalance: number;
+  payoutsEnabled: boolean;
   profilePictureMongoId: string | null;
   bannerMongoId: string | null;
   mfaEnabled: boolean;
@@ -97,6 +100,13 @@ export function adminUserStatus(user: Pick<AdminUser, 'isSuspended' | 'deletedAt
 export interface AdminUsersQuery extends PageParams {
   role?: Role;
   q?: string;
+}
+
+// --- Points (grand livre, tous utilisateurs) ---
+
+export interface AdminLedgerQuery extends PageParams {
+  userId?: string;
+  type?: PointsLedgerEntryType;
 }
 
 // --- Moderation ---

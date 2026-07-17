@@ -25,7 +25,9 @@
       "event_payout": "Event earnings",
       "event_refund": "Event refund",
       "event_commission": "Platform commission",
-      "adjustment": "Adjustment"
+      "adjustment": "Adjustment",
+      "cashout": "Cashout to bank transfer",
+      "cashout_reversed": "Cashout reversed (recredited)"
     }
   }
 }

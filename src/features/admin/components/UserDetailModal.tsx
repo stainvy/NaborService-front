@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Check, MessageSquare, Minus } from 'lucide-react';
+import { Check, Coins, MessageSquare, Minus } from 'lucide-react';
 import { Modal } from '@/components/Modal';
 import { Button } from '@/components/Button';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
@@ -73,6 +73,10 @@ export function UserDetailModal({ user, onClose }: UserDetailModalProps) {
             <span>{t(`users.status_${status}`)}</span>
             <span className="text-admin-muted">{t('users.col_totp')}:</span>
             <span>{user.mfaEnabled ? <Check className="h-4 w-4 text-green-600" /> : <Minus className="h-4 w-4 text-admin-muted" />}</span>
+            <span className="text-admin-muted">{t('users.col_points')}:</span>
+            <span>{user.pointsBalance}</span>
+            <span className="text-admin-muted">{t('users.col_payouts_enabled')}:</span>
+            <span>{user.payoutsEnabled ? <Check className="h-4 w-4 text-green-600" /> : <Minus className="h-4 w-4 text-admin-muted" />}</span>
             <span className="text-admin-muted">{t('users.col_created')}:</span>
             <span>{new Date(user.createdAt).toLocaleDateString()}</span>
           </div>
@@ -88,6 +92,14 @@ export function UserDetailModal({ user, onClose }: UserDetailModalProps) {
             className="flex items-center gap-1.5 text-sm font-medium text-admin-accent hover:underline"
           >
             <MessageSquare className="h-4 w-4" /> {t('users.view_conversations')}
+          </Link>
+
+          <Link
+            to={`/admin/points?userId=${user.id}`}
+            onClick={onClose}
+            className="flex items-center gap-1.5 text-sm font-medium text-admin-accent hover:underline"
+          >
+            <Coins className="h-4 w-4" /> {t('users.view_points_ledger')}
           </Link>
 
           <div className="flex flex-wrap gap-2 border-t border-admin-border pt-3">

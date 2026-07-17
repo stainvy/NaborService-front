@@ -75,6 +75,7 @@ export function AdminLayout() {
             <NavSection label={t('nav.platform')}>
               <AdminNavLink to="/admin/config">{t('nav.config')}</AdminNavLink>
               <AdminNavLink to="/admin/rgpd">{t('nav.rgpd')}</AdminNavLink>
+              <AdminNavLink to="/admin/points">{t('nav.points')}</AdminNavLink>
             </NavSection>
           )}
 

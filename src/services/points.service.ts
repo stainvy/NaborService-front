@@ -15,7 +15,9 @@ export type PointsLedgerEntryType =
   | 'event_payout'
   | 'event_refund'
   | 'event_commission'
-  | 'adjustment';
+  | 'adjustment'
+  | 'cashout'
+  | 'cashout_reversed';
 
 export interface PointsLedgerEntry {
   id: string;

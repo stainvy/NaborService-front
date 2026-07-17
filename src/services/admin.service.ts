@@ -5,6 +5,7 @@ import type {
   AdminGroup,
   AdminUser,
   AdminUsersQuery,
+  AdminLedgerQuery,
   AdminConfig,
   RgpdRequest,
   RgpdRequestStatusResponse,
@@ -18,6 +19,7 @@ import type {
 import type { Paginated } from '@/types/pagination';
 import type { Role } from '@/types/roles';
 import type { GroupSharedFile } from '@/types/chat';
+import type { PointsLedgerEntry } from '@/services/points.service';
 
 export type { AdminMessage, AdminGroup };
 
@@ -101,6 +103,12 @@ export const adminService = {
 
   resetUserTotp(id: string): Promise<void> {
     return api.delete(`/admin/users/${id}/totp`).then(() => undefined);
+  },
+
+  // --- Points (grand livre, tous utilisateurs) ---
+
+  getPointsLedger(params?: AdminLedgerQuery): Promise<Paginated<PointsLedgerEntry>> {
+    return api.get<Paginated<PointsLedgerEntry>>('/admin/points/ledger', { params }).then((r) => r.data);
   },
 
   // --- Config ---
