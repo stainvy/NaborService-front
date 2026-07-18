@@ -1,7 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { CategorySelect } from './CategorySelect';
 import { NeighbourhoodSelect } from './NeighbourhoodSelect';
-import { LISTING_STATUSES, LISTING_TYPES, type ListingFilters as Filters } from '../types';
+import {
+  LISTING_STATUSES,
+  LISTING_TYPES,
+  type ListingFilters as Filters,
+} from '../types';
 
 interface Props {
   value: Filters;
@@ -35,10 +39,13 @@ export function ListingFilters({ value, onChange }: Props) {
         <span className="text-sm font-medium text-navy">{t('filters.status')}</span>
         <select
           value={value.status ?? ''}
-          onChange={(e) => patch({ status: (e.target.value || undefined) as Filters['status'] })}
+          onChange={(e) => {
+            const status = (e.target.value || undefined) as Filters['status'];
+            patch({ status });
+          }}
           className="rounded-md border border-gray px-3 py-2"
         >
-          <option value="">{t('filters.all')}</option>
+          <option value="">{t('filters.all_statuses')}</option>
           {LISTING_STATUSES.map((st) => (
             <option key={st} value={st}>
               {t(`status.${st}`)}

@@ -5,6 +5,8 @@ import type {
   CreateListingPayload,
   ListingChatGroup,
   ListingContent,
+  ListingMediaItem,
+  ContractStatus,
   ListingFilters,
   ListingsPage,
   ReportListingPayload,
@@ -31,6 +33,18 @@ export const listingsService = {
       }
       return d;
     });
+  },
+
+  getMyOperations(filters?: ListingFilters): Promise<ListingsPage> {
+    return api
+      .get<Listing[] | ListingsPage>('/listings/me/operations', { params: filters })
+      .then((r) => {
+        const d = r.data;
+        if (Array.isArray(d)) {
+          return { data: d, meta: { total: d.length, offset: 0, limit: d.length } };
+        }
+        return d;
+      });
   },
 
   get(id: string): Promise<Listing> {
@@ -69,6 +83,10 @@ export const listingsService = {
   },
 
   // --- Médias (multipart, champ « file ») -----------------------------------
+  getMedia(id: string): Promise<ListingMediaItem[]> {
+    return api.get<ListingMediaItem[]>(`/listings/${id}/media`).then((r) => r.data);
+  },
+
   uploadMedia(id: string, file: File): Promise<{ mediaId: string }> {
     const form = new FormData();
     form.append('file', file);
@@ -121,6 +139,11 @@ export const listingsService = {
 
   sign(id: string, payload: SignDocumentPayload): Promise<unknown> {
     return api.post(`/listings/${id}/sign`, payload).then((r) => r.data);
+  },
+
+  // 404 tant que le contrat n'a pas été généré (avant acceptation de l'intérêt).
+  getContractStatus(id: string): Promise<ContractStatus> {
+    return api.get<ContractStatus>(`/listings/${id}/contract/status`).then((r) => r.data);
   },
 
   // --- Signalement ----------------------------------------------------------

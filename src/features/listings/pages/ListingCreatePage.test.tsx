@@ -10,7 +10,7 @@ import { env } from '@/lib/env';
 import { ListingCreatePage } from './ListingCreatePage';
 
 describe('ListingCreatePage', () => {
-  it('POST /listings avec prix euros→centimes et listing_type', async () => {
+  it('POST /listings avec prix en points et listing_type', async () => {
     mockAuthenticated();
     mockEmptyCatalog();
     let body: Record<string, unknown> | null = null;
@@ -31,13 +31,13 @@ describe('ListingCreatePage', () => {
     );
 
     await user.type(await screen.findByLabelText('form.title'), 'Tonte');
-    const price = screen.getByLabelText('form.price_euros');
+    const price = screen.getByLabelText('form.price_points');
     await user.clear(price);
     await user.type(price, '15');
     await user.click(screen.getByRole('button', { name: 'create.submit' }));
 
     await waitFor(() => expect(body).not.toBeNull());
-    expect(body).toMatchObject({ title: 'Tonte', listing_type: 'offer', price_cents: 1500 });
+    expect(body).toMatchObject({ title: 'Tonte', listing_type: 'offer', price_cents: 15 });
     // Redirige vers l'édition après création.
     expect(await screen.findByText('EDIT')).toBeInTheDocument();
   });

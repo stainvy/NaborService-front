@@ -7,8 +7,6 @@ import { ListingForm } from '../components/ListingForm';
 import { ListingMedia } from '../components/ListingMedia';
 import { useListing, useListingContent } from '../hooks/useListings';
 import { useUpdateContent, useUpdateListing } from '../hooks/useListingMutations';
-import { centsToEuros } from '@/lib/money';
-import { listingMediaIds } from '../types';
 
 export function ListingEditPage() {
   const { t } = useTranslation('listings');
@@ -31,8 +29,6 @@ export function ListingEditPage() {
   }, [content]);
 
   if (isLoading || !listing) return <FullPageLoader />;
-
-  const mediaIds = listingMediaIds(listing, content);
 
   const saveContent = (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,7 +58,7 @@ export function ListingEditPage() {
           description: listing.description ?? undefined,
           category_id: listing.categoryId ?? undefined,
           neighbourhood_id: listing.neighbourhoodId ?? undefined,
-          price_euros: centsToEuros(listing.priceCents),
+          price_points: listing.priceCents,
         }}
         onSubmit={(payload) =>
           // PATCH /listings/:id n'accepte pas listing_type → on l'omet.
@@ -111,7 +107,7 @@ export function ListingEditPage() {
       {/* Photos */}
       <section className="mt-10">
         <h2 className="mb-3 font-semibold text-navy">{t('edit.photos')}</h2>
-        <ListingMedia id={id} mediaIds={mediaIds} editable />
+        <ListingMedia id={id} editable />
       </section>
     </div>
   );

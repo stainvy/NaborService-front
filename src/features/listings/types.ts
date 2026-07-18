@@ -10,6 +10,8 @@ import type { Paginated } from '@/types/pagination';
 
 export type { Listing, ListingStatus, ListingType };
 
+export type ListingFilterStatus = ListingStatus | 'all';
+
 export const LISTING_TYPES: ListingType[] = ['offer', 'request'];
 export const LISTING_STATUSES: ListingStatus[] = [
   'open',
@@ -38,7 +40,7 @@ export interface ListingFilters {
   neighbourhood?: string;
   category?: number;
   type?: ListingType;
-  status?: ListingStatus;
+  status?: ListingFilterStatus;
 }
 
 // --- Corps de requête (snake_case, NE PAS normaliser) ---------------------
@@ -77,6 +79,22 @@ export interface SignDocumentPayload {
   totp_code: string;
 }
 
+// GET /listings/:id/contract/status — état de signature du contrat courant.
+// 404 tant qu'aucun contrat n'a été généré (avant acceptation de l'intérêt).
+export interface ContractStatus {
+  documentId: string;
+  myRole: 'provider' | 'requester' | null;
+  iSigned: boolean;
+  providerSignedAt: string | null;
+  requesterSignedAt: string | null;
+  fullySigned: boolean;
+  signedAt: string | null;
+  hasSignedPdf: boolean;
+  providerName: string;
+  requesterName: string;
+  sha256Hash: string;
+}
+
 // --- Modération -----------------------------------------------------------
 export type ModerationAction = 'cancelled' | 'warned' | 'restored';
 export const MODERATION_ACTIONS: ModerationAction[] = ['cancelled', 'warned', 'restored'];
@@ -103,29 +121,9 @@ export interface ListingChatGroup {
   [key: string]: unknown;
 }
 
-// ⚠️ Le détail d'annonce sondé n'exposait pas de tableau média (annonce sans
-// photo). L'endroit exact où le back référence les médias n'est pas confirmé →
-// on lit défensivement plusieurs emplacements possibles (annonce ET contenu).
-export function listingMediaIds(listing?: Listing, content?: ListingContent): string[] {
-  const collect = (value: unknown): string[] =>
-    Array.isArray(value)
-      ? value
-          .map((item) =>
-            typeof item === 'string'
-              ? item
-              : ((item as Record<string, unknown>)?.id ??
-                (item as Record<string, unknown>)?.media_id),
-          )
-          .filter((v): v is string => typeof v === 'string')
-      : [];
-
-  const l = listing as Record<string, unknown> | undefined;
-  const c = content as Record<string, unknown> | undefined;
-  return [
-    ...collect(l?.media),
-    ...collect(l?.photos),
-    ...collect(c?.media),
-    ...collect(c?.photos),
-    ...collect(c?.media_ids),
-  ];
+// GET /listings/:id/media — photos existantes de l'annonce, triées par `order`.
+export interface ListingMediaItem {
+  id: string;
+  order: number | null;
+  caption: string | null;
 }

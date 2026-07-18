@@ -2,19 +2,24 @@ import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/Button';
 import { mediaUrl } from '@/lib/media';
-import { useUploadListingMedia, useDeleteListingMedia } from '../hooks/useListingMedia';
+import {
+  useListingMediaList,
+  useUploadListingMedia,
+  useDeleteListingMedia,
+} from '../hooks/useListingMedia';
 
 const PHOTO_MAX = 5 * 1024 * 1024; // 5 MB
 
 interface Props {
   id: string;
-  mediaIds: string[];
   editable?: boolean;
 }
 
-// Galerie de photos d'une annonce + upload/suppression en mode édition.
-export function ListingMedia({ id, mediaIds, editable = false }: Props) {
+// Galerie de photos d'une annonce (GET /listings/:id/media) + upload/suppression en mode édition.
+export function ListingMedia({ id, editable = false }: Props) {
   const { t } = useTranslation('listings');
+  const media = useListingMediaList(id);
+  const mediaIds = (media.data ?? []).map((m) => m.id);
   const upload = useUploadListingMedia(id);
   const remove = useDeleteListingMedia(id);
   const inputRef = useRef<HTMLInputElement>(null);

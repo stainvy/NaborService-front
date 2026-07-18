@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { listingsService } from '@/services/listings.service';
 import { downloadBlob } from '@/lib/download';
 import { listingKeys } from './queryKeys';
@@ -22,7 +22,21 @@ export function useSignDocument(id: string) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload: SignDocumentPayload) => listingsService.sign(id, payload),
-    // Documents immuables après signature → on rafraîchit le détail.
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: listingKeys.detail(id) }),
+    // Documents immuables après signature → on rafraîchit le détail + le statut.
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: listingKeys.detail(id) });
+      queryClient.invalidateQueries({ queryKey: listingKeys.contractStatus(id) });
+    },
+  });
+}
+
+// 404 tant que le contrat n'a pas été généré (avant acceptation de l'intérêt) —
+// on ne retry pas et on laisse `isError` piloter l'affichage côté page.
+export function useContractStatus(id: string, enabled: boolean) {
+  return useQuery({
+    queryKey: listingKeys.contractStatus(id),
+    queryFn: () => listingsService.getContractStatus(id),
+    enabled,
+    retry: false,
   });
 }
