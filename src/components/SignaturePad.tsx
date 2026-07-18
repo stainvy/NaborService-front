@@ -17,8 +17,14 @@ export function SignaturePad({ onChange, width = 320, height = 160 }: SignatureP
   const last = useRef<{ x: number; y: number } | null>(null);
 
   const point = (e: PointerEvent<HTMLCanvasElement>) => {
-    const rect = canvasRef.current!.getBoundingClientRect();
-    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    const canvas = canvasRef.current!;
+    const rect = canvas.getBoundingClientRect();
+    // Le canvas peut être rendu à une taille CSS différente de sa résolution
+    // interne (width/height attributs) : sans ce facteur d'échelle, le tracé
+    // dérive du curseur à mesure qu'on s'éloigne du coin haut-gauche.
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    return { x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY };
   };
 
   const start = (e: PointerEvent<HTMLCanvasElement>) => {

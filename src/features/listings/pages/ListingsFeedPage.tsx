@@ -26,6 +26,9 @@ export function ListingsFeedPage() {
           <Link to="/my-listings" className="self-center text-sm text-orange underline">
             {t('feed.mine')}
           </Link>
+          <Link to="/my-operations" className="self-center text-sm text-orange underline">
+            {t('feed.operations')}
+          </Link>
           <Link to="/listings/new">
             <Button>{t('feed.create')}</Button>
           </Link>

@@ -94,26 +94,36 @@ export function PublicProfilePage() {
           >
             {startDirectChat.isPending ? tMessages('chat.starting_conversation') : tMessages('chat.start_direct_message')}
           </Button>
-          <Button onClick={() => follow.mutate(id)} disabled={follow.isPending}>
-            {t('social.follow')}
-          </Button>
-          <Button
-            variant="secondary"
-            onClick={() => unfollow.mutate(id)}
-            disabled={unfollow.isPending}
-          >
-            {t('social.unfollow')}
-          </Button>
-          <Button variant="secondary" onClick={() => block.mutate(id)} disabled={block.isPending}>
-            {t('social.block')}
-          </Button>
-          <Button
-            variant="secondary"
-            onClick={() => unblock.mutate(id)}
-            disabled={unblock.isPending}
-          >
-            {t('social.unblock')}
-          </Button>
+          {profile.isFollowing ? (
+            <Button
+              variant="secondary"
+              onClick={() => unfollow.mutate(id)}
+              disabled={unfollow.isPending}
+            >
+              {t('social.unfollow')}
+            </Button>
+          ) : (
+            <Button onClick={() => follow.mutate(id)} disabled={follow.isPending}>
+              {t('social.follow')}
+            </Button>
+          )}
+          {profile.isBlockedByMe ? (
+            <Button
+              variant="secondary"
+              onClick={() => unblock.mutate(id)}
+              disabled={unblock.isPending}
+            >
+              {t('social.unblock')}
+            </Button>
+          ) : (
+            <Button
+              variant="secondary"
+              onClick={() => block.mutate(id)}
+              disabled={block.isPending}
+            >
+              {t('social.block')}
+            </Button>
+          )}
           <button
             type="button"
             onClick={() => setReportOpen(true)}

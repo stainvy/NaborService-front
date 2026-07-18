@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import DOMPurify from 'dompurify';
 import { useAuth } from '@/hooks/useAuth';
+import { mediaUrl } from '@/lib/media';
 import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
 import { FullPageLoader } from '@/components/FullPageLoader';
@@ -14,10 +15,9 @@ import { useListing, useListingContent } from '../hooks/useListings';
 import { useListingStatusSocket } from '../hooks/useListingStatusSocket';
 import { useReportListing } from '../hooks/useReportListing';
 import { useDeleteListing } from '../hooks/useListingMutations';
-import { useDownloadContract, useDownloadReceipt } from '../hooks/useDocuments';
+import { useDownloadContract, useDownloadReceipt, useContractStatus } from '../hooks/useDocuments';
 import { useListingChat } from '../hooks/useListingChat';
 import { usePointsBalance, usePayListing } from '../hooks/usePayment';
-import { listingMediaIds } from '../types';
 
 export function ListingDetailPage() {
   const { t } = useTranslation('listings');
@@ -36,6 +36,9 @@ export function ListingDetailPage() {
 
   const transactionLive = listing?.status === 'in_progress' || listing?.status === 'closed';
   const chat = useListingChat(id, transactionLive);
+  // Le contrat n'existe qu'après acceptation de l'intérêt (job async côté back) ;
+  // en 404 tant qu'il n'a pas encore été généré.
+  const contractStatus = useContractStatus(id, transactionLive);
 
   const [reportOpen, setReportOpen] = useState(false);
   const [reason, setReason] = useState('');
@@ -52,7 +55,6 @@ export function ListingDetailPage() {
   if (isLoading || !listing) return <FullPageLoader />;
 
   const isCreator = listing.creatorId === user?.id;
-  const mediaIds = listingMediaIds(listing, content);
   const safeHtml = content?.body_html ? DOMPurify.sanitize(content.body_html) : null;
 
   return (
@@ -67,6 +69,22 @@ export function ListingDetailPage() {
           <p className="mt-1 text-xs uppercase tracking-wide text-gray">
             {t(`type.${listing.listingType}`)}
           </p>
+          {listing.creator && (
+            <div className="mt-2 flex items-center gap-2">
+              {listing.creator.profilePictureMongoId && (
+                <img
+                  src={mediaUrl(listing.creator.profilePictureMongoId) ?? ''}
+                  alt=""
+                  className="h-6 w-6 rounded-full object-cover"
+                />
+              )}
+              <span className="text-sm text-gray">
+                {t('detail.posted_by', {
+                  name: `${listing.creator.firstName} ${listing.creator.lastName}`,
+                })}
+              </span>
+            </div>
+          )}
         </div>
         <div className="flex flex-col items-end gap-2">
           <StatusBadge status={listing.status} />
@@ -96,11 +114,9 @@ export function ListingDetailPage() {
         </div>
       )}
 
-      {mediaIds.length > 0 && (
-        <section className="mt-6">
-          <ListingMedia id={id} mediaIds={mediaIds} />
-        </section>
-      )}
+      <section className="mt-6">
+        <ListingMedia id={id} />
+      </section>
 
       {/* Actions du cycle de vie selon le rôle */}
       <section className="mt-6">
@@ -147,18 +163,64 @@ export function ListingDetailPage() {
           );
         })()}
 
-      {/* Documents & signature */}
-      <section className="mt-6 flex flex-wrap gap-2">
-        <Button variant="secondary" onClick={() => contract.mutate()} disabled={contract.isPending}>
-          {t('documents.contract')}
-        </Button>
-        <Button variant="secondary" onClick={() => receipt.mutate()} disabled={receipt.isPending}>
-          {t('documents.receipt')}
-        </Button>
-        <Link to={`/listings/${id}/sign`}>
-          <Button>{t('documents.sign')}</Button>
-        </Link>
-      </section>
+      {/* Documents & signature — n'existent qu'une fois l'intérêt accepté. */}
+      {transactionLive && (
+        <section className="mt-6 rounded-lg border border-gray/30 p-4">
+          <h2 className="text-sm font-semibold text-navy">{t('documents.title')}</h2>
+
+          {contractStatus.isLoading && (
+            <p className="mt-2 text-sm text-gray">{t('documents.loading')}</p>
+          )}
+
+          {contractStatus.isError && (
+            <p className="mt-2 text-sm text-gray">{t('documents.not_ready')}</p>
+          )}
+
+          {contractStatus.data && (
+            <div className="mt-2 flex flex-col gap-3">
+              <p className="text-sm text-gray">
+                {contractStatus.data.fullySigned
+                  ? t('documents.fully_signed')
+                  : contractStatus.data.iSigned
+                    ? t('documents.waiting_other')
+                    : t('documents.your_turn')}
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant="secondary"
+                  onClick={() => contract.mutate()}
+                  disabled={contract.isPending}
+                >
+                  {contractStatus.data.fullySigned
+                    ? t('documents.contract_signed')
+                    : t('documents.contract')}
+                </Button>
+
+                {listing.status === 'closed' && (
+                  <Button
+                    variant="secondary"
+                    onClick={() => receipt.mutate()}
+                    disabled={receipt.isPending}
+                  >
+                    {t('documents.receipt')}
+                  </Button>
+                )}
+
+                {!contractStatus.data.fullySigned && !contractStatus.data.iSigned && (
+                  <Link to={`/listings/${id}/sign`}>
+                    <Button>{t('documents.sign')}</Button>
+                  </Link>
+                )}
+              </div>
+
+              {(contract.isError || receipt.isError) && (
+                <p className="text-sm text-error">{t('documents.download_error')}</p>
+              )}
+            </div>
+          )}
+        </section>
+      )}
 
       {/* Créateur : édition / suppression */}
       {isCreator && (

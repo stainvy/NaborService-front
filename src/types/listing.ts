@@ -8,9 +8,17 @@ export type ListingStatus = 'open' | 'pending' | 'in_progress' | 'closed' | 'can
  * (cf. DTOs dans features/listings/types.ts). Champs optionnels + index
  * signature pour tolérer les variations de sérialisation entre endpoints.
  */
+export interface ListingCreator {
+  id: string;
+  firstName: string;
+  lastName: string;
+  profilePictureMongoId: string | null;
+}
+
 export interface Listing {
   id: string;
   creatorId?: string;
+  creator?: ListingCreator | null;
   title: string;
   description?: string | null;
   categoryId?: number | null;
@@ -19,6 +27,7 @@ export interface Listing {
   status: ListingStatus;
   neighbourhoodId?: string | null;
   mongoDocumentId?: string | null;
+  coverMediaId?: string | null;
   createdAt?: string;
   updatedAt?: string | null;
   closedAt?: string | null;

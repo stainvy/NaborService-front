@@ -26,7 +26,9 @@ export function useStartDirectChat() {
       try {
         let groups = queryClient.getQueryData<ChatGroup[]>(chatKeys.groups);
         if (!groups) groups = await chatService.listGroups();
-        const candidates = groups.filter((g) => g.member_count === 2).slice(0, CANDIDATE_SCAN_LIMIT);
+        const candidates = groups
+          .filter((g) => g.type === 'direct_message' && g.member_count === 2)
+          .slice(0, CANDIDATE_SCAN_LIMIT);
 
         for (const candidate of candidates) {
           const members = await chatService.getMembers(candidate.id);

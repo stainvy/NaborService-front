@@ -10,6 +10,13 @@ export function useListings(filters?: ListingFilters) {
   });
 }
 
+export function useMyOperations(filters?: ListingFilters) {
+  return useQuery({
+    queryKey: listingKeys.operations(filters),
+    queryFn: () => listingsService.getMyOperations(filters),
+  });
+}
+
 export function useListing(id: string | undefined) {
   return useQuery({
     queryKey: listingKeys.detail(id ?? ''),

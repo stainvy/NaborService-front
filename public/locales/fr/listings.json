@@ -1,21 +1,23 @@
 {
   "listings": {
-    "free": "Gratuit"
+    "free": "Gratuit",
+    "price_points": "{{points}} points"
   },
   "type": {
     "offer": "Offre",
     "request": "Demande"
   },
   "status": {
-    "open": "Ouverte",
-    "pending": "Intérêt exprimé",
-    "in_progress": "En cours",
-    "closed": "Clôturée",
+    "open": "Disponible",
+    "pending": "En attente d'acceptation",
+    "in_progress": "Réservée",
+    "closed": "Terminée",
     "cancelled": "Annulée"
   },
   "feed": {
     "title": "Annonces & services",
     "mine": "Mes annonces",
+    "operations": "Mes opérations",
     "create": "Publier une annonce",
     "error": "Impossible de charger les annonces.",
     "empty": "Aucune annonce ne correspond.",
@@ -24,6 +26,7 @@
   },
   "filters": {
     "all": "Toutes",
+    "all_statuses": "Tous les statuts",
     "type": "Type",
     "status": "Statut",
     "category": "Catégorie",
@@ -38,11 +41,14 @@
     "category": "Catégorie",
     "neighbourhood": "Quartier",
     "none": "Aucune",
-    "price_euros": "Prix (€)",
-    "price_hint": "0 € = gratuit. Le prix est enregistré en centimes."
+    "section_location": "Catégorie & localisation",
+    "section_price": "Prix",
+    "price_points": "Prix (en points)",
+    "price_hint": "0 = gratuit. Le paiement se fait avec les points de la plateforme."
   },
   "create": {
     "title": "Publier une annonce",
+    "subtitle": "Décrivez le service que vous proposez ou recherchez dans votre quartier.",
     "submit": "Publier",
     "error": "La publication a échoué."
   },
@@ -62,11 +68,19 @@
     "back": "Retour à l'annonce",
     "back_home": "Retour à l'accueil",
     "edit": "Modifier",
-    "delete": "Supprimer"
+    "delete": "Supprimer",
+    "posted_by": "Publié par {{name}}"
+  },
+  "card": {
+    "by": "Par {{name}}"
   },
   "mine": {
     "title": "Mes annonces",
     "empty": "Vous n'avez pas encore publié d'annonce."
+  },
+  "operations": {
+    "title": "Mes opérations",
+    "empty": "Vous n'avez pas encore d'annonce en cours avec vous."
   },
   "actions": {
     "interest": "Je suis intéressé",
@@ -87,9 +101,17 @@
     "coming_soon": "Messagerie à venir."
   },
   "documents": {
+    "title": "Documents & signature",
+    "loading": "Chargement…",
+    "not_ready": "Le contrat est en cours de génération, réessayez dans quelques instants.",
+    "your_turn": "C'est à vous de signer le contrat.",
+    "waiting_other": "Vous avez signé — en attente de la signature de l'autre partie.",
+    "fully_signed": "Contrat entièrement signé par les deux parties.",
     "contract": "Télécharger le contrat",
+    "contract_signed": "Télécharger le contrat signé",
     "receipt": "Télécharger le reçu",
-    "sign": "Signer"
+    "sign": "Signer",
+    "download_error": "Le téléchargement a échoué."
   },
   "sign": {
     "title": "Signer le document",

@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import type { ListingStatus } from '../types';
 
+// Palette façon leboncoin : vert = dispo, orange = en attente d'une action,
+// navy = réservée (verrouillée pour les autres), gris/rouge = terminée/annulée.
 const STATUS_CLASSES: Record<ListingStatus, string> = {
   open: 'bg-success/15 text-success',
   pending: 'bg-orange/15 text-orange',
@@ -9,12 +11,21 @@ const STATUS_CLASSES: Record<ListingStatus, string> = {
   cancelled: 'bg-error/15 text-error',
 };
 
+const STATUS_DOT: Record<ListingStatus, string> = {
+  open: 'bg-success',
+  pending: 'bg-orange',
+  in_progress: 'bg-navy',
+  closed: 'bg-gray',
+  cancelled: 'bg-error',
+};
+
 export function StatusBadge({ status }: { status: ListingStatus }) {
   const { t } = useTranslation('listings');
   return (
     <span
-      className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_CLASSES[status]}`}
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${STATUS_CLASSES[status]}`}
     >
+      <span className={`h-1.5 w-1.5 rounded-full ${STATUS_DOT[status]}`} aria-hidden="true" />
       {t(`status.${status}`)}
     </span>
   );

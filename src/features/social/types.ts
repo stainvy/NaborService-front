@@ -16,6 +16,9 @@ export interface PublicProfile {
   bannerMongoId?: string | null;
   role?: Role;
   createdAt?: string;
+  /** Relation du visiteur connecté envers cet utilisateur. */
+  isFollowing?: boolean;
+  isBlockedByMe?: boolean;
 }
 
 // Un profil « complet » expose createdAt/role ; sinon il est restreint.

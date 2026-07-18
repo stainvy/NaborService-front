@@ -41,6 +41,7 @@ import { ListingDetailPage } from '@/features/listings/pages/ListingDetailPage';
 import { ListingCreatePage } from '@/features/listings/pages/ListingCreatePage';
 import { ListingEditPage } from '@/features/listings/pages/ListingEditPage';
 import { MyListingsPage } from '@/features/listings/pages/MyListingsPage';
+import { MyOperationsPage } from '@/features/listings/pages/MyOperationsPage';
 import { SignDocumentPage } from '@/features/listings/pages/SignDocumentPage';
 import { PointsPage } from '@/features/points/pages/PointsPage';
 
@@ -82,6 +83,7 @@ export const router = createBrowserRouter([
           { path: '/listings/:listingId/edit', element: <ListingEditPage /> },
           { path: '/listings/:listingId/sign', element: <SignDocumentPage /> },
           { path: '/my-listings', element: <MyListingsPage /> },
+          { path: '/my-operations', element: <MyOperationsPage /> },
         ],
       },
     ],
