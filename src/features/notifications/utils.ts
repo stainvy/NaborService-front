@@ -23,6 +23,7 @@ const NOTIFICATION_ICONS: Record<NotificationType, IconComponent> = {
   listing_accepted: CheckCircle,
   contract_pending: FileText,
   contract_signed: CheckCircle,
+  contract_fully_signed: CheckCircle,
   payment_confirmed: CreditCard,
   waitlist_place: Calendar,
   new_follower: UserPlus,
@@ -69,6 +70,8 @@ export function getNotificationMessage(notification: AppNotification, t: TFuncti
       return t('types.contract_pending', { title: p.listingTitle as string });
     case 'contract_signed':
       return t('types.contract_signed');
+    case 'contract_fully_signed':
+      return t('types.contract_fully_signed');
     case 'payment_confirmed':
       return t('types.payment_confirmed');
     case 'event_cancelled':
@@ -102,6 +105,7 @@ export function getNotificationLink(notification: AppNotification): string | und
     case 'listing_accepted':
     case 'contract_pending':
     case 'contract_signed':
+    case 'contract_fully_signed':
       return typeof p.listingId === 'string' ? `/listings/${p.listingId}` : undefined;
     default:
       return undefined;
