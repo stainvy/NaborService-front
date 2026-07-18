@@ -1,21 +1,23 @@
 {
   "listings": {
-    "free": "Free"
+    "free": "Free",
+    "price_points": "{{points}} points"
   },
   "type": {
     "offer": "Offer",
     "request": "Request"
   },
   "status": {
-    "open": "Open",
-    "pending": "Interest expressed",
-    "in_progress": "In progress",
-    "closed": "Closed",
+    "open": "Available",
+    "pending": "Awaiting acceptance",
+    "in_progress": "Reserved",
+    "closed": "Completed",
     "cancelled": "Cancelled"
   },
   "feed": {
     "title": "Listings & services",
     "mine": "My listings",
+    "operations": "My operations",
     "create": "Post a listing",
     "error": "Could not load listings.",
     "empty": "No listing matches.",
@@ -24,6 +26,7 @@
   },
   "filters": {
     "all": "All",
+    "all_statuses": "All statuses",
     "type": "Type",
     "status": "Status",
     "category": "Category",
@@ -38,11 +41,14 @@
     "category": "Category",
     "neighbourhood": "Neighbourhood",
     "none": "None",
-    "price_euros": "Price (€)",
-    "price_hint": "€0 = free. The price is stored in cents."
+    "section_location": "Category & location",
+    "section_price": "Price",
+    "price_points": "Price (in points)",
+    "price_hint": "0 = free. Payment is made using the platform's points."
   },
   "create": {
     "title": "Post a listing",
+    "subtitle": "Describe the service you're offering or looking for in your neighbourhood.",
     "submit": "Publish",
     "error": "Publishing failed."
   },
@@ -62,11 +68,19 @@
     "back": "Back to listing",
     "back_home": "Back to home",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "posted_by": "Posted by {{name}}"
+  },
+  "card": {
+    "by": "By {{name}}"
   },
   "mine": {
     "title": "My listings",
     "empty": "You haven't posted any listing yet."
+  },
+  "operations": {
+    "title": "My operations",
+    "empty": "You don't have any listings in operation with you yet."
   },
   "actions": {
     "interest": "I'm interested",
@@ -87,9 +101,17 @@
     "coming_soon": "Messaging coming soon."
   },
   "documents": {
+    "title": "Documents & signature",
+    "loading": "Loading…",
+    "not_ready": "The contract is still being generated, try again in a moment.",
+    "your_turn": "It's your turn to sign the contract.",
+    "waiting_other": "You've signed — waiting for the other party to sign.",
+    "fully_signed": "Contract fully signed by both parties.",
     "contract": "Download contract",
+    "contract_signed": "Download signed contract",
     "receipt": "Download receipt",
-    "sign": "Sign"
+    "sign": "Sign",
+    "download_error": "Download failed."
   },
   "sign": {
     "title": "Sign the document",

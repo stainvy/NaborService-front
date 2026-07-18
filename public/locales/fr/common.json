@@ -30,7 +30,8 @@
     "search": "Rechercher",
     "chat": "Messagerie",
     "polls": "Sondages",
-    "listings": "Annonces"
+    "listings": "Annonces",
+    "operations": "Mes opérations"
   },
   "home": {
     "greeting": "Bonjour {{name}} 👋",
