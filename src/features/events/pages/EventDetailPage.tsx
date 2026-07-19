@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { isAxiosError } from 'axios';
 import DOMPurify from 'dompurify';
 import { CalendarDays } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
@@ -24,6 +25,7 @@ import {
 } from '../hooks/useEventParticipation';
 import { useDeleteEvent } from '../hooks/useEventMutations';
 import { formatDateTime, formatEuros } from '../format';
+import { isPastEvent } from '../utils';
 
 export function EventDetailPage() {
   const { t, i18n } = useTranslation('events');
@@ -59,10 +61,13 @@ export function EventDetailPage() {
   if (isLoading || !event) return <FullPageLoader />;
 
   const safeHtml = content?.body_html ? DOMPurify.sanitize(content.body_html) : null;
+  const past = isPastEvent(event);
+  // 409 = l'événement a démarré entre l'affichage et le clic (inscription tardive).
+  const isConflict = isAxiosError(register.error) && register.error.response?.status === 409;
 
   const onRegister = () => {
     setAwaiting(true);
-    register.mutate();
+    register.mutate(undefined, { onError: () => setAwaiting(false) });
   };
 
   return (
@@ -73,7 +78,13 @@ export function EventDetailPage() {
 
       <header className="mt-4 flex items-start justify-between gap-4">
         <h1 className="text-2xl font-bold text-navy">{event.title}</h1>
-        <EventStatusBadge status={event.status} />
+        {past ? (
+          <span className="inline-block rounded-full bg-gray/20 px-2 py-0.5 text-xs font-medium text-gray">
+            {t('status.past')}
+          </span>
+        ) : (
+          <EventStatusBadge status={event.status} />
+        )}
       </header>
 
       <div className="mt-3 flex flex-col gap-1 text-sm text-gray">
@@ -120,10 +131,21 @@ export function EventDetailPage() {
         </p>
       )}
 
-      {/* Inscription (asynchrone) — non-créateur, événement ouvert */}
-      {!isCreator && event.status === 'open' && (
+      {/* Inscription (asynchrone) — non-créateur, événement ouvert et à venir.
+          On garde la section pour un inscrit (accès au billet) même passé. */}
+      {!isCreator && (event.status === 'open' || registered) && (
         <section className="mt-6 rounded-md border border-gray/30 p-4">
-          {outcome?.failedReason ? (
+          {past ? (
+            <div className="flex flex-col gap-2">
+              <p className="text-sm text-gray">{t('register.closed_past')}</p>
+              <Button disabled>{t('register.participate')}</Button>
+              {registered && (
+                <Button onClick={() => ticket.mutate()} disabled={ticket.isPending}>
+                  {t('ticket.download')}
+                </Button>
+              )}
+            </div>
+          ) : outcome?.failedReason ? (
             <div>
               <p className="text-sm text-error">{t('register.failed')}</p>
               <Button className="mt-2" onClick={onRegister} disabled={register.isPending}>
@@ -170,9 +192,16 @@ export function EventDetailPage() {
           ) : awaiting ? (
             <p className="text-sm text-gray">{t('register.pending')}</p>
           ) : (
-            <Button onClick={onRegister} disabled={register.isPending}>
-              {t('register.participate')}
-            </Button>
+            <div className="flex flex-col gap-2">
+              {register.isError && (
+                <p className="text-sm text-error">
+                  {isConflict ? t('register.closed_conflict') : t('register.failed')}
+                </p>
+              )}
+              <Button onClick={onRegister} disabled={register.isPending}>
+                {t('register.participate')}
+              </Button>
+            </div>
           )}
         </section>
       )}

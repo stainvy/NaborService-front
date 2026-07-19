@@ -5,7 +5,8 @@
     "open": "Inscriptions ouvertes",
     "in_progress": "En cours",
     "completed": "Terminé",
-    "cancelled": "Annulé"
+    "cancelled": "Annulé",
+    "past": "Terminé"
   },
   "card": {
     "free": "Gratuit",
@@ -26,7 +27,8 @@
     "all": "Tous",
     "status": "Statut",
     "category": "Catégorie",
-    "neighbourhood": "Quartier"
+    "neighbourhood": "Quartier",
+    "show_past": "Afficher aussi les événements passés"
   },
   "form": {
     "required": "Ce champ est requis.",
@@ -93,7 +95,9 @@
     "promoted": "Une place s'est libérée : vous êtes désormais inscrit !",
     "failed": "L'inscription a échoué.",
     "retry": "Réessayer",
-    "unregister": "Se désinscrire"
+    "unregister": "Se désinscrire",
+    "closed_past": "Les inscriptions sont closes : cet événement est terminé.",
+    "closed_conflict": "Trop tard : l'événement a commencé, les inscriptions sont closes."
   },
   "payment": {
     "required": "Événement payant ({{cost}}) — paiement requis pour finaliser l'inscription."

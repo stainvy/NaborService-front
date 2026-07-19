@@ -1,31 +1,23 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ThumbsUp, ThumbsDown } from 'lucide-react';
 import { Button } from '@/components/Button';
 import { EventFilters } from '../components/EventFilters';
 import { EventCard } from '../components/EventCard';
 import { useEvents } from '../hooks/useEvents';
-import { useSwipeEvent } from '../hooks/useEventParticipation';
-import type { EventFilters as Filters, EventSwipeDirection } from '../types';
+import type { EventFilters as Filters } from '../types';
 
 const LIMIT = 20;
 
 export function EventsFeedPage() {
   const { t } = useTranslation('events');
-  const [filters, setFilters] = useState<Filters>({ offset: 0, limit: LIMIT });
+  // Par défaut, on n'affiche que les événements à venir (upcoming=true).
+  const [filters, setFilters] = useState<Filters>({ offset: 0, limit: LIMIT, upcoming: true });
   const { data, isLoading, isError } = useEvents(filters);
-  const swipe = useSwipeEvent();
-  const [swiped, setSwiped] = useState<Record<string, EventSwipeDirection>>({});
 
   const offset = filters.offset ?? 0;
   const total = data?.meta?.total ?? 0;
   const setOffset = (next: number) => setFilters((f) => ({ ...f, offset: next }));
-
-  const onSwipe = (id: string, direction: EventSwipeDirection) => {
-    swipe.mutate({ id, direction });
-    setSwiped((s) => ({ ...s, [id]: direction }));
-  };
 
   return (
     <div className="mx-auto max-w-4xl p-6">
@@ -51,37 +43,7 @@ export function EventsFeedPage() {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {data?.data.map((event) => (
-          <div key={event.id} className="flex flex-col gap-2">
-            <EventCard event={event} />
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => onSwipe(event.id, 'like')}
-                disabled={Boolean(swiped[event.id])}
-                aria-label={t('feed.like')}
-                className={`flex items-center gap-1 rounded-md border px-2 py-1 text-xs ${
-                  swiped[event.id] === 'like'
-                    ? 'border-success text-success'
-                    : 'border-gray/40 text-gray hover:border-success hover:text-success'
-                }`}
-              >
-                <ThumbsUp className="h-3.5 w-3.5" /> {t('feed.like')}
-              </button>
-              <button
-                type="button"
-                onClick={() => onSwipe(event.id, 'dislike')}
-                disabled={Boolean(swiped[event.id])}
-                aria-label={t('feed.dislike')}
-                className={`flex items-center gap-1 rounded-md border px-2 py-1 text-xs ${
-                  swiped[event.id] === 'dislike'
-                    ? 'border-error text-error'
-                    : 'border-gray/40 text-gray hover:border-error hover:text-error'
-                }`}
-              >
-                <ThumbsDown className="h-3.5 w-3.5" /> {t('feed.dislike')}
-              </button>
-            </div>
-          </div>
+          <EventCard key={event.id} event={event} />
         ))}
       </div>
 

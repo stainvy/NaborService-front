@@ -5,7 +5,8 @@
     "open": "Registration open",
     "in_progress": "In progress",
     "completed": "Completed",
-    "cancelled": "Cancelled"
+    "cancelled": "Cancelled",
+    "past": "Ended"
   },
   "card": {
     "free": "Free",
@@ -26,7 +27,8 @@
     "all": "All",
     "status": "Status",
     "category": "Category",
-    "neighbourhood": "Neighbourhood"
+    "neighbourhood": "Neighbourhood",
+    "show_past": "Also show past events"
   },
   "form": {
     "required": "This field is required.",
@@ -93,7 +95,9 @@
     "promoted": "A spot opened up: you are now registered!",
     "failed": "Registration failed.",
     "retry": "Retry",
-    "unregister": "Unregister"
+    "unregister": "Unregister",
+    "closed_past": "Registration is closed: this event has ended.",
+    "closed_conflict": "Too late: the event has started, registration is closed."
   },
   "payment": {
     "required": "Paid event ({{cost}}) — payment required to finalise registration."

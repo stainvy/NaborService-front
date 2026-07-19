@@ -55,6 +55,9 @@ export interface EventFilters {
   neighbourhood?: string;
   category?: number;
   status?: EventStatus;
+  // true = uniquement les événements à venir (par défaut sur le feed) ; omis =
+  // inclut les passés.
+  upcoming?: boolean;
 }
 
 // --- Corps de requête (snake_case, NE PAS normaliser) ---------------------
