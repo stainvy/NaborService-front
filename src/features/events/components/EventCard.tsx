@@ -5,7 +5,7 @@ import { CalendarDays, Users, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { mediaUrl } from '@/lib/media';
 import { EventStatusBadge } from './EventStatusBadge';
 import { useSwipeEvent } from '../hooks/useEventParticipation';
-import { formatDateTime, formatEuros } from '../format';
+import { formatDateTime, eventPoints } from '../format';
 import { isPastEvent } from '../utils';
 import type { EventSwipeDirection, NaborEvent } from '../types';
 
@@ -55,7 +55,7 @@ export function EventCard({ event }: { event: NaborEvent }) {
             {event.costCents === 0 ? (
               <span className="text-success">{t('card.free')}</span>
             ) : (
-              formatEuros(event.costCents, locale)
+              t('card.points', { points: eventPoints(event) })
             )}
           </span>
           {event.maxParticipants != null && (

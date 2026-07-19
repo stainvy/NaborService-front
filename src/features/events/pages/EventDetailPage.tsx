@@ -25,7 +25,7 @@ import {
   useEventChat,
 } from '../hooks/useEventParticipation';
 import { useDeleteEvent } from '../hooks/useEventMutations';
-import { formatDateTime, formatEuros } from '../format';
+import { formatDateTime, eventPoints } from '../format';
 import { isPastEvent } from '../utils';
 
 export function EventDetailPage() {
@@ -97,7 +97,7 @@ export function EventDetailPage() {
           </p>
         )}
         <p className="font-semibold text-navy">
-          {event.costCents === 0 ? t('card.free') : formatEuros(event.costCents, locale)}
+          {event.costCents === 0 ? t('card.free') : t('card.points', { points: eventPoints(event) })}
         </p>
         {event.maxParticipants != null && (
           <p>{t('card.capacity', { count: event.maxParticipants })}</p>
@@ -130,10 +130,10 @@ export function EventDetailPage() {
         <EventMedia id={id} editable={Boolean(isCreator)} />
       </section>
 
-      {/* Événement payant : coût + paiement requis (checkout hors périmètre) */}
+      {/* Événement payant : coût en points débité à l'inscription */}
       {event.costCents > 0 && (
         <p className="mt-4 rounded-md bg-orange/10 p-3 text-sm text-orange">
-          {t('payment.required', { cost: formatEuros(event.costCents, locale) })}
+          {t('payment.required', { cost: t('card.points', { points: eventPoints(event) }) })}
         </p>
       )}
 
