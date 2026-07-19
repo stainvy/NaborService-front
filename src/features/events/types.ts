@@ -57,6 +57,16 @@ export interface EventMediaItem {
 // GET /events → { data, meta } (cf. ListEventsResponseDto).
 export type EventsPage = Paginated<NaborEvent>;
 
+// GET /events/me/registrations → événement + statut de participation.
+export type ParticipationStatus = 'registered' | 'waitlisted';
+
+export interface EventRegistration extends NaborEvent {
+  participationStatus: ParticipationStatus;
+  registeredAt: string;
+}
+
+export type EventRegistrationsPage = Paginated<EventRegistration>;
+
 export interface EventFilters {
   offset?: number;
   limit?: number;

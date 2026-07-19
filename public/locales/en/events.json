@@ -16,6 +16,7 @@
   "feed": {
     "title": "Events",
     "mine": "My events",
+    "registrations": "My registrations",
     "create": "Create an event",
     "error": "Could not load events.",
     "empty": "No event matches.",
@@ -69,7 +70,15 @@
   },
   "mine": {
     "title": "My events",
-    "empty": "You haven't created any event yet."
+    "empty": "You haven't created or joined any event yet."
+  },
+  "registrations": {
+    "title": "My registrations",
+    "empty": "You are not registered for any event.",
+    "status": {
+      "registered": "Registered",
+      "waitlisted": "Waitlisted"
+    }
   },
   "actions": {
     "publish": "Publish",

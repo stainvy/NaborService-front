@@ -6,6 +6,8 @@ import type {
   EventFilters,
   EventMediaItem,
   EventParticipant,
+  EventRegistration,
+  EventRegistrationsPage,
   EventsPage,
   EventSwipeDirection,
   NaborEvent,
@@ -38,6 +40,34 @@ export const eventsService = {
 
   getById(eventId: string): Promise<NaborEvent> {
     return api.get<NaborEvent>(`/events/${eventId}`).then((r) => r.data);
+  },
+
+  // GET /events/me/operations → événements créés ou rejoints par l'utilisateur.
+  getMyOperations(filters?: EventFilters): Promise<EventsPage> {
+    return api
+      .get<NaborEvent[] | EventsPage>('/events/me/operations', { params: filters })
+      .then((r) => {
+        const d = r.data;
+        if (Array.isArray(d)) {
+          return { data: d, meta: { total: d.length, offset: 0, limit: d.length } };
+        }
+        return d;
+      });
+  },
+
+  // GET /events/me/registrations → inscriptions (y compris liste d'attente).
+  getMyRegistrations(filters?: EventFilters): Promise<EventRegistrationsPage> {
+    return api
+      .get<EventRegistration[] | EventRegistrationsPage>('/events/me/registrations', {
+        params: filters,
+      })
+      .then((r) => {
+        const d = r.data;
+        if (Array.isArray(d)) {
+          return { data: d, meta: { total: d.length, offset: 0, limit: d.length } };
+        }
+        return d;
+      });
   },
 
   update(eventId: string, payload: UpdateEventPayload): Promise<NaborEvent> {

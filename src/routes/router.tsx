@@ -49,6 +49,7 @@ import { EventCreatePage } from '@/features/events/pages/EventCreatePage';
 import { EventDetailPage } from '@/features/events/pages/EventDetailPage';
 import { EventEditPage } from '@/features/events/pages/EventEditPage';
 import { MyEventsPage } from '@/features/events/pages/MyEventsPage';
+import { MyRegistrationsPage } from '@/features/events/pages/MyRegistrationsPage';
 
 export const router = createBrowserRouter([
   // Routes publiques
@@ -96,6 +97,7 @@ export const router = createBrowserRouter([
           { path: '/events/:eventId', element: <EventDetailPage /> },
           { path: '/events/:eventId/edit', element: <EventEditPage /> },
           { path: '/my-events', element: <MyEventsPage /> },
+          { path: '/my-registrations', element: <MyRegistrationsPage /> },
         ],
       },
     ],

@@ -10,6 +10,20 @@ export function useEvents(filters?: EventFilters) {
   });
 }
 
+export function useMyEventOperations(filters?: EventFilters) {
+  return useQuery({
+    queryKey: eventKeys.operations(filters),
+    queryFn: () => eventsService.getMyOperations(filters),
+  });
+}
+
+export function useMyEventRegistrations(filters?: EventFilters) {
+  return useQuery({
+    queryKey: eventKeys.registrations(filters),
+    queryFn: () => eventsService.getMyRegistrations(filters),
+  });
+}
+
 export function useEvent(id: string | undefined) {
   return useQuery({
     queryKey: eventKeys.detail(id ?? ''),

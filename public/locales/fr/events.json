@@ -16,6 +16,7 @@
   "feed": {
     "title": "Événements",
     "mine": "Mes événements",
+    "registrations": "Mes inscriptions",
     "create": "Créer un événement",
     "error": "Impossible de charger les événements.",
     "empty": "Aucun événement ne correspond.",
@@ -69,7 +70,15 @@
   },
   "mine": {
     "title": "Mes événements",
-    "empty": "Vous n'avez pas encore créé d'événement."
+    "empty": "Vous n'avez pas encore créé ou rejoint d'événement."
+  },
+  "registrations": {
+    "title": "Mes inscriptions",
+    "empty": "Vous n'êtes inscrit à aucun événement.",
+    "status": {
+      "registered": "Inscrit",
+      "waitlisted": "Liste d'attente"
+    }
   },
   "actions": {
     "publish": "Publier",

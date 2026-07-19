@@ -24,6 +24,9 @@ export function EventsFeedPage() {
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-xl font-bold text-navy">{t('feed.title')}</h1>
         <div className="flex gap-2">
+          <Link to="/my-registrations" className="self-center text-sm text-orange underline">
+            {t('feed.registrations')}
+          </Link>
           <Link to="/my-events" className="self-center text-sm text-orange underline">
             {t('feed.mine')}
           </Link>
