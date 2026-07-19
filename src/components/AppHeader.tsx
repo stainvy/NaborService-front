@@ -62,6 +62,7 @@ export function AppHeader() {
           {t('nav.home')}
         </NavItem>
         <NavItem to="/listings">{t('nav.listings')}</NavItem>
+        <NavItem to="/events">{t('nav.events')}</NavItem>
         <NavItem to="/my-operations">{t('nav.operations')}</NavItem>
         <NavItem to="/discover">{t('nav.discover')}</NavItem>
         <NavItem to="/search">{t('nav.search')}</NavItem>

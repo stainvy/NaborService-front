@@ -44,6 +44,11 @@ import { MyListingsPage } from '@/features/listings/pages/MyListingsPage';
 import { MyOperationsPage } from '@/features/listings/pages/MyOperationsPage';
 import { SignDocumentPage } from '@/features/listings/pages/SignDocumentPage';
 import { PointsPage } from '@/features/points/pages/PointsPage';
+import { EventsFeedPage } from '@/features/events/pages/EventsFeedPage';
+import { EventCreatePage } from '@/features/events/pages/EventCreatePage';
+import { EventDetailPage } from '@/features/events/pages/EventDetailPage';
+import { EventEditPage } from '@/features/events/pages/EventEditPage';
+import { MyEventsPage } from '@/features/events/pages/MyEventsPage';
 
 export const router = createBrowserRouter([
   // Routes publiques
@@ -84,6 +89,13 @@ export const router = createBrowserRouter([
           { path: '/listings/:listingId/sign', element: <SignDocumentPage /> },
           { path: '/my-listings', element: <MyListingsPage /> },
           { path: '/my-operations', element: <MyOperationsPage /> },
+
+          // Événements
+          { path: '/events', element: <EventsFeedPage /> },
+          { path: '/events/new', element: <EventCreatePage /> },
+          { path: '/events/:eventId', element: <EventDetailPage /> },
+          { path: '/events/:eventId/edit', element: <EventEditPage /> },
+          { path: '/my-events', element: <MyEventsPage /> },
         ],
       },
     ],

@@ -1,0 +1,120 @@
+{
+  "status": {
+    "draft": "Draft",
+    "published": "Published",
+    "open": "Registration open",
+    "in_progress": "In progress",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  },
+  "card": {
+    "free": "Free",
+    "capacity": "{{count}} spots"
+  },
+  "feed": {
+    "title": "Events",
+    "mine": "My events",
+    "create": "Create an event",
+    "error": "Could not load events.",
+    "empty": "No event matches.",
+    "prev": "Previous",
+    "next": "Next",
+    "like": "Interested",
+    "dislike": "Skip"
+  },
+  "filters": {
+    "all": "All",
+    "status": "Status",
+    "category": "Category",
+    "neighbourhood": "Neighbourhood"
+  },
+  "form": {
+    "required": "This field is required.",
+    "cost_invalid": "Invalid cost.",
+    "title": "Title",
+    "description": "Description",
+    "category": "Category",
+    "none": "None",
+    "neighbourhood": "Neighbourhood",
+    "starts_at": "Start",
+    "ends_at": "End",
+    "max_participants": "Max participants",
+    "cost_euros": "Cost (€)",
+    "cost_hint": "€0 = free. The cost is stored in cents.",
+    "refund_deadline_hours": "Refundable until (hours before)",
+    "invite_code": "Invite code (optional)"
+  },
+  "create": {
+    "title": "Create an event",
+    "submit": "Create",
+    "error": "Creation failed."
+  },
+  "edit": {
+    "title": "Edit event",
+    "submit": "Save",
+    "saved": "Event updated.",
+    "content_title": "Rich content",
+    "body_html": "Content (HTML)",
+    "save_content": "Save content",
+    "content_saved": "Content saved.",
+    "media": "Media"
+  },
+  "detail": {
+    "back": "Back to event",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "mine": {
+    "title": "My events",
+    "empty": "You haven't created any event yet."
+  },
+  "actions": {
+    "publish": "Publish",
+    "open": "Open registration",
+    "complete": "Mark as completed",
+    "cancel": "Cancel",
+    "cancel_reason": "Cancellation reason",
+    "cancel_confirm": "Confirm cancellation"
+  },
+  "participants": {
+    "title": "Participants",
+    "empty": "No registered participant."
+  },
+  "waitlist": {
+    "title": "Waitlist",
+    "position": "Position {{position}}",
+    "on": "On the waitlist"
+  },
+  "register": {
+    "participate": "Join",
+    "pending": "Registration in progress…",
+    "registered": "You are registered for this event.",
+    "waitlisted": "You are on the waitlist.",
+    "promoted": "A spot opened up: you are now registered!",
+    "failed": "Registration failed.",
+    "retry": "Retry",
+    "unregister": "Unregister"
+  },
+  "payment": {
+    "required": "Paid event ({{cost}}) — payment required to finalise registration."
+  },
+  "ticket": {
+    "download": "Download my ticket"
+  },
+  "chat": {
+    "open": "Open discussion"
+  },
+  "report": {
+    "action": "Report event",
+    "title": "Report event",
+    "reason": "Reason for the report",
+    "submit": "Send report",
+    "done": "Report sent."
+  },
+  "media": {
+    "add": "Add media",
+    "hint": "Image or PDF, 5 MB max.",
+    "too_large": "File too large (max 5 MB).",
+    "uploaded": "Added: {{name}}"
+  }
+}

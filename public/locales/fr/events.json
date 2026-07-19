@@ -1,0 +1,120 @@
+{
+  "status": {
+    "draft": "Brouillon",
+    "published": "Publié",
+    "open": "Inscriptions ouvertes",
+    "in_progress": "En cours",
+    "completed": "Terminé",
+    "cancelled": "Annulé"
+  },
+  "card": {
+    "free": "Gratuit",
+    "capacity": "{{count}} places"
+  },
+  "feed": {
+    "title": "Événements",
+    "mine": "Mes événements",
+    "create": "Créer un événement",
+    "error": "Impossible de charger les événements.",
+    "empty": "Aucun événement ne correspond.",
+    "prev": "Précédent",
+    "next": "Suivant",
+    "like": "Intéressé",
+    "dislike": "Passer"
+  },
+  "filters": {
+    "all": "Tous",
+    "status": "Statut",
+    "category": "Catégorie",
+    "neighbourhood": "Quartier"
+  },
+  "form": {
+    "required": "Ce champ est requis.",
+    "cost_invalid": "Coût invalide.",
+    "title": "Titre",
+    "description": "Description",
+    "category": "Catégorie",
+    "none": "Aucune",
+    "neighbourhood": "Quartier",
+    "starts_at": "Début",
+    "ends_at": "Fin",
+    "max_participants": "Participants max",
+    "cost_euros": "Coût (€)",
+    "cost_hint": "0 € = gratuit. Le coût est enregistré en centimes.",
+    "refund_deadline_hours": "Remboursement jusqu'à (heures avant)",
+    "invite_code": "Code d'invitation (optionnel)"
+  },
+  "create": {
+    "title": "Créer un événement",
+    "submit": "Créer",
+    "error": "La création a échoué."
+  },
+  "edit": {
+    "title": "Modifier l'événement",
+    "submit": "Enregistrer",
+    "saved": "Événement mis à jour.",
+    "content_title": "Contenu enrichi",
+    "body_html": "Contenu (HTML)",
+    "save_content": "Enregistrer le contenu",
+    "content_saved": "Contenu enregistré.",
+    "media": "Médias"
+  },
+  "detail": {
+    "back": "Retour à l'événement",
+    "edit": "Modifier",
+    "delete": "Supprimer"
+  },
+  "mine": {
+    "title": "Mes événements",
+    "empty": "Vous n'avez pas encore créé d'événement."
+  },
+  "actions": {
+    "publish": "Publier",
+    "open": "Ouvrir les inscriptions",
+    "complete": "Marquer comme terminé",
+    "cancel": "Annuler",
+    "cancel_reason": "Motif d'annulation",
+    "cancel_confirm": "Confirmer l'annulation"
+  },
+  "participants": {
+    "title": "Participants",
+    "empty": "Aucun participant inscrit."
+  },
+  "waitlist": {
+    "title": "Liste d'attente",
+    "position": "Position {{position}}",
+    "on": "En liste d'attente"
+  },
+  "register": {
+    "participate": "Participer",
+    "pending": "Inscription en cours…",
+    "registered": "Vous êtes inscrit à cet événement.",
+    "waitlisted": "Vous êtes en liste d'attente.",
+    "promoted": "Une place s'est libérée : vous êtes désormais inscrit !",
+    "failed": "L'inscription a échoué.",
+    "retry": "Réessayer",
+    "unregister": "Se désinscrire"
+  },
+  "payment": {
+    "required": "Événement payant ({{cost}}) — paiement requis pour finaliser l'inscription."
+  },
+  "ticket": {
+    "download": "Télécharger mon billet"
+  },
+  "chat": {
+    "open": "Ouvrir la discussion"
+  },
+  "report": {
+    "action": "Signaler l'événement",
+    "title": "Signaler l'événement",
+    "reason": "Motif du signalement",
+    "submit": "Envoyer le signalement",
+    "done": "Signalement envoyé."
+  },
+  "media": {
+    "add": "Ajouter un média",
+    "hint": "Image ou PDF, 5 Mo max.",
+    "too_large": "Fichier trop volumineux (max 5 Mo).",
+    "uploaded": "Ajouté : {{name}}"
+  }
+}

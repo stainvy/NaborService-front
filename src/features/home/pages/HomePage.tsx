@@ -51,10 +51,10 @@ export function HomePage() {
     { to: '/search', icon: Search, title: t('nav.search'), description: t('home.cards.search') },
     { to: '/profile', icon: User, title: t('nav.profile'), description: t('home.cards.profile') },
     {
+      to: '/events',
       icon: CalendarDays,
       title: t('home.cards.events_title'),
       description: t('home.cards.events'),
-      soon: true,
     },
     { icon: Vote, title: t('nav.polls'), description: t('home.cards.polls'), soon: true },
   ];
@@ -63,7 +63,9 @@ export function HomePage() {
     <div className="mx-auto max-w-5xl p-6">
       {/* Bandeau de bienvenue */}
       <section className="rounded-2xl bg-navy p-8 text-white">
-        <h1 className="text-2xl font-bold">{t('home.greeting', { name: user?.firstName ?? '' })}</h1>
+        <h1 className="text-2xl font-bold">
+          {t('home.greeting', { name: user?.firstName ?? '' })}
+        </h1>
         <p className="mt-1 text-white/80">{t('home.subtitle')}</p>
         <Link to="/listings/new" className="mt-5 inline-block">
           <Button className="inline-flex items-center gap-2">
