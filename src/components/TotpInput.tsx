@@ -33,7 +33,7 @@ export function TotpInput({
         disabled={disabled}
         value={value}
         onChange={(e) => onChange(e.target.value.replace(/\D/g, '').slice(0, length))}
-        className="w-40 rounded-md border border-gray px-3 py-2 text-center text-2xl tracking-[0.5em] focus:border-navy focus:outline-none"
+        className="w-60 rounded-md border border-gray px-3 py-2 text-center text-2xl tracking-[0.5em] focus:border-navy focus:outline-none"
         placeholder={'•'.repeat(length)}
       />
     </div>

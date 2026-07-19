@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ServerDataTable } from '../components/ServerDataTable';
+import { AdjustPointsModal } from '../components/AdjustPointsModal';
+import { Button } from '@/components/Button';
 import { useAdminPointsLedger } from '../hooks/useAdminPoints';
 import type { PointsLedgerEntry, PointsLedgerEntryType } from '@/services/points.service';
 
@@ -17,7 +19,9 @@ const LEDGER_TYPES: PointsLedgerEntryType[] = [
   'event_payout',
   'event_refund',
   'event_commission',
+  'event_reward',
   'adjustment',
+  'admin_adjustment',
   'cashout',
   'cashout_reversed',
 ];
@@ -28,6 +32,7 @@ export function AdminPointsPage() {
   const [userId, setUserId] = useState(searchParams.get('userId') ?? '');
   const [type, setType] = useState<PointsLedgerEntryType | ''>('');
   const [offset, setOffset] = useState(0);
+  const [adjusting, setAdjusting] = useState(false);
 
   const { data, isLoading } = useAdminPointsLedger({
     userId: userId || undefined,
@@ -55,6 +60,15 @@ export function AdminPointsPage() {
           placeholder={t('points.filter_user_placeholder')}
           className="w-72 rounded-md border border-admin-border px-3 py-2 text-sm outline-none focus:border-admin-accent"
         />
+        <Button
+          type="button"
+          tone="admin"
+          variant="secondary"
+          disabled={!userId}
+          onClick={() => setAdjusting(true)}
+        >
+          {t('points.adjust.button')}
+        </Button>
         <select
           value={type}
           onChange={(e) => resetFilters(() => setType(e.target.value as PointsLedgerEntryType | ''))}
@@ -106,6 +120,11 @@ export function AdminPointsPage() {
             label: t('points.col_reference'),
             render: (e) => (e.referenceType ? `${e.referenceType} · ${e.referenceId}` : '—'),
           },
+          {
+            key: 'description',
+            label: t('points.col_description'),
+            render: (e) => e.description ?? '—',
+          },
         ]}
         data={data?.data ?? []}
         total={data?.meta.total ?? 0}
@@ -115,6 +134,12 @@ export function AdminPointsPage() {
         rowKey={(e) => e.id}
         loading={isLoading}
         emptyMessage={t('points.empty')}
+      />
+
+      <AdjustPointsModal
+        open={adjusting}
+        userId={userId}
+        onClose={() => setAdjusting(false)}
       />
     </div>
   );

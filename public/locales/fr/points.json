@@ -45,7 +45,9 @@
       "event_payout": "Revenus d'événement",
       "event_refund": "Remboursement d'événement",
       "event_commission": "Commission plateforme",
+      "event_reward": "Récompense d'événement",
       "adjustment": "Ajustement",
+      "admin_adjustment": "Ajustement administrateur",
       "cashout": "Retrait vers virement bancaire",
       "cashout_reversed": "Retrait annulé (recrédité)"
     }

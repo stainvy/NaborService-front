@@ -37,7 +37,7 @@ export function NotificationPanel({ onNavigate }: NotificationPanelProps) {
     <div
       role="menu"
       aria-label={t('title')}
-      className="absolute right-0 top-full z-20 mt-2 w-80 rounded-md border border-gray/20 bg-white shadow-lg"
+      className="absolute left-0 top-full z-20 mt-2 w-80 rounded-md border border-gray/20 bg-white shadow-lg"
     >
       <div className="flex items-center justify-between border-b border-gray/10 px-4 py-3">
         <h2 className="text-sm font-bold text-navy">{t('title')}</h2>

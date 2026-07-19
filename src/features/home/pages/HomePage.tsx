@@ -9,7 +9,6 @@ import {
   Search,
   User,
   CalendarDays,
-  Vote,
   Plus,
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
@@ -56,7 +55,6 @@ export function HomePage() {
       title: t('home.cards.events_title'),
       description: t('home.cards.events'),
     },
-    { icon: Vote, title: t('nav.polls'), description: t('home.cards.polls'), soon: true },
   ];
 
   return (

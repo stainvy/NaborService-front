@@ -53,19 +53,15 @@ export function AppHeader() {
         <Link to="/" className="text-lg font-bold text-navy">
           {t('app.name')}
         </Link>
-      </div>
-      <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium">
         <NotificationBell />
         <PointsBadge />
         <LanguageSwitcher />
+      </div>
+      <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium">
         <NavItem to="/" end>
           {t('nav.home')}
         </NavItem>
-        <NavItem to="/listings">{t('nav.listings')}</NavItem>
-        <NavItem to="/events">{t('nav.events')}</NavItem>
         <NavItem to="/my-operations">{t('nav.operations')}</NavItem>
-        <NavItem to="/discover">{t('nav.discover')}</NavItem>
-        <NavItem to="/search">{t('nav.search')}</NavItem>
         <NavItem to="/chat">{t('nav.chat')}</NavItem>
         <NavItem to="/profile">{t('nav.profile')}</NavItem>
         {hasMinRole(role, 'moderator') && <NavItem to="/admin">{t('nav.admin')}</NavItem>}
