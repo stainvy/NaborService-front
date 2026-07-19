@@ -19,6 +19,7 @@
     "upload": "Téléverser",
     "remove": "Supprimer",
     "save": "Enregistrer",
+    "cancel": "Annuler",
     "saved": "Profil mis à jour.",
     "error": "Échec de l'enregistrement.",
     "file_too_large": "Fichier trop volumineux (max {{max}}).",
@@ -34,6 +35,27 @@
       "friends": "Amis"
     },
     "empty_list": "Personne pour l'instant."
+  },
+  "neighbourhood": {
+    "section_title": "Mon quartier",
+    "current": "Quartier actuel : {{name}}",
+    "none_selected": "Aucun quartier sélectionné pour l'instant.",
+    "use_location": "Utiliser ma position",
+    "geo_denied": "Accès à la localisation refusé. Vous pouvez rechercher une adresse ci-dessous.",
+    "geo_unavailable": "Position indisponible. Vous pouvez rechercher une adresse ci-dessous.",
+    "geo_timeout": "La localisation a expiré. Réessayez ou recherchez une adresse.",
+    "geo_not_supported": "La géolocalisation n'est pas disponible sur cet appareil.",
+    "search_address": "Rechercher une adresse",
+    "address_placeholder": "Numéro et nom de rue, ville…",
+    "ban_error": "Recherche d'adresse momentanément indisponible. Utilisez la liste ci-dessous.",
+    "recommended": "Quartier recommandé : {{name}}",
+    "use": "Utiliser",
+    "choose_manually": "Choisir dans la liste",
+    "none": "— Aucun —",
+    "save": "Enregistrer mon quartier",
+    "confirm_title": "Changer de quartier ?",
+    "confirm_message": "Votre quartier va changer. Votre groupe de discussion de quartier sera mis à jour en conséquence.",
+    "confirm": "Confirmer le changement"
   },
   "security": {
     "title": "Sécurité",

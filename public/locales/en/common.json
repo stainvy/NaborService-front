@@ -40,6 +40,10 @@
     "publish_cta": "Post a listing",
     "quick_access": "Quick access",
     "soon": "Soon",
+    "neighbourhood_banner": {
+      "title": "Choose your neighbourhood",
+      "subtitle": "Set your neighbourhood to see listings and events near you."
+    },
     "cards": {
       "listings": "Browse offers and requests in your neighbourhood.",
       "my_listings_title": "My listings",

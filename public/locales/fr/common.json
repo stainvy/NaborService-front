@@ -40,6 +40,10 @@
     "publish_cta": "Publier une annonce",
     "quick_access": "Accès rapides",
     "soon": "Bientôt",
+    "neighbourhood_banner": {
+      "title": "Choisissez votre quartier",
+      "subtitle": "Renseignez votre quartier pour voir les annonces et événements près de chez vous."
+    },
     "cards": {
       "listings": "Parcourez les offres et demandes de votre quartier.",
       "my_listings_title": "Mes annonces",

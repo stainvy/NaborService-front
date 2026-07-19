@@ -10,6 +10,7 @@ import {
   User,
   CalendarDays,
   Plus,
+  MapPin,
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/Button';
@@ -72,6 +73,20 @@ export function HomePage() {
           </Button>
         </Link>
       </section>
+
+      {/* Incitation discrète à définir son quartier (non bloquant) */}
+      {user && !user.neighbourhoodId && (
+        <Link
+          to="/profile/edit"
+          className="mt-6 flex items-center gap-3 rounded-xl border border-orange/40 bg-orange/10 p-4 transition-colors hover:bg-orange/15"
+        >
+          <MapPin className="h-5 w-5 shrink-0 text-orange" />
+          <div>
+            <p className="font-semibold text-navy">{t('home.neighbourhood_banner.title')}</p>
+            <p className="text-sm text-gray">{t('home.neighbourhood_banner.subtitle')}</p>
+          </div>
+        </Link>
+      )}
 
       {/* Accès rapides */}
       <section className="mt-8">

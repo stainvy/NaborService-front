@@ -14,7 +14,7 @@ export interface UpdateProfilePayload {
   bio?: string;
   visibility?: Visibility;
   messagePolicy?: MessagePolicy;
-  neighbourhoodId?: string;
+  neighbourhoodId?: string | null; // null pour retirer le quartier
   email?: string;
   totpCode?: string;
 }

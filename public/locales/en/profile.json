@@ -19,6 +19,7 @@
     "upload": "Upload",
     "remove": "Remove",
     "save": "Save",
+    "cancel": "Cancel",
     "saved": "Profile updated.",
     "error": "Could not save.",
     "file_too_large": "File too large (max {{max}}).",
@@ -34,6 +35,27 @@
       "friends": "Friends"
     },
     "empty_list": "Nobody yet."
+  },
+  "neighbourhood": {
+    "section_title": "My neighbourhood",
+    "current": "Current neighbourhood: {{name}}",
+    "none_selected": "No neighbourhood selected yet.",
+    "use_location": "Use my location",
+    "geo_denied": "Location access denied. You can search for an address below.",
+    "geo_unavailable": "Position unavailable. You can search for an address below.",
+    "geo_timeout": "Location timed out. Try again or search for an address.",
+    "geo_not_supported": "Geolocation is not available on this device.",
+    "search_address": "Search for an address",
+    "address_placeholder": "Street number and name, city…",
+    "ban_error": "Address search is temporarily unavailable. Use the list below.",
+    "recommended": "Recommended neighbourhood: {{name}}",
+    "use": "Use",
+    "choose_manually": "Choose from the list",
+    "none": "— None —",
+    "save": "Save my neighbourhood",
+    "confirm_title": "Change neighbourhood?",
+    "confirm_message": "Your neighbourhood will change. Your neighbourhood chat group will be updated accordingly.",
+    "confirm": "Confirm change"
   },
   "security": {
     "title": "Security",
