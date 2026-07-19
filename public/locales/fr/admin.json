@@ -71,6 +71,7 @@
     "col_amount": "Montant",
     "col_balance_after": "Solde après",
     "col_reference": "Référence",
+    "col_description": "Motif",
     "platform": "Plateforme (commission)",
     "empty": "Aucune opération trouvée.",
     "types": {
@@ -83,9 +84,26 @@
       "event_payout": "Revenus d'événement",
       "event_refund": "Remboursement d'événement",
       "event_commission": "Commission plateforme",
+      "event_reward": "Récompense d'événement",
       "adjustment": "Ajustement",
+      "admin_adjustment": "Ajustement administrateur",
       "cashout": "Retrait vers virement bancaire",
       "cashout_reversed": "Retrait annulé (recrédité)"
+    },
+    "adjust": {
+      "button": "Ajuster les points",
+      "title": "Ajuster les points de l'utilisateur",
+      "direction_add": "Ajouter des points",
+      "direction_remove": "Retirer des points",
+      "amount_label": "Montant (points)",
+      "description_label": "Motif (optionnel)",
+      "description_placeholder": "ex. Correction suite à un bug de pointage",
+      "submit": "Confirmer",
+      "cancel": "Fermer",
+      "success": "Effectué — nouveau solde : {{points}} points.",
+      "error_conflict": "Montant invalide, ou le solde de l'utilisateur deviendrait négatif.",
+      "error_not_found": "Utilisateur introuvable.",
+      "error_generic": "Une erreur est survenue. Réessayez."
     }
   },
   "messages": {

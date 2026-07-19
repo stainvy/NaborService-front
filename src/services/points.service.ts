@@ -16,7 +16,9 @@ export type PointsLedgerEntryType =
   | 'event_payout'
   | 'event_refund'
   | 'event_commission'
+  | 'event_reward'
   | 'adjustment'
+  | 'admin_adjustment'
   | 'cashout'
   | 'cashout_reversed';
 

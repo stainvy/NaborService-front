@@ -6,6 +6,8 @@ import type {
   AdminUser,
   AdminUsersQuery,
   AdminLedgerQuery,
+  AdminAdjustPointsPayload,
+  AdminAdjustPointsResult,
   AdminConfig,
   RgpdRequest,
   RgpdRequestStatusResponse,
@@ -109,6 +111,13 @@ export const adminService = {
 
   getPointsLedger(params?: AdminLedgerQuery): Promise<Paginated<PointsLedgerEntry>> {
     return api.get<Paginated<PointsLedgerEntry>>('/admin/points/ledger', { params }).then((r) => r.data);
+  },
+
+  /** Crédite ou débite manuellement le solde d'un utilisateur (amountPoints signé). */
+  adjustPoints(payload: AdminAdjustPointsPayload): Promise<AdminAdjustPointsResult> {
+    return api
+      .post<AdminAdjustPointsResult>('/admin/points/adjust', payload)
+      .then((r) => r.data);
   },
 
   // --- Config ---

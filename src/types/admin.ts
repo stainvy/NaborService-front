@@ -109,6 +109,20 @@ export interface AdminLedgerQuery extends PageParams {
   type?: PointsLedgerEntryType;
 }
 
+export interface AdminAdjustPointsPayload {
+  userId: string;
+  amountPoints: number;
+  description?: string;
+}
+
+export interface AdminAdjustPointsResult {
+  success: boolean;
+  userId: string;
+  amountPoints: number;
+  balanceAfterPoints: number;
+  entryId: string;
+}
+
 // --- Moderation ---
 // Item shapes confirmées via /api-json (ReportedListingItemDto/ReportedEventItemDto) —
 // asymétriques entre listings et events. Les deux endpoints renvoient désormais

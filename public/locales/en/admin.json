@@ -71,6 +71,7 @@
     "col_amount": "Amount",
     "col_balance_after": "Balance after",
     "col_reference": "Reference",
+    "col_description": "Reason",
     "platform": "Platform (commission)",
     "empty": "No operations found.",
     "types": {
@@ -83,9 +84,26 @@
       "event_payout": "Event earnings",
       "event_refund": "Event refund",
       "event_commission": "Platform commission",
+      "event_reward": "Event reward",
       "adjustment": "Adjustment",
+      "admin_adjustment": "Admin adjustment",
       "cashout": "Cashout to bank transfer",
       "cashout_reversed": "Cashout reversed (recredited)"
+    },
+    "adjust": {
+      "button": "Adjust points",
+      "title": "Adjust user points",
+      "direction_add": "Add points",
+      "direction_remove": "Remove points",
+      "amount_label": "Amount (points)",
+      "description_label": "Reason (optional)",
+      "description_placeholder": "e.g. Correction following a tracking bug",
+      "submit": "Confirm",
+      "cancel": "Close",
+      "success": "Done — new balance: {{points}} points.",
+      "error_conflict": "Invalid amount, or the user's balance would become negative.",
+      "error_not_found": "User not found.",
+      "error_generic": "Something went wrong. Please try again."
     }
   },
   "messages": {

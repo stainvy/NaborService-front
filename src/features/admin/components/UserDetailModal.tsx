@@ -6,6 +6,7 @@ import { Modal } from '@/components/Modal';
 import { Button } from '@/components/Button';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { RoleSelect } from './RoleSelect';
+import { AdjustPointsModal } from './AdjustPointsModal';
 import { adminUserStatus, type AdminUser } from '@/types/admin';
 import type { Role } from '@/types/roles';
 import {
@@ -26,6 +27,7 @@ type PendingAction = 'suspend' | 'restore' | 'reset_totp' | 'delete' | null;
 export function UserDetailModal({ user, onClose }: UserDetailModalProps) {
   const { t } = useTranslation('admin');
   const [pending, setPending] = useState<PendingAction>(null);
+  const [adjustingPoints, setAdjustingPoints] = useState(false);
 
   const updateRole = useUpdateUserRole();
   const suspend = useSuspendUser();
@@ -102,6 +104,14 @@ export function UserDetailModal({ user, onClose }: UserDetailModalProps) {
             <Coins className="h-4 w-4" /> {t('users.view_points_ledger')}
           </Link>
 
+          <button
+            type="button"
+            onClick={() => setAdjustingPoints(true)}
+            className="flex items-center gap-1.5 text-sm font-medium text-admin-accent hover:underline"
+          >
+            <Coins className="h-4 w-4" /> {t('points.adjust.button')}
+          </button>
+
           <div className="flex flex-wrap gap-2 border-t border-admin-border pt-3">
             {status === 'suspended' ? (
               <Button tone="admin" variant="secondary" disabled={loading} onClick={() => setPending('restore')}>
@@ -142,6 +152,13 @@ export function UserDetailModal({ user, onClose }: UserDetailModalProps) {
         loading={loading}
         onConfirm={runPending}
         onCancel={() => setPending(null)}
+      />
+
+      <AdjustPointsModal
+        open={adjustingPoints}
+        userId={user.id}
+        userLabel={`${user.firstName} ${user.lastName} — ${user.email}`}
+        onClose={() => setAdjustingPoints(false)}
       />
     </>
   );
