@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CalendarDays, Users, ThumbsUp, ThumbsDown } from 'lucide-react';
+import { mediaUrl } from '@/lib/media';
 import { EventStatusBadge } from './EventStatusBadge';
 import { useSwipeEvent } from '../hooks/useEventParticipation';
 import { formatDateTime, formatEuros } from '../format';
@@ -12,6 +13,7 @@ export function EventCard({ event }: { event: NaborEvent }) {
   const { t, i18n } = useTranslation('events');
   const locale = i18n.resolvedLanguage;
   const past = isPastEvent(event);
+  const cover = mediaUrl(event.coverMediaId);
 
   const swipe = useSwipeEvent();
   const [swiped, setSwiped] = useState<EventSwipeDirection | null>(null);
@@ -23,6 +25,13 @@ export function EventCard({ event }: { event: NaborEvent }) {
   return (
     <div className="flex flex-col gap-2 rounded-lg border border-gray/30 p-4">
       <Link to={`/events/${event.id}`} className="flex flex-col gap-2 hover:opacity-90">
+        {cover && (
+          <img
+            src={cover}
+            alt=""
+            className="-mx-4 -mt-4 mb-1 h-32 w-[calc(100%+2rem)] rounded-t-lg object-cover"
+          />
+        )}
         <div className="flex items-start justify-between gap-2">
           <h3 className="font-semibold text-navy">{event.title}</h3>
           {past ? (

@@ -119,7 +119,7 @@ function EventsPanel() {
     if (!file) return;
     uploadMedia.mutate({ eventId, file }, {
       onSuccess: (r) => {
-        const name = r.name ?? r.type;
+        const name = r.mediaId;
         setMediaList((prev) => [...prev, { id: name, url: eventMediaUrl(eventId, name) }]);
       },
     });

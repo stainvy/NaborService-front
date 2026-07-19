@@ -116,9 +116,9 @@
     "done": "Report sent."
   },
   "media": {
-    "add": "Add media",
-    "hint": "Image or PDF, 5 MB max.",
-    "too_large": "File too large (max 5 MB).",
-    "uploaded": "Added: {{name}}"
+    "add": "Add a photo",
+    "remove": "Remove",
+    "hint": "Up to 8 photos, 5 MB each.",
+    "too_large": "Photo too large (max 5 MB)."
   }
 }

@@ -1,49 +1,83 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/Button';
-import { useUploadEventMedia } from '../hooks/useEventMutations';
+import { mediaUrl } from '@/lib/media';
+import {
+  useEventMediaList,
+  useUploadEventMedia,
+  useDeleteEventMedia,
+} from '../hooks/useEventMedia';
 
-const MAX = 5 * 1024 * 1024; // 5 Mo
+const PHOTO_MAX = 5 * 1024 * 1024; // 5 Mo
 
-// Téléversement de médias (couverture / pièce jointe). ⚠️ Le back n'expose pas
-// de liste des médias sur l'événement : on gère l'ajout ; l'aperçu/suppression
-// des médias existants viendra quand la liste sera disponible.
-export function EventMedia({ id }: { id: string }) {
+interface Props {
+  id: string;
+  editable?: boolean;
+}
+
+// Galerie d'images d'un événement (GET /events/:id/media) + upload/suppression
+// en mode édition. Copie de listings/components/ListingMedia.tsx.
+export function EventMedia({ id, editable = false }: Props) {
   const { t } = useTranslation('events');
+  const media = useEventMediaList(id);
+  const mediaIds = (media.data ?? []).map((m) => m.id);
   const upload = useUploadEventMedia(id);
+  const remove = useDeleteEventMedia(id);
   const inputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
-  const [uploaded, setUploaded] = useState<string | null>(null);
 
   const onPick = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     e.target.value = '';
     if (!file) return;
-    if (file.size > MAX) {
+    if (file.size > PHOTO_MAX) {
       setError(t('media.too_large'));
       return;
     }
     setError(null);
-    upload.mutate(file, { onSuccess: (res) => setUploaded(res.name ?? res.type) });
+    upload.mutate(file);
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <input
-        ref={inputRef}
-        type="file"
-        accept="image/*,application/pdf"
-        className="hidden"
-        onChange={onPick}
-      />
-      <Button type="button" onClick={() => inputRef.current?.click()} disabled={upload.isPending}>
-        {t('media.add')}
-      </Button>
-      <p className="text-xs text-gray">{t('media.hint')}</p>
-      {uploaded && (
-        <p className="text-sm text-success">{t('media.uploaded', { name: uploaded })}</p>
+    <div className="flex flex-col gap-3">
+      {mediaIds.length > 0 && (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {mediaIds.map((mid) => (
+            <div key={mid} className="relative">
+              <img
+                src={mediaUrl(mid) ?? ''}
+                alt=""
+                className="h-32 w-full rounded-md object-cover"
+              />
+              {editable && (
+                <button
+                  type="button"
+                  onClick={() => remove.mutate(mid)}
+                  className="absolute right-1 top-1 rounded-full bg-error px-2 text-xs text-white"
+                  aria-label={t('media.remove')}
+                >
+                  ×
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
       )}
-      {error && <p className="text-sm text-error">{error}</p>}
+
+      {editable && (
+        <div>
+          <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={onPick} />
+          <Button
+            type="button"
+            onClick={() => inputRef.current?.click()}
+            disabled={upload.isPending || mediaIds.length >= 8}
+          >
+            {t('media.add')}
+          </Button>
+          <p className="mt-1 text-xs text-gray">{t('media.hint')}</p>
+          {error && <p className="text-sm text-error">{error}</p>}
+        </div>
+      )}
     </div>
   );
 }

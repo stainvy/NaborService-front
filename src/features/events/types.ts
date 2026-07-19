@@ -37,6 +37,7 @@ export interface NaborEvent {
   neighbourhoodId?: string | null;
   refundDeadlineHours?: number;
   mongoDocumentId?: string | null;
+  coverMediaId?: string | null;
   publishedAt?: string | null;
   cancelledAt?: string | null;
   completedAt?: string | null;
@@ -44,6 +45,13 @@ export interface NaborEvent {
   updatedAt?: string | null;
   deletedAt?: string | null;
   [key: string]: unknown;
+}
+
+// GET /events/:id/media — même forme que ListingMediaItem (id, order, caption).
+export interface EventMediaItem {
+  id: string;
+  order: number | null;
+  caption: string | null;
 }
 
 // GET /events → { data, meta } (cf. ListEventsResponseDto).

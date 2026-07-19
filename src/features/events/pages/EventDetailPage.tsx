@@ -12,6 +12,7 @@ import { EventStatusBadge } from '../components/EventStatusBadge';
 import { LifecycleActions } from '../components/LifecycleActions';
 import { ParticipantsList } from '../components/ParticipantsList';
 import { WaitlistBadge } from '../components/WaitlistBadge';
+import { EventMedia } from '../components/EventMedia';
 import { useEvent, useEventContent } from '../hooks/useEvents';
 import { useEventSocket } from '../hooks/useEventSocket';
 import {
@@ -123,6 +124,11 @@ export function EventDetailPage() {
           ))}
         </ul>
       )}
+
+      {/* Médias (galerie ; upload/suppression réservés au créateur) */}
+      <section className="mt-6">
+        <EventMedia id={id} editable={Boolean(isCreator)} />
+      </section>
 
       {/* Événement payant : coût + paiement requis (checkout hors périmètre) */}
       {event.costCents > 0 && (

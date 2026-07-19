@@ -116,9 +116,9 @@
     "done": "Signalement envoyé."
   },
   "media": {
-    "add": "Ajouter un média",
-    "hint": "Image ou PDF, 5 Mo max.",
-    "too_large": "Fichier trop volumineux (max 5 Mo).",
-    "uploaded": "Ajouté : {{name}}"
+    "add": "Ajouter une photo",
+    "remove": "Retirer",
+    "hint": "8 photos max, 5 Mo chacune.",
+    "too_large": "Photo trop volumineuse (max 5 Mo)."
   }
 }

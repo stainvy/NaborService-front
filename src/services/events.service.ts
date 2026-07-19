@@ -4,6 +4,7 @@ import type {
   EventChatGroup,
   EventContent,
   EventFilters,
+  EventMediaItem,
   EventParticipant,
   EventsPage,
   EventSwipeDirection,
@@ -92,25 +93,19 @@ export const eventsService = {
     return api.delete(`/events/${eventId}/participants/me`).then(() => undefined);
   },
 
-  // --- Médias (multipart, champ « file ») -----------------------------------
-  uploadMedia(
-    eventId: string,
-    file: File,
-  ): Promise<{
-    type: 'cover' | 'attachment';
-    name?: string;
-    mimetype: string;
-    size_bytes: number;
-  }> {
-    const form = new FormData();
-    form.append('file', file);
-    return api.post(`/events/${eventId}/media`, form).then((r) => r.data);
+  // --- Médias (aligné sur les annonces) -------------------------------------
+  getMedia(eventId: string): Promise<EventMediaItem[]> {
+    return api.get<EventMediaItem[]>(`/events/${eventId}/media`).then((r) => r.data);
   },
 
-  deleteMedia(eventId: string, filename: string): Promise<void> {
-    return api
-      .delete(`/events/${eventId}/media/${encodeURIComponent(filename)}`)
-      .then(() => undefined);
+  uploadMedia(eventId: string, file: File): Promise<{ mediaId: string }> {
+    const form = new FormData();
+    form.append('file', file);
+    return api.post<{ mediaId: string }>(`/events/${eventId}/media`, form).then((r) => r.data);
+  },
+
+  deleteMedia(eventId: string, mediaId: string): Promise<void> {
+    return api.delete(`/events/${eventId}/media/${mediaId}`).then(() => undefined);
   },
 
   // --- Interactions ---------------------------------------------------------

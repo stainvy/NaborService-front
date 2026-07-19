@@ -31,4 +31,16 @@ describe('EventCard', () => {
     expect(screen.getByText('feed.like')).toBeInTheDocument();
     expect(screen.getByText('feed.dislike')).toBeInTheDocument();
   });
+
+  it('affiche la couverture quand coverMediaId existe', () => {
+    const { container } = renderWithProviders(
+      <EventCard event={makeEvent({ coverMediaId: 'cover' })} />,
+    );
+    expect(container.querySelector('img')).toBeInTheDocument();
+  });
+
+  it('pas de couverture quand coverMediaId est absent', () => {
+    const { container } = renderWithProviders(<EventCard event={makeEvent()} />);
+    expect(container.querySelector('img')).not.toBeInTheDocument();
+  });
 });

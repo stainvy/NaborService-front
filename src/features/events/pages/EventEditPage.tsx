@@ -79,7 +79,7 @@ export function EventEditPage() {
 
       <section className="mt-10">
         <h2 className="mb-3 font-semibold text-navy">{t('edit.media')}</h2>
-        <EventMedia id={id} />
+        <EventMedia id={id} editable />
       </section>
     </div>
   );

@@ -38,18 +38,5 @@ export function useDeleteEvent() {
   });
 }
 
-export function useUploadEventMedia(id: string) {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (file: File) => eventsService.uploadMedia(id, file),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: eventKeys.detail(id) }),
-  });
-}
-
-export function useDeleteEventMedia(id: string) {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (filename: string) => eventsService.deleteMedia(id, filename),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: eventKeys.detail(id) }),
-  });
-}
+// Les médias (liste/upload/suppression) vivent dans useEventMedia.ts, aligné
+// sur le module Annonces.

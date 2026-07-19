@@ -5,6 +5,7 @@ export const eventKeys = {
   list: (filters?: EventFilters) => ['events', 'list', filters] as const,
   detail: (id: string) => ['events', 'detail', id] as const,
   content: (id: string) => ['events', 'content', id] as const,
+  media: (id: string) => ['events', 'media', id] as const,
   participants: (id: string) => ['events', 'participants', id] as const,
   waitlist: (id: string) => ['events', 'waitlist', id] as const,
   chat: (id: string) => ['events', 'chat', id] as const,
