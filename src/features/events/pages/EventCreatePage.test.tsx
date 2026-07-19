@@ -10,7 +10,7 @@ import { env } from '@/lib/env';
 import { EventCreatePage } from './EventCreatePage';
 
 describe('EventCreatePage', () => {
-  it('POST /events avec le coût converti euros→centimes', async () => {
+  it('POST /events avec le coût en points (1 point = 1 cost_cents)', async () => {
     mockAuthenticated();
     server.use(
       http.get(`${env.apiUrl}/categories/events`, () => HttpResponse.json([])),
@@ -34,13 +34,13 @@ describe('EventCreatePage', () => {
     );
 
     await user.type(await screen.findByLabelText('form.title'), 'Atelier jardinage');
-    const cost = screen.getByLabelText('form.cost_euros');
+    const cost = screen.getByLabelText('form.cost_points');
     await user.clear(cost);
     await user.type(cost, '5');
     await user.click(screen.getByRole('button', { name: 'create.submit' }));
 
     await waitFor(() => expect(body).not.toBeNull());
-    expect(body).toMatchObject({ title: 'Atelier jardinage', cost_cents: 500 });
+    expect(body).toMatchObject({ title: 'Atelier jardinage', cost_cents: 5 });
     expect(await screen.findByText('DETAIL')).toBeInTheDocument();
   });
 });

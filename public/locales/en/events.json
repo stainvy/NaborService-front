@@ -41,8 +41,8 @@
     "starts_at": "Start",
     "ends_at": "End",
     "max_participants": "Max participants",
-    "cost_euros": "Cost (€)",
-    "cost_hint": "€0 = free. The cost is stored in cents.",
+    "cost_points": "Cost (in points)",
+    "cost_hint": "0 points = free. The cost is charged in points on registration.",
     "refund_deadline_hours": "Refundable until (hours before)",
     "invite_code": "Invite code (optional)"
   },

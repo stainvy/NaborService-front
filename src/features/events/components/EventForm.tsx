@@ -30,7 +30,7 @@ export function EventForm({ defaultValues, submitLabel, submitting, onSubmit }: 
     formState: { errors },
   } = useForm<EventFormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { cost_euros: 0, ...defaultValues },
+    defaultValues: { cost_points: 0, ...defaultValues },
   });
 
   const submit = handleSubmit((v) => {
@@ -42,7 +42,8 @@ export function EventForm({ defaultValues, submitLabel, submitting, onSubmit }: 
       starts_at: toIso(v.starts_at),
       ends_at: toIso(v.ends_at),
       max_participants: v.max_participants,
-      cost_cents: Math.round(v.cost_euros * 100),
+      // 1 point = 1 unité de cost_cents (système de points, comme les annonces).
+      cost_cents: v.cost_points,
       refund_deadline_hours: v.refund_deadline_hours,
       invite_code: v.invite_code || undefined,
     });
@@ -105,12 +106,12 @@ export function EventForm({ defaultValues, submitLabel, submitting, onSubmit }: 
           {...register('max_participants')}
         />
         <TextField
-          label={t('form.cost_euros')}
+          label={t('form.cost_points')}
           type="number"
-          step="0.01"
+          step="1"
           min="0"
-          error={errors.cost_euros?.message}
-          {...register('cost_euros')}
+          error={errors.cost_points?.message}
+          {...register('cost_points')}
         />
         <TextField
           label={t('form.refund_deadline_hours')}

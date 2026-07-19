@@ -48,7 +48,7 @@ export function EventEditPage() {
           starts_at: toDatetimeLocal(event.startsAt),
           ends_at: toDatetimeLocal(event.endsAt),
           max_participants: event.maxParticipants ?? undefined,
-          cost_euros: event.costCents / 100,
+          cost_points: event.costCents,
           refund_deadline_hours: event.refundDeadlineHours,
           invite_code: event.inviteCode ?? undefined,
         }}

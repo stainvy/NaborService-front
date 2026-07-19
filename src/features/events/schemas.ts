@@ -11,7 +11,9 @@ const optionalPositiveInt = z.preprocess(
   z.number({ message: 'invalid' }).int().min(1).optional(),
 );
 
-// Formulaire événement (coût saisi en euros → cost_cents à l'envoi).
+// Formulaire événement. Le coût suit le système de points de la plateforme
+// (pas de conversion euros — 1 point = 1 unité de `cost_cents` côté back,
+// comme pour les annonces, cf. listingFormSchema).
 export function eventFormSchema(t: TFunction) {
   return z.object({
     title: z.string().trim().min(1, t('form.required')).max(200),
@@ -21,7 +23,10 @@ export function eventFormSchema(t: TFunction) {
     starts_at: z.string().optional(),
     ends_at: z.string().optional(),
     max_participants: optionalPositiveInt,
-    cost_euros: z.coerce.number({ message: t('form.cost_invalid') }).min(0, t('form.cost_invalid')),
+    cost_points: z.coerce
+      .number({ message: t('form.cost_invalid') })
+      .int(t('form.cost_invalid'))
+      .min(0, t('form.cost_invalid')),
     refund_deadline_hours: optionalNonNegInt,
     invite_code: z.string().max(100).optional(),
   });

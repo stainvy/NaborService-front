@@ -41,8 +41,8 @@
     "starts_at": "Début",
     "ends_at": "Fin",
     "max_participants": "Participants max",
-    "cost_euros": "Coût (€)",
-    "cost_hint": "0 € = gratuit. Le coût est enregistré en centimes.",
+    "cost_points": "Coût (en points)",
+    "cost_hint": "0 point = gratuit. Le coût est débité en points à l'inscription.",
     "refund_deadline_hours": "Remboursement jusqu'à (heures avant)",
     "invite_code": "Code d'invitation (optionnel)"
   },
