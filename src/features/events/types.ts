@@ -44,6 +44,8 @@ export interface NaborEvent {
   createdAt: string;
   updatedAt?: string | null;
   deletedAt?: string | null;
+  // Statut de participation de l'utilisateur courant (GET /events/:id).
+  participationStatus?: 'registered' | 'waitlisted' | null;
   [key: string]: unknown;
 }
 

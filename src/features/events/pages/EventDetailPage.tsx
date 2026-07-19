@@ -45,7 +45,13 @@ export function EventDetailPage() {
   const remove = useDeleteEvent();
 
   const isCreator = event?.creatorId === user?.id;
-  const registered = outcome?.status === 'registered';
+  // Statut de participation : la Socket donne le résultat immédiat d'une
+  // inscription ; la valeur persistée vient de GET /events/:id (rechargement).
+  // Après une désinscription réussie, le résultat Socket est obsolète.
+  const socketStatus = unregister.isSuccess ? null : outcome?.status;
+  const participation = socketStatus ?? event?.participationStatus ?? null;
+  const registered = participation === 'registered';
+  const waitlisted = participation === 'waitlisted';
   const participants = useEventParticipants(id, Boolean(isCreator));
   const waitlist = useEventWaitlist(id, Boolean(isCreator));
   const chat = useEventChat(id, Boolean(isCreator) || registered);
@@ -139,7 +145,7 @@ export function EventDetailPage() {
 
       {/* Inscription (asynchrone) — non-créateur, événement ouvert et à venir.
           On garde la section pour un inscrit (accès au billet) même passé. */}
-      {!isCreator && (event.status === 'open' || registered) && (
+      {!isCreator && (event.status === 'open' || registered || waitlisted) && (
         <section className="mt-6 rounded-md border border-gray/30 p-4">
           {past ? (
             <div className="flex flex-col gap-2">
@@ -181,7 +187,7 @@ export function EventDetailPage() {
                 </Button>
               </div>
             </div>
-          ) : outcome?.status === 'waitlisted' ? (
+          ) : waitlisted ? (
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <span className="text-sm text-navy">{t('register.waitlisted')}</span>
