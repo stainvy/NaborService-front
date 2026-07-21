@@ -10,7 +10,12 @@
     "subtitle": "Exchange services, join events, chat with your neighbours and bring your neighbourhood to life, safely, between residents.",
     "cta_primary": "Join my neighbourhood",
     "cta_secondary": "Log in",
-    "illustration_alt": "Illustration of a connected neighbourhood"
+    "illustration_alt": "Illustration of a connected neighbourhood",
+    "trust": {
+      "free": "Free between neighbours",
+      "mfa": "Secure sign-in",
+      "rgpd": "GDPR data"
+    }
   },
   "reassurance": {
     "mfa": {

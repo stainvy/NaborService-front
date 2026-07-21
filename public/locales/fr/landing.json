@@ -10,7 +10,12 @@
     "subtitle": "Échangez des services, participez aux événements, discutez avec vos voisins et faites vivre votre quartier, en toute sécurité, entre habitants.",
     "cta_primary": "Rejoindre mon quartier",
     "cta_secondary": "Se connecter",
-    "illustration_alt": "Illustration d'un quartier connecté"
+    "illustration_alt": "Illustration d'un quartier connecté",
+    "trust": {
+      "free": "Gratuit entre voisins",
+      "mfa": "Connexion sécurisée",
+      "rgpd": "Données RGPD"
+    }
   },
   "reassurance": {
     "mfa": {
