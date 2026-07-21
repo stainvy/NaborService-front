@@ -29,7 +29,7 @@ export function LoginPage() {
     formState: { errors },
   } = useForm<LoginForm>({ resolver: zodResolver(schema) });
 
-  const onAuthenticated = () => navigate('/', { replace: true });
+  const onAuthenticated = () => navigate('/app', { replace: true });
 
   const onSubmit = handleSubmit((values) => {
     login.mutate(values, { onSuccess: setChallenge });

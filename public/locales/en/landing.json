@@ -1,0 +1,107 @@
+{
+  "nav": {
+    "features": "Features",
+    "how": "How it works",
+    "values": "Community"
+  },
+  "hero": {
+    "badge": "Your neighbourhood's collaborative platform",
+    "title": "Your neighbourhood, better connected.",
+    "subtitle": "Exchange services, join events, chat with your neighbours and bring your neighbourhood to life — safely, between residents.",
+    "cta_primary": "Join my neighbourhood",
+    "cta_secondary": "Log in",
+    "illustration_alt": "Illustration of a connected neighbourhood"
+  },
+  "reassurance": {
+    "mfa": {
+      "title": "Enhanced security",
+      "desc": "Two-factor authentication (MFA) on every sensitive action."
+    },
+    "payments": {
+      "title": "Protected payments",
+      "desc": "Secure transactions via Stripe, no banking data stored."
+    },
+    "rgpd": {
+      "title": "Your data, your rules",
+      "desc": "GDPR-compliant: export, rectify and delete at any time."
+    },
+    "local": {
+      "title": "100% between neighbours",
+      "desc": "A local, verified community at the scale of your neighbourhood."
+    }
+  },
+  "features": {
+    "title": "Everything you need to grow your neighbourhood",
+    "subtitle": "One app for mutual help, meeting people and local life.",
+    "services": {
+      "title": "Neighbour services",
+      "desc": "Offer or request a hand: DIY, childcare, lessons, tool lending… Full tracking from request to payment."
+    },
+    "events": {
+      "title": "Events & activities",
+      "desc": "Create and join neighbourhood events, with sign-ups, waiting list and tickets."
+    },
+    "messaging": {
+      "title": "Secure messaging",
+      "desc": "Chat privately or in groups: text, photos, voice messages and calls, in real time."
+    },
+    "documents": {
+      "title": "Documents & signatures",
+      "desc": "Contracts and receipts generated automatically, signed electronically and tamper-proof."
+    },
+    "polls": {
+      "title": "Neighbourhood polls",
+      "desc": "Ask residents and decide together with real-time votes."
+    },
+    "neighbourhood": {
+      "title": "My neighbourhood",
+      "desc": "Join your neighbourhood on the map and find all the activity near you."
+    }
+  },
+  "steps": {
+    "title": "How it works",
+    "subtitle": "Three steps to join your community.",
+    "one": {
+      "title": "I create my account",
+      "desc": "Fast, secure sign-up with two-factor authentication."
+    },
+    "two": {
+      "title": "I choose my neighbourhood",
+      "desc": "Use geolocation or search your address to join the right neighbourhood."
+    },
+    "three": {
+      "title": "I connect with my neighbours",
+      "desc": "Services, events, messages: neighbourhood life begins."
+    }
+  },
+  "values": {
+    "title": "A community you can trust",
+    "subtitle": "Nabor Services brings residents together around simple values.",
+    "proximity": {
+      "title": "Proximity",
+      "desc": "Human-scale exchanges, between neighbours of the same area."
+    },
+    "trust": {
+      "title": "Trust",
+      "desc": "Verified accounts, secure actions and active moderation."
+    },
+    "solidarity": {
+      "title": "Solidarity",
+      "desc": "Helping out becomes simple, useful and rewarding."
+    }
+  },
+  "final_cta": {
+    "title": "Ready to join your neighbourhood?",
+    "subtitle": "Create your account in minutes and meet your neighbours.",
+    "button": "Sign up for free"
+  },
+  "footer": {
+    "tagline": "The collaborative neighbourhood platform.",
+    "product": "Product",
+    "legal": "Legal",
+    "legal_notice": "Legal notice",
+    "privacy": "Privacy & GDPR",
+    "contact": "Contact",
+    "rights": "All rights reserved."
+  }
+}

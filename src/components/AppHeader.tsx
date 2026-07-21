@@ -34,7 +34,7 @@ export function AppHeader() {
   const { role, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const showBack = location.pathname !== '/';
+  const showBack = location.pathname !== '/app';
 
   return (
     <header className="flex flex-shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-gray/30 bg-white px-4 py-3">
@@ -50,7 +50,7 @@ export function AppHeader() {
             <ArrowLeft className="h-5 w-5" />
           </button>
         )}
-        <Link to="/" className="text-lg font-bold text-navy">
+        <Link to="/app" className="text-lg font-bold text-navy">
           {t('app.name')}
         </Link>
         <NotificationBell />
@@ -58,7 +58,7 @@ export function AppHeader() {
         <LanguageSwitcher />
       </div>
       <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium">
-        <NavItem to="/" end>
+        <NavItem to="/app" end>
           {t('nav.home')}
         </NavItem>
         <NavItem to="/my-operations">{t('nav.operations')}</NavItem>

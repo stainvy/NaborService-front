@@ -21,6 +21,11 @@
     "fr": "Français",
     "en": "Anglais"
   },
+  "public": {
+    "login": "Se connecter",
+    "register": "S'inscrire",
+    "back_to_site": "Retour au site"
+  },
   "nav": {
     "home": "Accueil",
     "admin": "Administration",

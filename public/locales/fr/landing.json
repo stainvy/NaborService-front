@@ -1,0 +1,107 @@
+{
+  "nav": {
+    "features": "Fonctionnalités",
+    "how": "Comment ça marche",
+    "values": "La communauté"
+  },
+  "hero": {
+    "badge": "La plateforme collaborative de votre quartier",
+    "title": "Votre quartier, en mieux connecté.",
+    "subtitle": "Échangez des services, participez aux événements, discutez avec vos voisins et faites vivre votre quartier — en toute sécurité, entre habitants.",
+    "cta_primary": "Rejoindre mon quartier",
+    "cta_secondary": "Se connecter",
+    "illustration_alt": "Illustration d'un quartier connecté"
+  },
+  "reassurance": {
+    "mfa": {
+      "title": "Sécurité renforcée",
+      "desc": "Double authentification (MFA) sur toutes les actions sensibles."
+    },
+    "payments": {
+      "title": "Paiements protégés",
+      "desc": "Transactions sécurisées via Stripe, aucune donnée bancaire stockée."
+    },
+    "rgpd": {
+      "title": "Données maîtrisées",
+      "desc": "Conforme au RGPD : export, rectification et suppression à tout moment."
+    },
+    "local": {
+      "title": "100 % entre voisins",
+      "desc": "Une communauté locale et vérifiée, à l'échelle de votre quartier."
+    }
+  },
+  "features": {
+    "title": "Tout ce qu'il faut pour faire vivre son quartier",
+    "subtitle": "Une seule application pour l'entraide, les rencontres et la vie locale.",
+    "services": {
+      "title": "Services entre voisins",
+      "desc": "Proposez ou demandez un coup de main : bricolage, garde, cours, prêt de matériel… Suivi complet de la demande jusqu'au paiement."
+    },
+    "events": {
+      "title": "Événements & activités",
+      "desc": "Créez et rejoignez les événements du quartier, avec inscriptions, liste d'attente et billets."
+    },
+    "messaging": {
+      "title": "Messagerie sécurisée",
+      "desc": "Discutez en privé ou en groupe : texte, photos, messages vocaux et appels, en temps réel."
+    },
+    "documents": {
+      "title": "Documents & signatures",
+      "desc": "Contrats et reçus générés automatiquement, signés électroniquement et infalsifiables."
+    },
+    "polls": {
+      "title": "Sondages de quartier",
+      "desc": "Consultez les habitants et décidez ensemble grâce à des votes en temps réel."
+    },
+    "neighbourhood": {
+      "title": "Mon quartier",
+      "desc": "Rejoignez votre quartier sur la carte et retrouvez toute l'activité près de chez vous."
+    }
+  },
+  "steps": {
+    "title": "Comment ça marche",
+    "subtitle": "Trois étapes pour rejoindre votre communauté.",
+    "one": {
+      "title": "Je crée mon compte",
+      "desc": "Inscription rapide et sécurisée avec double authentification."
+    },
+    "two": {
+      "title": "Je choisis mon quartier",
+      "desc": "Géolocalisez-vous ou recherchez votre adresse pour rejoindre le bon quartier."
+    },
+    "three": {
+      "title": "J'échange avec mes voisins",
+      "desc": "Services, événements, messages : la vie de quartier commence."
+    }
+  },
+  "values": {
+    "title": "Une communauté de confiance",
+    "subtitle": "Nabor Services rapproche les habitants autour de valeurs simples.",
+    "proximity": {
+      "title": "Proximité",
+      "desc": "Des échanges à l'échelle humaine, entre voisins d'un même quartier."
+    },
+    "trust": {
+      "title": "Confiance",
+      "desc": "Comptes vérifiés, actions sécurisées et modération active."
+    },
+    "solidarity": {
+      "title": "Entraide",
+      "desc": "Rendre service devient simple, utile et gratifiant."
+    }
+  },
+  "final_cta": {
+    "title": "Prêt à rejoindre votre quartier ?",
+    "subtitle": "Créez votre compte en quelques minutes et découvrez vos voisins.",
+    "button": "S'inscrire gratuitement"
+  },
+  "footer": {
+    "tagline": "La plateforme collaborative de quartier.",
+    "product": "Produit",
+    "legal": "Légal",
+    "legal_notice": "Mentions légales",
+    "privacy": "Confidentialité & RGPD",
+    "contact": "Contact",
+    "rights": "Tous droits réservés."
+  }
+}

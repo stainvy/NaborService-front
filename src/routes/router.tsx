@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { ProtectedRoute } from './ProtectedRoute';
 import { RoleRoute } from './RoleRoute';
+import { PublicHome } from './PublicHome';
 import { NotFoundPage } from './NotFoundPage';
 import { HabitantLayout } from '@/components/HabitantLayout';
 import { LoginPage } from '@/features/auth/pages/LoginPage';
@@ -52,6 +53,9 @@ import { MyEventsPage } from '@/features/events/pages/MyEventsPage';
 import { MyRegistrationsPage } from '@/features/events/pages/MyRegistrationsPage';
 
 export const router = createBrowserRouter([
+  // Vitrine publique (redirige vers /app si déjà connecté)
+  { path: '/', element: <PublicHome /> },
+
   // Routes publiques
   { path: '/login', element: <LoginPage /> },
   { path: '/register', element: <RegisterPage /> },
@@ -65,7 +69,7 @@ export const router = createBrowserRouter([
       {
         element: <HabitantLayout />,
         children: [
-          { path: '/', element: <HomePage /> },
+          { path: '/app', element: <HomePage /> },
           { path: '/profile', element: <ProfilePage /> },
           { path: '/profile/edit', element: <ProfileEditPage /> },
           { path: '/security', element: <SecurityPage /> },

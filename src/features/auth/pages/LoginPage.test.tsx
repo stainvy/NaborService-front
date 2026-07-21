@@ -18,20 +18,20 @@ const fakeUser = {
   updatedAt: '2026-01-01T00:00:00.000Z',
 };
 
-// Routes minimales : /login + une cible '/' pour détecter la navigation
-// post-authentification.
+// Routes minimales : /login + une cible '/app' pour détecter la navigation
+// post-authentification (le tableau de bord vit désormais sous /app).
 function renderLogin() {
   return renderWithProviders(
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/" element={<div>ACCUEIL</div>} />
+      <Route path="/app" element={<div>ACCUEIL</div>} />
     </Routes>,
     { route: '/login' },
   );
 }
 
 describe('LoginPage — flux TOTP', () => {
-  it('login → totp_required → verify → session établie (redirige vers /)', async () => {
+  it('login → totp_required → verify → session établie (redirige vers /app)', async () => {
     server.use(
       http.post(`${env.apiUrl}/auth/login`, () =>
         HttpResponse.json({ challenge: 'totp_required', challenge_token: 'chall-1' }),

@@ -21,6 +21,11 @@
     "fr": "French",
     "en": "English"
   },
+  "public": {
+    "login": "Log in",
+    "register": "Sign up",
+    "back_to_site": "Back to site"
+  },
   "nav": {
     "home": "Home",
     "admin": "Administration",

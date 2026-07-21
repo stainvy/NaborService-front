@@ -44,7 +44,7 @@ export function SsoValidatePage() {
         <p className="text-center text-gray">
           {error ?? t('sso.missing_token')}
         </p>
-        <Link to="/" className="text-sm text-orange underline">
+        <Link to="/app" className="text-sm text-orange underline">
           ← {t('sso.back_home')}
         </Link>
       </div>
@@ -57,7 +57,7 @@ export function SsoValidatePage() {
         <div className="rounded-full bg-green-100 p-4 text-green-600 text-3xl">✓</div>
         <h1 className="text-xl font-bold text-navy">{t('sso.success_title')}</h1>
         <p className="text-center text-gray">{t('sso.success_message', { device })}</p>
-        <Link to="/" className="text-sm text-orange underline">
+        <Link to="/app" className="text-sm text-orange underline">
           ← {t('sso.back_home')}
         </Link>
       </div>
@@ -73,7 +73,7 @@ export function SsoValidatePage() {
       </p>
 
       <div className="flex gap-3">
-        <Link to="/">
+        <Link to="/app">
           <Button variant="secondary">{t('sso.deny')}</Button>
         </Link>
         <Button onClick={handleAuthorize} disabled={status === 'loading'}>

@@ -12,7 +12,7 @@ export function RoleRoute({ minRole }: { minRole: Role }) {
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
   if (!hasMinRole(role, minRole)) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/app" replace />;
   }
   return <Outlet />;
 }

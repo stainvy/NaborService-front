@@ -19,7 +19,7 @@ export function SessionsPage() {
     <div className="mx-auto min-h-screen max-w-2xl bg-white p-6">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-xl font-bold text-navy">{t('sessions.title')}</h1>
-        <Link to="/" className="text-sm text-orange underline">
+        <Link to="/app" className="text-sm text-orange underline">
           ← {t('sessions.back_home')}
         </Link>
       </div>
