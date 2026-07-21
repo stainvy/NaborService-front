@@ -2,9 +2,7 @@ import { z } from 'zod';
 import type { TFunction } from 'i18next';
 
 // Schémas construits avec `t` pour des messages traduits (aucune chaîne en dur).
-// Les règles reflètent EXACTEMENT le back :
-// - register : password 8–128
-// - reset    : password ≥ 12 (différent du register !)
+// Règle unique pour tous les mots de passe (création, reset, changement) : min 12.
 
 export function registerSchema(t: TFunction) {
   return z.object({
@@ -13,7 +11,7 @@ export function registerSchema(t: TFunction) {
     email: z.string().trim().email(t('validation.email_invalid')).max(255),
     password: z
       .string()
-      .min(8, t('validation.password_min', { count: 8 }))
+      .min(12, t('validation.password_min', { count: 12 }))
       .max(128, t('validation.password_max', { count: 128 })),
   });
 }
