@@ -14,7 +14,8 @@ export function ConnectionsTabs({ userId }: { userId: string }) {
   const followers = useFollowers(userId, { limit: 20 });
   const following = useFollowing(userId, { limit: 20 });
   const friends = useFriends(userId, { limit: 20 });
-  const query = tab === 'followers' ? followers : tab === 'following' ? following : friends;
+  const queryByTab = { followers, following, friends };
+  const query = queryByTab[tab];
   const items = query.data?.data ?? [];
 
   return (
@@ -30,7 +31,7 @@ export function ConnectionsTabs({ userId }: { userId: string }) {
             }`}
           >
             {t(`profile.tabs.${tb}`)}
-            {query.data?.meta ? ` (${query.data.meta.total})` : ''}
+            {queryByTab[tb].data?.meta ? ` (${queryByTab[tb].data.meta.total})` : ''}
           </button>
         ))}
       </div>
