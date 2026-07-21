@@ -27,6 +27,9 @@ vi.mock('@/lib/socket', () => ({
   connectSocket: () => socketMock.socket,
   reconnectSocket: () => {},
   disconnectSocket: () => {},
+  connectAllSockets: () => {},
+  reconnectAllSockets: () => {},
+  disconnectAllSockets: () => {},
 }));
 
 const openEvent = {
