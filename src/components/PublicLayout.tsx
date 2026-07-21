@@ -67,10 +67,6 @@ export function PublicLayout({ children }: { children: ReactNode }) {
           <div>
             <p className="text-lg font-bold text-white">{tc('app.name')}</p>
             <p className="mt-2 text-sm text-white/70">{t('footer.tagline')}</p>
-            <div className="mt-4 flex items-center gap-3">
-              <LanguageSwitcher />
-              <ThemeToggle className="text-white/80 hover:bg-white/10" />
-            </div>
           </div>
           <div>
             <p className="mb-3 text-sm font-semibold text-white">{t('footer.product')}</p>
