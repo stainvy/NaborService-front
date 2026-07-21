@@ -23,7 +23,7 @@ export function ProfilePage() {
       />
 
       <div className="px-6">
-        <div className="-mt-10 flex items-end justify-between">
+        <div className="mt-4 flex items-end justify-between">
           <div className="flex items-end gap-4">
             <div className="rounded-full ring-4 ring-white">
               <Avatar
@@ -33,7 +33,7 @@ export function ProfilePage() {
                 size={80}
               />
             </div>
-            <div className="pb-2">
+            <div>
               <h1 className="text-xl font-bold text-navy">
                 {user.firstName} {user.lastName}
               </h1>
@@ -49,7 +49,9 @@ export function ProfilePage() {
 
         <section className="mt-6">
           <h2 className="text-sm font-semibold text-navy">{t('profile.bio')}</h2>
-          <p className="mt-1 whitespace-pre-line text-gray">{user.bio || t('profile.no_bio')}</p>
+          <p className="mt-1 whitespace-pre-line text-gray text-wrap break-words">
+            {user.bio || t('profile.no_bio')}
+          </p>
         </section>
 
         <nav className="mt-6 flex flex-wrap gap-4 text-sm">

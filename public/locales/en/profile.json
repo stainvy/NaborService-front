@@ -45,6 +45,8 @@
     "geo_unavailable": "Position unavailable. You can search for an address below.",
     "geo_timeout": "Location timed out. Try again or search for an address.",
     "geo_not_supported": "Geolocation is not available on this device.",
+    "geo_locating": "Locating…",
+    "geo_no_match": "No neighbourhood found near you yet. You can search for an address below.",
     "search_address": "Search for an address",
     "address_placeholder": "Street number and name, city…",
     "ban_error": "Address search is temporarily unavailable. Use the list below.",

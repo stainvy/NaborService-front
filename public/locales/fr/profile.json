@@ -45,6 +45,8 @@
     "geo_unavailable": "Position indisponible. Vous pouvez rechercher une adresse ci-dessous.",
     "geo_timeout": "La localisation a expiré. Réessayez ou recherchez une adresse.",
     "geo_not_supported": "La géolocalisation n'est pas disponible sur cet appareil.",
+    "geo_locating": "Localisation en cours…",
+    "geo_no_match": "Aucun quartier trouvé près de vous pour l'instant. Vous pouvez rechercher une adresse ci-dessous.",
     "search_address": "Rechercher une adresse",
     "address_placeholder": "Numéro et nom de rue, ville…",
     "ban_error": "Recherche d'adresse momentanément indisponible. Utilisez la liste ci-dessous.",

@@ -50,6 +50,24 @@ describe('NeighbourhoodPicker', () => {
     expect(onChange).toHaveBeenCalledWith('nb-b');
   });
 
+  it('géolocalisation réussie mais aucun quartier proche : message dédié (pas de silence)', async () => {
+    stubGeolocation({
+      getCurrentPosition: (success) =>
+        success({ coords: { latitude: 48.85, longitude: 2.35 } } as GeolocationPosition),
+    });
+    server.use(
+      http.get(`${env.apiUrl}/neighbourhoods/nearby`, () => HttpResponse.json([])),
+      http.get(`${env.apiUrl}/neighbourhoods`, () => HttpResponse.json(NEIGHBOURHOODS)),
+    );
+
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    renderWithProviders(<NeighbourhoodPicker value={undefined} onChange={onChange} />);
+
+    await user.click(screen.getByRole('button', { name: 'neighbourhood.use_location' }));
+    expect(await screen.findByText('neighbourhood.geo_no_match')).toBeInTheDocument();
+  });
+
   it('géolocalisation refusée : message d’erreur et repli sur la liste manuelle', async () => {
     stubGeolocation({
       getCurrentPosition: (_success, error) =>

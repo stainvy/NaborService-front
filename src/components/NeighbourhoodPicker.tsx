@@ -99,6 +99,15 @@ export function NeighbourhoodPicker({ value, onChange }: Props) {
           {t('neighbourhood.use_location')}
         </Button>
         {geoError && <p className="mt-1 text-sm text-error">{t(`neighbourhood.${geoError}`)}</p>}
+        {!geoError && nearby.isLoading && (
+          <p className="mt-1 text-sm text-gray">{t('neighbourhood.geo_locating')}</p>
+        )}
+        {!geoError && nearby.isSuccess && !nearest && (
+          <p className="mt-1 text-sm text-gray">{t('neighbourhood.geo_no_match')}</p>
+        )}
+        {!geoError && nearby.isError && (
+          <p className="mt-1 text-sm text-error">{t('neighbourhood.geo_unavailable')}</p>
+        )}
         {nearest && <Recommendation neighbourhood={nearest} />}
       </div>
 
