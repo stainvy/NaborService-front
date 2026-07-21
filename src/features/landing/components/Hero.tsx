@@ -11,18 +11,21 @@ const TRUST: { key: string; icon: ComponentType<{ className?: string }> }[] = [
   { key: 'rgpd', icon: Lock },
 ];
 
+// Hero volontairement sombre en permanence (light comme dark) : fond navy fixe,
+// texte clair. Il « claque » en haut de page et contraste avec les sections
+// claires qui suivent.
 export function Hero() {
   const { t } = useTranslation('landing');
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-bg via-navy/5 to-surface">
+    <section className="relative overflow-hidden bg-gradient-to-br from-navy via-navy to-brand-navyDark">
       {/* Décor de fond : strictement derrière le contenu, non interactif. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         {/* dot grid façon plan de quartier, fondu sur les bords */}
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: 'radial-gradient(rgb(var(--fg) / 0.07) 1px, transparent 1px)',
+            backgroundImage: 'radial-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1px)',
             backgroundSize: '22px 22px',
             maskImage: 'radial-gradient(ellipse 70% 60% at 50% 45%, black 30%, transparent 78%)',
             WebkitMaskImage:
@@ -30,20 +33,20 @@ export function Hero() {
           }}
         />
         {/* blobs floutés dans les zones vides */}
-        <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-navy/10 blur-3xl" />
-        <div className="absolute -right-16 -top-20 h-96 w-96 rounded-full bg-orange/10 blur-3xl" />
-        <div className="absolute left-1/3 top-1/2 h-64 w-64 rounded-full bg-orange/5 blur-3xl" />
+        <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-orange/20 blur-3xl" />
+        <div className="absolute -right-20 -top-24 h-96 w-96 rounded-full bg-brand-navyLight/50 blur-3xl" />
+        <div className="absolute left-1/3 top-1/2 h-64 w-64 rounded-full bg-orange/10 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 lg:grid-cols-2 lg:py-24">
+      <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:py-28">
         <div>
-          <span className="inline-flex items-center rounded-full bg-orange/15 px-3 py-1 text-sm font-medium text-orange">
+          <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-orange">
             {t('hero.badge')}
           </span>
-          <h1 className="mt-5 text-4xl font-extrabold leading-tight text-fg sm:text-5xl">
+          <h1 className="mt-5 text-4xl font-extrabold leading-tight text-white sm:text-5xl">
             {t('hero.title')}
           </h1>
-          <p className="mt-5 max-w-xl text-lg text-muted">{t('hero.subtitle')}</p>
+          <p className="mt-5 max-w-xl text-lg text-white/80">{t('hero.subtitle')}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/register">
               <Button className="inline-flex items-center gap-2 px-6 py-3 text-base">
@@ -52,7 +55,7 @@ export function Hero() {
               </Button>
             </Link>
             <Link to="/login">
-              <Button variant="secondary" className="px-6 py-3 text-base">
+              <Button variant="ghost" className="px-6 py-3 text-base">
                 {t('hero.cta_secondary')}
               </Button>
             </Link>
@@ -61,7 +64,7 @@ export function Hero() {
           {/* Rangée de réassurance : comble l'espace sous les CTA */}
           <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
             {TRUST.map(({ key, icon: Icon }) => (
-              <li key={key} className="flex items-center gap-1.5 text-sm text-muted">
+              <li key={key} className="flex items-center gap-1.5 text-sm text-white/80">
                 <Icon className="h-4 w-4 text-orange" />
                 {t(`hero.trust.${key}`)}
               </li>
@@ -70,8 +73,22 @@ export function Hero() {
         </div>
 
         <div className="flex justify-center lg:justify-end">
-          <HeroIllustration alt={t('hero.illustration_alt')} />
+          {/* halo clair derrière l'illustration pour qu'elle ne se fonde pas */}
+          <div className="relative">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-10 scale-125 rounded-full bg-white/5 blur-2xl"
+            />
+            <HeroIllustration alt={t('hero.illustration_alt')} />
+          </div>
         </div>
+      </div>
+
+      {/* Transition franche vers la section claire suivante (vague CSS). */}
+      <div aria-hidden className="absolute inset-x-0 bottom-0 text-surface">
+        <svg viewBox="0 0 1440 48" className="block w-full" preserveAspectRatio="none">
+          <path fill="currentColor" d="M0,48 L0,24 C360,0 1080,56 1440,20 L1440,48 Z" />
+        </svg>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react';
 
-type Variant = 'primary' | 'secondary';
+type Variant = 'primary' | 'secondary' | 'ghost';
 type Tone = 'brand' | 'admin';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,14 +8,19 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   tone?: Tone;
 }
 
+// `ghost` : contour clair translucide, lisible sur un fond sombre (ex. hero navy).
+const GHOST = 'border border-white/30 bg-transparent text-white hover:bg-white/10';
+
 const VARIANT_CLASSES: Record<Tone, Record<Variant, string>> = {
   brand: {
     primary: 'bg-orange text-white hover:opacity-90',
     secondary: 'bg-navy text-white hover:opacity-90',
+    ghost: GHOST,
   },
   admin: {
     primary: 'bg-admin-accent text-white hover:bg-admin-accentHover',
     secondary: 'bg-surface text-admin-text border border-admin-border hover:bg-admin-bg',
+    ghost: GHOST,
   },
 };
 
