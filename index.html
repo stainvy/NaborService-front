@@ -5,6 +5,20 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nabor Services</title>
+    <!-- Anti-FOUC : pose la classe .dark avant le rendu du bundle (évite le flash blanc). -->
+    <script>
+      (function () {
+        try {
+          var m = localStorage.getItem('nabor-theme');
+          var dark =
+            m === 'dark' ||
+            ((m === 'system' || !m) &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.documentElement.classList.add('dark');
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

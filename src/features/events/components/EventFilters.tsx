@@ -18,7 +18,7 @@ export function EventFilters({ value, onChange }: Props) {
     <div className="flex flex-col gap-3">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-navy">{t('filters.status')}</span>
+          <span className="text-sm font-medium text-fg">{t('filters.status')}</span>
           <select
             value={value.status ?? ''}
             onChange={(e) => patch({ status: (e.target.value || undefined) as Filters['status'] })}
@@ -48,7 +48,7 @@ export function EventFilters({ value, onChange }: Props) {
         />
       </div>
 
-      <label className="flex items-center gap-2 text-sm text-navy">
+      <label className="flex items-center gap-2 text-sm text-fg">
         <input
           type="checkbox"
           checked={showPast}

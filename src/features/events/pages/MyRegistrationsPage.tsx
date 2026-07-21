@@ -12,7 +12,7 @@ export function MyRegistrationsPage() {
 
   return (
     <div className="mx-auto max-w-4xl p-6">
-      <h1 className="mb-6 text-xl font-bold text-navy">{t('registrations.title')}</h1>
+      <h1 className="mb-6 text-xl font-bold text-fg">{t('registrations.title')}</h1>
       {isLoading && <p className="text-gray">…</p>}
       {!isLoading && registrations.length === 0 && (
         <p className="text-gray">{t('registrations.empty')}</p>

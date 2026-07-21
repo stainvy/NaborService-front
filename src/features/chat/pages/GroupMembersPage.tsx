@@ -66,15 +66,15 @@ export function GroupMembersPage() {
     <div className="mx-auto flex max-w-2xl flex-col gap-4 p-6">
       <header className="flex items-center gap-3">
         <Link to={`/chat/${groupId}/settings`} aria-label={t('chat.group_settings')}>
-          <ArrowLeft className="h-5 w-5 text-navy" />
+          <ArrowLeft className="h-5 w-5 text-fg" />
         </Link>
-        <h1 className="flex-1 text-xl font-bold text-navy">{t('chat.members')}</h1>
+        <h1 className="flex-1 text-xl font-bold text-fg">{t('chat.members')}</h1>
         <button
           type="button"
           onClick={() => setRolesHelpOpen((v) => !v)}
           aria-expanded={rolesHelpOpen}
           aria-label={t('chat.roles_help_title')}
-          className="text-navy/60 hover:text-navy"
+          className="text-fg/60 hover:text-fg"
         >
           <HelpCircle className="h-5 w-5" />
         </button>
@@ -90,10 +90,10 @@ export function GroupMembersPage() {
 
       {rolesHelpOpen && (
         <div className="flex flex-col gap-2 rounded-lg border border-gray/20 bg-gray/5 p-3 text-sm">
-          <p className="font-medium text-navy">{t('chat.roles_help_title')}</p>
+          <p className="font-medium text-fg">{t('chat.roles_help_title')}</p>
           {ROLES.map((role) => (
             <p key={role}>
-              <span className="font-medium text-navy">{t(`chat.role_${role}`)}</span>
+              <span className="font-medium text-fg">{t(`chat.role_${role}`)}</span>
               {' — '}
               <span className="text-gray">{t(`chat.role_${role}_desc`)}</span>
             </p>
@@ -108,14 +108,14 @@ export function GroupMembersPage() {
             <div key={member.user_id} className="flex items-center gap-3 rounded-lg border border-gray/20 p-3">
               <Avatar mongoId={member.profile_picture_mongo_id} firstName={member.first_name} lastName={member.last_name} size={40} />
               <div className="min-w-0 flex-1">
-                <p className="truncate font-medium text-navy">
+                <p className="truncate font-medium text-fg">
                   {member.first_name} {member.last_name} {isSelf && `(${t('chat.you')})`}
                 </p>
                 {isAdmin && !isSelf ? (
                   <select
                     value={member.role}
                     onChange={(e) => groupId && updateRole.mutate({ groupId, userId: member.user_id, role: e.target.value as GroupRole })}
-                    className="mt-0.5 rounded-md border border-gray bg-white px-2 py-1 text-xs font-medium text-navy outline-none focus:border-navy"
+                    className="mt-0.5 rounded-md border border-gray bg-surface px-2 py-1 text-xs font-medium text-fg outline-none focus:border-navy"
                   >
                     {ROLES.map((role) => (
                       <option key={role} value={role}>{t(`chat.role_${role}`)}</option>

@@ -125,8 +125,8 @@ export function ProfileEditPage() {
   };
 
   return (
-    <div className="mx-auto min-h-screen max-w-xl bg-white p-6">
-      <h1 className="mb-6 text-xl font-bold text-navy">{t('profile.edit')}</h1>
+    <div className="mx-auto min-h-screen max-w-xl bg-surface p-6">
+      <h1 className="mb-6 text-xl font-bold text-fg">{t('profile.edit')}</h1>
 
       {/* Médias */}
       <section className="mb-8 flex flex-col gap-4">
@@ -182,7 +182,7 @@ export function ProfileEditPage() {
         <TextField label={t('profile.last_name')} {...register('lastName')} />
 
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-navy">{t('profile.bio')}</span>
+          <span className="text-sm font-medium text-fg">{t('profile.bio')}</span>
           <textarea
             {...register('bio')}
             rows={4}
@@ -191,7 +191,7 @@ export function ProfileEditPage() {
         </label>
 
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-navy">{t('profile.visibility')}</span>
+          <span className="text-sm font-medium text-fg">{t('profile.visibility')}</span>
           <select {...register('visibility')} className="rounded-md border border-gray px-3 py-2">
             {VISIBILITIES.map((v) => (
               <option key={v} value={v}>
@@ -202,7 +202,7 @@ export function ProfileEditPage() {
         </label>
 
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-navy">{t('profile.message_policy')}</span>
+          <span className="text-sm font-medium text-fg">{t('profile.message_policy')}</span>
           <select
             {...register('messagePolicy')}
             className="rounded-md border border-gray px-3 py-2"
@@ -225,7 +225,7 @@ export function ProfileEditPage() {
 
       {/* Mon quartier */}
       <section className="mt-10">
-        <h2 className="mb-3 font-semibold text-navy">{t('neighbourhood.section_title')}</h2>
+        <h2 className="mb-3 font-semibold text-fg">{t('neighbourhood.section_title')}</h2>
         <NeighbourhoodPicker value={neighbourhoodId} onChange={setNeighbourhoodId} />
 
         {saveNeighbourhood.isError && (

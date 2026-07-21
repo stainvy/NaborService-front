@@ -58,12 +58,12 @@ export function PrivacyPage() {
   const activeMutation = pending === 'rectify' ? rectify : deleteAccount;
 
   return (
-    <div className="mx-auto min-h-screen max-w-xl bg-white p-6">
-      <h1 className="mb-6 text-xl font-bold text-navy">{t('privacy.title')}</h1>
+    <div className="mx-auto min-h-screen max-w-xl bg-surface p-6">
+      <h1 className="mb-6 text-xl font-bold text-fg">{t('privacy.title')}</h1>
 
       {/* Export */}
       <section className="mb-8">
-        <h2 className="font-semibold text-navy">{t('privacy.export.title')}</h2>
+        <h2 className="font-semibold text-fg">{t('privacy.export.title')}</h2>
         <p className="mb-3 text-sm text-gray">{t('privacy.export.hint')}</p>
         <div className="flex gap-2">
           <Button onClick={() => exportData.mutate('json')} disabled={exportData.isPending}>
@@ -81,7 +81,7 @@ export function PrivacyPage() {
 
       {/* Rectification */}
       <section className="mb-8">
-        <h2 className="mb-3 font-semibold text-navy">{t('privacy.rectify.title')}</h2>
+        <h2 className="mb-3 font-semibold text-fg">{t('privacy.rectify.title')}</h2>
         <form onSubmit={submitRectify} className="flex flex-col gap-4">
           <TextField label={t('profile.first_name')} {...rectifyForm.register('firstName')} />
           <TextField label={t('profile.last_name')} {...rectifyForm.register('lastName')} />
@@ -97,7 +97,7 @@ export function PrivacyPage() {
 
       {/* Opposition */}
       <section className="mb-8">
-        <h2 className="font-semibold text-navy">{t('privacy.opt_out.title')}</h2>
+        <h2 className="font-semibold text-fg">{t('privacy.opt_out.title')}</h2>
         <p className="mb-3 text-sm text-gray">{t('privacy.opt_out.hint')}</p>
         <div className="flex flex-col divide-y divide-gray/20">
           {PROCESSING_TYPES.map((type: ProcessingType) => {
@@ -118,7 +118,7 @@ export function PrivacyPage() {
 
       {/* Limitation */}
       <section className="mb-8">
-        <h2 className="font-semibold text-navy">{t('privacy.restrict.title')}</h2>
+        <h2 className="font-semibold text-fg">{t('privacy.restrict.title')}</h2>
         <p className="mb-3 text-sm text-gray">{t('privacy.restrict.hint')}</p>
         <Button variant="secondary" onClick={() => restrict.mutate()} disabled={restrict.isPending}>
           {t('privacy.restrict.enable')}

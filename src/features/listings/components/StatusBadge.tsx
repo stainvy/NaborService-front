@@ -6,7 +6,7 @@ import type { ListingStatus } from '../types';
 const STATUS_CLASSES: Record<ListingStatus, string> = {
   open: 'bg-success/15 text-success',
   pending: 'bg-orange/15 text-orange',
-  in_progress: 'bg-navy/15 text-navy',
+  in_progress: 'bg-navy/15 text-fg',
   closed: 'bg-gray/20 text-gray',
   cancelled: 'bg-error/15 text-error',
 };

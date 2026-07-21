@@ -9,9 +9,9 @@ export function ListingCreatePage() {
   const create = useCreateListing();
 
   return (
-    <div className="mx-auto min-h-screen max-w-xl bg-white p-6">
+    <div className="mx-auto min-h-screen max-w-xl bg-surface p-6">
       <div className="mb-6">
-        <h1 className="text-xl font-bold text-navy">{t('create.title')}</h1>
+        <h1 className="text-xl font-bold text-fg">{t('create.title')}</h1>
         <p className="mt-1 text-sm text-gray">{t('create.subtitle')}</p>
       </div>
 

@@ -11,8 +11,8 @@ export function MyOperationsPage() {
   const operations = data?.data ?? [];
 
   return (
-    <div className="mx-auto min-h-screen max-w-4xl bg-white p-6">
-      <h1 className="mb-6 text-xl font-bold text-navy">{t('operations.title')}</h1>
+    <div className="mx-auto min-h-screen max-w-4xl bg-surface p-6">
+      <h1 className="mb-6 text-xl font-bold text-fg">{t('operations.title')}</h1>
       {isLoading && <p className="text-gray">…</p>}
       {!isLoading && operations.length === 0 && (
         <p className="text-gray">{t('operations.empty')}</p>

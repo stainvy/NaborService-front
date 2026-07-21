@@ -64,7 +64,7 @@ export function MessageInput({ onSend, onTyping, onSendFile, replyTo, onCancelRe
       {replyTo && (
         <div className="flex items-center gap-2 border-b border-gray/10 bg-gray/5 px-3 py-2 text-xs">
           <div className="min-w-0 flex-1">
-            <p className="font-medium text-navy">
+            <p className="font-medium text-fg">
               {t('chat.replying_to', {
                 name:
                   replyTo.sender_id === user?.id
@@ -89,7 +89,7 @@ export function MessageInput({ onSend, onTyping, onSendFile, replyTo, onCancelRe
         // Barre d'enregistrement vocal : chrono + annuler / envoyer.
         <div className="flex items-center gap-3 p-3">
           <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-error" aria-hidden />
-          <span className="text-sm font-semibold tabular-nums text-navy">{formatRecordingTime(voice.seconds)}</span>
+          <span className="text-sm font-semibold tabular-nums text-fg">{formatRecordingTime(voice.seconds)}</span>
           <span className="flex-1 truncate text-xs text-gray">{t('chat.recording_voice')}</span>
           <Button
             type="button"

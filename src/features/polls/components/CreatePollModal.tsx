@@ -113,10 +113,10 @@ export function CreatePollModal({ open, onClose, neighbourhoodId, groupId }: Cre
         <TextField label={t('description')} value={description} onChange={(e) => setDescription(e.target.value)} />
 
         <div>
-          <p className="mb-1 text-sm font-medium text-navy">{t('poll_type')}</p>
+          <p className="mb-1 text-sm font-medium text-fg">{t('poll_type')}</p>
           <div className="flex gap-3">
             {SELECTION_TYPES.map((type) => (
-              <label key={type} className="flex items-center gap-1 text-sm text-navy">
+              <label key={type} className="flex items-center gap-1 text-sm text-fg">
                 <input type="radio" name="poll_type" checked={selectionType === type} onChange={() => setSelectionType(type)} />
                 {t(`poll_type_${type}`)}
               </label>
@@ -127,7 +127,7 @@ export function CreatePollModal({ open, onClose, neighbourhoodId, groupId }: Cre
         <Toggle checked={isWeighted} onChange={setIsWeighted} label={t('is_weighted')} />
 
         <div>
-          <p className="mb-1 text-sm font-medium text-navy">{t('options')}</p>
+          <p className="mb-1 text-sm font-medium text-fg">{t('options')}</p>
           <div className="flex flex-col gap-2">
             {options.map((option, index) => (
               <div key={index} className="flex items-center gap-2">

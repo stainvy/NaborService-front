@@ -57,7 +57,7 @@ export function LifecycleActions({ event }: { event: NaborEvent }) {
           className="flex flex-col gap-4"
         >
           <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-navy">{t('actions.cancel_reason')}</span>
+            <span className="text-sm font-medium text-fg">{t('actions.cancel_reason')}</span>
             <textarea
               value={reason}
               onChange={(e) => setReason(e.target.value)}

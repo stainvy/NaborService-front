@@ -48,7 +48,7 @@ export function ListingForm({ defaultValues, submitLabel, submitting, onSubmit }
         <TextField label={t('form.title')} error={errors.title?.message} {...register('title')} />
 
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-navy">{t('form.type')}</span>
+          <span className="text-sm font-medium text-fg">{t('form.type')}</span>
           <select {...register('listing_type')} className="rounded-md border border-gray px-3 py-2">
             {LISTING_TYPES.map((ty) => (
               <option key={ty} value={ty}>
@@ -59,7 +59,7 @@ export function ListingForm({ defaultValues, submitLabel, submitting, onSubmit }
         </label>
 
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-navy">{t('form.description')}</span>
+          <span className="text-sm font-medium text-fg">{t('form.description')}</span>
           <textarea
             {...register('description')}
             rows={4}

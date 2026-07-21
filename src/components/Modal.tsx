@@ -27,13 +27,13 @@ export function Modal({ open, onClose, title, children, maxWidthClass = 'max-w-s
       role="presentation"
     >
       <div
-        className={`w-full ${maxWidthClass} rounded-lg bg-white p-6 shadow-lg`}
+        className={`w-full ${maxWidthClass} rounded-lg bg-surface p-6 shadow-lg`}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-label={title}
       >
-        <h2 className="mb-4 text-lg font-bold text-navy">{title}</h2>
+        <h2 className="mb-4 text-lg font-bold text-fg">{title}</h2>
         {children}
       </div>
     </div>

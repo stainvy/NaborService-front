@@ -80,23 +80,23 @@ export function GroupSettingsPage() {
     <div className="mx-auto flex max-w-2xl flex-col gap-6 p-6">
       <header className="flex items-center gap-3">
         <Link to={`/chat/${groupId}`} aria-label={t('chat.title')}>
-          <ArrowLeft className="h-5 w-5 text-navy" />
+          <ArrowLeft className="h-5 w-5 text-fg" />
         </Link>
-        <h1 className="text-xl font-bold text-navy">
+        <h1 className="text-xl font-bold text-fg">
           {isDirectMessage && group ? getGroupDisplayName(group, t) : t('chat.group_settings')}
         </h1>
       </header>
 
       {myRole && !isDirectMessage && (
         <p className="text-sm text-gray">
-          {t('chat.your_role')}: <span className="font-medium text-navy">{t(`chat.role_${myRole}`)}</span>
+          {t('chat.your_role')}: <span className="font-medium text-fg">{t(`chat.role_${myRole}`)}</span>
         </p>
       )}
 
       {!isDirectMessage && (
         <Link
           to={`/chat/${groupId}/members`}
-          className="flex items-center gap-2 rounded-lg border border-gray/20 p-3 text-sm font-medium text-navy hover:border-orange/40"
+          className="flex items-center gap-2 rounded-lg border border-gray/20 p-3 text-sm font-medium text-fg hover:border-orange/40"
         >
           <Users className="h-4 w-4" /> {t('chat.members')}
           {members && <span className="text-gray">({members.length})</span>}
@@ -105,12 +105,12 @@ export function GroupSettingsPage() {
 
       <div className="flex flex-col gap-2 rounded-lg border border-gray/20 p-3">
         {!group?.is_muted && (
-          <label className="flex items-center justify-between gap-2 text-sm text-navy">
+          <label className="flex items-center justify-between gap-2 text-sm text-fg">
             {t('chat.mute_duration_label')}
             <select
               value={muteDuration}
               onChange={(e) => setMuteDuration(e.target.value)}
-              className="rounded-md border border-gray bg-white px-2 py-1 text-xs font-medium text-navy outline-none focus:border-navy"
+              className="rounded-md border border-gray bg-surface px-2 py-1 text-xs font-medium text-fg outline-none focus:border-navy"
             >
               {MUTE_DURATIONS.map((d) => (
                 <option key={d.key} value={d.key}>{t(`chat.${d.key}`)}</option>
@@ -122,7 +122,7 @@ export function GroupSettingsPage() {
           type="button"
           onClick={handleToggleMute}
           disabled={muteGroup.isPending || unmuteGroup.isPending}
-          className="flex items-center gap-2 text-sm font-medium text-navy hover:text-orange"
+          className="flex items-center gap-2 text-sm font-medium text-fg hover:text-orange"
         >
           {group?.is_muted ? <BellOff className="h-4 w-4" /> : <Bell className="h-4 w-4" />}
           {group?.is_muted ? t('chat.unmute') : t('chat.mute')}

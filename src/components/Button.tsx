@@ -15,7 +15,7 @@ const VARIANT_CLASSES: Record<Tone, Record<Variant, string>> = {
   },
   admin: {
     primary: 'bg-admin-accent text-white hover:bg-admin-accentHover',
-    secondary: 'bg-white text-admin-text border border-admin-border hover:bg-admin-bg',
+    secondary: 'bg-surface text-admin-text border border-admin-border hover:bg-admin-bg',
   },
 };
 

@@ -19,7 +19,7 @@ export function NeighbourhoodSelect({ value, onChange, label, emptyLabel }: Prop
 
   return (
     <label className="flex flex-col gap-1">
-      <span className="text-sm font-medium text-navy">{label}</span>
+      <span className="text-sm font-medium text-fg">{label}</span>
       <select
         value={value ?? ''}
         onChange={(e) => onChange(e.target.value || undefined)}

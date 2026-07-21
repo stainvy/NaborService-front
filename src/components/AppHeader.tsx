@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { hasMinRole } from '@/types/roles';
 import { Button } from '@/components/Button';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { NotificationBell } from '@/features/notifications/components/NotificationBell';
 import { PointsBadge } from '@/features/points/components/PointsBadge';
 
@@ -17,7 +18,7 @@ function NavItem({ to, end, children }: { to: string; end?: boolean; children: R
       end={end}
       className={({ isActive }) =>
         `underline transition-colors ${
-          isActive ? 'font-semibold text-orange' : 'text-navy hover:text-orange'
+          isActive ? 'font-semibold text-orange' : 'text-fg hover:text-orange'
         }`
       }
     >
@@ -37,7 +38,7 @@ export function AppHeader() {
   const showBack = location.pathname !== '/app';
 
   return (
-    <header className="flex flex-shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-gray/30 bg-white px-4 py-3">
+    <header className="flex flex-shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-gray/30 bg-surface px-4 py-3">
       <div className="flex items-center gap-2">
         {showBack && (
           <button
@@ -45,16 +46,17 @@ export function AppHeader() {
             onClick={() => navigate(-1)}
             aria-label={t('actions.back')}
             title={t('actions.back')}
-            className="flex h-8 w-8 items-center justify-center rounded-md text-navy transition-colors hover:bg-navy/10"
+            className="flex h-8 w-8 items-center justify-center rounded-md text-fg transition-colors hover:bg-navy/10"
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
         )}
-        <Link to="/app" className="text-lg font-bold text-navy">
+        <Link to="/app" className="text-lg font-bold text-fg">
           {t('app.name')}
         </Link>
         <NotificationBell />
         <PointsBadge />
+        <ThemeToggle />
         <LanguageSwitcher />
       </div>
       <nav className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium">

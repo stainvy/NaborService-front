@@ -13,8 +13,8 @@ export function MyListingsPage() {
   const mine = (data?.data ?? []).filter((l) => l.creatorId === user?.id);
 
   return (
-    <div className="mx-auto min-h-screen max-w-4xl bg-white p-6">
-      <h1 className="mb-6 text-xl font-bold text-navy">{t('mine.title')}</h1>
+    <div className="mx-auto min-h-screen max-w-4xl bg-surface p-6">
+      <h1 className="mb-6 text-xl font-bold text-fg">{t('mine.title')}</h1>
       {isLoading && <p className="text-gray">…</p>}
       {!isLoading && mine.length === 0 && <p className="text-gray">{t('mine.empty')}</p>}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

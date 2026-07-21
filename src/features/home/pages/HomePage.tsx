@@ -114,7 +114,7 @@ export function HomePage() {
           >
             <MapPin className="h-5 w-5 shrink-0 text-orange" />
             <div>
-              <p className="font-semibold text-navy">{t('home.neighbourhood_banner.title')}</p>
+              <p className="font-semibold text-fg">{t('home.neighbourhood_banner.title')}</p>
               <p className="text-sm text-brand-muted">{t('home.neighbourhood_banner.subtitle')}</p>
             </div>
           </Link>
@@ -237,10 +237,10 @@ function QuickAccessCard({ card }: { card: QuickCard }) {
     <Link to={card.to} className="block">
       <Card variant="interactive" className="h-full p-4">
         <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy/10 text-navy">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy/10 text-fg">
             <Icon className="h-5 w-5" />
           </span>
-          <span className="font-semibold text-navy">{card.title}</span>
+          <span className="font-semibold text-fg">{card.title}</span>
         </div>
         <p className="mt-2 text-sm text-brand-muted">{card.description}</p>
       </Card>

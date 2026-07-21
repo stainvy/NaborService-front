@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 type BadgeTone = 'navy' | 'orange' | 'success' | 'error' | 'muted';
 
 const TONES: Record<BadgeTone, string> = {
-  navy: 'bg-navy/10 text-navy',
+  navy: 'bg-navy/10 text-fg',
   orange: 'bg-orange/15 text-orange',
   success: 'bg-success/15 text-success',
   error: 'bg-error/15 text-error',

@@ -15,7 +15,7 @@ export function UserListItem({ user }: { user: SocialUserSummary }) {
         lastName={user.lastName}
         size={40}
       />
-      <span className="font-medium text-navy">
+      <span className="font-medium text-fg">
         {user.firstName} {user.lastName}
       </span>
     </Link>

@@ -21,8 +21,8 @@ export function DiscoverPage() {
   };
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-md flex-col items-center bg-white p-6">
-      <h1 className="mb-6 text-xl font-bold text-navy">{t('social.discover.title')}</h1>
+    <div className="mx-auto flex min-h-screen max-w-md flex-col items-center bg-surface p-6">
+      <h1 className="mb-6 text-xl font-bold text-fg">{t('social.discover.title')}</h1>
 
       {isLoading ? (
         <p className="text-gray">…</p>
@@ -37,7 +37,7 @@ export function DiscoverPage() {
               lastName={current.lastName}
               size={120}
             />
-            <h2 className="text-lg font-semibold text-navy">
+            <h2 className="text-lg font-semibold text-fg">
               {current.firstName} {current.lastName}
             </h2>
             {current.bio && <p className="text-center text-sm text-gray">{current.bio}</p>}

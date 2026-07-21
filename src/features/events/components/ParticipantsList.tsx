@@ -21,7 +21,7 @@ export function ParticipantsList({ participants }: { participants: EventParticip
             lastName={p.user?.lastName}
             size={32}
           />
-          <span className="text-sm text-navy">
+          <span className="text-sm text-fg">
             {p.user ? `${p.user.firstName ?? ''} ${p.user.lastName ?? ''}`.trim() : p.userId}
           </span>
         </li>

@@ -72,13 +72,13 @@ export function DataTable({
   // Loading skeleton
   if (loading) {
     return (
-      <div className="overflow-auto rounded-lg border border-gray/200">
+      <div className="overflow-auto rounded-lg border border-border">
         <table className="w-full text-left text-xs">
           <thead>
-            <tr className="border-b border-gray/200 bg-gray-50">
+            <tr className="border-b border-border bg-surface-2">
               <td className="w-10 px-4 py-2 text-center text-gray">#</td>
               {columns.map((c) => (
-                <td key={c.key} className="px-4 py-2 font-medium text-navy">
+                <td key={c.key} className="px-4 py-2 font-medium text-fg">
                   {c.label}
                 </td>
               ))}
@@ -90,7 +90,7 @@ export function DataTable({
                 <td className="px-4 py-3 text-center text-gray">{i}</td>
                 {columns.map((c) => (
                   <td key={c.key} className="px-4 py-3">
-                    <div className="h-3 w-24 rounded bg-gray-100" />
+                    <div className="h-3 w-24 rounded bg-surface-2" />
                   </td>
                 ))}
               </tr>
@@ -104,7 +104,7 @@ export function DataTable({
   // Empty state
   if (!data.length) {
     return (
-      <div className="rounded-lg border border-gray/200 bg-white px-5 py-8 text-center text-sm text-gray">
+      <div className="rounded-lg border border-border bg-surface px-5 py-8 text-center text-sm text-gray">
         {emptyMessage}
       </div>
     );
@@ -112,16 +112,16 @@ export function DataTable({
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="overflow-auto rounded-lg border border-gray/200">
+      <div className="overflow-auto rounded-lg border border-border">
         <table className="w-full text-left text-xs">
           <thead>
-            <tr className="border-b border-gray/200 bg-gray-50">
+            <tr className="border-b border-border bg-surface-2">
               <td className="w-10 select-none px-4 py-2 text-center text-gray">#</td>
               {columns.map((c) => (
                 <td
                   key={c.key}
                   onClick={() => handleSort(c)}
-                  className={`px-4 py-2 font-medium text-navy ${
+                  className={`px-4 py-2 font-medium text-fg ${
                     c.sortable ? 'cursor-pointer select-none hover:text-orange' : ''
                   }`}
                 >
@@ -137,7 +137,7 @@ export function DataTable({
                 onClick={() => onRowClick?.(row, i)}
                 className={`border-b border-gray/50 ${
                   onRowClick ? 'cursor-pointer hover:bg-orange/5' : ''
-                } ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/30'}`}
+                } ${i % 2 === 0 ? 'bg-surface' : 'bg-surface-2/30'}`}
               >
                 <td className="w-10 select-none px-4 py-2.5 text-center text-gray">
                   {page * pageSize + i + 1}
@@ -145,7 +145,7 @@ export function DataTable({
                 {columns.map((c) => {
                   const val = redactCell(row[c.key]);
                   return (
-                    <td key={c.key} className="max-w-xs truncate px-4 py-2.5 font-mono text-navy">
+                    <td key={c.key} className="max-w-xs truncate px-4 py-2.5 font-mono text-fg">
                       {val}
                     </td>
                   );

@@ -7,7 +7,7 @@ import { AppHeader } from '@/components/AppHeader';
 // son propre scroll interne.
 export function HabitantLayout() {
   return (
-    <div className="flex h-screen flex-col bg-white">
+    <div className="flex h-screen flex-col bg-surface">
       <AppHeader />
       <main className="min-h-0 flex-1 overflow-auto">
         <Outlet />

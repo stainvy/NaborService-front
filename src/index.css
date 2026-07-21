@@ -2,11 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Thème par variables CSS (canaux RGB → compatibles avec l'opacité Tailwind
+ * `/ <alpha-value>`). `:root` = clair, `.dark` = sombre. La classe `.dark` est
+ * posée sur <html> par le ThemeProvider (et par le script anti-FOUC de index.html).
+ * navy/orange restent des accents de marque fixes ; seuls les tokens sémantiques
+ * basculent. En light, --fg vaut le navy de marque pour que text-navy → text-fg
+ * soit visuellement identique.
+ */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: light;
+
+  --bg: 244 247 252; /* fond de page */
+  --surface: 255 255 255; /* cartes, entêtes, modales */
+  --surface-2: 238 242 248; /* surface alternée / hovers */
+  --border: 227 233 242; /* séparateurs */
+  --fg: 15 42 94; /* texte principal (= navy en clair) */
+  --muted: 91 107 133; /* texte secondaire, placeholders */
+
+  /* Back-office (bascule aussi) */
+  --admin-bg: 248 250 252;
+  --admin-surface: 255 255 255;
+  --admin-border: 226 232 240;
+  --admin-text: 30 41 59;
+  --admin-muted: 100 116 139;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --bg: 11 18 32;
+  --surface: 19 28 46;
+  --surface-2: 27 39 64;
+  --border: 42 55 82;
+  --fg: 230 236 245;
+  --muted: 147 161 184;
+
+  --admin-bg: 15 23 42;
+  --admin-surface: 30 41 59;
+  --admin-border: 51 65 85;
+  --admin-text: 226 232 240;
+  --admin-muted: 148 163 184;
 }
 
 body {
   margin: 0;
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
 }

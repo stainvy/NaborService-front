@@ -54,7 +54,7 @@ export function EventForm({ defaultValues, submitLabel, submitting, onSubmit }: 
       <div className="flex flex-col gap-4">
         <TextField label={t('form.title')} error={errors.title?.message} {...register('title')} />
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-navy">{t('form.description')}</span>
+          <span className="text-sm font-medium text-fg">{t('form.description')}</span>
           <textarea
             {...register('description')}
             rows={4}

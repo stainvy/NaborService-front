@@ -3,6 +3,22 @@ import { afterAll, afterEach, beforeAll, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import { server } from './msw/server';
 
+// jsdom n'implémente pas matchMedia : le ThemeProvider (préférence système) en
+// dépend. Stub minimal (préférence claire, listeners no-op).
+if (!window.matchMedia) {
+  window.matchMedia = (query: string) =>
+    ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      addListener: () => {},
+      removeListener: () => {},
+      dispatchEvent: () => false,
+    }) as unknown as MediaQueryList;
+}
+
 // On neutralise le vrai client Socket.io en test : sinon une session
 // authentifiée déclenche une connexion réseau vers VITE_SOCKET_URL, ce qui
 // laisse un handle ouvert et fait planter Node au teardown (libuv).

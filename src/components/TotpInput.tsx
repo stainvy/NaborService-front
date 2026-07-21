@@ -20,7 +20,7 @@ export function TotpInput({
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <label htmlFor={id} className="text-sm font-medium text-navy">
+        <label htmlFor={id} className="text-sm font-medium text-fg">
           {label}
         </label>
       )}

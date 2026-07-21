@@ -205,7 +205,7 @@ function EventsPanel() {
 
             {showContent && content != null && (
               <div
-                className="max-h-80 overflow-auto rounded border border-admin-border bg-white p-3 text-xs"
+                className="max-h-80 overflow-auto rounded border border-admin-border bg-surface p-3 text-xs"
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(
                     (content as any)?.body_html ?? (content as any)?.body ?? (content as any)?.html ?? JSON.stringify(content),
@@ -375,7 +375,7 @@ function ListingsPanel() {
 
             {showContent && content != null && (
               <div
-                className="max-h-80 overflow-auto rounded border border-admin-border bg-white p-3 text-xs"
+                className="max-h-80 overflow-auto rounded border border-admin-border bg-surface p-3 text-xs"
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(
                     (content as any)?.body_html ?? (content as any)?.body ?? (content as any)?.html ?? JSON.stringify(content),

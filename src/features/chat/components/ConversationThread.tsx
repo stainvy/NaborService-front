@@ -280,11 +280,11 @@ export function ConversationThread({
   }
 
   if (isLoading || !group) {
-    return <main className="flex flex-1 items-center justify-center bg-white text-sm text-gray">…</main>;
+    return <main className="flex flex-1 items-center justify-center bg-surface text-sm text-gray">…</main>;
   }
 
   return (
-    <main className="flex min-h-0 min-w-0 flex-1 flex-col bg-white">
+    <main className="flex min-h-0 min-w-0 flex-1 flex-col bg-surface">
       <header className="flex h-16 flex-shrink-0 items-center gap-3 border-b border-gray/20 px-4">
         {/* Retour à la liste des conversations — visible seulement sur mobile,
             où le fil occupe toute la largeur (colonne unique). */}
@@ -297,7 +297,7 @@ export function ConversationThread({
         </Link>
         <Avatar {...getGroupAvatarProps(group)} size={40} />
         <div className="min-w-0 flex-1">
-          <p className="truncate font-bold text-navy">{getGroupDisplayName(group, t)}</p>
+          <p className="truncate font-bold text-fg">{getGroupDisplayName(group, t)}</p>
           {isGroup && group.member_count != null && (
             <p className="text-xs text-gray">{t('chat.member_count', { count: group.member_count })}</p>
           )}
@@ -314,7 +314,7 @@ export function ConversationThread({
               type="button"
               onClick={() => setTab('discussion')}
               className={`rounded-md px-3 py-1 text-xs font-semibold transition-colors ${
-                tab === 'discussion' ? 'bg-white text-navy shadow-sm' : 'text-gray'
+                tab === 'discussion' ? 'bg-surface text-fg shadow-sm' : 'text-gray'
               }`}
             >
               {t('chat.tab_discussion')}
@@ -323,7 +323,7 @@ export function ConversationThread({
               type="button"
               onClick={() => setTab('sondages')}
               className={`rounded-md px-3 py-1 text-xs font-semibold transition-colors ${
-                tab === 'sondages' ? 'bg-white text-navy shadow-sm' : 'text-gray'
+                tab === 'sondages' ? 'bg-surface text-fg shadow-sm' : 'text-gray'
               }`}
             >
               {t('chat.tab_polls')}
@@ -338,7 +338,7 @@ export function ConversationThread({
               onClick={() => handleStartCall('audio')}
               aria-label={t('call.start_audio')}
               title={t('call.start_audio')}
-              className="rounded-lg p-2 text-gray hover:bg-gray/10 hover:text-navy"
+              className="rounded-lg p-2 text-gray hover:bg-gray/10 hover:text-fg"
             >
               <Phone className="h-5 w-5" />
             </button>
@@ -347,7 +347,7 @@ export function ConversationThread({
               onClick={() => handleStartCall('video')}
               aria-label={t('call.start_video')}
               title={t('call.start_video')}
-              className="rounded-lg p-2 text-gray hover:bg-gray/10 hover:text-navy"
+              className="rounded-lg p-2 text-gray hover:bg-gray/10 hover:text-fg"
             >
               <Video className="h-5 w-5" />
             </button>

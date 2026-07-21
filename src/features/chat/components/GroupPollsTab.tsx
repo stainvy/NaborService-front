@@ -41,7 +41,7 @@ export function GroupPollsTab({ groupId, isNeighbourhood, neighbourhoodId, canCr
   return (
     <div className="flex-1 overflow-y-auto bg-gray/5 p-5">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-bold text-navy">{t('group_title')}</h2>
+        <h2 className="text-lg font-bold text-fg">{t('group_title')}</h2>
         {canCreate && (
           <Button onClick={() => setCreateOpen(true)} className="gap-1.5">
             <Plus className="h-4 w-4" /> {t('create_poll')}
@@ -82,7 +82,7 @@ function GroupPollCard({ poll }: { poll: Poll }) {
   const canManage = canManagePoll(poll, user?.id, role);
 
   return (
-    <div className="rounded-xl border border-gray/20 bg-white p-4">
+    <div className="rounded-xl border border-gray/20 bg-surface p-4">
       <div className="mb-2 flex items-center gap-2">
         <span className="flex items-center gap-1 rounded-full bg-gray/10 px-2 py-0.5 text-xs font-medium text-gray">
           <PollSelectionIcon pollType={poll.pollType} selected={false} className="h-3 w-3" />
@@ -98,7 +98,7 @@ function GroupPollCard({ poll }: { poll: Poll }) {
             type="button"
             onClick={() => setConfirmCloseOpen(true)}
             aria-label={t('close_poll')}
-            className="text-gray hover:text-navy"
+            className="text-gray hover:text-fg"
           >
             <Lock className="h-3.5 w-3.5" />
           </button>
@@ -114,7 +114,7 @@ function GroupPollCard({ poll }: { poll: Poll }) {
           </button>
         )}
       </div>
-      <p className="mb-3 font-semibold text-navy">{poll.title}</p>
+      <p className="mb-3 font-semibold text-fg">{poll.title}</p>
 
       <div className="flex flex-col gap-3">
         {poll.options.map((option) => {
@@ -133,7 +133,7 @@ function GroupPollCard({ poll }: { poll: Poll }) {
               className={`text-left ${!canVote ? 'cursor-default' : 'cursor-pointer'}`}
             >
               <div className="mb-1 flex items-center justify-between gap-2 text-sm">
-                <span className={`flex items-center gap-1.5 ${isSelected ? 'font-semibold text-orange' : 'font-medium text-navy'}`}>
+                <span className={`flex items-center gap-1.5 ${isSelected ? 'font-semibold text-orange' : 'font-medium text-fg'}`}>
                   <PollSelectionIcon pollType={poll.pollType} selected={isSelected} className={`h-4 w-4 flex-shrink-0 ${isSelected ? 'text-orange' : 'text-gray'}`} />
                   {isWinner && <Trophy className="h-3.5 w-3.5 text-orange" />}
                   {option.label}

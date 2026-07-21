@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { hasMinRole } from '@/types/roles';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 function NavSection({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -86,6 +87,10 @@ export function AdminLayout() {
             <AdminNavLink to="/admin/api-explorer">{t('nav.api_explorer')}</AdminNavLink>
           </NavSection>
         </nav>
+
+        <div className="mt-auto px-3 pt-4">
+          <ThemeToggle className="text-admin-textInverse hover:bg-admin-sidebarHover" />
+        </div>
       </aside>
 
       <main className="flex-1 overflow-auto p-6">

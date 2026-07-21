@@ -20,7 +20,7 @@ export function LanguageSwitcher() {
       <select
         value={i18n.resolvedLanguage}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-md border border-gray bg-white px-2 py-1 text-xs font-medium text-navy outline-none focus:border-navy"
+        className="rounded-md border border-gray bg-surface px-2 py-1 text-xs font-medium text-fg outline-none focus:border-navy"
       >
         {SUPPORTED_LANGUAGES.map((lng) => (
           <option key={lng} value={lng}>

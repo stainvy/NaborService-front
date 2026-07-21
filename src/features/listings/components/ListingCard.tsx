@@ -21,12 +21,12 @@ export function ListingCard({ listing }: { listing: Listing }) {
         />
       )}
       <div className="flex items-start justify-between gap-2">
-        <span className="inline-block w-fit rounded-full bg-navy/10 px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-navy">
+        <span className="inline-block w-fit rounded-full bg-navy/10 px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-fg">
           {t(`type.${listing.listingType}`)}
         </span>
         <StatusBadge status={listing.status} />
       </div>
-      <h3 className="font-semibold text-navy">{listing.title}</h3>
+      <h3 className="font-semibold text-fg">{listing.title}</h3>
       {listing.description && (
         <p className="line-clamp-2 text-sm text-gray">{listing.description}</p>
       )}

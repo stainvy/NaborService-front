@@ -24,7 +24,7 @@ export function ListingsFeedPage() {
   return (
     <div className="mx-auto min-h-screen max-w-4xl bg-brand-bg p-6">
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-navy">{t('feed.title')}</h1>
+        <h1 className="text-xl font-bold text-fg">{t('feed.title')}</h1>
         <div className="flex gap-2">
           <Link to="/my-listings" className="self-center text-sm text-orange underline">
             {t('feed.mine')}

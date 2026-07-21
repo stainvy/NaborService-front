@@ -45,7 +45,7 @@ export function MediaViewer({ file, onClose }: { file: ViewableFile | null; onCl
             download={file.filename}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 self-start rounded-md border border-gray/30 px-3 py-1.5 text-sm text-navy hover:bg-gray/10"
+            className="inline-flex items-center gap-1.5 self-start rounded-md border border-gray/30 px-3 py-1.5 text-sm text-fg hover:bg-gray/10"
           >
             <Download className="h-4 w-4" /> {t('media.download')}
           </a>

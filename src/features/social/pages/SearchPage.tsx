@@ -12,8 +12,8 @@ export function SearchPage() {
   const results = data?.data ?? [];
 
   return (
-    <div className="mx-auto min-h-screen max-w-xl bg-white p-6">
-      <h1 className="mb-6 text-xl font-bold text-navy">{t('social.search.title')}</h1>
+    <div className="mx-auto min-h-screen max-w-xl bg-surface p-6">
+      <h1 className="mb-6 text-xl font-bold text-fg">{t('social.search.title')}</h1>
 
       <form
         onSubmit={(e) => {

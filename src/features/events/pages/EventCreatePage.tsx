@@ -10,7 +10,7 @@ export function EventCreatePage() {
 
   return (
     <div className="mx-auto max-w-xl p-6">
-      <h1 className="mb-6 text-xl font-bold text-navy">{t('create.title')}</h1>
+      <h1 className="mb-6 text-xl font-bold text-fg">{t('create.title')}</h1>
       {create.isError && <p className="mb-4 text-sm text-error">{t('create.error')}</p>}
       <EventForm
         submitLabel={t('create.submit')}

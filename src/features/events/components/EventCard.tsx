@@ -33,7 +33,7 @@ export function EventCard({ event }: { event: NaborEvent }) {
           />
         )}
         <div className="flex items-start justify-between gap-2">
-          <h3 className="font-semibold text-navy">{event.title}</h3>
+          <h3 className="font-semibold text-fg">{event.title}</h3>
           {past ? (
             <span className="inline-block rounded-full bg-gray/20 px-2 py-0.5 text-xs font-medium text-gray">
               {t('status.past')}
@@ -51,7 +51,7 @@ export function EventCard({ event }: { event: NaborEvent }) {
         )}
 
         <div className="mt-1 flex items-center justify-between">
-          <span className="font-semibold text-navy">
+          <span className="font-semibold text-fg">
             {event.costCents === 0 ? (
               <span className="text-success">{t('card.free')}</span>
             ) : (

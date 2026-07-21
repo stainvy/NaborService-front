@@ -9,8 +9,8 @@ export function NotificationPreferencesPage() {
   const update = useUpdateNotifPrefs();
 
   return (
-    <div className="mx-auto min-h-screen max-w-xl bg-white p-6">
-      <h1 className="mb-6 text-xl font-bold text-navy">{t('notif.title')}</h1>
+    <div className="mx-auto min-h-screen max-w-xl bg-surface p-6">
+      <h1 className="mb-6 text-xl font-bold text-fg">{t('notif.title')}</h1>
 
       {isLoading || !prefs ? (
         <p className="text-gray">…</p>

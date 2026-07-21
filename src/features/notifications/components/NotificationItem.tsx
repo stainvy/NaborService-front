@@ -48,11 +48,11 @@ export function NotificationItem({ notification, onNavigate }: NotificationItemP
         onClick={handleClick}
         className="flex min-w-0 flex-1 items-start gap-3 text-left"
       >
-        <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-navy/10 text-navy">
+        <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-navy/10 text-fg">
           <Icon className="h-4 w-4" />
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block truncate text-sm text-navy">
+          <span className="block truncate text-sm text-fg">
             {getNotificationMessage(notification, t)}
           </span>
           <span className="block text-xs text-gray">

@@ -14,7 +14,7 @@ const QUICK_EMOJIS = ['👍', '❤️', '😂', '😮', '😢', '🙏'];
 const ROLE_BADGE_CLASSES: Record<GroupRole, string> = {
   watch: 'bg-gray/10 text-gray',
   message: 'bg-gray/10 text-gray',
-  actions: 'bg-navy/10 text-navy',
+  actions: 'bg-navy/10 text-fg',
   admin: 'bg-orange/10 text-orange',
 };
 
@@ -106,11 +106,11 @@ export function MessageBubble({ message, isOwn, showSender, isGroupAdmin, canPin
         <div className={`flex min-w-0 flex-col gap-1 ${isOwn ? 'items-end' : 'items-start'}`}>
           <div
             className={`max-w-full rounded-2xl px-4 py-2 text-sm ${
-              isOwn ? 'bg-orange text-white' : 'bg-gray/10 text-navy'
+              isOwn ? 'bg-orange text-white' : 'bg-gray/10 text-fg'
             } ${message.pending ? 'opacity-60' : ''}`}
           >
             {showSender && !isOwn && message.sender && (
-              <p className="mb-0.5 flex items-center gap-1.5 text-xs font-semibold text-navy/80">
+              <p className="mb-0.5 flex items-center gap-1.5 text-xs font-semibold text-fg/80">
                 {message.sender.first_name} {message.sender.last_name}
                 {senderRole && senderRole !== 'message' && (
                   <span
@@ -214,8 +214,8 @@ export function MessageBubble({ message, isOwn, showSender, isGroupAdmin, canPin
                   key={emoji}
                   className={`rounded-full border px-1.5 py-0.5 text-xs ${
                     myReaction?.emoji === emoji
-                      ? 'border-orange bg-orange/10 text-navy'
-                      : 'border-gray/20 bg-white text-navy'
+                      ? 'border-orange bg-orange/10 text-fg'
+                      : 'border-gray/20 bg-surface text-fg'
                   }`}
                 >
                   {emoji} {count}
@@ -237,7 +237,7 @@ export function MessageBubble({ message, isOwn, showSender, isGroupAdmin, canPin
             </button>
             {menuOpen && (
               <div
-                className={`absolute top-1/2 z-20 -translate-y-1/2 flex flex-col gap-1 rounded-md border border-gray/20 bg-white p-1 text-xs shadow-lg ${isOwn ? 'right-full mr-1' : 'left-full ml-1'}`}
+                className={`absolute top-1/2 z-20 -translate-y-1/2 flex flex-col gap-1 rounded-md border border-gray/20 bg-surface p-1 text-xs shadow-lg ${isOwn ? 'right-full mr-1' : 'left-full ml-1'}`}
               >
                 {canParticipate && (
                   <button
@@ -320,7 +320,7 @@ export function MessageBubble({ message, isOwn, showSender, isGroupAdmin, canPin
             )}
             {emojiPickerOpen && (
               <div
-                className={`absolute top-1/2 z-20 -translate-y-1/2 flex gap-1 rounded-md border border-gray/20 bg-white p-1 shadow-lg ${isOwn ? 'right-full mr-1' : 'left-full ml-1'}`}
+                className={`absolute top-1/2 z-20 -translate-y-1/2 flex gap-1 rounded-md border border-gray/20 bg-surface p-1 shadow-lg ${isOwn ? 'right-full mr-1' : 'left-full ml-1'}`}
               >
                 {QUICK_EMOJIS.map((emoji) => (
                   <button

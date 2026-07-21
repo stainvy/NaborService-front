@@ -23,11 +23,11 @@ export function SignDocumentPage() {
   };
 
   return (
-    <div className="mx-auto min-h-screen max-w-md bg-white p-6">
+    <div className="mx-auto min-h-screen max-w-md bg-surface p-6">
       <Link to={`/listings/${id}`} className="text-sm text-orange underline">
         ← {t('detail.back')}
       </Link>
-      <h1 className="my-6 text-xl font-bold text-navy">{t('sign.title')}</h1>
+      <h1 className="my-6 text-xl font-bold text-fg">{t('sign.title')}</h1>
       <p className="mb-4 text-sm text-gray">{t('sign.hint')}</p>
 
       <SignaturePad onChange={setSignature} />

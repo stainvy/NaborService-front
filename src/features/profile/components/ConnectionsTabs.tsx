@@ -26,7 +26,7 @@ export function ConnectionsTabs({ userId }: { userId: string }) {
             type="button"
             onClick={() => setTab(tb)}
             className={`px-4 py-2 text-sm font-medium ${
-              tab === tb ? 'border-b-2 border-orange text-navy' : 'text-gray'
+              tab === tb ? 'border-b-2 border-orange text-fg' : 'text-gray'
             }`}
           >
             {t(`profile.tabs.${tb}`)}

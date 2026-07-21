@@ -32,7 +32,7 @@ export function PointsPage() {
 
   return (
     <div className="mx-auto max-w-lg p-6">
-      <h1 className="text-xl font-bold text-navy">{t('title')}</h1>
+      <h1 className="text-xl font-bold text-fg">{t('title')}</h1>
 
       {topup === 'success' && (
         <p className="mt-4 rounded-md bg-green-100 p-3 text-sm text-success">
@@ -53,7 +53,7 @@ export function PointsPage() {
         </p>
       )}
 
-      <p className="mt-4 text-2xl font-bold text-navy">
+      <p className="mt-4 text-2xl font-bold text-fg">
         {t('balance', { points: balance.data?.pointsBalance ?? '…' })}
       </p>
 
@@ -65,7 +65,7 @@ export function PointsPage() {
           type="button"
           onClick={() => setMode('topup')}
           className={`flex-1 px-4 py-2 text-sm font-semibold transition-colors ${
-            mode === 'topup' ? 'bg-orange text-white' : 'bg-white text-gray hover:bg-gray/10'
+            mode === 'topup' ? 'bg-orange text-white' : 'bg-surface text-gray hover:bg-gray/10'
           }`}
         >
           {t('mode.topup')}
@@ -74,7 +74,7 @@ export function PointsPage() {
           type="button"
           onClick={() => setMode('cashout')}
           className={`flex-1 px-4 py-2 text-sm font-semibold transition-colors ${
-            mode === 'cashout' ? 'bg-blue-600 text-white' : 'bg-white text-gray hover:bg-gray/10'
+            mode === 'cashout' ? 'bg-blue-600 text-white' : 'bg-surface text-gray hover:bg-gray/10'
           }`}
         >
           {t('mode.cashout')}
@@ -84,7 +84,7 @@ export function PointsPage() {
       {mode === 'topup' ? <TopupPanel /> : <CashoutPanel currentBalance={balance.data?.pointsBalance} />}
 
       <section className="mt-6">
-        <h2 className="text-sm font-semibold text-navy">{t('history.title')}</h2>
+        <h2 className="text-sm font-semibold text-fg">{t('history.title')}</h2>
         {ledger.data?.data.length === 0 && (
           <p className="mt-1 text-sm text-gray">{t('history.empty')}</p>
         )}
@@ -92,7 +92,7 @@ export function PointsPage() {
           {ledger.data?.data.map((entry) => (
             <li key={entry.id} className="flex items-center justify-between py-2 text-sm">
               <div>
-                <p className="text-navy">{t(`history.types.${entry.type}`)}</p>
+                <p className="text-fg">{t(`history.types.${entry.type}`)}</p>
                 <p className="text-xs text-gray">{new Date(entry.createdAt).toLocaleString()}</p>
               </div>
               <span className={entry.amountPoints >= 0 ? 'text-success' : 'text-error'}>
@@ -125,7 +125,7 @@ function TopupPanel() {
 
   return (
     <section className="mt-4 rounded-md border border-orange/30 bg-orange/5 p-4">
-      <h2 className="text-sm font-semibold text-navy">{t('topup.title')}</h2>
+      <h2 className="text-sm font-semibold text-fg">{t('topup.title')}</h2>
       <label className="mt-2 flex flex-col gap-1">
         <span className="text-sm text-gray">{t('topup.amount_label')}</span>
         <input
@@ -173,7 +173,7 @@ function CashoutPanel({ currentBalance }: { currentBalance: number | undefined }
 
   return (
     <section className="mt-4 rounded-md border border-blue-600/30 bg-blue-50 p-4">
-      <h2 className="text-sm font-semibold text-navy">{t('cashout.title')}</h2>
+      <h2 className="text-sm font-semibold text-fg">{t('cashout.title')}</h2>
 
       {connectStatus.isLoading && <p className="mt-2 text-sm text-gray">{t('cashout.loading_status')}</p>}
 

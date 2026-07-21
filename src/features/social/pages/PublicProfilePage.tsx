@@ -44,7 +44,7 @@ export function PublicProfilePage() {
   const bannerUrl = full ? mediaUrl(profile.bannerMongoId) : null;
 
   return (
-    <div className="mx-auto min-h-screen max-w-3xl bg-white">
+    <div className="mx-auto min-h-screen max-w-3xl bg-surface">
       <div
         className="h-40 w-full bg-navy/10"
         style={
@@ -61,7 +61,7 @@ export function PublicProfilePage() {
               size={80}
             />
           </div>
-          <h1 className="pb-2 text-xl font-bold text-navy">
+          <h1 className="pb-2 text-xl font-bold text-fg">
             {profile.firstName} {profile.lastName}
           </h1>
         </div>
@@ -147,7 +147,7 @@ export function PublicProfilePage() {
           className="flex flex-col gap-4"
         >
           <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-navy">{t('social.report_reason')}</span>
+            <span className="text-sm font-medium text-fg">{t('social.report_reason')}</span>
             <textarea
               value={reason}
               onChange={(e) => setReason(e.target.value)}

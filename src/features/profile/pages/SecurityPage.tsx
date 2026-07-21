@@ -48,12 +48,12 @@ export function SecurityPage() {
   const activeMutation = pending === 'password' ? changePassword : changeEmail;
 
   return (
-    <div className="mx-auto min-h-screen max-w-xl bg-white p-6">
-      <h1 className="mb-6 text-xl font-bold text-navy">{t('security.title')}</h1>
+    <div className="mx-auto min-h-screen max-w-xl bg-surface p-6">
+      <h1 className="mb-6 text-xl font-bold text-fg">{t('security.title')}</h1>
 
       {/* Mot de passe */}
       <section className="mb-8">
-        <h2 className="mb-3 font-semibold text-navy">{t('security.change_password')}</h2>
+        <h2 className="mb-3 font-semibold text-fg">{t('security.change_password')}</h2>
         <form onSubmit={submitPassword} className="flex flex-col gap-4">
           <TextField
             label={t('security.current_password')}
@@ -76,7 +76,7 @@ export function SecurityPage() {
 
       {/* E-mail */}
       <section className="mb-8">
-        <h2 className="mb-3 font-semibold text-navy">{t('security.change_email')}</h2>
+        <h2 className="mb-3 font-semibold text-fg">{t('security.change_email')}</h2>
         <form onSubmit={submitEmail} className="flex flex-col gap-4">
           <TextField
             label={t('security.new_email')}

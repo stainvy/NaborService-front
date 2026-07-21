@@ -36,7 +36,7 @@ export function NotificationBell() {
         onClick={() => setOpen((v) => !v)}
         aria-label={t('title')}
         aria-expanded={open}
-        className="relative flex h-8 w-8 items-center justify-center rounded-full text-navy hover:bg-gray/10"
+        className="relative flex h-8 w-8 items-center justify-center rounded-full text-fg hover:bg-gray/10"
       >
         <Bell className="h-5 w-5" />
         {totalUnread > 0 && (

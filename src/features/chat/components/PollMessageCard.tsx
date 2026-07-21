@@ -25,7 +25,7 @@ export function PollMessageCard({ pollId, isOwn, onViewResults }: PollMessageCar
   const mutedText = isOwn ? 'text-white/80' : 'text-gray';
 
   return (
-    <div className={`min-w-[240px] rounded-lg border p-3 ${isOwn ? 'border-white/30 bg-white/10' : 'border-gray/20 bg-white'}`}>
+    <div className={`min-w-[240px] rounded-lg border p-3 ${isOwn ? 'border-white/30 bg-white/10' : 'border-gray/20 bg-surface'}`}>
       <div className={`mb-2 flex items-center gap-2 text-xs font-semibold ${isOwn ? 'text-white' : 'text-orange'}`}>
         <BarChart3 className="h-3.5 w-3.5" />
         {t('title')}

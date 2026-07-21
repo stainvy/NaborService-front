@@ -26,6 +26,13 @@
     "register": "Sign up",
     "back_to_site": "Back to site"
   },
+  "theme": {
+    "label": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "Auto",
+    "toggle": "Change theme"
+  },
   "nav": {
     "home": "Home",
     "admin": "Administration",

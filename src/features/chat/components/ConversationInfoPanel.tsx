@@ -49,17 +49,17 @@ export function ConversationInfoPanel({ group, members, myRole, onJumpToMessage 
   }
 
   return (
-    <aside className="flex h-full w-full flex-col overflow-y-auto border-l border-gray/20 bg-white">
+    <aside className="flex h-full w-full flex-col overflow-y-auto border-l border-gray/20 bg-surface">
       <div className="flex flex-col items-center gap-2 border-b border-gray/10 p-6 text-center">
         <Avatar {...getGroupAvatarProps(group)} size={76} />
-        <h2 className="text-lg font-bold text-navy">{getGroupDisplayName(group, t)}</h2>
+        <h2 className="text-lg font-bold text-fg">{getGroupDisplayName(group, t)}</h2>
         {isGroup && group.member_count != null && (
           <p className="text-xs text-gray">{t('chat.member_count', { count: group.member_count })}</p>
         )}
       </div>
 
       <div className="flex justify-center gap-6 border-b border-gray/10 py-4">
-        <button type="button" onClick={handleToggleMute} className="flex flex-col items-center gap-1.5 text-gray hover:text-navy">
+        <button type="button" onClick={handleToggleMute} className="flex flex-col items-center gap-1.5 text-gray hover:text-fg">
           <span className={`flex h-10 w-10 items-center justify-center rounded-full ${group.is_muted ? 'bg-orange/10 text-orange' : 'bg-gray/10'}`}>
             {group.is_muted ? <BellOff className="h-4.5 w-4.5" /> : <Bell className="h-4.5 w-4.5" />}
           </span>
@@ -69,7 +69,7 @@ export function ConversationInfoPanel({ group, members, myRole, onJumpToMessage 
           <InviteQuickAction groupId={group.id} existingMemberIds={members?.map((m) => m.user_id) ?? []} />
         ) : (
           group.other_participant && (
-            <Link to={`/users/${group.other_participant.id}`} className="flex flex-col items-center gap-1.5 text-gray hover:text-navy">
+            <Link to={`/users/${group.other_participant.id}`} className="flex flex-col items-center gap-1.5 text-gray hover:text-fg">
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gray/10">
                 <Users className="h-4.5 w-4.5" />
               </span>
@@ -106,7 +106,7 @@ function InviteQuickAction({ groupId, existingMemberIds }: { groupId: string; ex
 
   return (
     <>
-      <button type="button" onClick={() => setOpen(true)} className="flex flex-col items-center gap-1.5 text-gray hover:text-navy">
+      <button type="button" onClick={() => setOpen(true)} className="flex flex-col items-center gap-1.5 text-gray hover:text-fg">
         <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gray/10">
           <UserPlus className="h-4.5 w-4.5" />
         </span>
@@ -172,14 +172,14 @@ function GroupPanelBody({
           {preview.map((member) => (
             <div key={member.user_id} className="flex items-center gap-2.5">
               <Avatar mongoId={member.profile_picture_mongo_id} firstName={member.first_name} lastName={member.last_name} size={32} />
-              <span className="min-w-0 flex-1 truncate text-sm font-medium text-navy">
+              <span className="min-w-0 flex-1 truncate text-sm font-medium text-fg">
                 {member.first_name} {member.last_name}
               </span>
               {isAdmin ? (
                 <select
                   value={member.role}
                   onChange={(e) => updateRole.mutate({ groupId: group.id, userId: member.user_id, role: e.target.value as GroupRole })}
-                  className="rounded-md border border-gray bg-white px-2 py-1 text-xs font-medium text-navy outline-none focus:border-navy"
+                  className="rounded-md border border-gray bg-surface px-2 py-1 text-xs font-medium text-fg outline-none focus:border-navy"
                 >
                   {ROLES.map((role) => (
                     <option key={role} value={role}>{t(`chat.role_${role}`)}</option>
@@ -206,7 +206,7 @@ function GroupPanelBody({
         {members && members.length > MEMBERS_PREVIEW_COUNT && (
           <Link
             to={`/chat/${group.id}/members`}
-            className="mt-3 block rounded-lg border border-gray/20 py-2 text-center text-xs font-semibold text-navy hover:bg-gray/5"
+            className="mt-3 block rounded-lg border border-gray/20 py-2 text-center text-xs font-semibold text-fg hover:bg-gray/5"
           >
             {t('chat.view_all_members', { count: members.length })}
           </Link>
@@ -222,7 +222,7 @@ function GroupPanelBody({
             <div key={role} className="flex items-start gap-2.5">
               <Shield className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-gray" />
               <div>
-                <p className="text-sm font-semibold text-navy">{t(`chat.role_${role}`)}</p>
+                <p className="text-sm font-semibold text-fg">{t(`chat.role_${role}`)}</p>
                 <p className="text-xs text-gray">{t(`chat.role_${role}_desc`)}</p>
               </div>
             </div>
@@ -315,13 +315,13 @@ function SharedFilesSection({
                   onClick={() => onJumpToMessage?.(file.message_id)}
                   className="min-w-0 flex-1 text-left"
                 >
-                  <p className="truncate text-sm font-medium text-navy hover:underline">{file.filename}</p>
+                  <p className="truncate text-sm font-medium text-fg hover:underline">{file.filename}</p>
                   <p className="text-xs text-gray">{Math.round(file.size_bytes / 1024)} Ko</p>
                 </button>
                 <button
                   type="button"
                   onClick={() => setViewFile({ media_id: file.media_id, filename: file.filename, mimetype: file.mimetype })}
-                  className="flex-shrink-0 rounded-full p-1.5 text-gray hover:bg-gray/10 hover:text-navy"
+                  className="flex-shrink-0 rounded-full p-1.5 text-gray hover:bg-gray/10 hover:text-fg"
                   aria-label={t('chat.view_file')}
                   title={t('chat.view_file')}
                 >
@@ -333,7 +333,7 @@ function SharedFilesSection({
                     download={file.filename}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex-shrink-0 rounded-full p-1.5 text-gray hover:bg-gray/10 hover:text-navy"
+                    className="flex-shrink-0 rounded-full p-1.5 text-gray hover:bg-gray/10 hover:text-fg"
                     aria-label={t('chat.download')}
                     title={t('chat.download')}
                   >

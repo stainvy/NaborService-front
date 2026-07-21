@@ -14,7 +14,7 @@ export function ProfilePage() {
   const bannerUrl = mediaUrl(user.bannerMongoId);
 
   return (
-    <div className="mx-auto min-h-screen max-w-3xl bg-white">
+    <div className="mx-auto min-h-screen max-w-3xl bg-surface">
       <div
         className="h-40 w-full bg-navy/10"
         style={
@@ -34,7 +34,7 @@ export function ProfilePage() {
               />
             </div>
             <div className="pb-2">
-              <h1 className="text-xl font-bold text-navy">
+              <h1 className="text-xl font-bold text-fg">
                 {user.firstName} {user.lastName}
               </h1>
               <p className="text-sm text-gray">
@@ -48,7 +48,7 @@ export function ProfilePage() {
         </div>
 
         <section className="mt-6">
-          <h2 className="text-sm font-semibold text-navy">{t('profile.bio')}</h2>
+          <h2 className="text-sm font-semibold text-fg">{t('profile.bio')}</h2>
           <p className="mt-1 whitespace-pre-line text-gray">{user.bio || t('profile.no_bio')}</p>
         </section>
 

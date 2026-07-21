@@ -58,14 +58,14 @@ export function ListingDetailPage() {
   const safeHtml = content?.body_html ? DOMPurify.sanitize(content.body_html) : null;
 
   return (
-    <div className="mx-auto min-h-screen max-w-3xl bg-white p-6">
+    <div className="mx-auto min-h-screen max-w-3xl bg-surface p-6">
       <Link to="/listings" className="text-sm text-orange underline">
         ← {t('feed.title')}
       </Link>
 
       <header className="mt-4 flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-navy">{listing.title}</h1>
+          <h1 className="text-2xl font-bold text-fg">{listing.title}</h1>
           <p className="mt-1 text-xs uppercase tracking-wide text-gray">
             {t(`type.${listing.listingType}`)}
           </p>
@@ -99,7 +99,7 @@ export function ListingDetailPage() {
       {/* Contenu enrichi MongoDB — assaini par DOMPurify avant rendu. */}
       {safeHtml && (
         <div
-          className="prose mt-4 max-w-none text-navy"
+          className="prose mt-4 max-w-none text-fg"
           dangerouslySetInnerHTML={{ __html: safeHtml }}
         />
       )}
@@ -144,7 +144,7 @@ export function ListingDetailPage() {
               <p className="text-sm text-gray">
                 {t('payment.balance', { points: bal ?? 0 })}
               </p>
-              <p className="mt-1 text-sm text-navy">
+              <p className="mt-1 text-sm text-fg">
                 {t('payment.price', { points: listing.priceCents })}
               </p>
               <Button
@@ -166,7 +166,7 @@ export function ListingDetailPage() {
       {/* Documents & signature — n'existent qu'une fois l'intérêt accepté. */}
       {transactionLive && (
         <section className="mt-6 rounded-lg border border-gray/30 p-4">
-          <h2 className="text-sm font-semibold text-navy">{t('documents.title')}</h2>
+          <h2 className="text-sm font-semibold text-fg">{t('documents.title')}</h2>
 
           {contractStatus.isLoading && (
             <p className="mt-2 text-sm text-gray">{t('documents.loading')}</p>
@@ -256,7 +256,7 @@ export function ListingDetailPage() {
           className="flex flex-col gap-4"
         >
           <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-navy">{t('report.reason')}</span>
+            <span className="text-sm font-medium text-fg">{t('report.reason')}</span>
             <textarea
               value={reason}
               onChange={(e) => setReason(e.target.value)}

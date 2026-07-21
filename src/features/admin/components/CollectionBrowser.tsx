@@ -61,13 +61,13 @@ export function CollectionBrowser() {
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-lg font-bold text-navy">{t('browser.title')}</h2>
+        <h2 className="text-lg font-bold text-fg">{t('browser.title')}</h2>
         <p className="mt-1 text-sm text-gray">{t('browser.subtitle')}</p>
       </div>
 
       {/* Sélecteur de collection */}
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-sm font-medium text-navy">{t('dsl.collection')}:</span>
+        <span className="text-sm font-medium text-fg">{t('dsl.collection')}:</span>
         {COLLECTIONS.map((c) => (
           <button
             key={c.id}
@@ -92,7 +92,7 @@ export function CollectionBrowser() {
             key={i}
             type="button"
             onClick={() => applyFilter(f)}
-            className="rounded-full border border-gray/20 bg-gray-50 px-2.5 py-1 font-mono text-[11px] text-navy transition-colors hover:border-orange hover:bg-orange/5"
+            className="rounded-full border border-gray/20 bg-surface-2 px-2.5 py-1 font-mono text-[11px] text-fg transition-colors hover:border-orange hover:bg-orange/5"
             title={`${f.field} ${f.operator} ${f.value ?? ''}`}
           >
             {f.label}
@@ -102,13 +102,13 @@ export function CollectionBrowser() {
 
       {/* Éditeur de requête */}
       <div className="flex flex-col gap-2">
-        <label className="text-sm font-medium text-navy">{t('dsl.query_label')}</label>
+        <label className="text-sm font-medium text-fg">{t('dsl.query_label')}</label>
         <textarea
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           rows={5}
           spellCheck={false}
-          className="rounded-md border border-gray/30 bg-gray-50 px-4 py-3 font-mono text-sm leading-relaxed text-navy outline-none focus:border-orange focus:ring-1 focus:ring-orange"
+          className="rounded-md border border-gray/30 bg-surface-2 px-4 py-3 font-mono text-sm leading-relaxed text-fg outline-none focus:border-orange focus:ring-1 focus:ring-orange"
           placeholder="GET contracts\nWHERE signed_at IS NOT NULL\nLIMIT 20"
         />
         <div className="flex items-center justify-between">
@@ -131,11 +131,11 @@ export function CollectionBrowser() {
       {result && (
         <div className="flex flex-col gap-6">
           {/* ── Section Documents ── */}
-          <div className="rounded-lg border border-gray/200 bg-white">
+          <div className="rounded-lg border border-border bg-surface">
             <div className="flex items-center justify-between border-b border-gray/100 px-5 py-3">
               <div className="flex items-center gap-3">
-                <h3 className="font-bold text-navy">{t('browser.results')}</h3>
-                <code className="rounded bg-gray-100 px-2 py-0.5 font-mono text-xs text-gray">
+                <h3 className="font-bold text-fg">{t('browser.results')}</h3>
+                <code className="rounded bg-surface-2 px-2 py-0.5 font-mono text-xs text-gray">
                   {result.collection}
                 </code>
                 <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
@@ -156,8 +156,8 @@ export function CollectionBrowser() {
           </div>
 
           {/* ── Section Filtre généré ── */}
-          <details className="rounded-lg border border-gray/200 bg-white">
-            <summary className="flex cursor-pointer items-center justify-between px-5 py-3 text-sm font-medium text-navy">
+          <details className="rounded-lg border border-border bg-surface">
+            <summary className="flex cursor-pointer items-center justify-between px-5 py-3 text-sm font-medium text-fg">
               <span>{t('browser.generated_filter')}</span>
               <button
                 type="button"
@@ -165,7 +165,7 @@ export function CollectionBrowser() {
                   e.preventDefault();
                   navigator.clipboard.writeText(JSON.stringify(result.filter, null, 2));
                 }}
-                className="rounded border border-gray/20 px-2 py-1 text-xs text-gray hover:bg-gray-50"
+                className="rounded border border-gray/20 px-2 py-1 text-xs text-gray hover:bg-surface-2"
               >
                 {t('dsl.copy_filter')}
               </button>

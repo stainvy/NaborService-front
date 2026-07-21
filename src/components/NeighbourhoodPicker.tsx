@@ -74,7 +74,7 @@ export function NeighbourhoodPicker({ value, onChange }: Props) {
 
   const Recommendation = ({ neighbourhood }: { neighbourhood: Neighbourhood }) => (
     <div className="mt-2 flex items-center justify-between gap-3 rounded-md bg-navy/5 p-2">
-      <span className="text-sm text-navy">
+      <span className="text-sm text-fg">
         {t('neighbourhood.recommended', { name: label(neighbourhood) })}
       </span>
       <Button type="button" onClick={() => onChange(neighbourhood.pgId)}>
@@ -105,7 +105,7 @@ export function NeighbourhoodPicker({ value, onChange }: Props) {
       {/* Voie 2 : recherche d'adresse */}
       <div>
         <label className="flex flex-col gap-1">
-          <span className="text-sm font-medium text-navy">{t('neighbourhood.search_address')}</span>
+          <span className="text-sm font-medium text-fg">{t('neighbourhood.search_address')}</span>
           <span className="relative">
             <Search className="pointer-events-none absolute left-2 top-2.5 h-4 w-4 text-gray" />
             <input
@@ -143,7 +143,7 @@ export function NeighbourhoodPicker({ value, onChange }: Props) {
 
       {/* Voie 3 : choix manuel (prioritaire) */}
       <label className="flex flex-col gap-1">
-        <span className="text-sm font-medium text-navy">{t('neighbourhood.choose_manually')}</span>
+        <span className="text-sm font-medium text-fg">{t('neighbourhood.choose_manually')}</span>
         <select
           value={value ?? ''}
           onChange={(e) => onChange(e.target.value || undefined)}

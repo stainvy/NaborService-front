@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/Button';
 
 // En-tête marketing (distinct de l'AppHeader connecté) + footer, pour la
@@ -34,11 +35,11 @@ export function PublicLayout({ children }: { children: ReactNode }) {
         }`}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3">
-          <Link to="/" className="text-lg font-bold text-navy">
+          <Link to="/" className="text-lg font-bold text-fg">
             {tc('app.name')}
           </Link>
 
-          <nav className="hidden items-center gap-6 text-sm font-medium text-navy md:flex">
+          <nav className="hidden items-center gap-6 text-sm font-medium text-fg md:flex">
             {anchors.map((a) => (
               <a key={a.href} href={a.href} className="transition-colors hover:text-orange">
                 {a.label}
@@ -47,6 +48,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
           </nav>
 
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             <LanguageSwitcher />
             <Link to="/login" className="hidden sm:block">
               <Button variant="secondary">{tc('public.login')}</Button>
@@ -63,11 +65,11 @@ export function PublicLayout({ children }: { children: ReactNode }) {
       <footer className="border-t border-brand-border bg-brand-bg">
         <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="text-lg font-bold text-navy">{tc('app.name')}</p>
+            <p className="text-lg font-bold text-fg">{tc('app.name')}</p>
             <p className="mt-2 text-sm text-brand-muted">{t('footer.tagline')}</p>
           </div>
           <div>
-            <p className="mb-3 text-sm font-semibold text-navy">{t('footer.product')}</p>
+            <p className="mb-3 text-sm font-semibold text-fg">{t('footer.product')}</p>
             <ul className="flex flex-col gap-2 text-sm text-brand-muted">
               {anchors.map((a) => (
                 <li key={a.href}>
@@ -79,7 +81,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             </ul>
           </div>
           <div>
-            <p className="mb-3 text-sm font-semibold text-navy">{t('footer.legal')}</p>
+            <p className="mb-3 text-sm font-semibold text-fg">{t('footer.legal')}</p>
             <ul className="flex flex-col gap-2 text-sm text-brand-muted">
               <li>{t('footer.legal_notice')}</li>
               <li>{t('footer.privacy')}</li>

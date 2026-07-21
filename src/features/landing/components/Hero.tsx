@@ -14,7 +14,7 @@ export function Hero() {
           <span className="inline-flex items-center rounded-full bg-orange/15 px-3 py-1 text-sm font-medium text-orange">
             {t('hero.badge')}
           </span>
-          <h1 className="mt-5 text-4xl font-extrabold leading-tight text-navy sm:text-5xl">
+          <h1 className="mt-5 text-4xl font-extrabold leading-tight text-fg sm:text-5xl">
             {t('hero.title')}
           </h1>
           <p className="mt-5 max-w-xl text-lg text-brand-muted">{t('hero.subtitle')}</p>

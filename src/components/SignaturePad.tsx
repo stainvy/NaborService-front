@@ -77,7 +77,7 @@ export function SignaturePad({ onChange, width = 320, height = 160 }: SignatureP
         onPointerMove={move}
         onPointerUp={end}
         onPointerLeave={end}
-        className="touch-none rounded-md border border-gray bg-white"
+        className="touch-none rounded-md border border-gray bg-surface"
       />
       <Button type="button" variant="secondary" onClick={clear}>
         {t('sign.clear')}

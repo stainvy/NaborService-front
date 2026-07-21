@@ -20,7 +20,7 @@ export function ListingFilters({ value, onChange }: Props) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <label className="flex flex-col gap-1">
-        <span className="text-sm font-medium text-navy">{t('filters.type')}</span>
+        <span className="text-sm font-medium text-fg">{t('filters.type')}</span>
         <select
           value={value.type ?? ''}
           onChange={(e) => patch({ type: (e.target.value || undefined) as Filters['type'] })}
@@ -36,7 +36,7 @@ export function ListingFilters({ value, onChange }: Props) {
       </label>
 
       <label className="flex flex-col gap-1">
-        <span className="text-sm font-medium text-navy">{t('filters.status')}</span>
+        <span className="text-sm font-medium text-fg">{t('filters.status')}</span>
         <select
           value={value.status ?? ''}
           onChange={(e) => {

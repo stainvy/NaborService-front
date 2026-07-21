@@ -28,10 +28,10 @@ export function CommunityValues() {
         <div className="mt-6 grid gap-6 md:grid-cols-3">
           {VALUES.map(({ key, icon: Icon }) => (
             <Card key={key} className="flex flex-col items-center p-8 text-center">
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-navy/10 text-navy">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-navy/10 text-fg">
                 <Icon className="h-6 w-6" />
               </span>
-              <h3 className="mt-4 text-lg font-semibold text-navy">{t(`values.${key}.title`)}</h3>
+              <h3 className="mt-4 text-lg font-semibold text-fg">{t(`values.${key}.title`)}</h3>
               <p className="mt-2 text-sm text-brand-muted">{t(`values.${key}.desc`)}</p>
             </Card>
           ))}

@@ -14,7 +14,7 @@ export function PointsBadge() {
       to="/points"
       className={({ isActive }) =>
         `flex items-center gap-1 underline transition-colors ${
-          isActive ? 'font-semibold text-orange' : 'text-navy hover:text-orange'
+          isActive ? 'font-semibold text-orange' : 'text-fg hover:text-orange'
         }`
       }
     >

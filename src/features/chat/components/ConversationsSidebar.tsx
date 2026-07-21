@@ -35,10 +35,10 @@ export function ConversationsSidebar({ activeGroupId }: ConversationsSidebarProp
   const online = usePresence((groups ?? []).map((g) => g.other_participant?.id));
 
   return (
-    <aside className="flex h-full w-full flex-col border-r border-gray/20 bg-white">
+    <aside className="flex h-full w-full flex-col border-r border-gray/20 bg-surface">
       <div className="flex flex-col gap-3 p-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold text-navy">{t('chat.title')}</h1>
+          <h1 className="text-xl font-bold text-fg">{t('chat.title')}</h1>
           <button
             type="button"
             onClick={() => setCreateGroupOpen(true)}
@@ -105,7 +105,7 @@ export function ConversationsSidebar({ activeGroupId }: ConversationsSidebarProp
               </span>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between gap-2">
-                  <p className="truncate text-sm font-semibold text-navy">{getGroupDisplayName(group, t)}</p>
+                  <p className="truncate text-sm font-semibold text-fg">{getGroupDisplayName(group, t)}</p>
                   {!!group.unread_count && (
                     <span className="flex h-5 min-w-5 flex-shrink-0 items-center justify-center rounded-full bg-orange px-1.5 text-[11px] font-bold text-white">
                       {group.unread_count}

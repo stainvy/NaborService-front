@@ -29,7 +29,7 @@ export function HowItWorks() {
                 <span className="mt-4 text-sm font-bold uppercase tracking-wide text-orange">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="mt-1 text-lg font-semibold text-navy">
+                <h3 className="mt-1 text-lg font-semibold text-fg">
                   {t(`steps.${step.key}.title`)}
                 </h3>
                 <p className="mt-2 max-w-xs text-sm text-brand-muted">

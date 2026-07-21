@@ -26,7 +26,7 @@ export function TotpSetupStep({ challengeToken, otpauthUrl, onAuthenticated }: P
   return (
     <form onSubmit={submit} className="flex flex-col items-center gap-4">
       <p className="text-center text-sm text-gray">{t('totp.setup_prompt')}</p>
-      <div className="rounded-md bg-white p-2 ring-1 ring-gray/30">
+      <div className="rounded-md bg-surface p-2 ring-1 ring-gray/30">
         <QRCodeSVG value={otpauthUrl} size={176} aria-label={t('totp.qr_alt')} />
       </div>
       <p className="text-center text-sm text-gray">{t('totp.setup_then')}</p>

@@ -37,10 +37,10 @@ export function NotificationPanel({ onNavigate }: NotificationPanelProps) {
     <div
       role="menu"
       aria-label={t('title')}
-      className="absolute left-0 top-full z-20 mt-2 w-80 rounded-md border border-gray/20 bg-white shadow-lg"
+      className="absolute left-0 top-full z-20 mt-2 w-80 rounded-md border border-gray/20 bg-surface shadow-lg"
     >
       <div className="flex items-center justify-between border-b border-gray/10 px-4 py-3">
-        <h2 className="text-sm font-bold text-navy">{t('title')}</h2>
+        <h2 className="text-sm font-bold text-fg">{t('title')}</h2>
         <div className="flex items-center gap-3">
           {hasUnread && (
             <button
@@ -86,7 +86,7 @@ export function NotificationPanel({ onNavigate }: NotificationPanelProps) {
                 >
                   <Avatar {...getGroupAvatarProps(group)} size={36} />
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm font-semibold text-navy">
+                    <span className="block truncate text-sm font-semibold text-fg">
                       {getGroupDisplayName(group, tChat)}
                     </span>
                   </span>

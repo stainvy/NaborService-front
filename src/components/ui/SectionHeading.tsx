@@ -13,7 +13,7 @@ export function SectionHeading({ title, subtitle, seeAllTo, seeAllLabel }: Secti
   return (
     <div className="mb-4 flex items-end justify-between gap-4">
       <div>
-        <h2 className="text-lg font-semibold text-navy">{title}</h2>
+        <h2 className="text-lg font-semibold text-fg">{title}</h2>
         {subtitle && <p className="mt-0.5 text-sm text-brand-muted">{subtitle}</p>}
       </div>
       {seeAllTo && (

@@ -14,7 +14,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function T
   const id = useId();
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={id} className="text-sm font-medium text-navy">
+      <label htmlFor={id} className="text-sm font-medium text-fg">
         {label}
       </label>
       <input

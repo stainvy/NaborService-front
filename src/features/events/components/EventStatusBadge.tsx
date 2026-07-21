@@ -3,7 +3,7 @@ import type { EventStatus } from '../types';
 
 const STATUS_CLASSES: Record<EventStatus, string> = {
   draft: 'bg-gray/20 text-gray',
-  published: 'bg-navy/15 text-navy',
+  published: 'bg-navy/15 text-fg',
   open: 'bg-success/15 text-success',
   in_progress: 'bg-orange/15 text-orange',
   completed: 'bg-gray/20 text-gray',

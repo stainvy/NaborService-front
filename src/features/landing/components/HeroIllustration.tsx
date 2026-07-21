@@ -15,11 +15,11 @@ export function HeroIllustration({ alt }: { alt: string }) {
         <circle cx="200" cy="160" r="150" fill="currentColor" opacity="0.08" />
       </g>
       {/* sol */}
-      <g className="text-navy">
+      <g className="text-fg">
         <rect x="40" y="250" width="320" height="8" rx="4" fill="currentColor" opacity="0.15" />
       </g>
       {/* maison gauche */}
-      <g className="text-navy">
+      <g className="text-fg">
         <rect x="70" y="170" width="90" height="80" rx="6" fill="currentColor" />
         <polygon points="65,172 115,130 165,172" fill="currentColor" opacity="0.85" />
       </g>
@@ -28,7 +28,7 @@ export function HeroIllustration({ alt }: { alt: string }) {
         <rect x="120" y="205" width="22" height="45" rx="3" fill="currentColor" opacity="0.9" />
       </g>
       {/* maison droite */}
-      <g className="text-navy">
+      <g className="text-fg">
         <rect x="235" y="150" width="100" height="100" rx="6" fill="currentColor" opacity="0.9" />
         <polygon points="228,152 285,108 342,152" fill="currentColor" />
       </g>

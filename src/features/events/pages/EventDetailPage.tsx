@@ -84,7 +84,7 @@ export function EventDetailPage() {
       </Link>
 
       <header className="mt-4 flex items-start justify-between gap-4">
-        <h1 className="text-2xl font-bold text-navy">{event.title}</h1>
+        <h1 className="text-2xl font-bold text-fg">{event.title}</h1>
         {past ? (
           <span className="inline-block rounded-full bg-gray/20 px-2 py-0.5 text-xs font-medium text-gray">
             {t('status.past')}
@@ -102,7 +102,7 @@ export function EventDetailPage() {
             {event.endsAt && ` → ${formatDateTime(event.endsAt, locale)}`}
           </p>
         )}
-        <p className="font-semibold text-navy">
+        <p className="font-semibold text-fg">
           {event.costCents === 0 ? t('card.free') : t('card.points', { points: eventPoints(event) })}
         </p>
         {event.maxParticipants != null && (
@@ -117,12 +117,12 @@ export function EventDetailPage() {
       {/* Contenu enrichi — assaini par DOMPurify */}
       {safeHtml && (
         <div
-          className="prose mt-4 max-w-none text-navy"
+          className="prose mt-4 max-w-none text-fg"
           dangerouslySetInnerHTML={{ __html: safeHtml }}
         />
       )}
       {content?.programme && content.programme.length > 0 && (
-        <ul className="mt-4 flex flex-col gap-1 text-sm text-navy">
+        <ul className="mt-4 flex flex-col gap-1 text-sm text-fg">
           {content.programme.map((item, i) => (
             <li key={i}>
               <span className="font-medium">{item.time}</span> — {item.label}
@@ -190,7 +190,7 @@ export function EventDetailPage() {
           ) : waitlisted ? (
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
-                <span className="text-sm text-navy">{t('register.waitlisted')}</span>
+                <span className="text-sm text-fg">{t('register.waitlisted')}</span>
                 <WaitlistBadge />
               </div>
               <Button
@@ -238,16 +238,16 @@ export function EventDetailPage() {
           </section>
 
           <section className="mt-6">
-            <h2 className="mb-2 font-semibold text-navy">{t('participants.title')}</h2>
+            <h2 className="mb-2 font-semibold text-fg">{t('participants.title')}</h2>
             <ParticipantsList participants={participants.data ?? []} />
           </section>
 
           {(waitlist.data?.length ?? 0) > 0 && (
             <section className="mt-6">
-              <h2 className="mb-2 font-semibold text-navy">{t('waitlist.title')}</h2>
+              <h2 className="mb-2 font-semibold text-fg">{t('waitlist.title')}</h2>
               <ul className="flex flex-col gap-1">
                 {waitlist.data!.map((p, i) => (
-                  <li key={p.userId ?? i} className="flex items-center gap-2 text-sm text-navy">
+                  <li key={p.userId ?? i} className="flex items-center gap-2 text-sm text-fg">
                     <WaitlistBadge position={i + 1} />
                     {p.user
                       ? `${p.user.firstName ?? ''} ${p.user.lastName ?? ''}`.trim()
@@ -282,7 +282,7 @@ export function EventDetailPage() {
           className="flex flex-col gap-4"
         >
           <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-navy">{t('report.reason')}</span>
+            <span className="text-sm font-medium text-fg">{t('report.reason')}</span>
             <textarea
               value={reason}
               onChange={(e) => setReason(e.target.value)}

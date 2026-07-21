@@ -38,9 +38,9 @@ export function SsoValidatePage() {
 
   if (!token || status === 'error') {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white p-6">
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-surface p-6">
         <div className="rounded-full bg-red-100 p-4 text-red-600 text-3xl">✕</div>
-        <h1 className="text-xl font-bold text-navy">{t('sso.error_title')}</h1>
+        <h1 className="text-xl font-bold text-fg">{t('sso.error_title')}</h1>
         <p className="text-center text-gray">
           {error ?? t('sso.missing_token')}
         </p>
@@ -53,9 +53,9 @@ export function SsoValidatePage() {
 
   if (status === 'success') {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white p-6">
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-surface p-6">
         <div className="rounded-full bg-green-100 p-4 text-green-600 text-3xl">✓</div>
-        <h1 className="text-xl font-bold text-navy">{t('sso.success_title')}</h1>
+        <h1 className="text-xl font-bold text-fg">{t('sso.success_title')}</h1>
         <p className="text-center text-gray">{t('sso.success_message', { device })}</p>
         <Link to="/app" className="text-sm text-orange underline">
           ← {t('sso.back_home')}
@@ -65,9 +65,9 @@ export function SsoValidatePage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-white p-6">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-surface p-6">
       <div className="rounded-full bg-blue-100 p-4 text-blue-600 text-3xl">🔑</div>
-      <h1 className="text-xl font-bold text-navy">{t('sso.preview_title')}</h1>
+      <h1 className="text-xl font-bold text-fg">{t('sso.preview_title')}</h1>
       <p className="text-center text-gray max-w-sm">
         {t('sso.preview_message', { device })}
       </p>

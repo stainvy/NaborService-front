@@ -42,11 +42,11 @@ export function ListingEditPage() {
   };
 
   return (
-    <div className="mx-auto min-h-screen max-w-xl bg-white p-6">
+    <div className="mx-auto min-h-screen max-w-xl bg-surface p-6">
       <Link to={`/listings/${id}`} className="text-sm text-orange underline">
         ← {t('detail.back')}
       </Link>
-      <h1 className="my-6 text-xl font-bold text-navy">{t('edit.title')}</h1>
+      <h1 className="my-6 text-xl font-bold text-fg">{t('edit.title')}</h1>
 
       {/* Métadonnées */}
       <ListingForm
@@ -75,10 +75,10 @@ export function ListingEditPage() {
 
       {/* Contenu enrichi */}
       <section className="mt-10">
-        <h2 className="mb-3 font-semibold text-navy">{t('edit.content_title')}</h2>
+        <h2 className="mb-3 font-semibold text-fg">{t('edit.content_title')}</h2>
         <form onSubmit={saveContent} className="flex flex-col gap-4">
           <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-navy">{t('edit.body_html')}</span>
+            <span className="text-sm font-medium text-fg">{t('edit.body_html')}</span>
             <textarea
               value={bodyHtml}
               onChange={(e) => setBodyHtml(e.target.value)}
@@ -87,7 +87,7 @@ export function ListingEditPage() {
             />
           </label>
           <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-navy">{t('edit.tags')}</span>
+            <span className="text-sm font-medium text-fg">{t('edit.tags')}</span>
             <input
               value={tags}
               onChange={(e) => setTags(e.target.value)}
@@ -106,7 +106,7 @@ export function ListingEditPage() {
 
       {/* Photos */}
       <section className="mt-10">
-        <h2 className="mb-3 font-semibold text-navy">{t('edit.photos')}</h2>
+        <h2 className="mb-3 font-semibold text-fg">{t('edit.photos')}</h2>
         <ListingMedia id={id} editable />
       </section>
     </div>

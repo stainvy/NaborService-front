@@ -78,7 +78,7 @@ export function MessagingPage() {
             )}
           </>
         ) : (
-          <div className="hidden flex-1 flex-col items-center justify-center gap-2 bg-white text-gray md:flex">
+          <div className="hidden flex-1 flex-col items-center justify-center gap-2 bg-surface text-gray md:flex">
             <MessageSquare className="h-10 w-10 opacity-40" />
             <p className="text-sm">{t('chat.select_conversation')}</p>
           </div>

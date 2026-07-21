@@ -1,35 +1,49 @@
 /** @type {import('tailwindcss').Config} */
+const rgb = (v) => `rgb(var(${v}) / <alpha-value>)`;
+
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        // Palette Nabor Services (CLAUDE.md section 7)
+        // Accents de marque — fixes dans les deux thèmes (CLAUDE.md section 7)
         navy: '#0F2A5E', // primaire — headers, boutons secondaires
         orange: '#F7931E', // accent — CTA principaux, badges
         success: '#3DBD77', // confirmations, statuts validés
         error: '#E8534A', // erreurs, modération
-        gray: '#8C8C8C', // textes secondaires, placeholders
-        // Échelle neutre de marque (froide/bleutée, accordée à navy/orange) —
-        // pour le site habitant. Distincte des gris de l'admin.
+
+        // Tokens sémantiques (basculent light/dark via variables CSS)
+        bg: rgb('--bg'), // fond de page
+        surface: rgb('--surface'), // cartes, entêtes, modales
+        'surface-2': rgb('--surface-2'), // surface alternée / hovers
+        border: rgb('--border'), // séparateurs
+        fg: rgb('--fg'), // texte principal
+        muted: rgb('--muted'), // texte secondaire, placeholders
+        // `gray` (placeholders/bordures historiques) pointe sur --muted → bascule
+        // sans migration des text-gray / border-gray existants.
+        gray: rgb('--muted'),
+
+        // Échelle de marque : bg/surface/border/muted pointent sur les tokens
+        // sémantiques → les usages brand.* existants basculent automatiquement.
         brand: {
-          bg: '#F4F7FC', // fond de page très clair
-          surface: '#FFFFFF', // cartes / surfaces
-          border: '#E3E9F2', // séparateurs discrets
-          muted: '#5B6B85', // texte secondaire (plus doux que gray)
-          navyLight: '#1B3B78', // dégradés / survols du navy
-          navyDark: '#0A1E44', // dégradés profonds
+          bg: rgb('--bg'),
+          surface: rgb('--surface'),
+          border: rgb('--border'),
+          muted: rgb('--muted'),
+          navyLight: '#1B3B78', // dégradés / survols (accent fixe)
+          navyDark: '#0A1E44', // dégradés profonds (accent fixe)
         },
-        // Palette back-office admin — délibérément distincte du reste du site
+        // Back-office : bascule aussi via variables --admin-*
         admin: {
           sidebar: '#0F172A',
           sidebarHover: '#1E293B',
-          bg: '#F8FAFC',
-          surface: '#FFFFFF',
-          border: '#E2E8F0',
-          text: '#1E293B',
+          bg: rgb('--admin-bg'),
+          surface: rgb('--admin-surface'),
+          border: rgb('--admin-border'),
+          text: rgb('--admin-text'),
           textInverse: '#E2E8F0',
-          muted: '#64748B',
+          muted: rgb('--admin-muted'),
           accent: '#6366F1',
           accentHover: '#4F46E5',
         },

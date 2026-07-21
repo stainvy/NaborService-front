@@ -14,7 +14,7 @@ export function StatTile({ label, value, icon: Icon, loading = false }: StatTile
   return (
     <Card className="flex items-center gap-3 p-4">
       {Icon && (
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy/10 text-navy">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy/10 text-fg">
           <Icon className="h-5 w-5" />
         </span>
       )}
@@ -22,7 +22,7 @@ export function StatTile({ label, value, icon: Icon, loading = false }: StatTile
         {loading ? (
           <Skeleton className="mb-1 h-6 w-10" />
         ) : (
-          <p className="text-2xl font-bold leading-tight text-navy">{value}</p>
+          <p className="text-2xl font-bold leading-tight text-fg">{value}</p>
         )}
         <p className="truncate text-xs font-medium uppercase tracking-wide text-brand-muted">
           {label}

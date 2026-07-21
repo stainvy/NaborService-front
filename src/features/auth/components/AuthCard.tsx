@@ -45,7 +45,7 @@ export function AuthCard({ title, children }: { title: string; children: ReactNo
         <div className="flex items-center justify-between p-4">
           <Link
             to="/"
-            className="inline-flex items-center gap-1 text-sm text-brand-muted hover:text-navy"
+            className="inline-flex items-center gap-1 text-sm text-brand-muted hover:text-fg"
           >
             <ArrowLeft className="h-4 w-4" />
             {tc('public.back_to_site')}
@@ -54,7 +54,7 @@ export function AuthCard({ title, children }: { title: string; children: ReactNo
         </div>
         <div className="flex flex-1 items-center justify-center p-6">
           <div className="w-full max-w-sm">
-            <h1 className="mb-6 text-2xl font-bold text-navy">{title}</h1>
+            <h1 className="mb-6 text-2xl font-bold text-fg">{title}</h1>
             {children}
           </div>
         </div>

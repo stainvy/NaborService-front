@@ -62,7 +62,7 @@ export function CreateGroupModal({ open, onClose }: CreateGroupModalProps) {
           maxLength={280}
         />
         <div>
-          <p className="mb-1 text-sm font-medium text-navy">{t('chat.add_members')}</p>
+          <p className="mb-1 text-sm font-medium text-fg">{t('chat.add_members')}</p>
           <MemberPicker selectedIds={memberIds} onToggle={toggleMember} excludeIds={user ? [user.id] : []} />
         </div>
         <div className="flex justify-end gap-2">

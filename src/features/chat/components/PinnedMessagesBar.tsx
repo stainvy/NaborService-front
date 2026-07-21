@@ -23,7 +23,7 @@ export function PinnedMessagesBar({ groupId, onSelect }: PinnedMessagesBarProps)
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center gap-2 px-4 py-2 text-xs font-medium text-navy"
+        className="flex w-full items-center gap-2 px-4 py-2 text-xs font-medium text-fg"
       >
         <Pin className="h-3.5 w-3.5 flex-shrink-0 text-orange" />
         <span className="flex-1 text-left">{t('chat.pinned_count', { count: pinned.length })}</span>
@@ -40,9 +40,9 @@ export function PinnedMessagesBar({ groupId, onSelect }: PinnedMessagesBarProps)
                 onSelect(message.id);
                 setOpen(false);
               }}
-              className="flex flex-col items-start gap-0.5 rounded-md px-2.5 py-1.5 text-left hover:bg-white"
+              className="flex flex-col items-start gap-0.5 rounded-md px-2.5 py-1.5 text-left hover:bg-surface"
             >
-              <span className="text-xs font-semibold text-navy">
+              <span className="text-xs font-semibold text-fg">
                 {message.sender ? `${message.sender.first_name} ${message.sender.last_name}` : t('chat.them')}
               </span>
               <span className="line-clamp-1 text-xs text-gray">

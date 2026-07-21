@@ -16,9 +16,9 @@ export function SessionsPage() {
     }).format(new Date(iso));
 
   return (
-    <div className="mx-auto min-h-screen max-w-2xl bg-white p-6">
+    <div className="mx-auto min-h-screen max-w-2xl bg-surface p-6">
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-navy">{t('sessions.title')}</h1>
+        <h1 className="text-xl font-bold text-fg">{t('sessions.title')}</h1>
         <Link to="/app" className="text-sm text-orange underline">
           ← {t('sessions.back_home')}
         </Link>
@@ -34,7 +34,7 @@ export function SessionsPage() {
             className="flex items-center justify-between rounded-md border border-gray/30 p-4"
           >
             <div className="flex flex-col gap-1">
-              <span className="flex items-center gap-2 font-medium text-navy">
+              <span className="flex items-center gap-2 font-medium text-fg">
                 {session.device_name}
                 {session.is_current && (
                   <span className="rounded-full bg-success px-2 py-0.5 text-xs text-white">
