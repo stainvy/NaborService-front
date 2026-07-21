@@ -40,6 +40,39 @@
     "publish_cta": "Post a listing",
     "quick_access": "Quick access",
     "soon": "Soon",
+    "see_all": "See all",
+    "your_activity": "Your activity",
+    "hero": {
+      "neighbourhood": "{{name}} neighbourhood",
+      "points": "points"
+    },
+    "stats": {
+      "active_listings": "Active listings",
+      "upcoming_events": "Upcoming events",
+      "unread": "Unread notifications"
+    },
+    "near_you": {
+      "title": "Near you",
+      "subtitle": "The latest listings in your neighbourhood."
+    },
+    "upcoming_events": {
+      "title": "Upcoming events",
+      "subtitle": "Stay on top of what's happening nearby."
+    },
+    "empty": {
+      "listings": {
+        "title": "No listings yet",
+        "description": "Be the first to offer or request a service in your neighbourhood."
+      },
+      "events": {
+        "title": "No upcoming events",
+        "description": "Check back soon or explore neighbourhood events."
+      }
+    },
+    "error": {
+      "listings": "Couldn't load listings right now.",
+      "events": "Couldn't load events right now."
+    },
     "neighbourhood_banner": {
       "title": "Choose your neighbourhood",
       "subtitle": "Set your neighbourhood to see listings and events near you."

@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Store } from 'lucide-react';
 import { Button } from '@/components/Button';
+import { CardSkeleton } from '@/components/ui/Skeleton';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { ListingFilters } from '../components/ListingFilters';
 import { ListingCard } from '../components/ListingCard';
 import { useListings } from '../hooks/useListings';
@@ -19,7 +22,7 @@ export function ListingsFeedPage() {
   const setOffset = (next: number) => setFilters((f) => ({ ...f, offset: next }));
 
   return (
-    <div className="mx-auto min-h-screen max-w-4xl bg-white p-6">
+    <div className="mx-auto min-h-screen max-w-4xl bg-brand-bg p-6">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-xl font-bold text-navy">{t('feed.title')}</h1>
         <div className="flex gap-2">
@@ -39,16 +42,23 @@ export function ListingsFeedPage() {
         <ListingFilters value={filters} onChange={setFilters} />
       </div>
 
-      {isLoading && <p className="text-gray">…</p>}
       {isError && <p className="text-error">{t('feed.error')}</p>}
 
-      {data && data.data.length === 0 && <p className="text-gray">{t('feed.empty')}</p>}
-
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {data?.data.map((listing) => (
-          <ListingCard key={listing.id} listing={listing} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <CardSkeleton key={i} />
+          ))}
+        </div>
+      ) : data && data.data.length === 0 ? (
+        <EmptyState icon={Store} title={t('feed.empty')} />
+      ) : (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {data?.data.map((listing) => (
+            <ListingCard key={listing.id} listing={listing} />
+          ))}
+        </div>
+      )}
 
       {total > LIMIT && (
         <div className="mt-6 flex items-center justify-between">

@@ -40,6 +40,39 @@
     "publish_cta": "Publier une annonce",
     "quick_access": "Accès rapides",
     "soon": "Bientôt",
+    "see_all": "Voir tout",
+    "your_activity": "Votre activité",
+    "hero": {
+      "neighbourhood": "Quartier {{name}}",
+      "points": "points"
+    },
+    "stats": {
+      "active_listings": "Annonces actives",
+      "upcoming_events": "Événements à venir",
+      "unread": "Notifications non lues"
+    },
+    "near_you": {
+      "title": "Près de chez vous",
+      "subtitle": "Les dernières annonces de votre quartier."
+    },
+    "upcoming_events": {
+      "title": "Événements à venir",
+      "subtitle": "Ne manquez rien de l'activité du quartier."
+    },
+    "empty": {
+      "listings": {
+        "title": "Aucune annonce pour l'instant",
+        "description": "Soyez le premier à proposer ou demander un service dans votre quartier."
+      },
+      "events": {
+        "title": "Aucun événement à venir",
+        "description": "Revenez bientôt ou explorez les événements du quartier."
+      }
+    },
+    "error": {
+      "listings": "Impossible de charger les annonces pour le moment.",
+      "events": "Impossible de charger les événements pour le moment."
+    },
     "neighbourhood_banner": {
       "title": "Choisissez votre quartier",
       "subtitle": "Renseignez votre quartier pour voir les annonces et événements près de chez vous."
