@@ -110,7 +110,7 @@
     "closed_conflict": "Too late: the event has started, registration is closed."
   },
   "payment": {
-    "required": "Paid event ({{cost}}) — payment required to finalise registration."
+    "required": "Paid event ({{cost}}): payment required to finalise registration."
   },
   "ticket": {
     "download": "Download my ticket"

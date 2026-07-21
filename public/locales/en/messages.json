@@ -107,7 +107,7 @@
 
     "system_call_missed": "Missed call",
     "system_call_declined": "Call declined",
-    "system_call_ended": "Call ended — {{duration}}",
+    "system_call_ended": "Call ended ({{duration}})",
     "system_generic": "System event",
 
     "group_settings": "Group settings",

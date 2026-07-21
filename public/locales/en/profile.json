@@ -51,7 +51,7 @@
     "recommended": "Recommended neighbourhood: {{name}}",
     "use": "Use",
     "choose_manually": "Choose from the list",
-    "none": "— None —",
+    "none": "None",
     "save": "Save my neighbourhood",
     "confirm_title": "Change neighbourhood?",
     "confirm_message": "Your neighbourhood will change. Your neighbourhood chat group will be updated accordingly.",

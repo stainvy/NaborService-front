@@ -29,7 +29,7 @@
     "insufficient": "Insufficient balance for this amount.",
     "error": "The transfer failed. Your points have been credited back.",
     "success": "Cashout successful! The transfer is on its way.",
-    "connect_return": "Setup submitted to Stripe — verification can take a few moments.",
+    "connect_return": "Setup submitted to Stripe. Verification can take a few moments.",
     "connect_refresh": "The setup link expired, please try again."
   },
   "history": {

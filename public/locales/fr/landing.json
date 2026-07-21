@@ -7,7 +7,7 @@
   "hero": {
     "badge": "La plateforme collaborative de votre quartier",
     "title": "Votre quartier, en mieux connecté.",
-    "subtitle": "Échangez des services, participez aux événements, discutez avec vos voisins et faites vivre votre quartier — en toute sécurité, entre habitants.",
+    "subtitle": "Échangez des services, participez aux événements, discutez avec vos voisins et faites vivre votre quartier, en toute sécurité, entre habitants.",
     "cta_primary": "Rejoindre mon quartier",
     "cta_secondary": "Se connecter",
     "illustration_alt": "Illustration d'un quartier connecté"
@@ -98,6 +98,7 @@
   "footer": {
     "tagline": "La plateforme collaborative de quartier.",
     "product": "Produit",
+    "community": "Communauté",
     "legal": "Légal",
     "legal_notice": "Mentions légales",
     "privacy": "Confidentialité & RGPD",

@@ -5,7 +5,7 @@
   },
   "media": {
     "download": "Download",
-    "preview_unavailable": "No inline preview available for this file type — use download."
+    "preview_unavailable": "No inline preview available for this file type. Use download."
   },
   "actions": {
     "publish": "Publish",

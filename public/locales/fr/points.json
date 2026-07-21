@@ -29,7 +29,7 @@
     "insufficient": "Solde insuffisant pour ce montant.",
     "error": "Le virement a échoué. Vos points ont été recrédités.",
     "success": "Retrait réussi ! Le virement est en cours.",
-    "connect_return": "Configuration transmise à Stripe — la vérification peut prendre quelques instants.",
+    "connect_return": "Configuration transmise à Stripe. La vérification peut prendre quelques instants.",
     "connect_refresh": "Le lien de configuration a expiré, réessayez."
   },
   "history": {

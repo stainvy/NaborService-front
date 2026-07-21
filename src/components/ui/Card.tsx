@@ -7,11 +7,12 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-const BASE = 'rounded-2xl border border-brand-border bg-brand-surface';
+// Séparation par l'ombre douce (pas de bordure dure) ; hairline quasi invisible
+// juste pour tenir la forme, jamais de trait navy/foncé.
+const BASE = 'rounded-2xl border border-border/50 bg-surface';
 const VARIANTS: Record<CardVariant, string> = {
   flat: 'shadow-soft',
-  interactive:
-    'shadow-soft transition-all hover:-translate-y-0.5 hover:border-navy/30 hover:shadow-card',
+  interactive: 'shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-card',
 };
 
 // Surface de contenu réutilisable (remplace les `div rounded-xl border …`

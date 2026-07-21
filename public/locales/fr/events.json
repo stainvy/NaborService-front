@@ -110,7 +110,7 @@
     "closed_conflict": "Trop tard : l'événement a commencé, les inscriptions sont closes."
   },
   "payment": {
-    "required": "Événement payant ({{cost}}) — paiement requis pour finaliser l'inscription."
+    "required": "Événement payant ({{cost}}) : paiement requis pour finaliser l'inscription."
   },
   "ticket": {
     "download": "Télécharger mon billet"

@@ -8,7 +8,7 @@ export function FinalCta() {
   const { t } = useTranslation('landing');
 
   return (
-    <section className="bg-brand-surface">
+    <section className="bg-bg">
       <div className="mx-auto max-w-6xl px-6 py-16">
         <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-navy via-navy to-brand-navyDark px-8 py-14 text-center text-white shadow-card">
           <h2 className="text-3xl font-bold">{t('final_cta.title')}</h2>

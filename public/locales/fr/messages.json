@@ -107,7 +107,7 @@
 
     "system_call_missed": "Appel manqué",
     "system_call_declined": "Appel refusé",
-    "system_call_ended": "Appel terminé — {{duration}}",
+    "system_call_ended": "Appel terminé ({{duration}})",
     "system_generic": "Événement système",
 
     "group_settings": "Paramètres du groupe",

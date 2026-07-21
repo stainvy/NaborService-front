@@ -94,7 +94,7 @@ function BANTab() {
             <p className="text-sm text-admin-text">{selected.label}</p>
             <p className="text-xs text-admin-muted">
               GPS: {selected.latitude}, {selected.longitude}
-              {selected.city && ` — ${selected.postcode} ${selected.city}`}
+              {selected.city && `, ${selected.postcode} ${selected.city}`}
             </p>
             {resolvedNb && (
               <div className="mt-2 rounded bg-green-50 p-2 text-xs text-green-700">

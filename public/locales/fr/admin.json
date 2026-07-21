@@ -61,7 +61,7 @@
     "close": "Fermer"
   },
   "points": {
-    "title": "Points — Grand livre",
+    "title": "Points : grand livre",
     "subtitle": "Toutes les opérations de points, tous utilisateurs confondus.",
     "filter_user_placeholder": "Filtrer par identifiant utilisateur…",
     "all_types": "Tous les types",
@@ -100,14 +100,14 @@
       "description_placeholder": "ex. Correction suite à un bug de pointage",
       "submit": "Confirmer",
       "cancel": "Fermer",
-      "success": "Effectué — nouveau solde : {{points}} points.",
+      "success": "Effectué. Nouveau solde : {{points}} points.",
       "error_conflict": "Montant invalide, ou le solde de l'utilisateur deviendrait négatif.",
       "error_not_found": "Utilisateur introuvable.",
       "error_generic": "Une erreur est survenue. Réessayez."
     }
   },
   "messages": {
-    "title": "Messages — Modération",
+    "title": "Messages : modération",
     "subtitle": "Parcourez toutes les conversations (groupes et messages privés), consultez l'historique déchiffré complet et modérez messages, fichiers et sondages des deux côtés.",
     "search_placeholder": "Rechercher une conversation ou un participant…",
     "no_conversations": "Aucune conversation.",
@@ -136,7 +136,7 @@
     "no_polls": "Aucun sondage dans cette conversation.",
     "view": "Voir",
     "download": "Télécharger",
-    "preview_unavailable": "Aucun aperçu disponible pour ce type de fichier — utilisez le téléchargement.",
+    "preview_unavailable": "Aucun aperçu disponible pour ce type de fichier. Utilisez le téléchargement.",
     "empty_thread": "Aucun message dans cette conversation.",
     "no_text": "(sans texte)",
     "edited": "modifié",
@@ -167,9 +167,9 @@
     "poll_delete": "Supprimer le sondage"
   },
   "moderation": {
-    "listings_title": "Modération — Annonces",
+    "listings_title": "Modération : annonces",
     "listings_subtitle": "Annonces signalées par les utilisateurs.",
-    "events_title": "Modération — Événements",
+    "events_title": "Modération : événements",
     "events_subtitle": "Événements signalés par les utilisateurs.",
     "col_title": "Titre",
     "col_reports": "Signalements",
@@ -190,7 +190,7 @@
   },
   "incidents": {
     "title": "Incidents",
-    "subtitle": "Signalements d'incidents — suivi, assignation et résolution.",
+    "subtitle": "Signalements d'incidents : suivi, assignation et résolution.",
     "create": "Créer",
     "create_title": "Signaler un incident",
     "detail_title": "Détail de l'incident",
@@ -217,7 +217,7 @@
     "resolved_at": "Résolu le",
     "location_hint": "Indication de localisation",
     "map_title": "Localisation (quartier)",
-    "no_map": "Aucun quartier associé — pas de localisation disponible.",
+    "no_map": "Aucun quartier associé, pas de localisation disponible.",
     "photos": "Photos",
     "assign_to_me": "S'assigner",
     "action_resolve": "Résoudre",
@@ -284,7 +284,7 @@
     "delete": "del",
     "no_messages": "Aucun message dans ce groupe.",
     "select_group": "Sélectionnez un groupe pour voir ses messages.",
-    "manual_lookup": "Lookup manuel — voir un message déchiffré par ID",
+    "manual_lookup": "Lookup manuel : voir un message déchiffré par ID",
     "view": "Voir",
     "confirm_delete_message": "Supprimer définitivement ce message ?",
     "events": "Événements",
@@ -346,7 +346,7 @@
     "documents": "Documents",
     "generated_filter": "Filtre MongoDB généré",
     "raw_response": "Réponse brute JSON",
-    "endpoint_hint": "Ce endpoint retourne seulement le filtre MongoDB généré — il n'exécute pas la requête sur les documents.",
+    "endpoint_hint": "Ce endpoint retourne seulement le filtre MongoDB généré ; il n'exécute pas la requête sur les documents.",
     "no_documents_explain": "Le endpoint /dsl/query traduit votre requête DSL en filtre MongoDB mais ne retourne pas les documents. Utilisez l'onglet Explorateur MongoDB pour parcourir les données.",
     "copy_filter": "Copier le filtre",
     "filter_copied": "Filtre copié dans le presse-papier.",

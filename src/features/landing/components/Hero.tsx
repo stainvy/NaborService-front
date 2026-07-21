@@ -8,8 +8,13 @@ export function Hero() {
   const { t } = useTranslation('landing');
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-brand-bg to-brand-surface">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:py-28">
+    <section className="relative overflow-hidden bg-gradient-to-b from-bg via-surface to-bg">
+      {/* halo orange discret (CSS pur) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-orange/10 blur-3xl"
+      />
+      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:py-28">
         <div>
           <span className="inline-flex items-center rounded-full bg-orange/15 px-3 py-1 text-sm font-medium text-orange">
             {t('hero.badge')}
@@ -17,7 +22,7 @@ export function Hero() {
           <h1 className="mt-5 text-4xl font-extrabold leading-tight text-fg sm:text-5xl">
             {t('hero.title')}
           </h1>
-          <p className="mt-5 max-w-xl text-lg text-brand-muted">{t('hero.subtitle')}</p>
+          <p className="mt-5 max-w-xl text-lg text-muted">{t('hero.subtitle')}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/register">
               <Button className="inline-flex items-center gap-2 px-6 py-3 text-base">

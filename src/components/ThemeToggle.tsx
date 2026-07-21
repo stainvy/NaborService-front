@@ -24,7 +24,7 @@ export function ThemeToggle({
     <button
       type="button"
       onClick={() => setMode(next)}
-      aria-label={`${t('theme.toggle')} — ${t(`theme.${mode}`)}`}
+      aria-label={`${t('theme.toggle')} : ${t(`theme.${mode}`)}`}
       title={`${t('theme.label')}: ${t(`theme.${mode}`)}`}
       className={`flex h-8 w-8 items-center justify-center rounded-md transition-colors ${className}`}
     >

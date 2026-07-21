@@ -7,7 +7,7 @@
   "hero": {
     "badge": "Your neighbourhood's collaborative platform",
     "title": "Your neighbourhood, better connected.",
-    "subtitle": "Exchange services, join events, chat with your neighbours and bring your neighbourhood to life — safely, between residents.",
+    "subtitle": "Exchange services, join events, chat with your neighbours and bring your neighbourhood to life, safely, between residents.",
     "cta_primary": "Join my neighbourhood",
     "cta_secondary": "Log in",
     "illustration_alt": "Illustration of a connected neighbourhood"
@@ -98,6 +98,7 @@
   "footer": {
     "tagline": "The collaborative neighbourhood platform.",
     "product": "Product",
+    "community": "Community",
     "legal": "Legal",
     "legal_notice": "Legal notice",
     "privacy": "Privacy & GDPR",

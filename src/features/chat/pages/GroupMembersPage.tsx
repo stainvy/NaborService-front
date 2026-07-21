@@ -94,7 +94,7 @@ export function GroupMembersPage() {
           {ROLES.map((role) => (
             <p key={role}>
               <span className="font-medium text-fg">{t(`chat.role_${role}`)}</span>
-              {' — '}
+              {' · '}
               <span className="text-gray">{t(`chat.role_${role}_desc`)}</span>
             </p>
           ))}

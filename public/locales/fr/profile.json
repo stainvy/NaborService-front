@@ -51,7 +51,7 @@
     "recommended": "Quartier recommandé : {{name}}",
     "use": "Utiliser",
     "choose_manually": "Choisir dans la liste",
-    "none": "— Aucun —",
+    "none": "Aucun",
     "save": "Enregistrer mon quartier",
     "confirm_title": "Changer de quartier ?",
     "confirm_message": "Votre quartier va changer. Votre groupe de discussion de quartier sera mis à jour en conséquence.",

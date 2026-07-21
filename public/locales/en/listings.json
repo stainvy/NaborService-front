@@ -105,7 +105,7 @@
     "loading": "Loading…",
     "not_ready": "The contract is still being generated, try again in a moment.",
     "your_turn": "It's your turn to sign the contract.",
-    "waiting_other": "You've signed — waiting for the other party to sign.",
+    "waiting_other": "You've signed. Waiting for the other party to sign.",
     "fully_signed": "Contract fully signed by both parties.",
     "contract": "Download contract",
     "contract_signed": "Download signed contract",
@@ -144,7 +144,7 @@
     "pay_button": "Pay (with points)",
     "balance": "Your balance: {{points}} points",
     "price": "Price: {{points}} points",
-    "insufficient": "Insufficient balance — top up your points.",
+    "insufficient": "Insufficient balance. Top up your points.",
     "paid": "Payment completed.",
     "error": "Payment failed."
   },

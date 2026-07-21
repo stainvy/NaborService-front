@@ -61,7 +61,7 @@
     "close": "Close"
   },
   "points": {
-    "title": "Points — Ledger",
+    "title": "Points: ledger",
     "subtitle": "Every points operation, across all users.",
     "filter_user_placeholder": "Filter by user id…",
     "all_types": "All types",
@@ -100,14 +100,14 @@
       "description_placeholder": "e.g. Correction following a tracking bug",
       "submit": "Confirm",
       "cancel": "Close",
-      "success": "Done — new balance: {{points}} points.",
+      "success": "Done. New balance: {{points}} points.",
       "error_conflict": "Invalid amount, or the user's balance would become negative.",
       "error_not_found": "User not found.",
       "error_generic": "Something went wrong. Please try again."
     }
   },
   "messages": {
-    "title": "Messages — Moderation",
+    "title": "Messages: moderation",
     "subtitle": "Browse every conversation (groups and direct messages), inspect the full decrypted history, and moderate messages, files and polls on both sides.",
     "search_placeholder": "Search a conversation or a participant…",
     "no_conversations": "No conversations.",
@@ -136,7 +136,7 @@
     "no_polls": "No polls in this conversation.",
     "view": "View",
     "download": "Download",
-    "preview_unavailable": "No inline preview available for this file type — use download.",
+    "preview_unavailable": "No inline preview available for this file type. Use download.",
     "empty_thread": "No messages in this conversation.",
     "no_text": "(no text)",
     "edited": "edited",
@@ -167,9 +167,9 @@
     "poll_delete": "Delete poll"
   },
   "moderation": {
-    "listings_title": "Moderation — Listings",
+    "listings_title": "Moderation: listings",
     "listings_subtitle": "Listings reported by users.",
-    "events_title": "Moderation — Events",
+    "events_title": "Moderation: events",
     "events_subtitle": "Events reported by users.",
     "col_title": "Title",
     "col_reports": "Reports",
@@ -190,7 +190,7 @@
   },
   "incidents": {
     "title": "Incidents",
-    "subtitle": "Incident reports — tracking, assignment and resolution.",
+    "subtitle": "Incident reports: tracking, assignment and resolution.",
     "create": "Create",
     "create_title": "Report an incident",
     "detail_title": "Incident detail",
@@ -217,7 +217,7 @@
     "resolved_at": "Resolved at",
     "location_hint": "Location hint",
     "map_title": "Location (neighbourhood)",
-    "no_map": "No neighbourhood attached — no location available.",
+    "no_map": "No neighbourhood attached, no location available.",
     "photos": "Photos",
     "assign_to_me": "Assign to me",
     "action_resolve": "Resolve",
@@ -284,7 +284,7 @@
     "delete": "del",
     "no_messages": "No messages in this group.",
     "select_group": "Select a group to view its messages.",
-    "manual_lookup": "Manual lookup — view a decrypted message by ID",
+    "manual_lookup": "Manual lookup: view a decrypted message by ID",
     "view": "View",
     "confirm_delete_message": "Permanently delete this message?",
     "events": "Events",
@@ -346,7 +346,7 @@
     "documents": "Documents",
     "generated_filter": "Generated MongoDB filter",
     "raw_response": "Raw JSON response",
-    "endpoint_hint": "This endpoint returns the generated MongoDB filter — it does not fetch documents.",
+    "endpoint_hint": "This endpoint returns the generated MongoDB filter; it does not fetch documents.",
     "no_documents_explain": "The /dsl/query endpoint translates your DSL into a MongoDB filter but does not return documents. Use the MongoDB Browser tab to browse data.",
     "copy_filter": "Copy Filter",
     "filter_copied": "Filter copied to clipboard.",

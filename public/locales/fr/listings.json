@@ -105,7 +105,7 @@
     "loading": "Chargement…",
     "not_ready": "Le contrat est en cours de génération, réessayez dans quelques instants.",
     "your_turn": "C'est à vous de signer le contrat.",
-    "waiting_other": "Vous avez signé — en attente de la signature de l'autre partie.",
+    "waiting_other": "Vous avez signé. En attente de la signature de l'autre partie.",
     "fully_signed": "Contrat entièrement signé par les deux parties.",
     "contract": "Télécharger le contrat",
     "contract_signed": "Télécharger le contrat signé",
@@ -144,7 +144,7 @@
     "pay_button": "Payer (en points)",
     "balance": "Votre solde : {{points}} points",
     "price": "Prix : {{points}} points",
-    "insufficient": "Solde insuffisant — rechargez vos points.",
+    "insufficient": "Solde insuffisant. Rechargez vos points.",
     "paid": "Paiement effectué.",
     "error": "Le paiement a échoué."
   },

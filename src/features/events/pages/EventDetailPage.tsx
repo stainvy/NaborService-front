@@ -125,7 +125,7 @@ export function EventDetailPage() {
         <ul className="mt-4 flex flex-col gap-1 text-sm text-fg">
           {content.programme.map((item, i) => (
             <li key={i}>
-              <span className="font-medium">{item.time}</span> — {item.label}
+              <span className="font-medium">{item.time}</span> · {item.label}
             </li>
           ))}
         </ul>

@@ -5,7 +5,7 @@
   },
   "media": {
     "download": "Télécharger",
-    "preview_unavailable": "Aucun aperçu disponible pour ce type de fichier — utilisez le téléchargement."
+    "preview_unavailable": "Aucun aperçu disponible pour ce type de fichier. Utilisez le téléchargement."
   },
   "actions": {
     "publish": "Publier",

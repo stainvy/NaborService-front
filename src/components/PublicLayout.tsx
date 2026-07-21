@@ -62,46 +62,63 @@ export function PublicLayout({ children }: { children: ReactNode }) {
 
       <main className="flex-1">{children}</main>
 
-      <footer className="border-t border-brand-border bg-brand-bg">
-        <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 sm:grid-cols-2 lg:grid-cols-4">
+      <footer className="bg-navy text-white">
+        <div className="mx-auto grid max-w-6xl gap-8 px-6 py-14 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="text-lg font-bold text-fg">{tc('app.name')}</p>
-            <p className="mt-2 text-sm text-brand-muted">{t('footer.tagline')}</p>
+            <p className="text-lg font-bold text-white">{tc('app.name')}</p>
+            <p className="mt-2 text-sm text-white/70">{t('footer.tagline')}</p>
+            <div className="mt-4 flex items-center gap-3">
+              <LanguageSwitcher />
+              <ThemeToggle className="text-white/80 hover:bg-white/10" />
+            </div>
           </div>
           <div>
-            <p className="mb-3 text-sm font-semibold text-fg">{t('footer.product')}</p>
-            <ul className="flex flex-col gap-2 text-sm text-brand-muted">
-              {anchors.map((a) => (
-                <li key={a.href}>
-                  <a href={a.href} className="hover:text-orange">
-                    {a.label}
-                  </a>
-                </li>
-              ))}
+            <p className="mb-3 text-sm font-semibold text-white">{t('footer.product')}</p>
+            <ul className="flex flex-col gap-2 text-sm text-white/70">
+              <li>
+                <a href="#features" className="hover:text-orange">
+                  {t('nav.features')}
+                </a>
+              </li>
+              <li>
+                <a href="#how" className="hover:text-orange">
+                  {t('nav.how')}
+                </a>
+              </li>
             </ul>
           </div>
           <div>
-            <p className="mb-3 text-sm font-semibold text-fg">{t('footer.legal')}</p>
-            <ul className="flex flex-col gap-2 text-sm text-brand-muted">
+            <p className="mb-3 text-sm font-semibold text-white">{t('footer.community')}</p>
+            <ul className="flex flex-col gap-2 text-sm text-white/70">
+              <li>
+                <a href="#values" className="hover:text-orange">
+                  {t('nav.values')}
+                </a>
+              </li>
+              <li>
+                <Link to="/register" className="hover:text-orange">
+                  {tc('public.register')}
+                </Link>
+              </li>
+              <li>
+                <Link to="/login" className="hover:text-orange">
+                  {tc('public.login')}
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p className="mb-3 text-sm font-semibold text-white">{t('footer.legal')}</p>
+            <ul className="flex flex-col gap-2 text-sm text-white/70">
               <li>{t('footer.legal_notice')}</li>
               <li>{t('footer.privacy')}</li>
               <li>{t('footer.contact')}</li>
             </ul>
           </div>
-          <div className="flex flex-col gap-3">
-            <Link to="/register">
-              <Button className="w-full">{tc('public.register')}</Button>
-            </Link>
-            <Link to="/login">
-              <Button variant="secondary" className="w-full">
-                {tc('public.login')}
-              </Button>
-            </Link>
-          </div>
         </div>
-        <div className="border-t border-brand-border">
-          <p className="mx-auto max-w-6xl px-6 py-4 text-xs text-brand-muted">
-            © {tc('app.name')} — {t('footer.rights')}
+        <div className="border-t border-white/10">
+          <p className="mx-auto max-w-6xl px-6 py-4 text-xs text-white/60">
+            © {tc('app.name')}. {t('footer.rights')}
           </p>
         </div>
       </footer>

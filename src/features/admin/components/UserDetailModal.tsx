@@ -157,7 +157,7 @@ export function UserDetailModal({ user, onClose }: UserDetailModalProps) {
       <AdjustPointsModal
         open={adjustingPoints}
         userId={user.id}
-        userLabel={`${user.firstName} ${user.lastName} — ${user.email}`}
+        userLabel={`${user.firstName} ${user.lastName} · ${user.email}`}
         onClose={() => setAdjustingPoints(false)}
       />
     </>

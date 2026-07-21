@@ -267,7 +267,7 @@ export function NeighbourhoodMap({
           ) : (
             <>
               <span className="text-xs text-admin-muted">
-                {drawPoints.length} point{drawPoints.length > 1 ? 's' : ''} — cliquez sur la carte
+                {drawPoints.length} point{drawPoints.length > 1 ? 's' : ''}, cliquez sur la carte
                 {snapHint && <span className="ml-1 font-medium text-green-600">(accroché !)</span>}
               </span>
               <button type="button" onClick={finishDrawing} disabled={drawPoints.length < 3} className="rounded bg-green-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-green-700 disabled:opacity-40">
