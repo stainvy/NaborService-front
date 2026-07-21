@@ -58,8 +58,6 @@
     "saved": "Listing updated.",
     "content_title": "Rich content",
     "body_html": "Content (HTML)",
-    "tags": "Tags",
-    "tags_hint": "comma-separated",
     "save_content": "Save content",
     "content_saved": "Content saved.",
     "photos": "Photos"

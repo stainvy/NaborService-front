@@ -18,13 +18,11 @@ export function ListingEditPage() {
   const updateContent = useUpdateContent(id);
 
   const [bodyHtml, setBodyHtml] = useState('');
-  const [tags, setTags] = useState('');
 
   // Pré-remplit l'éditeur de contenu une fois chargé.
   useEffect(() => {
     if (content) {
       setBodyHtml(content.body_html ?? '');
-      setTags((content.tags ?? []).join(', '));
     }
   }, [content]);
 
@@ -34,10 +32,6 @@ export function ListingEditPage() {
     e.preventDefault();
     updateContent.mutate({
       body_html: bodyHtml || undefined,
-      tags: tags
-        .split(',')
-        .map((s) => s.trim())
-        .filter(Boolean),
     });
   };
 
@@ -83,15 +77,6 @@ export function ListingEditPage() {
               value={bodyHtml}
               onChange={(e) => setBodyHtml(e.target.value)}
               rows={5}
-              className="rounded-md border border-gray px-3 py-2 focus:border-navy focus:outline-none"
-            />
-          </label>
-          <label className="flex flex-col gap-1">
-            <span className="text-sm font-medium text-navy">{t('edit.tags')}</span>
-            <input
-              value={tags}
-              onChange={(e) => setTags(e.target.value)}
-              placeholder={t('edit.tags_hint')}
               className="rounded-md border border-gray px-3 py-2 focus:border-navy focus:outline-none"
             />
           </label>
