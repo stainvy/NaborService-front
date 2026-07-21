@@ -57,6 +57,7 @@
     "your_role": "Your role",
     "start_direct_message": "Message",
     "starting_conversation": "Opening conversation…",
+    "start_direct_message_error": "Couldn't find your conversation with this person. Try again in a moment.",
     "select_conversation": "Select a conversation to get started.",
     "search_conversations": "Search a conversation",
     "filter_all": "All",
