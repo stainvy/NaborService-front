@@ -87,13 +87,17 @@ export function PublicProfilePage() {
 
         {/* Actions */}
         <div className="mt-6 flex flex-wrap gap-2">
-          <Button
-            variant="secondary"
-            onClick={() => startDirectChat.start(id, profile.firstName)}
-            disabled={startDirectChat.isPending}
-          >
-            {startDirectChat.isPending ? tMessages('chat.starting_conversation') : tMessages('chat.start_direct_message')}
-          </Button>
+          {profile.isFriend && (
+            <Button
+              variant="secondary"
+              onClick={() => startDirectChat.start(id)}
+              disabled={startDirectChat.isPending}
+            >
+              {startDirectChat.isPending
+                ? tMessages('chat.starting_conversation')
+                : tMessages('chat.start_direct_message')}
+            </Button>
+          )}
           {profile.isFollowing ? (
             <Button
               variant="secondary"
@@ -132,6 +136,9 @@ export function PublicProfilePage() {
             {t('social.report')}
           </button>
         </div>
+        {startDirectChat.isError && (
+          <p className="mt-2 text-sm text-error">{tMessages('chat.start_direct_message_error')}</p>
+        )}
       </div>
 
       <Modal

@@ -18,6 +18,8 @@ export interface PublicProfile {
   createdAt?: string;
   /** Relation du visiteur connecté envers cet utilisateur. */
   isFollowing?: boolean;
+  /** Follow mutuel — seul cas où un groupe direct_message existe déjà côté back. */
+  isFriend?: boolean;
   isBlockedByMe?: boolean;
 }
 

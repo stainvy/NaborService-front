@@ -29,7 +29,6 @@ export type ListingsPage = Paginated<Listing>;
 // DOMPurify avant rendu. Forme non figée côté back (champs additionnels possibles).
 export interface ListingContent {
   body_html?: string;
-  tags?: string[];
   [key: string]: unknown;
 }
 
@@ -63,7 +62,6 @@ export interface UpdateListingPayload {
 
 export interface UpdateContentPayload {
   body_html?: string;
-  tags?: string[];
 }
 
 export interface CancelListingPayload {

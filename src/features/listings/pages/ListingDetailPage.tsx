@@ -104,16 +104,6 @@ export function ListingDetailPage() {
         />
       )}
 
-      {content?.tags && content.tags.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-2">
-          {content.tags.map((tag) => (
-            <span key={tag} className="rounded-full bg-gray/15 px-2 py-0.5 text-xs text-gray">
-              #{tag}
-            </span>
-          ))}
-        </div>
-      )}
-
       <section className="mt-6">
         <ListingMedia id={id} />
       </section>

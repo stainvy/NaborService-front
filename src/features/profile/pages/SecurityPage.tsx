@@ -65,7 +65,7 @@ export function SecurityPage() {
             label={t('security.new_password')}
             type="password"
             autoComplete="new-password"
-            {...passwordForm.register('newPassword', { required: true, minLength: 8 })}
+            {...passwordForm.register('newPassword', { required: true, minLength: 12 })}
           />
           {changePassword.isSuccess && (
             <p className="text-sm text-success">{t('security.password_changed')}</p>
