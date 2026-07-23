@@ -47,10 +47,11 @@ function BANTab() {
   }, [q]);
 
   const { data: suggestions = [], isFetching: loadingSuggestions } = useBanAutocomplete(debouncedQ);
-  const { data: resolvedNb, isLoading: resolvingNb } = useResolveNeighbourhood(selected?.label);
+  const { data: resolved, isLoading: resolvingNb } = useResolveNeighbourhood(selected?.label);
   const { data: nearby = [] } = useNearbyNeighbourhoods(
     selected ? { latitude: selected.latitude, longitude: selected.longitude } : undefined,
   );
+  const resolvedNb = nearby.find((nb) => nb.pgId === resolved?.neighbourhoodId);
 
   function handleChange(val: string) {
     setQ(val);

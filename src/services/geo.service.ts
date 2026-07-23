@@ -1,5 +1,5 @@
 import { api } from '@/lib/api';
-import type { GeoSuggestion, Neighbourhood } from '@/types/geo';
+import type { GeoSuggestion, ResolveNeighbourhoodResult } from '@/types/geo';
 
 export type { GeoSuggestion };
 
@@ -11,10 +11,10 @@ export const geoService = {
       .then((r) => r.data);
   },
 
-  /** Résoudre un quartier depuis une adresse. */
-  resolveNeighbourhood(q: string): Promise<Neighbourhood> {
+  /** Résoudre un quartier depuis une adresse (l'API ne renvoie que l'id). */
+  resolveNeighbourhood(q: string): Promise<ResolveNeighbourhoodResult> {
     return api
-      .get<Neighbourhood>('/geo/resolve-neighbourhood', { params: { q } })
+      .get<ResolveNeighbourhoodResult>('/geo/resolve-neighbourhood', { params: { q } })
       .then((r) => r.data);
   },
 };

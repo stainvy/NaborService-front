@@ -1,3 +1,9 @@
+/** Résultat de résolution d'une adresse en quartier (ne renvoie que l'id). */
+export interface ResolveNeighbourhoodResult {
+  neighbourhoodId: string;
+  method: string;
+}
+
 /** Suggestion d'adresse retournée par la BAN. */
 export interface GeoSuggestion {
   label: string;

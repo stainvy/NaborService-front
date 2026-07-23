@@ -68,6 +68,31 @@ describe('NeighbourhoodPicker', () => {
     expect(await screen.findByText('neighbourhood.geo_no_match')).toBeInTheDocument();
   });
 
+  it('résolution d’adresse (BAN) : l’API ne renvoie qu’un id, la recommandation doit quand même s’afficher', async () => {
+    server.use(
+      http.get(`${env.apiUrl}/neighbourhoods`, () => HttpResponse.json(NEIGHBOURHOODS)),
+      http.get(`${env.apiUrl}/geo/autocomplete`, () =>
+        HttpResponse.json([{ label: '1 Rue des Noyers 91220 Brétigny-sur-Orge', latitude: 48.6, longitude: 2.3 }]),
+      ),
+      http.get(`${env.apiUrl}/geo/resolve-neighbourhood`, () =>
+        HttpResponse.json({ neighbourhoodId: 'nb-a', method: 'nearest-centroid' }),
+      ),
+    );
+
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    renderWithProviders(<NeighbourhoodPicker value={undefined} onChange={onChange} />);
+
+    await user.type(screen.getByPlaceholderText('neighbourhood.address_placeholder'), '1 Rue des Noyers');
+    const suggestion = await screen.findByText('1 Rue des Noyers 91220 Brétigny-sur-Orge');
+    await user.click(suggestion);
+
+    const useBtn = await screen.findByRole('button', { name: 'neighbourhood.use' });
+    expect(useBtn).toBeInTheDocument();
+    await user.click(useBtn);
+    expect(onChange).toHaveBeenCalledWith('nb-a');
+  });
+
   it('géolocalisation refusée : message d’erreur et repli sur la liste manuelle', async () => {
     stubGeolocation({
       getCurrentPosition: (_success, error) =>

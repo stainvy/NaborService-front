@@ -69,7 +69,11 @@ export function NeighbourhoodPicker({ value, onChange }: Props) {
   const onPickAddress = (suggestionLabel: string) => {
     setAddress(suggestionLabel);
     setResolved(null);
-    resolve.mutate(suggestionLabel, { onSuccess: (n) => setResolved(n) });
+    resolve.mutate(suggestionLabel, {
+      onSuccess: (res) => {
+        setResolved(all.data?.find((n) => n.pgId === res.neighbourhoodId) ?? null);
+      },
+    });
   };
 
   const Recommendation = ({ neighbourhood }: { neighbourhood: Neighbourhood }) => (
