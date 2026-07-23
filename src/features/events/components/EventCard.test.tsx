@@ -1,6 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { http, HttpResponse } from 'msw';
+import { server } from '@/test/msw/server';
 import { renderWithProviders } from '@/test/renderWithProviders';
+import { env } from '@/lib/env';
 import { EventCard } from './EventCard';
 import type { NaborEvent } from '../types';
 
@@ -42,5 +46,34 @@ describe('EventCard', () => {
   it('pas de couverture quand coverMediaId est absent', () => {
     const { container } = renderWithProviders(<EventCard event={makeEvent()} />);
     expect(container.querySelector('img')).not.toBeInTheDocument();
+  });
+
+  it('reprend le like/dislike déjà enregistré côté serveur après rechargement', () => {
+    renderWithProviders(
+      <EventCard event={makeEvent({ startsAt: '2999-01-01T10:00:00Z', userSwipe: 'like' })} />,
+    );
+
+    expect(screen.getByRole('button', { name: /feed.like/ })).toBeDisabled();
+    expect(screen.getByRole('button', { name: /feed.dislike/ })).toBeEnabled();
+  });
+
+  it('permet de changer d’avis (like -> dislike) au lieu de bloquer les deux boutons', async () => {
+    server.use(
+      http.post(`${env.apiUrl}/events/ev1/swipe`, () => HttpResponse.json({ success: true })),
+    );
+
+    const user = userEvent.setup();
+    renderWithProviders(<EventCard event={makeEvent({ startsAt: '2999-01-01T10:00:00Z' })} />);
+
+    const likeBtn = screen.getByRole('button', { name: /feed.like/ });
+    const dislikeBtn = screen.getByRole('button', { name: /feed.dislike/ });
+
+    await user.click(likeBtn);
+    expect(likeBtn).toBeDisabled();
+    expect(dislikeBtn).toBeEnabled();
+
+    await user.click(dislikeBtn);
+    expect(dislikeBtn).toBeDisabled();
+    expect(likeBtn).toBeEnabled();
   });
 });

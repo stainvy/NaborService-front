@@ -46,6 +46,8 @@ export interface NaborEvent {
   deletedAt?: string | null;
   // Statut de participation de l'utilisateur courant (GET /events/:id).
   participationStatus?: 'registered' | 'waitlisted' | null;
+  // Swipe like/dislike de l'utilisateur courant (GET /events, /events/me/operations).
+  userSwipe?: 'like' | 'dislike' | null;
   [key: string]: unknown;
 }
 

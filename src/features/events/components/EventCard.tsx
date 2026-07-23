@@ -16,10 +16,12 @@ export function EventCard({ event }: { event: NaborEvent }) {
   const cover = mediaUrl(event.coverMediaId);
 
   const swipe = useSwipeEvent();
-  const [swiped, setSwiped] = useState<EventSwipeDirection | null>(null);
+  const [swiped, setSwiped] = useState<EventSwipeDirection | null>(event.userSwipe ?? null);
   const onSwipe = (direction: EventSwipeDirection) => {
-    swipe.mutate({ id: event.id, direction });
+    if (direction === swiped || swipe.isPending) return;
+    const previous = swiped;
     setSwiped(direction);
+    swipe.mutate({ id: event.id, direction }, { onError: () => setSwiped(previous) });
   };
 
   return (
@@ -73,7 +75,7 @@ export function EventCard({ event }: { event: NaborEvent }) {
           <button
             type="button"
             onClick={() => onSwipe('like')}
-            disabled={swiped !== null}
+            disabled={swipe.isPending || swiped === 'like'}
             className={`flex items-center gap-1 rounded-md border px-2 py-1 text-xs ${
               swiped === 'like'
                 ? 'border-success text-success'
@@ -85,7 +87,7 @@ export function EventCard({ event }: { event: NaborEvent }) {
           <button
             type="button"
             onClick={() => onSwipe('dislike')}
-            disabled={swiped !== null}
+            disabled={swipe.isPending || swiped === 'dislike'}
             className={`flex items-center gap-1 rounded-md border px-2 py-1 text-xs ${
               swiped === 'dislike'
                 ? 'border-error text-error'
